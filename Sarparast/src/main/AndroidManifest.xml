@@ -181,14 +181,13 @@
 
         <service
             android:name=".MyLocationServices"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <activity
             android:name=".ActivityAdamVisit"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.MHZ">
-
-        </activity>
+            android:theme="@style/AppTheme.MHZ"></activity>
+        <activity android:name=".ActivityListOfAdamVisit"></activity>
     </application>
 
 </manifest>

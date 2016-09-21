@@ -62,6 +62,7 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lyMap;
     private LinearLayout lySarjam;
     private LinearLayout lyHead;
+    private LinearLayout lyNotVisited;
 
 
     private RecyclerView row_khales;
@@ -84,39 +85,11 @@ public class ActivityMain extends AppCompatActivity
     private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<UserInfo>();
     private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<UserInfo>();
 
-
-
-
-//    private void sendBroadcast(Context context) {
-//
-//        Intent intent = new Intent();
-//        intent.setAction("com.sarparast.sendlocation");
-//
-//        sendBroadcast(intent);
-//    }
-//
-
-
-
     @Override
     protected void onResume() {
 
         super.onResume();
     }
-
-
-//    public  BroadcastReceiver receiver = new BroadcastReceiver() {
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//
-//            if (intent.getAction().equals("android.intent.action.Action")) {
-//                // Set the Action here.
-//            }
-//
-//
-//        }
-//    };
-
 
     @Override
 
@@ -149,12 +122,21 @@ public class ActivityMain extends AppCompatActivity
         lySarjam = (LinearLayout) findViewById(R.id.lySarjam);
         lyMap = (LinearLayout) findViewById(R.id.lyMap);
         lyHead = (LinearLayout) findViewById(R.id.lyHead);
+        lyNotVisited = (LinearLayout) findViewById(R.id.lyNotVisited);
 
         btnNews = (Button) findViewById(R.id.btnNews);
 
         preferenceHelper = new PreferenceHelper(this);
 
 //txtUserName.setText(""+preferenceHelper.getString(PreferenceHelper.USER_NAME));
+
+        lyNotVisited.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityMain.this, ActivityAdamVisit.class);
+                startActivity(intent);
+            }
+        });
 
         lyHadaf.setOnClickListener(new View.OnClickListener() {
             @Override

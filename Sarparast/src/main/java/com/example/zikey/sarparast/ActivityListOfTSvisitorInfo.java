@@ -197,7 +197,6 @@ public class ActivityListOfTSvisitorInfo extends AppCompatActivity {
                         factor.setTs_price(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString())));
                         factor.setImgFactorDetail(R.drawable.lisst);
 
-
                         factor.setImgAghlam(R.drawable.aghlam);
                         factors.add(factor);
                     }
@@ -211,7 +210,6 @@ public class ActivityListOfTSvisitorInfo extends AppCompatActivity {
             }
             return "NotOnline";
         }
-
 
     }
 

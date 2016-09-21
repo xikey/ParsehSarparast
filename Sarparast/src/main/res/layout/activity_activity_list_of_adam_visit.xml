@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.zikey.sarparast.ActivitySarjamDetails"
+    tools:context="com.example.zikey.sarparast.ActivityListOfAdamVisit"
     android:visibility="visible">
 
     <RelativeLayout
@@ -56,7 +56,7 @@
 
 
             <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/row_sarjam"
+                android:id="@+id/row_AdamVisit"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:focusable="true"

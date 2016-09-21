@@ -35,7 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mhztoolbar"
-        android:layout_alignParentStart="false"
         android:padding="20dp"
         android:background="#e3dede">
 
@@ -70,6 +69,7 @@
                     android:background="#363030">
 
                     <LinearLayout
+                        android:id="@+id/lyMonth"
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_height="match_parent">
@@ -144,6 +144,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:orientation="vertical"
+                        android:id="@+id/lyDate"
                         android:layout_height="match_parent">
 
                         <LinearLayout

@@ -27,8 +27,9 @@ import java.util.HashMap;
 public class ActivitySarjamDetails extends AppCompatActivity {
 
     private ImageView imgBack;
-   TextView txtHead;
-    String state;
+    private TextView txtHead;
+    private String state;
+
     private FragmentManager manager;
 
     private PreferenceHelper preferenceHelper;
@@ -123,7 +124,6 @@ public class ActivitySarjamDetails extends AppCompatActivity {
         Boolean isonline = NetworkTools.isOnline(ActivitySarjamDetails.this);
 
 
-
         @Override
         protected void onPostExecute(String state) {
 
@@ -145,7 +145,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
             if (state.equals("Online")) {
 
-                Log.e("Is Online","Online is ok ");
+                Log.e("Is Online", "Online is ok ");
                 SarjamBarAdapter sarjamAdapter = new SarjamBarAdapter(sarjamInfos);
 
                 row_adapter = sarjamAdapter;
@@ -157,10 +157,8 @@ public class ActivitySarjamDetails extends AppCompatActivity {
                 row_adapter.setManager(manager);
 
 
-
                 lyContent.setVisibility(View.VISIBLE);
                 lyProgress.setVisibility(View.GONE);
-
 
 
             } else if (state.equals("NotOnline"))
@@ -184,14 +182,14 @@ public class ActivitySarjamDetails extends AppCompatActivity {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-            datas.put("group","Visitor");
+            datas.put("group", "Visitor");
 
             if (isonline) {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_GetListOF_SarjamBar", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0){
-                        return  "Null" ;
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
                     }
 
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
@@ -200,11 +198,12 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
                         SarjamInfo sarjamInfo = new SarjamInfo();
 
-                       sarjamInfo.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-                       sarjamInfo.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
-                       sarjamInfo.set_Factor(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
-                       sarjamInfo.set_Sefaresh(NetworkTools.getSoapPropertyAsNullableString(sp, 2));sarjamInfo.set_PriceFactor(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
-                       sarjamInfo.set_PriceSefaresh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString())));
+                        sarjamInfo.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                        sarjamInfo.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                        sarjamInfo.set_Factor(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
+                        sarjamInfo.set_Sefaresh(NetworkTools.getSoapPropertyAsNullableString(sp, 2));
+                        sarjamInfo.set_PriceFactor(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
+                        sarjamInfo.set_PriceSefaresh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString())));
 
                         sarjamInfos.add(sarjamInfo);
                     }
@@ -224,12 +223,9 @@ public class ActivitySarjamDetails extends AppCompatActivity {
     }
 
 
-
-
     public class SarjamKalaAsync extends AsyncTask<Void, String, String> {
 
         Boolean isonline = NetworkTools.isOnline(ActivitySarjamDetails.this);
-
 
 
         @Override
@@ -253,7 +249,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
             if (state.equals("Online")) {
 
-                Log.e("Is Online","Online is ok ");
+                Log.e("Is Online", "Online is ok ");
                 SarjamBarAdapter sarjamAdapter = new SarjamBarAdapter(sarjamInfos);
 
                 lyContent.setVisibility(View.VISIBLE);
@@ -268,8 +264,6 @@ public class ActivitySarjamDetails extends AppCompatActivity {
                 row_adapter.setState(1);
                 row_adapter.setActivity(ActivitySarjamDetails.this);
                 row_adapter.setManager(manager);
-
-
 
 
             } else if (state.equals("NotOnline"))
@@ -293,14 +287,14 @@ public class ActivitySarjamDetails extends AppCompatActivity {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-            datas.put("group","Kala");
+            datas.put("group", "Kala");
 
             if (isonline) {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_GetListOF_SarjamBar", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0){
-                        return  "Null" ;
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
                     }
 
                     for (int i = 0; i < request2.getPropertyCount(); i++) {

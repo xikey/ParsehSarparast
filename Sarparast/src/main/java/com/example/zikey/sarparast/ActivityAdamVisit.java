@@ -1,5 +1,7 @@
 package com.example.zikey.sarparast;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +23,8 @@ public class ActivityAdamVisit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_adam_visit);
 
-        lyDate = (LinearLayout) findViewById(R.id.lyMantaghe);
-        lyMonth = (LinearLayout) findViewById(R.id.lyTarikh);
-
-
+        lyDate = (LinearLayout) findViewById(R.id.lyDate);
+        lyMonth = (LinearLayout) findViewById(R.id.lyMonth);
 
         preferenceHelper = new PreferenceHelper(this);
         imgBack= (ImageView) findViewById(R.id.imgBack);
@@ -33,6 +33,26 @@ public class ActivityAdamVisit extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        lyDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityAdamVisit.this,ActivityListOfAdamVisit.class);
+                intent.putExtra("state","Date");
+              //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
+  lyMonth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ActivityAdamVisit.this,ActivityListOfAdamVisit.class);
+                intent.putExtra("state","Month");
+              //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 

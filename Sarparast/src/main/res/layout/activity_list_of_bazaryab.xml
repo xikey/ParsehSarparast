@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zikey.sarparast.ActivityListOfBazaryab">
+
+
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="30dp"
+            android:src="@drawable/backsvg"
+            android:layout_height="match_parent"
+            android:id="@+id/imgBack" />
+        <TextView
+            android:text="مسیر حرکت بازاریاب"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtToolbar" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/row_bazaryab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="false"
+        android:scrollbars="vertical"
+        android:background="#e3dede"
+        android:focusableInTouchMode="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="false"
+        android:layout_below="@+id/relativeLayout4" />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/relativeLayout4"
+        android:gravity="center_vertical"
+        android:background="#0277BD"
+      android:layout_below="@id/mhztoolbar"
+        android:layout_centerHorizontal="true">
+
+        <EditText
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:hint="جستجو"
+            android:background="#0277BD"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/edtSearch"
+            android:layout_weight="1"
+            android:enabled="true"
+            android:focusableInTouchMode="true"
+            android:paddingRight="50dp"
+            />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView27"
+            android:src="@android:drawable/ic_menu_search"
+            android:scaleType="fitCenter"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

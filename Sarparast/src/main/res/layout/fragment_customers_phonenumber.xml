@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="1dp"
+    android:minWidth="1000dp"
+
+    card_view:cardElevation="2dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="#e3dede">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="1dp"
+        android:background="#e3dede">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lyContent"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/relativeLayout8"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:background="#767676"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relativeLayout8"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView32"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/mobile"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtMobile"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/btnCall2"
+                    android:src="@drawable/calllogo"
+                    android:layout_alignTop="@+id/btnSmS2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/btnSmS2"
+                    android:src="@drawable/smslogo"
+                    android:layout_alignTop="@+id/txtMobile"
+                    android:layout_toRightOf="@+id/btnCall2"
+                    android:layout_toEndOf="@+id/btnCall2"
+                    android:layout_marginLeft="12dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_below="@+id/relativeLayout7"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:id="@+id/relativeLayout8"
+                android:layout_marginBottom="5dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView31"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/telephone"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtPhone"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#000000"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/btnCall1"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/calllogo" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#78909C"
+                android:id="@+id/relativeLayout7">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:id="@+id/imageView30"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/phone_book"
+                    android:layout_marginRight="10dp"
+                    android:padding="4dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtName"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/btnExit"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/error"
+                    android:padding="6dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:id="@+id/lyEror"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtEror"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="left"
+    android:layoutDirection="rtl"
+    android:layout_gravity="left"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:icon="@drawable/homew"
+        android:gravity="left"
+        android:layout_gravity="left"
+
+        app:showAsAction="always" />
+
+
+
+
+</menu>
+

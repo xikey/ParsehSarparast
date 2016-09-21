@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="2dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="#fffbfb">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:id="@+id/lyRootReq"
+        android:padding="1dp">
+
+      <LinearLayout
+          android:orientation="horizontal"
+          android:id="@+id/ly01"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="right"
+          android:layout_marginTop="10dp"
+          android:weightSum="1">
+
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="... "
+              android:id="@+id/txtCode"
+              android:layout_weight="1.00"
+              android:gravity="right"
+              android:layout_marginRight="50dp"
+              android:textColor="#000000"
+              android:textSize="17sp" />
+
+          <TextView
+              android:layout_width="110dp"
+              android:layout_height="wrap_content"
+              android:text="کد مشتری"
+              android:id="@+id/textView49"
+              android:paddingRight="10dp"
+              android:textColor="#000000"
+              android:textSize="16sp" />
+      </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/ly02"
+            android:layout_below="@id/ly01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtName"
+                android:layout_weight="1.00"
+                android:gravity="center|right"
+                android:layout_marginRight="50dp"
+                android:textColor="#000000"
+                android:paddingRight="4dp"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="نام مشتری"
+                android:id="@+id/textView50"
+                android:paddingRight="10dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+<LinearLayout
+    android:orientation="horizontal"
+            android:id="@+id/ly03"
+            android:layout_below="@id/ly02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+    android:gravity="right"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="..."
+
+        android:layout_weight="1.00"
+        android:gravity="right"
+        android:layout_marginRight="50dp"
+        android:paddingRight="4dp"
+        android:id="@+id/txtMande"
+        android:textSize="17sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="110dp"
+        android:layout_height="wrap_content"
+        android:text="مانده مشتری"
+        android:id="@+id/textView51"
+        android:paddingRight="10dp"
+        android:textSize="16sp"
+        android:textColor="#000000" />
+</LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/ly04"
+            android:layout_below="@id/ly03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtVaset"
+                android:layout_weight="1.00"
+                android:gravity="right"
+                android:layout_marginRight="50dp"
+                android:textColor="#000000"
+                android:paddingRight="4dp"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="نام واسط اصلی"
+
+                android:layout_marginBottom="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/lyAddress"
+            android:layout_below="@id/ly04"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtAddress"
+                android:layout_weight="1.00"
+                android:gravity="right"
+                android:layout_marginRight="50dp"
+                android:textColor="#000000"
+                android:paddingRight="4dp"
+                android:textSize="17sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="آدرس"
+                android:layout_marginBottom="10dp"
+                android:paddingRight="10dp"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/lyAddress"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#e3dede"
+            android:id="@+id/lyKhat">
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/lyKhat"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="right"
+            android:id="@+id/lyButtom"
+            android:layout_marginTop="1dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:layout_weight="30">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgDislike"
+                    android:src="@drawable/dislike"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgLike"
+                    android:src="@drawable/like"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgNavigate"
+                    android:src="@drawable/location"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgCall"
+                    android:src="@drawable/phone2"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgInfo"
+                    android:src="@drawable/info3"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/img5Vijegi"
+                    android:src="@drawable/property"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnShowDetails"
+                    android:src="@drawable/dollar3"
+                    android:layout_marginRight="7dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_weight="14.8"
+                    android:padding="3dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

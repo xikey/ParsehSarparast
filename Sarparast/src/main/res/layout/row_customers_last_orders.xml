@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="3dp"
+    card_view:cardElevation="2dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:background="#ffffff">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="1dp">
+
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#90A4AE"
+        android:id="@+id/linearLayout15">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtDate"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:id="@+id/txtPeygiri"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout15"
+        android:layout_centerHorizontal="true"
+        android:background="#ffffff"
+        android:id="@+id/lymain">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:background="#ffffff">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtTasvie"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="تسویه نشده"
+                    android:id="@+id/textView92"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#78909C"></LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtCheque"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="چک"
+                    android:id="@+id/textView93"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtElamie"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="اعلامیه"
+                    android:id="@+id/textView94"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtBargasht"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="برگشتی"
+                    android:id="@+id/textView95"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="50"
+            android:background="#ffffff">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtPrice"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:text="مبلغ خرید"
+                    android:id="@+id/textView28"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="#78909C"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtNaghd"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:text="نقد"
+                    android:id="@+id/textView88"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtVariz"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:text="واریز"
+                    android:id="@+id/textView90"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtTakhfif"
+                    android:layout_marginRight="4dp"
+                    android:gravity="right"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:layout_weight="0.90"
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:text="تخفیف"
+                    android:id="@+id/textView91"
+                    android:layout_marginRight="10dp"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/lymain"
+        android:id="@+id/lyButtom"
+        android:gravity="right">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#78909C"
+            android:id="@+id/linearLayout21"></LinearLayout>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView46" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imgfactor"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/lisst"
+            android:layout_marginRight="10dp"
+            android:padding="5dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imgAghlam"
+            android:src="@drawable/aghlam"
+            android:padding="6dp"
+            android:layout_below="@+id/linearLayout21"
+            android:layout_toLeftOf="@+id/imgfactor"
+            android:layout_toStartOf="@+id/imgfactor"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+</RelativeLayout>
+
+</android.support.v7.widget.CardView>

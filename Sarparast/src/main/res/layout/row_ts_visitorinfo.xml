@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="5dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="#ffffff">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/lyRoot02">
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="پیگیری فاکتور"
+        android:id="@+id/textView3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="14sp"
+        android:layout_marginTop="20dp"
+        android:textColor="#1e1a1a"
+        android:paddingRight="18dp"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تاریخ"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="14sp"
+        android:layout_marginTop="9dp"
+        android:textColor="#1e1a1a"
+        android:paddingRight="18dp"
+        android:layout_marginBottom="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="نام مشتری"
+        android:id="@+id/textView7"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="false"
+        android:textSize="14sp"
+        android:layout_marginTop="9dp"
+        android:textColor="#1e1a1a"
+        android:paddingRight="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مبلغ تسویه نشده"
+        android:id="@+id/textView11"
+        android:textSize="18sp"
+        android:textColor="#1e1a1a"
+        android:paddingRight="18dp"
+        android:layout_below="@+id/txtName"
+        android:layout_alignRight="@+id/textView5"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:gravity="right"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtCode"
+        android:textColor="#1e1a1a"
+        android:layout_alignTop="@+id/textView5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/txtRow"
+        android:layout_alignEnd="@+id/txtRow" />
+
+    <TextView
+        android:gravity="right"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtRow"
+        android:textColor="#1e1a1a"
+
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:gravity="right"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtName"
+        android:textColor="#1e1a1a"
+
+        android:layout_alignTop="@+id/textView7"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+      />
+
+    <TextView
+        android:gravity="right"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtTSPrice"
+        android:textColor="#ce0202"
+        android:textSize="18sp"
+        android:layout_alignTop="@+id/textView11"
+        android:layout_alignLeft="@+id/txtCode"
+        android:layout_alignStart="@+id/txtCode"
+        android:layout_alignRight="@+id/txtCode"
+        android:layout_alignEnd="@+id/txtCode" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/txtTSPrice"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#B0BEC5"
+        android:layout_marginBottom="50dp"
+        android:id="@+id/linearLayout4"
+        android:padding="2dp"
+        android:layout_marginRight="20dp">
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/linearLayout4"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imgFactorDetail"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="22dp"
+            android:src="@drawable/lisst"
+            android:padding="8dp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/imgAghlam"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/imgFactorDetail"
+            android:layout_toStartOf="@+id/imgFactorDetail"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/aghlam"
+            android:padding="9dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
+    </android.support.v7.widget.CardView>

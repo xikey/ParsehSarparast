@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CustomGauge/CustomGauge.iml" filepath="$PROJECT_DIR$/CustomGauge/CustomGauge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParsehSarparast.iml" filepath="$PROJECT_DIR$/ParsehSarparast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sarparast/Sarparast.iml" filepath="$PROJECT_DIR$/Sarparast/Sarparast.iml" />
+    </modules>
+  </component>
+</project>

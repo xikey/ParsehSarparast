@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="کد مشتری"
+        android:id="@+id/textView9"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="نام مشتری"
+        android:id="@+id/textView25"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تلفن ثابت"
+        android:id="@+id/textView32"
+        android:layout_below="@+id/textView25"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtCode"
+        android:layout_alignTop="@+id/textView9"
+        android:layout_toLeftOf="@+id/textView9"
+        android:layout_toStartOf="@+id/textView9"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtName"
+        android:layout_alignTop="@+id/textView25"
+
+
+        android:textColor="#000000"
+        android:layout_alignEnd="@+id/txtCode" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtTel"
+        android:layout_alignTop="@+id/textView32"
+        android:layout_alignRight="@+id/txtCode"
+        android:layout_alignEnd="@+id/txtCode"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تلفن همراه"
+        android:id="@+id/textView39"
+        android:layout_below="@+id/textView32"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtMobile"
+        android:layout_alignTop="@+id/textView39"
+        android:layout_alignStart="@+id/txtTel"
+        android:textColor="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="آدرس"
+        android:id="@+id/textView42"
+        android:layout_marginRight="10dp"
+        android:layout_below="@+id/textView39"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:textColor="#000000"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtAddress"
+        android:layout_alignTop="@+id/textView42"
+        android:layout_alignEnd="@+id/txtMobile"
+        android:textColor="#000000"
+        android:layout_marginBottom="10dp" />
+</RelativeLayout>

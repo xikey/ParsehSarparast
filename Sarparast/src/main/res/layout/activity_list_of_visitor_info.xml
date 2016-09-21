@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:gauge="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.example.zikey.sarparast.ActivityForoosh"
+
+    android:background="#EEEEEE">
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="30dp"
+            android:src="@drawable/backsvg"
+            android:layout_height="match_parent"
+            android:id="@+id/imgBack" />
+        <TextView
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+           android:layout_marginLeft="10dp"
+            android:text="آنالیز فروش"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.CardView
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="5dp"
+
+        cardUseCompatPadding="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="#aab1f7"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_weight="0.1"
+                android:background="#ffffff">
+
+                <ImageView
+                    android:layout_width="110dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView5"
+                    android:src="@drawable/cycle_userlogo"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtNumber"
+                    android:gravity="center_vertical|right"
+                    android:textColor="#070101"
+                    android:textSize="18sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/imageView5"
+                    android:layout_toStartOf="@+id/imageView5"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtPrice"
+                    android:gravity="center_vertical|right"
+                    android:textColor="#070101"
+                    android:textSize="18sp"
+                    android:layout_below="@+id/imgSMS"
+                    android:layout_alignRight="@+id/txtNumber"
+                    android:layout_alignEnd="@+id/txtNumber" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imgSMS"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imgCall"
+                    android:layout_toEndOf="@+id/imgCall"
+                    android:src="@drawable/smslogo"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="25dp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:id="@+id/imgCall"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/calllogo"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="25dp" />
+
+                <RatingBar
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ratingBar"
+
+
+                    android:progressTint="#d50000"
+
+                    android:progressBackgroundTint="#000000"
+
+                    android:scrollbarSize="1dp"
+
+                    android:secondaryProgressTint="#d50000"
+                    android:stepSize="0.1"
+                    style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignRight="@+id/txtPrice"
+                    android:layout_alignEnd="@+id/txtPrice"
+                    android:layout_marginBottom="8dp"
+                    android:rating="0" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/imageView13"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="#575252" />
+
+
+            </RelativeLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/scrollView2"
+                android:layout_weight="0.9">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout android:orientation="horizontal"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="45dp"
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtTFForoosh"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="تعداد فاکتورهای فروش"
+                                android:id="@+id/textView"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#FAFAFA"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtRFForoosh"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ریال فاکتورهای فروش"
+                                android:id="@+id/textView4"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtTFBargasht"
+                                android:textSize="16sp"
+                                android:textColor="#b71c1c"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="تعداد فاکتورهای برگشتی"
+                                android:id="@+id/textView6"
+                                android:textSize="16sp"
+                                android:textColor="#b71c1c"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#FAFAFA"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtRFBargasht"
+                                android:textSize="16sp"
+                                android:textColor="#b71c1c"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ریال فاکتورهای برگشتی"
+                                android:id="@+id/textView10"
+                                android:textSize="16sp"
+                                android:textColor="#b71c1c"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtKhalesT"
+                                android:textSize="16sp"
+                                android:textColor="#004D40"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="خالص فروش تعدادی"
+                                android:id="@+id/textView12"
+                                android:textSize="16sp"
+                                android:textColor="#004D40"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#FAFAFA"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtFRGDore"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="فروش ریالی قبل از دوره"
+                                android:id="@+id/textView16"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtAVGsatr"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="میانگین سطر فروش"
+                                android:id="@+id/textView18"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#FAFAFA"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtAVGForoosh"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="متوسط مبلغ فاکتور"
+                                android:id="@+id/textView20"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtSoodR"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="سود ریالی"
+                                android:id="@+id/textView22"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="#FAFAFA"
+                        android:layout_marginTop="0dp"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:id="@+id/txtSoodD"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="سود درصدی"
+                                android:id="@+id/textView24"
+                                android:textSize="16sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#EEEEEE"
+                        android:gravity="center_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/txtKhalesForoosh"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="5dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="خالص فروش ریالی"
+                                android:id="@+id/textView26"
+                                android:textSize="20sp"
+                                android:textColor="#000000"
+                                android:layout_marginRight="3dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+
+                        >
+
+                        <ImageView
+
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:background="#546E7A"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp" />
+                       <TextView
+                           style="@style/Base.ThemeOverlay.AppCompat.Light"
+                           android:layout_marginTop="20dp"
+                           android:textSize="20sp"
+                           android:textColor="#000000"
+                           android:text="متوسط درصد فروش بر اساس پیش بینی"
+                           android:gravity="center"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content" />
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <pl.pawelkleczkowski.customgauge.CustomGauge
+                                android:id="@+id/gauge2"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:padding="20dp"
+                                gauge:gaugeEndValue="100"
+                                gauge:gaugePointEndColor="#00f"
+                                gauge:gaugePointStartColor="#0ee"
+                                gauge:gaugeStartAngel="135"
+                                gauge:gaugeStartValue="0"
+                                gauge:gaugeStrokeCap="ROUND"
+                                gauge:gaugeStrokeColor="#CCCCCC"
+                                gauge:gaugeStrokeWidth="13dp"
+                                gauge:gaugeSweepAngel="270"
+                                android:layout_alignParentTop="true"
+                                android:layout_centerHorizontal="true" />
+                            <TextView
+
+                                android:textSize="25sp"
+                                android:textColor="#9E9E9E"
+                                android:layout_width="200dp"
+                                android:layout_height="200dp"
+                                android:gravity="center"
+                                android:id="@+id/btnDarsad"
+                                android:layout_centerVertical="true"
+                                android:layout_centerHorizontal="true"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+
+
+    </android.support.v7.widget.CardView>
+
+
+
+</LinearLayout>

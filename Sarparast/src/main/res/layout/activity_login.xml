@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityLogin"
+    android:windowSoftInputMode="adjustResize"
+    android:orientation="vertical"
+    android:background="#1565C0"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#1565C0"
+        android:id="@+id/ly"
+        android:gravity="center"
+        android:layout_weight=".25">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView3"
+            android:src="@drawable/parsehlogo3"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/lyrt"
+        android:background="#1565C0"
+        android:layout_weight=".098">
+
+        <EditText
+
+
+            android:textColorHint="#BDBDBD"
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="number"
+            android:hint="نام کاربری"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:password="false"
+            android:gravity="left|center"
+            android:singleLine="true"
+            android:theme="@style/AppTheme.Underline"
+            android:background="@drawable/underline"
+            android:textSize="17sp"
+            android:paddingTop="15dp"
+            android:focusable="true" />
+
+        <EditText
+            android:textColorHint="#BDBDBD"
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="numberPassword|number"
+            android:hint="رمز عبور"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff"
+            android:password="false"
+            android:gravity="left|center"
+            android:background="@drawable/underline"
+            android:theme="@style/AppTheme.Underline"
+            android:textSize="17sp"
+            android:paddingTop="15dp"
+            android:focusable="true"
+            android:singleLine="true"
+        />
+        <EditText
+            android:textColorHint="#BDBDBD"
+            android:id="@+id/edtUrl"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="http://"
+            android:textColor="#ffffff"
+            android:password="false"
+            android:gravity="left|center"
+            android:background="@drawable/underline"
+            android:layout_marginTop="5dp"
+            android:theme="@style/AppTheme.Underline"
+            android:textSize="17sp"
+            android:paddingTop="15dp"
+            android:focusable="true"
+            android:singleLine="true"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:text="ورود"
+            android:textStyle="bold"
+            android:background="#FFFFFF"
+            android:textSize="18sp"
+            android:focusable="false" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Copyright© 2016,Parseh Total System"
+            android:id="@+id/textView2"
+            android:gravity="bottom|center"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

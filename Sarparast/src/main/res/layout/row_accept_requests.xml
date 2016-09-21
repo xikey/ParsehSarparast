@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="2dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="#fffbfb">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/lyRootReq"
+    android:padding="1dp">
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtShomareSefaresh"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtDate"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/txtShomareSefaresh"
+        android:layout_toStartOf="@+id/txtShomareSefaresh"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtCodeMoshtari"
+        android:layout_below="@+id/txtShomareSefaresh"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:paddingLeft="8dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtNameMoshtari"
+        android:layout_below="@+id/txtShomareSefaresh"
+        android:layout_toLeftOf="@+id/txtCodeMoshtari"
+        android:layout_toStartOf="@+id/txtCodeMoshtari"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtNameVizitor"
+        android:layout_below="@+id/txtDate"
+        android:layout_toLeftOf="@+id/txtNameMoshtari"
+        android:layout_toStartOf="@+id/txtNameMoshtari"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مبلغ:"
+        android:id="@+id/textView34"
+        android:layout_below="@+id/txtCodeMoshtari"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:paddingRight="16dp" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtPrice"
+        android:layout_below="@+id/txtCodeMoshtari"
+        android:layout_toStartOf="@+id/textView41"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:paddingLeft="8dp"
+        android:paddingRight="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/textView41"
+        android:gravity="right" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مانده:"
+        android:id="@+id/textView36"
+        android:layout_below="@+id/textView34"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#e30000"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:paddingRight="16dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtMande"
+        android:layout_below="@+id/txtPrice"
+        android:textColor="#e30000"
+        android:textSize="17sp"
+        android:layout_alignLeft="@+id/txtPrice"
+        android:layout_alignStart="@+id/txtPrice"
+        android:layout_toStartOf="@+id/textView41"
+        android:paddingLeft="8dp"
+        android:paddingRight="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/textView41"
+        android:gravity="right"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="چک در جریان:"
+        android:id="@+id/textView38"
+        android:layout_below="@+id/textView36"
+        android:layout_alignRight="@+id/txtShomareSefaresh"
+        android:layout_alignEnd="@+id/txtShomareSefaresh"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:paddingRight="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="چک برگشتی:"
+        android:id="@+id/textView41"
+        android:layout_below="@+id/textView38"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="15dp"
+        android:paddingRight="16dp" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtJaryanR"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:paddingRight="20dp"
+        android:gravity="right"
+        android:layout_alignTop="@+id/textView38"
+        android:layout_toLeftOf="@+id/textView41" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtJaryanT"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center|right"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_alignTop="@+id/txtJaryanR"
+        android:layout_toStartOf="@+id/txtJaryanR"
+        android:layout_marginRight="25dp" />
+
+    <TextView
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtBargashtR"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:paddingLeft="8dp"
+        android:paddingRight="20dp"
+        android:gravity="right"
+        android:layout_alignTop="@+id/textView41"
+        android:layout_toLeftOf="@+id/textView41"
+        android:layout_marginBottom="15dp"
+        android:layout_alignLeft="@+id/txtJaryanR"
+        android:layout_alignStart="@+id/txtJaryanR" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtBargashtT"
+        android:textColor="#0c0000"
+        android:textSize="17sp"
+        android:gravity="center|right"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:layout_alignTop="@+id/txtBargashtR"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="25dp"
+        android:layout_toStartOf="@+id/txtBargashtR" />
+
+    <LinearLayout
+        android:layout_below="@id/txtBargashtR"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CFD8DC"
+        android:id="@+id/lyKhat"
+        android:layout_marginBottom="1dp">
+
+    </LinearLayout>
+
+<LinearLayout
+        android:layout_below="@id/lyKhat"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+    android:gravity="right"
+    android:id="@+id/lyButtom">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgCall"
+        android:src="@drawable/phone2"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="16.6"
+        android:layout_marginLeft="5dp" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgInfo"
+        android:src="@drawable/info3"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="16.6" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imgOrders"
+        android:src="@drawable/dollar3"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="16.6" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/btnShowDetails"
+        android:src="@drawable/details"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_weight="16.6" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/btnForward"
+        android:src="@drawable/backsvg"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_weight="16.6" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/btnCancel"
+        android:src="@drawable/cancell"
+        android:padding="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/btnShowDetails"
+        android:layout_marginEnd="33dp"
+        android:layout_weight="16.6" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:id="@+id/btnAccept"
+        android:src="@drawable/sucsess"
+        android:padding="5dp"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/btnShowDetails"
+        android:layout_marginRight="5dp"
+        android:layout_weight="16.6" />
+</LinearLayout>
+
+</RelativeLayout>
+
+</android.support.v7.widget.CardView>

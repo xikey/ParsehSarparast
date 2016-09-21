@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/lyProgress"
+        android:visibility="visible" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:id="@+id/progressBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:id="@+id/lyEror"
+        android:layout_marginTop="?attr/actionBarSize">
+
+        <TextView
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="اطلاعاتی جهت نمایش وجود ندارد"
+            android:id="@+id/txtEror"
+            android:gravity="center"
+            android:layout_marginTop="?attr/actionBarSize" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lyContent"
+        android:visibility="visible"
+        android:layout_below="@+id/mhztoolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lyMain"
+            android:visibility="visible">
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/row_customers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:scrollbars="vertical"
+                android:background="#e3dede"
+                android:focusableInTouchMode="true"
+                android:visibility="visible"
+                android:layout_below="@+id/relativeLayout" />
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/relativeLayout"
+                android:gravity="center_vertical"
+                android:background="#0277BD"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
+
+                <EditText
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff"
+                    android:hint="جستجو"
+                    android:background="#0277BD"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edtSearch"
+                    android:layout_weight="1"
+
+                    android:paddingRight="50dp"
+                    android:paddingLeft="10dp" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView24"
+                    android:src="@android:drawable/ic_menu_search"
+                    android:scaleType="fitCenter"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+   </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="30dp"
+            android:src="@drawable/backsvg"
+            android:layout_height="match_parent"
+            android:id="@+id/imgBack" />
+        <TextView
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtTop" />
+    </android.support.v7.widget.Toolbar>
+
+</RelativeLayout>

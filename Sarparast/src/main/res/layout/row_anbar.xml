@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="7dp"
+    cardUseCompatPadding="true"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="12dp"
+    android:layout_marginRight="12dp"
+    android:background="#ffffff">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:id="@+id/lyRoot02">
+
+
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="0.95">
+
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearLayout7"
+                    android:gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:weightSum="1">
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearLayout7"
+                    android:layout_alignParentStart="true"
+                    android:id="@+id/linearLayout8"
+                    android:gravity="right"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtCode"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:layout_marginRight="25dp"
+                        android:gravity="right"
+                        android:layout_weight=".99"
+                        android:paddingLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="کد کالا"
+                        android:id="@+id/textView83"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearLayout8"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/linearLayout9"
+                    android:gravity="right"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtName"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:layout_marginRight="25dp"
+                        android:gravity="right"
+                        android:layout_weight=".99"
+                        android:paddingLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="نام کالا"
+                        android:id="@+id/textView87"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linearLayout9"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/linearLayout12">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtMojoodi"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:layout_marginRight="25dp"
+                        android:gravity="right"
+                        android:layout_weight=".99"
+                        android:paddingLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="موجودی"
+                        android:id="@+id/textView89"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:paddingRight="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_below="@+id/linearLayout12"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/linearLayout19"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtTForoosh"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        android:layout_marginRight="25dp"
+                        android:gravity="right"
+                        android:layout_weight=".99"
+                        android:paddingLeft="8dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="قابل فروش"
+                        android:id="@+id/textView59"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingRight="8dp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="100dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="#e3dede"></LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="101dp"
+                android:id="@+id/imgBazaryab"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/barcode2"
+                android:padding="7dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_below="@id/lyRoot02"
+            android:layout_height="50dp"
+            android:id="@+id/lyButtom"
+            android:gravity="right">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imgSathGheymat"
+                android:src="@drawable/dollar3"
+                android:padding="6dp"
+                android:layout_marginRight="6dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imgInfo"
+                android:src="@drawable/info3"
+                android:padding="6dp"
+                android:layout_marginRight="6dp" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imgVijegiKala"
+                android:padding="6dp"
+                android:layout_marginRight="6dp"
+                android:src="@drawable/details" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/lyRoot02"
+            android:id="@+id/lyKhat"
+            android:layout_marginBottom="1dp"
+            android:background="#607D8B"></LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

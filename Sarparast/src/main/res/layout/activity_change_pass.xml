@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityLogin"
+    android:orientation="vertical"
+    android:background="#1565C0">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent">
+        <ImageView
+            android:layout_width="30dp"
+            android:src="@drawable/backsvg"
+            android:layout_height="match_parent"
+            android:id="@+id/imgBack" />
+        <TextView
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="تغییر رمز عبور"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#1565C0"
+        android:id="@+id/ly"
+        android:gravity="center"
+        android:layout_weight="0.35">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView3"
+            android:src="@drawable/locker_w"
+            android:scaleType="fitCenter"
+            android:layout_alignParentBottom="true"
+            android:padding="2dp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/lyrt"
+        android:background="#1565C0"
+        android:layout_weight=".098">
+
+        <EditText
+            android:textColorHint="#ffffff"
+            android:id="@+id/oldPass"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="numberPassword|number"
+            android:hint="رمز عبور قبلی"
+            android:background="#42A5F5"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff3f3f3"
+            android:padding="10dp"
+            android:password="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <EditText
+
+            android:textColorHint="#ffffff"
+            android:id="@+id/newPass1"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="numberPassword|number"
+            android:hint="رمز عبور جدید"
+            android:background="#42A5F5"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff3f3f3"
+            android:padding="10dp"
+            android:password="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+        <EditText
+            android:textColorHint="#ffffff"
+            android:id="@+id/newPass2"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="numberPassword|number"
+            android:hint="تکرار رمز عبور جدید"
+            android:background="#42A5F5"
+            android:layout_marginTop="5dp"
+            android:textColor="#fff3f3f3"
+            android:padding="10dp"
+            android:password="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="ذخیره"
+            android:background="#0277BD"
+            android:textColor="#fff3f3f3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Copyright© 2016,Parseh Total System"
+            android:id="@+id/textView2"
+            android:gravity="bottom|center"
+            android:textColor="#ffffff"
+            android:textSize="10sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

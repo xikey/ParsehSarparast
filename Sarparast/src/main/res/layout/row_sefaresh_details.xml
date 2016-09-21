@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="7dp"
+    cardUseCompatPadding="true"
+    android:layout_marginTop="5dip"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:background="#ffffff">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:id="@+id/lyRoot">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:paddingBottom="10dp">
+
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight="0.95">
+
+
+
+
+                <TextView
+                    android:layout_width="135dp"
+                    android:layout_height="wrap_content"
+                    android:text="کد "
+                    android:id="@+id/textView3"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="17sp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#1e1a1a"
+                    android:paddingRight="1dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="0dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="نام کالا"
+                    android:id="@+id/textView13"
+                    android:textSize="17sp"
+                    android:layout_marginTop="19dp"
+                    android:textColor="#1e1a1a"
+                    android:paddingRight="1dp"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignRight="@+id/textView3"
+                    android:layout_alignEnd="@+id/textView3" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="تعداد"
+                    android:id="@+id/textView15"
+                    android:textSize="17sp"
+                    android:layout_marginTop="17dp"
+                    android:textColor="#1e1a1a"
+                    android:paddingRight="1dp"
+                    android:layout_below="@+id/textView13"
+                    android:layout_alignRight="@+id/textView13"
+                    android:layout_alignEnd="@+id/textView13" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="فی کالا"
+                    android:id="@+id/textView17"
+                    android:textSize="17sp"
+                    android:textColor="#1e1a1a"
+                    android:paddingRight="1dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignRight="@+id/textView15"
+                    android:layout_alignEnd="@+id/textView15"
+                    android:layout_marginTop="17dp"
+                    android:layout_below="@+id/textView15" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مبلغ نهایی"
+                    android:id="@+id/textView21"
+                    android:textSize="19sp"
+                    android:layout_marginTop="17dp"
+                    android:textColor="#2037ff"
+                    android:paddingRight="1dp"
+                    android:layout_below="@+id/textView17"
+                    android:layout_alignRight="@+id/textView17"
+                    android:layout_alignEnd="@+id/textView17" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtCodeKala"
+                    android:textColor="#000000"
+                    android:layout_alignTop="@+id/textView3"
+                    android:layout_alignLeft="@+id/txtCode"
+                    android:layout_alignStart="@+id/txtCode"
+                    android:layout_alignRight="@+id/txtCode"
+                    android:layout_alignEnd="@+id/txtCode"
+                    android:gravity="right"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtCode"
+                    android:layout_alignTop="@+id/textView13"
+                    android:textColor="#000000"
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtTedad"
+                    android:layout_alignTop="@+id/textView15"
+                    android:textColor="#000000"
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtFi"
+                    android:layout_alignTop="@+id/textView17"
+                    android:textColor="#000000"
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="..."
+                    android:id="@+id/txtPriceKol"
+                    android:layout_alignTop="@+id/textView21"
+                    android:textColor="#2037ff"
+                    android:layout_toLeftOf="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:textSize="19sp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:gravity="left|center">
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView14"
+                android:layout_gravity="center_vertical"
+                android:background="#a8a8a8"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="222"
+                android:id="@+id/txtRowNumber"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

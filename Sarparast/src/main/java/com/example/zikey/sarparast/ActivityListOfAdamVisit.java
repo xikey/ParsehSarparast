@@ -74,15 +74,15 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
             }
         });
 
-        if (controler.equals("Date")){
+        if (controler.equals("Date")) {
             txtHead.setText("عدم ویزیت روزانه");
-            methodName="S_Adam_Visit_Day";
+            methodName = "S_Adam_Visit_Day";
             runAsync();
         }
 
-        if (controler.equals("Month")){
+        if (controler.equals("Month")) {
             txtHead.setText("عدم ویزیت ماهانه");
-            methodName="S_Adam_Visit_Month";
+            methodName = "S_Adam_Visit_Month";
             runAsync();
         }
 
@@ -124,7 +124,7 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
         @Override
         protected void onPostExecute(String state) {
 
-            adamVisitAsync=null;
+            adamVisitAsync = null;
 
             if (state.equals("Null")) {
 
@@ -145,7 +145,6 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
                 Log.e("Is Online", "Online is ok ");
 
-
                 lyContent.setVisibility(View.VISIBLE);
                 lyProgress.setVisibility(View.GONE);
                 lyEror.setVisibility(View.GONE);
@@ -157,12 +156,12 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
                 row_AdamVisit.setAdapter(row_adapter);
                 row_adapter.setState(1);
 
-                if (controler.equals("Date")){
-                  row_adapter.setChecker("date");
+                if (controler.equals("Date")) {
+                    row_adapter.setChecker("date");
                 }
 
-                if (controler.equals("Month")){
-                     row_adapter.setChecker("month");
+                if (controler.equals("Month")) {
+                    row_adapter.setChecker("month");
                 }
                 row_adapter.setActivity(ActivityListOfAdamVisit.this);
 
@@ -182,16 +181,13 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
 
 
-
-
-
             Log.e("tttttttttttt", "" + "Do in background is ok");
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
 
-                      if (isonline) {
+            if (isonline) {
                 try {
 
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), methodName, datas).getProperty(0);
@@ -226,12 +222,10 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
     }
 
     private void runAsync() {
-        if (adamVisitAsync!=null)
-        {
+        if (adamVisitAsync != null) {
             return;
-        }
-        else {
-            adamVisitAsync=new AdamVisitAsync();
+        } else {
+            adamVisitAsync = new AdamVisitAsync();
             adamVisitAsync.execute();
         }
     }

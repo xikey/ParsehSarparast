@@ -9,7 +9,7 @@
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="7dp"
     cardUseCompatPadding="true"
-    android:layout_marginTop="14dp"
+    android:layout_marginTop="10dp"
     android:layout_marginBottom="5dip"
     android:layout_marginLeft="4dp"
     android:layout_marginRight="4dp"

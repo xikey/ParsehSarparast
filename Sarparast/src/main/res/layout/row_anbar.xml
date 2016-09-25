@@ -60,7 +60,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linearLayout7"
-                    android:layout_alignParentStart="true"
+
                     android:id="@+id/linearLayout8"
                     android:gravity="right"
                     android:layout_marginTop="10dp">
@@ -124,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linearLayout9"
-                    android:layout_alignParentStart="true"
+
                     android:gravity="right"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
@@ -223,7 +223,7 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imgSathGheymat"
-                android:src="@drawable/dollar3"
+                android:src="@drawable/ic_dollar_black"
                 android:padding="6dp"
                 android:layout_marginRight="6dp" />
 
@@ -231,7 +231,7 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:id="@+id/imgInfo"
-                android:src="@drawable/info3"
+                android:src="@drawable/ic_info_black"
                 android:padding="6dp"
                 android:layout_marginRight="6dp" />
 
@@ -241,7 +241,7 @@
                 android:id="@+id/imgVijegiKala"
                 android:padding="6dp"
                 android:layout_marginRight="6dp"
-                android:src="@drawable/details" />
+                android:src="@drawable/ic_details_black_24dp1" />
         </LinearLayout>
 
         <LinearLayout

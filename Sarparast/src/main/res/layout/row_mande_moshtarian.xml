@@ -206,30 +206,30 @@
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgDislike"
-                    android:src="@drawable/dislike"
+                    android:src="@drawable/ic_dislike_black"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="5dp" />
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgLike"
-                    android:src="@drawable/like"
+                    android:src="@drawable/ic_like_blavk"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="5dp" />
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgNavigate"
-                    android:src="@drawable/location"
+                    android:src="@drawable/ic_location_black"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
@@ -237,9 +237,9 @@
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgCall"
-                    android:src="@drawable/phone2"
+                    android:src="@drawable/ic_call_black_24dp"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
@@ -247,19 +247,19 @@
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgInfo"
-                    android:src="@drawable/info3"
+                    android:src="@drawable/ic_info_black"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="5dp" />
 
                 <ImageView
                     android:layout_width="50dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/img5Vijegi"
-                    android:src="@drawable/property"
+                    android:src="@drawable/ic_person_black_24dp"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
@@ -269,11 +269,11 @@
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
                     android:id="@+id/btnShowDetails"
-                    android:src="@drawable/dollar3"
+                    android:src="@drawable/ic_dollar_black"
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="5dp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -61,10 +61,10 @@
             android:paddingLeft="10dp" />
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:id="@+id/imageView12"
-            android:src="@android:drawable/ic_menu_search"
+            android:src="@drawable/ic_search_black_24dp"
             android:scaleType="fitCenter"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />

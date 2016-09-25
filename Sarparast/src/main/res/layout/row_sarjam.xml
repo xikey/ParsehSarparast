@@ -192,7 +192,7 @@
                         android:id="@+id/imgSathGheymat"
                         android:layout_marginRight="10dp"
                         android:padding="8dp"
-                        android:src="@drawable/dollar3" />
+                        android:src="@drawable/ic_dollar_black" />
 
                     <ImageView
                         android:layout_width="50dp"
@@ -200,7 +200,7 @@
                         android:id="@+id/imgInfo"
                         android:layout_marginRight="10dp"
                         android:padding="8dp"
-                        android:src="@drawable/info3" />
+                        android:src="@drawable/ic_info_black" />
 
                     <ImageView
                         android:layout_width="50dp"
@@ -208,7 +208,7 @@
                         android:id="@+id/imgVijegiKala"
                         android:layout_marginRight="10dp"
                         android:padding="8dp"
-                        android:src="@drawable/details" />
+                        android:src="@drawable/ic_details_black_24dp1" />
                 </LinearLayout>
 
                 <LinearLayout

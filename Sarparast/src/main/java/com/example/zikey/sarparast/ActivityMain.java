@@ -11,7 +11,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -19,6 +18,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,8 +31,10 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.Helpers.Indicator;
@@ -64,7 +66,6 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
 
-
     private RecyclerView row_khales;
 
     private RecyclerView row_TasvieNashode;
@@ -85,19 +86,44 @@ public class ActivityMain extends AppCompatActivity
     private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<UserInfo>();
     private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<UserInfo>();
 
+    //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
+    private int isAFinalRelease=-1;
+
     @Override
     protected void onResume() {
 
         super.onResume();
     }
 
+
     @Override
 
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
+        isAFinalRelease=1;
+
+        if (isAFinalRelease==1){
+            Thread t = new Thread(new adminThread());
+            t.setDefaultUncaughtExceptionHandler(new Thread.
+                    UncaughtExceptionHandler() {
+                public void uncaughtException(Thread t, Throwable e) {
+                    System.out.println(t + " throws exception: " + e);
+
+                    Intent intent = new Intent(ActivityMain.this, ActivityErorHandelling.class);
+                    intent.putExtra("Eror", e.toString()+" "+e.getMessage()+t.toString());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    System.exit(0);
+                    t.start();
+
+                }
+            });
+            // this will call run() function
+        }
 
 //        alarmManager.setInexactRepeating(AlarmManager.RTC,9000,9000,);
 
@@ -625,7 +651,7 @@ public class ActivityMain extends AppCompatActivity
     }
 
 
-    public   void  initVersionName(){
+    public void initVersionName() {
         TextView txtParseh = (TextView) findViewById(R.id.txtCopyRight);
         PackageManager manager = getApplicationContext().getPackageManager();
         PackageInfo info;
@@ -637,6 +663,13 @@ public class ActivityMain extends AppCompatActivity
             e.printStackTrace();
         }
 
+    }
+
+    public class adminThread implements Runnable {
+
+        public void run() {
+            throw new RuntimeException();
+        }
     }
 
 }

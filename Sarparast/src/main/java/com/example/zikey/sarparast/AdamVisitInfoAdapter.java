@@ -1,6 +1,7 @@
 package com.example.zikey.sarparast;
 
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -29,7 +30,7 @@ public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdap
     //state 1 is Kala
 
     private int state;
-    private String checker="0";
+    private String checker = "0";
 
     public void setChecker(String checker) {
         this.checker = checker;
@@ -149,6 +150,7 @@ public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdap
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
         TextView txtCode, txtName, txtCount;
+        ImageView imgDetails;
 
         public productoViewHolder(final View itemView) {
             super(itemView);
@@ -156,8 +158,27 @@ public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdap
             txtName = (TextView) itemView.findViewById(R.id.txtName);
             txtCode = (TextView) itemView.findViewById(R.id.txtCode);
             txtCount = (TextView) itemView.findViewById(R.id.txtCount);
+            imgDetails = (ImageView) itemView.findViewById(R.id.imgDetails);
+
+
+            imgDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(activity, ActivityListOfAdamVisitMoshjtarian.class);
+                    if (checker != null) {
+
+                        intent.putExtra("checker", checker);
+                        intent.putExtra("hedare", txtName.getText().toString());
+                        intent.putExtra("ID",txtCode.getText().toString());
+                        activity.startActivity(intent);
+                    }
+                }
+            });
 
         }
     }
+
+
 }
 

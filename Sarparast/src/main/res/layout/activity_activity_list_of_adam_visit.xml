@@ -96,7 +96,7 @@
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
                     android:id="@+id/imageView23"
-                    android:src="@android:drawable/ic_menu_search"
+                    android:src="@drawable/ic_search_black_24dp"
                     android:scaleType="fitCenter"
                     android:background="#0277BD"
                     android:padding="2dp"

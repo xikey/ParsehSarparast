@@ -192,11 +192,11 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:id="@+id/imgBazaryab"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/cycle_userlogo2"
-                    android:padding="18dp" />
+                    android:src="@drawable/ic_account_circle_black_24dp"
+                    android:padding="15dp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -216,12 +216,12 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imageView28"
+                android:id="@+id/imgDetails"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/details"
+                android:src="@drawable/ic_details_black_24dp1"
                 android:padding="5dp" />
         </RelativeLayout>
 

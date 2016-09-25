@@ -97,8 +97,6 @@ public class ActivityRequestsHeader extends AppCompatActivity {
         });
 
 
-
-
     }
 
     public class BazaryabHaveOrderAsync extends AsyncTask<Void, String, String> {
@@ -159,8 +157,6 @@ public class ActivityRequestsHeader extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
 
-
-
             Log.e("tttttttttttt", "" + "Do in background is ok");
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
@@ -183,7 +179,7 @@ public class ActivityRequestsHeader extends AppCompatActivity {
                         requestsInfo.set_NameBazaryab(NetworkTools.getSoapPropertyAsNullableString(sp, 9));
                         requestsInfo.set_CodeBazaryab(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
                         requestsInfo.set_TedadKol(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
-                        requestsInfo.set_FactorShode(NetworkTools.getSoapPropertyAsNullableString(sp,4));
+                        requestsInfo.set_FactorShode(NetworkTools.getSoapPropertyAsNullableString(sp, 4));
                         requestsInfo.set_TedadTaeed(NetworkTools.getSoapPropertyAsNullableString(sp, 6));
                         requestsInfo.set_TedadLaghv(NetworkTools.getSoapPropertyAsNullableString(sp, 7));
                         requestsInfo.set_TedadBargashti(NetworkTools.getSoapPropertyAsNullableString(sp, 8));

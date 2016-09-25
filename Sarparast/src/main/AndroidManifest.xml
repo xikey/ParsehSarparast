@@ -186,8 +186,11 @@
         <activity
             android:name=".ActivityAdamVisit"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.MHZ"></activity>
-        <activity android:name=".ActivityListOfAdamVisit"></activity>
+            android:theme="@style/AppTheme.MHZ" />
+        <activity android:name=".ActivityListOfAdamVisit" />
+        <activity android:name=".ActivityListOfAdamVisitMoshjtarian" />
+        <activity android:name=".ActivityReasonsNotVisited" />
+        <activity android:name=".ActivityErorHandelling"></activity>
     </application>
 
 </manifest>

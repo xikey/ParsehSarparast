@@ -182,11 +182,11 @@
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:id="@+id/btnShowDetails"
-                android:src="@drawable/details"
+                android:src="@drawable/ic_details_black_24dp1"
                 android:padding="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
+                />
 
 
 

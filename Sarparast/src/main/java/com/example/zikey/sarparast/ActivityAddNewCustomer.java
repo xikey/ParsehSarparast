@@ -118,44 +118,9 @@ public class ActivityAddNewCustomer extends AppCompatActivity implements   Googl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_customer);
 
-        Thread t = new Thread(new adminThread());
 
-        t.setDefaultUncaughtExceptionHandler(new Thread.
-                UncaughtExceptionHandler() {
-            public void uncaughtException(Thread t, Throwable e) {
-                System.out.println(t + " throws exception: " + e);
 
-                try {
-                    File newFolder = new File(Environment.getExternalStorageDirectory(), "Sarparast_Exception");
-                    if (!newFolder.exists()) {
-                        newFolder.mkdirs();
-                    }
-                    try {
-                        File file = new File(newFolder, "Exeption_Sarparast" + ".txt");
-                        file.createNewFile();
 
-                        try {
-                            BufferedWriter buf = new BufferedWriter(new FileWriter(file, true));
-                            buf.append(":" + e.toString());
-                            buf.newLine();
-                            buf.close();
-
-                        }
-                        catch (Exception e3) {
-                            System.out.println("connot write to buffer: " + e3);
-                        }
-
-                    } catch (Exception ex) {
-                        System.out.println("ex: " + ex);
-                    }
-                } catch (Exception e2) {
-                    System.out.println("e: " + e2);
-                }
-
-            }
-        });
-        // this will call run() function
-        t.start();
 
 
     permiss = ContextCompat.checkSelfPermission(ActivityAddNewCustomer.this,
@@ -534,12 +499,7 @@ else {
 
 
 
-  public   class adminThread implements Runnable {
 
-        public void run() {
-            throw new RuntimeException();
-        }
-    }
 
     private  void  getMyLocation(){
         if (MY_PERMISSIONS_REQUEST_READ_GPS==-1){

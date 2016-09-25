@@ -26,7 +26,7 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
     private ImageView imgBack;
     private TextView txtHead;
-    private String state;
+    private String controler;
 
     private PreferenceHelper preferenceHelper;
 
@@ -56,7 +56,7 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
         row_AdamVisit = (RecyclerView) findViewById(R.id.row_AdamVisit);
 
-        state = getIntent().getStringExtra("state");
+        controler = getIntent().getStringExtra("state");
 
 
         txtHead = (TextView) findViewById(R.id.txtHead);
@@ -74,12 +74,14 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
             }
         });
 
-        if (state.equals("Date")){
+        if (controler.equals("Date")){
+            txtHead.setText("عدم ویزیت روزانه");
             methodName="S_Adam_Visit_Day";
             runAsync();
         }
 
-        if (state.equals("Month")){
+        if (controler.equals("Month")){
+            txtHead.setText("عدم ویزیت ماهانه");
             methodName="S_Adam_Visit_Month";
             runAsync();
         }
@@ -154,11 +156,12 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
                 row_AdamVisit.setAdapter(row_adapter);
                 row_adapter.setState(1);
-                if (state.equals("Date")){
+
+                if (controler.equals("Date")){
                   row_adapter.setChecker("date");
                 }
 
-                if (state.equals("Month")){
+                if (controler.equals("Month")){
                      row_adapter.setChecker("month");
                 }
                 row_adapter.setActivity(ActivityListOfAdamVisit.this);
@@ -221,7 +224,6 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
             return "NotOnline";
         }
     }
-
 
     private void runAsync() {
         if (adamVisitAsync!=null)

@@ -264,32 +264,32 @@
 
     <ImageView
         android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/imgCall"
-        android:src="@drawable/phone2"
+        android:src="@drawable/ic_call_black_24dp"
         android:padding="5dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+
         android:layout_weight="16.6"
         android:layout_marginLeft="5dp" />
 
     <ImageView
         android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/imgInfo"
-        android:src="@drawable/info3"
+        android:src="@drawable/ic_info_black"
         android:padding="5dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
+
         android:layout_weight="16.6" />
 
     <ImageView
         android:layout_width="40dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/imgOrders"
-        android:src="@drawable/dollar3"
+        android:src="@drawable/ic_dollar_black"
         android:padding="5dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
@@ -300,7 +300,7 @@
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:id="@+id/btnShowDetails"
-        android:src="@drawable/details"
+        android:src="@drawable/ic_details_black_24dp1"
         android:padding="5dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
@@ -311,7 +311,7 @@
         android:layout_width="40dp"
         android:layout_height="match_parent"
         android:id="@+id/btnForward"
-        android:src="@drawable/backsvg"
+        android:src="@drawable/back"
         android:padding="5dp"
         android:layout_marginRight="8dp"
         android:layout_weight="16.6" />

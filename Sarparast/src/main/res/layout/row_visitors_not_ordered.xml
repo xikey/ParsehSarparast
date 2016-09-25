@@ -170,7 +170,7 @@
                 android:id="@+id/imgBazaryab"
                 android:layout_gravity="center_vertical"
                 android:padding="20dp"
-                android:src="@drawable/cycle_userlogo2" />
+                android:src="@drawable/ic_account_circle_black_24dp" />
 
         </LinearLayout>
     </LinearLayout>

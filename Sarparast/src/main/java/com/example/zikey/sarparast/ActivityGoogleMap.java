@@ -1,6 +1,7 @@
 package com.example.zikey.sarparast;
 
 import android.*;
+import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -14,11 +15,17 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.zikey.sarparast.Helpers.Convertor;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.google.android.gms.common.ConnectionResult;
@@ -35,35 +42,50 @@ import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, DatePickerDialog.OnDateSetListener {
 
-  private   String mLatitudeText="0.0";
-  private   String mLongitudeText="0.0";
+    private String mLatitudeText = "0.0";
+    private String mLongitudeText = "0.0";
 
     double lastCustomerL;
     double lastCustomerW;
 
-   private  Marker marker;
+    private Button btnDate;
+
+    private int swich;
+
+    private Marker marker;
 
     private ArrayList<BazaryabInfo> pointha = new ArrayList<>();
 
-   private String TempL;
-   private String TempW;
+    private String TempL;
+    private String TempW;
 
-    private int mmapReady=0;
+    private PersianCalendar persianCalendar = null;
+    private DatePickerDialog datePickerDialog = null;
+    private BazaryabSabtPath bazaryabSabtPathAsync = null;
+
+    private int mmapReady = 0;
     private int MY_PERMISSIONS_REQUEST_READ_GPS;
 
 
-   private Location mLastLocation;
-   private GoogleApiClient mGoogleApiClient;
+    private Location mLastLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private String thisDate = "";
 
-    private boolean started=false;
+    private boolean started = false;
 
     @Override
     protected void onStart() {
@@ -81,23 +103,37 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
     BitmapDescriptor pinStart;
     BitmapDescriptor pinEnd;
     BitmapDescriptor pin;
+    BitmapDescriptor customerPin;
 
     private String state;
     public PreferenceHelper preferenceHelper;
 
     public ArrayList<BazaryabInfo> points;
 
-    private    Double W;
-    private    Double L;
+    private Double W;
+    private Double L;
 
-    private    Double myW;
-    private    Double myL;
+    private Double myW;
+    private Double myL;
+
+    private RelativeLayout lyProgress;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_move_path);
+
+        btnDate = (Button) findViewById(R.id.btnDate);
+        lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
+
+        btnDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                showPersianCalender(persianCalendar, datePickerDialog);
+            }
+        });
 
         MapsInitializer.initialize(getApplicationContext());
 
@@ -111,14 +147,12 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         }
 
 
-
         points = new ArrayList<>();
         points.clear();
 
         state = getIntent().getStringExtra("state");
 
         ID = getIntent().getIntExtra("Code", 0);
-
 
 
         preferenceHelper = new PreferenceHelper(this);
@@ -128,26 +162,45 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         }
 
         if (state.equals("MasirSabt")) {
-            new BazaryabSabtPath().execute();
+            lyProgress.setVisibility(View.VISIBLE);
+            runBazaryabSabtPathAsync(thisDate);
         }
 
-  if (state.equals("CustomerPastLocation")) {
+        if (state.equals("CustomerPastLocation")) {
 
-      TempL = getIntent().getStringExtra("Lat");
-      TempW = getIntent().getStringExtra("Long");
+            TempL = getIntent().getStringExtra("Lat");
+            TempW = getIntent().getStringExtra("Long");
 
-      if ((!TempL.equals("0")) && (!TempW.equals("0"))) {
+            if ((!TempL.equals("0")) && (!TempW.equals("0"))) {
 
-        lastCustomerL = Double.parseDouble(TempL);
-        lastCustomerW = Double.parseDouble(TempW);
+                lastCustomerL = Double.parseDouble(TempL);
+                lastCustomerW = Double.parseDouble(TempW);
 
-      }
-  }
+            }
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String month;
+        String day;
+        if (monthOfYear < 10) month = "0" + (monthOfYear + 1);
+        else month = "" + (monthOfYear + 1);
+
+        if (dayOfMonth < 10) day = "0" + (dayOfMonth);
+        else day = "" + (dayOfMonth);
+
+
+        thisDate = year + "/" + month + "/" + day;
+        runBazaryabSabtPathAsync(thisDate);
+
+        btnDate.setText(thisDate);
+
     }
 
     /**
@@ -167,24 +220,16 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         pinStart = BitmapDescriptorFactory.fromResource(R.drawable.start_pin);
         pinEnd = BitmapDescriptorFactory.fromResource(R.drawable.pin_end);
         pin = BitmapDescriptorFactory.fromResource(R.drawable.pin);
+        customerPin = BitmapDescriptorFactory.fromResource(R.drawable.customerpin);
 
 
         mMap = googleMap;
         mmapReady = 1;
 
-        if (mmapReady==1){
+        if (mmapReady == 1) {
 
 
             mMap.setInfoWindowAdapter(new CustomInfoView());
-//            if (state.equals("MyNearCustomers")) {
-//
-//                Log.e("OnConnected", "on Connected is run");
-//
-//             new  NearCustomersAsync().execute();
-//
-//            }
-
-
 
 
             if (state.equals("CustomerPastLocation")) {
@@ -201,29 +246,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             }
         }
 
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(gholipoor));
-//        float zoomLevel = 17.0f; //This goes up to 21
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gholipoor, zoomLevel));
-
-        // Add a marker in Sydney and move the camera
-
-//Log.e("Poits size","Poits size si "+points.size());
-//        for (int i=0;i<points.size();i++){
-//            L= Double.valueOf((((points.get(i)).get_L())));
-//            W= Double.valueOf((((points.get(i)).get_W())));
-//
-//             Log.e("LatLong","L is "+L+"W is "+W);
-//
-//            MarkerOptions marker = new MarkerOptions();
-//
-//            marker.position(new LatLng(W,L));
-//            mMap.addMarker(marker);
-//        }
-
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
 
     }
 
@@ -232,7 +254,7 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
         if (state.equals("MyNearCustomers")) {
 
-           getMyLocation();
+            getMyLocation();
 
 
         }
@@ -240,7 +262,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
 
     public class MyLocationAsync extends AsyncTask<Void, String, String> implements GoogleMap.InfoWindowAdapter {
-
 
 
         @Override
@@ -264,11 +285,9 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             CircleOptions circleOptions = new CircleOptions();
 
 
-
             for (int i = 0; i < points.size(); i++) {
                 myW = Double.valueOf((((points.get(i)).get_L())));
                 myL = Double.valueOf((((points.get(i)).get_W())));
-
 
 
                 MarkerOptions marker = new MarkerOptions();
@@ -281,31 +300,27 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
                 //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
 
-                if (latLng!=null){
+                if (latLng != null) {
 
-                if (i == 0) {
-                    marker.icon(pinStart);
-                    circleOptions.center(latLng);
-                    circleOptions.radius(500);
+                    if (i == 0) {
+                        marker.icon(pinStart);
+                        circleOptions.center(latLng);
+                        circleOptions.radius(500);
 
-                    circleOptions.strokeColor(Color.parseColor("#d50000")).strokeWidth(2);
-                    circleOptions.fillColor(Color.argb(20, 255, 0, 0));
+                        circleOptions.strokeColor(Color.parseColor("#d50000")).strokeWidth(2);
+                        circleOptions.fillColor(Color.argb(20, 255, 0, 0));
 
-                    float zoomLevel = 15.0f; //This goes up to 21
+                        float zoomLevel = 15.0f; //This goes up to 21
 
-                    mMap.addCircle(circleOptions);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
-                }
+                        mMap.addCircle(circleOptions);
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                    }
 
-//                if (i == (points.size() - 1)) {
-//                    marker.icon(pinEnd);
-//                }
-                //tsinfo  mMap.addPolyline(polylineOptions);
-                if (marker!=null) {
+                    if (marker != null) {
 
-                    mMap.addMarker(marker);
+                        mMap.addMarker(marker);
 
-                      }
+                    }
                 }
 
             }
@@ -328,22 +343,17 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             w = String.valueOf(myW);
 
 
-
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("ID", ID);
-
-
 
 
             if (isonline) {
                 try {
 
-                        BazaryabInfo point = new BazaryabInfo();
-                        point.set_L(l);
-                        point.set_W(w);
-                        points.add(point);
-
-
+                    BazaryabInfo point = new BazaryabInfo();
+                    point.set_L(l);
+                    point.set_W(w);
+                    points.add(point);
 
 
                 } catch (Exception e) {
@@ -360,189 +370,229 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
     }
 
 
-
-
-
-
-
-
-
     public class BazaryabMovePath extends AsyncTask<Void, String, String> implements GoogleMap.InfoWindowAdapter {
 
-//        private View view;
-//
-//        public BazaryabMovePath() {
-//            view = getLayoutInflater().inflate(R.layout.custom_info_window,
-//                    null);
-//        }
 
-            @Override
-            public View getInfoWindow(Marker marker) {
-                return null;
-            }
+        @Override
+        public View getInfoWindow(Marker marker) {
+            return null;
+        }
 
 
-            @Override
-            public View getInfoContents(Marker marker) {
-                return null;
-            }
+        @Override
+        public View getInfoContents(Marker marker) {
+            return null;
+        }
 
 
-            Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
-            ProgressDialog dialog;
+        Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
+        ProgressDialog dialog;
 
-            @Override
-            protected void onPostExecute(String state) {
+        @Override
+        protected void onPostExecute(String state) {
 
-                //PolylineOptions polylineOptions = new PolylineOptions();
-                CircleOptions circleOptions = new CircleOptions();
+            //PolylineOptions polylineOptions = new PolylineOptions();
+            CircleOptions circleOptions = new CircleOptions();
 
-                for (int i = 0; i < points.size(); i++) {
+            for (int i = 0; i < points.size(); i++) {
 
-                   L = Double.valueOf((((points.get(i)).get_L())));
-                    W = Double.valueOf((((points.get(i)).get_W())));
-
-
-                    MarkerOptions marker = new MarkerOptions();
-
-                    LatLng latLng = new LatLng(W, L);
-
-                    marker.position(latLng);
-                    marker.icon(pin);
-                    marker.title("اطلاعاتی برای نمایش وجود ندارد ");
-
-                    //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
+                L = Double.valueOf((((points.get(i)).get_L())));
+                W = Double.valueOf((((points.get(i)).get_W())));
 
 
-                    if (i == 0) {
-                        marker.icon(pinStart);
-                        circleOptions.center(latLng);
-                        circleOptions.radius(500);
+                MarkerOptions marker = new MarkerOptions();
 
-                        circleOptions.strokeColor(Color.parseColor("#d50000")).strokeWidth(2);
-                        circleOptions.fillColor(Color.argb(20, 255, 0, 0));
+                LatLng latLng = new LatLng(W, L);
 
-                        float zoomLevel = 14.0f; //This goes up to 21
-                        mMap.addCircle(circleOptions);
-                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                marker.position(latLng);
+                marker.icon(pin);
+                marker.title("اطلاعاتی برای نمایش وجود ندارد ");
 
-                    }
+                //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
 
-                    if (i == (points.size() - 1)) {
-                        marker.icon(pinEnd);
-                    }
-                    //tsinfo  mMap.addPolyline(polylineOptions);
-                    mMap.addMarker(marker);
+
+                if (i == 0) {
+                    marker.icon(pinStart);
+                    circleOptions.center(latLng);
+                    circleOptions.radius(500);
+
+                    circleOptions.strokeColor(Color.parseColor("#d50000")).strokeWidth(2);
+                    circleOptions.fillColor(Color.argb(20, 255, 0, 0));
+
+                    float zoomLevel = 14.0f; //This goes up to 21
+                    mMap.addCircle(circleOptions);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
 
                 }
+
+                if (i == (points.size() - 1)) {
+                    marker.icon(pinEnd);
+                }
+                //tsinfo  mMap.addPolyline(polylineOptions);
+                mMap.addMarker(marker);
+
             }
+        }
 
-            @Override
-            protected void onPreExecute() {
+        @Override
+        protected void onPreExecute() {
 
-            }
+        }
 
-            @Override
-            protected String doInBackground(Void... voids) {
-                HashMap<String, Object> datas = new HashMap<String, Object>();
-
-
-                datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-                datas.put("ID", ID);
+        @Override
+        protected String doInBackground(Void... voids) {
+            HashMap<String, Object> datas = new HashMap<String, Object>();
 
 
-
-                if (isonline) {
-                    try {
-                        SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitorPoints", datas).getProperty(0);
-
-                        for (int i = 0; i < request2.getPropertyCount(); i++) {
-                            SoapObject sp = (SoapObject) request2.getProperty(i);
-
-                            BazaryabInfo point = new BazaryabInfo();
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("ID", ID);
 
 
-                            if (!TextUtils.isEmpty(NetworkTools.getSoapPropertyAsNullableString(sp, 0))) {
-                                point.set_W(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-                                point.set_L(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+            if (isonline) {
+                try {
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitorPoints", datas).getProperty(0);
 
-                                points.add(point);
-                            }
+                    for (int i = 0; i < request2.getPropertyCount(); i++) {
+                        SoapObject sp = (SoapObject) request2.getProperty(i);
+
+                        BazaryabInfo point = new BazaryabInfo();
+
+
+                        if (!TextUtils.isEmpty(NetworkTools.getSoapPropertyAsNullableString(sp, 0))) {
+                            point.set_W(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                            point.set_L(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+
+                            points.add(point);
                         }
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
                     }
-                    return "Online";
-                }
-                return "NotOnline";
 
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+                return "Online";
+            }
+            return "NotOnline";
+
+        }
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        mMap.clear();
+
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onRestart() {
+        mMap.clear();
+        super.onRestart();
+    }
+
+
+    //__________________________________ASYNC MASIR SABT ___________________________________________
+
+
+    public class BazaryabSabtPath extends AsyncTask<Void, String, String> {
+
+        MarkerOptions marker = new MarkerOptions();
+        MarkerOptions customerMarker = new MarkerOptions();
+        PolylineOptions options = new PolylineOptions();
+
+        Double customerLat;
+        Double customerLong;
+
+//        private ArrayList<BazaryabInfo> customersPoints = new ArrayList<>();
+
+
+        Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
+        ProgressDialog dialog;
+
+        @Override
+        protected void onPostExecute(String state) {
+
+
+            bazaryabSabtPathAsync = null;
+
+            if (points.size() <= 0) {
+                new android.app.AlertDialog.Builder(ActivityGoogleMap.this)
+                        .setCancelable(false)
+                        .setTitle("خطا")
+                        .setMessage("در این تاریخ مکانی برای این بازاریاب ثبت نشده است")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setIcon(R.drawable.eror_dialog)
+                        .show();
             }
 
+            if (state.equals("")) {
 
-        }
+                new android.app.AlertDialog.Builder(ActivityGoogleMap.this)
+                        .setCancelable(false)
+                        .setTitle("خطا")
+                        .setMessage("در این تاریخ مکانی برای این بازاریاب ثبت نشده است")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
 
-        @Override
-        public void onBackPressed () {
-            mMap.clear();
+                            }
+                        })
+                        .setIcon(R.drawable.eror_dialog)
+                        .show();
 
-            super.onBackPressed();
-        }
-
-        @Override
-        protected void onRestart () {
-            mMap.clear();
-            super.onRestart();
-        }
-
-
-        //__________________________________ASYNC MASIR SABT ___________________________________________
-
-
-        public class BazaryabSabtPath extends AsyncTask<Void, String, String> {
-
-
-            Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
-            ProgressDialog dialog;
-
-            @Override
-            protected void onPostExecute(String state) {
-
-
-                if (state.equals("")){
-
-                    new android.app.AlertDialog.Builder(ActivityGoogleMap.this)
-                            .setCancelable(false)
-                            .setTitle("خطا")
-                            .setMessage("مکانی برای این بازاریاب روی نقشه ثبت نشده است")
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            })
-                            .setIcon(R.drawable.eror_dialog)
-                            .show();
-
-                }
-else
-                {
+            } else {
                 //PolylineOptions polylineOptions = new PolylineOptions();
+
+
+//                for (int j = 0; j < customersPoints.size(); j++) {
+//
+//                    if (customersPoints.get(j).get_L() != null || !customersPoints.get(j).get_L().equals("0")) {
+//
+//                        customerLat = customersPoints.get(j).get_L();
+//                        customerLong = customersPoints.get(j).get_W();
+//
+//                        MarkerOptions markerOptions = new MarkerOptions();
+//
+//                    }
+//                }
+
 
                 for (int i = 0; i < points.size(); i++) {
 
-                    if (points.get(i).get_L()!=null) {
+                    if (points.get(i).get_L() != null) {
                         L = Double.valueOf((((points.get(i)).get_L())));
                         W = Double.valueOf((((points.get(i)).get_W())));
 
 
-                        MarkerOptions marker = new MarkerOptions();
+                        customerLong = Double.valueOf(points.get(i).get_CustomerLat());
+                        customerLat = Double.valueOf(points.get(i).get_CustomerLong());
+
+
                         LatLng latLng = new LatLng(W, L);
 
+                        if (customerLong != 0) {
+                            LatLng customerLatLng = new LatLng(customerLat, customerLong);
+                            customerMarker.position(customerLatLng);
+
+                            options.width(5).color(Color.BLUE).geodesic(true);
+                            options.add(latLng);
+                            options.add(customerLatLng);
+                            mMap.addPolyline(options);
+
+                        }
                         marker.position(latLng);
 
+
                         marker.icon(pin);
-                        marker.title("اطلاعاتی برای نمایش وجود ندارد ");
+                        marker.title(points.get(i).get_Code());
+
+                        customerMarker.icon(customerPin);
+                        customerMarker.title(points.get(i).get_Code());
 
                         //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
 
@@ -559,156 +609,113 @@ else
                             marker.icon(pinEnd);
                         }
                         //tsinfo  mMap.addPolyline(polylineOptions);
+
                         mMap.addMarker(marker);
+                        mMap.addMarker(customerMarker);
                     }
+                    swich = 2;
+                    mMap.setInfoWindowAdapter(new CustomInfoView());
+                    lyProgress.setVisibility(View.VISIBLE);
                 }
 
-                }
             }
+        }
 
-            @Override
-            protected void onPreExecute() {
-
-            }
-
-            @Override
-            protected String doInBackground(Void... voids) {
-                HashMap<String, Object> datas = new HashMap<String, Object>();
-
-
-                datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-                datas.put("ID", ID);
-
-
-
-                if (isonline) {
-                    try {
-                        SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitorMasirSabtPoints", datas).getProperty(0);
-
-                        if (request2.getPropertyCount()<=0)
-                        {
-
-                            return "";
-
-
-                        }
-                        for (int i = 0; i < request2.getPropertyCount(); i++) {
-                            SoapObject sp = (SoapObject) request2.getProperty(i);
-
-                            Log.e("Points","Point is "+sp);
-
-                            BazaryabInfo point = new BazaryabInfo();
-
-                            if (!TextUtils.isEmpty(NetworkTools.getSoapPropertyAsNullableString(sp, 0))) {
-
-                                   point.set_W(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-
-                                   point.set_L(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
-
-
-                                   points.add(point);
-
-                            }
-                        }
-
-                    } catch (Exception e) {
-
-                        e.printStackTrace();
-                    }
-                    return "Online";
-                }
-                return "NotOnline";
-
-            }
+        @Override
+        protected void onPreExecute() {
 
         }
 
+        @Override
+        protected String doInBackground(Void... voids) {
+            HashMap<String, Object> datas = new HashMap<String, Object>();
 
 
-//    public class NearCustomersAsync extends AsyncTask<Void, String, String> {
-//
-//
-//        Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
-//        ProgressDialog dialog;
-//
-//        @Override
-//        protected void onPostExecute(String state) {
-//
-//            //PolylineOptions polylineOptions = new PolylineOptions();
-//            Log.e("Poits size", "Poits size si " + points.size());
-//            for (int i = 0; i < points.size(); i++) {
-//                L = Double.valueOf((((points.get(i)).get_L())));
-//                W = Double.valueOf((((points.get(i)).get_W())));
-//
-//                //  Log.e("LatLong","L is "+L+"W is "+W);
-//
-//                MarkerOptions marker = new MarkerOptions();
-//                LatLng latLng = new LatLng(W, L);
-//
-//                marker.position(latLng);
-//
-//                marker.icon(pinStart );
-//                marker.title("اطلاعاتی برای نمایش وجود ندارد ");
-//
-//                mMap.addMarker(marker);
-//
-//            }
-//        }
-//
-//        @Override
-//        protected void onPreExecute() {
-//
-//        }
-//
-//        @Override
-//        protected String doInBackground(Void... voids) {
-//            HashMap<String, Object> datas = new HashMap<String, Object>();
-//
-//
-//            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-//            datas.put("L", myL);
-//            datas.put("W", myW);
-//
-//            Log.e("myLocation","My location is "+myL+"  "+myW);
-//
-//            Log.e("AsyncCheker", "Async Is Run");
-//
-//            if (isonline) {
-//                try {
-//                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_MyNEar_Customers", datas).getProperty(0);
-//
-//                    for (int i = 0; i < request2.getPropertyCount(); i++) {
-//                        SoapObject sp = (SoapObject) request2.getProperty(i);
-//                        //  Log.e("tttttttttttt", "" + sp);
-//
-//                        BazaryabInfo point = new BazaryabInfo();
-//
-//                        point.set_W(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-//                        point.set_L(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
-//
-//                        points.add(point);
-//                    }
-//
-//                } catch (Exception e) {
-//                    //    Log.e("iiiiiii", "connot read Soap");
-//                    e.printStackTrace();
-//                }
-//                return "Online";
-//            }
-//            return "NotOnline";
-//
-//        }
-//
-//    }
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("ID", ID);
+            datas.put("thisDate", thisDate);
 
 
+            if (isonline) {
+                try {
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitorMasirSabtPoints", datas).getProperty(0);
+
+                    if (request2.getPropertyCount() <= 0) {
+
+                        return "";
 
 
+                    }
+                    for (int i = 0; i < request2.getPropertyCount(); i++) {
+                        SoapObject sp = (SoapObject) request2.getProperty(i);
+
+                        Log.e("Points", "Point is " + sp);
+
+                        BazaryabInfo point = new BazaryabInfo();
+                        BazaryabInfo customerPoint = new BazaryabInfo();
+
+                        if (!TextUtils.isEmpty(NetworkTools.getSoapPropertyAsNullableString(sp, 0))) {
+                            String value = (NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                            if (!value.equals("0")) {
+
+                                point.set_W(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                                point.set_L(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                                point.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 2));
+                                point.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
+                                point.set_Tel(NetworkTools.getSoapPropertyAsNullableString(sp, 4));
+                                point.setWrappers(NavigationWrapper.getNavigationWrappers(NetworkTools.getSoapPropertyAsNullableString(sp, 7)));
+                                point.set_CustomerLat(NetworkTools.getSoapPropertyAsNullableString(sp, 8));
+                                point.set_CustomerLong(NetworkTools.getSoapPropertyAsNullableString(sp, 9));
+
+                                points.add(point);
+
+                            }
+
+                        }
+                    }
+
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+                return "Online";
+            }
+            return "NotOnline";
+
+        }
+
+    }
+
+    public static class NavigationWrapper {
+        public String title;
+        public String value;
+
+        public NavigationWrapper(String jsonStr) throws JSONException {
+            JSONObject obj = new JSONObject(jsonStr);
+
+            this.title = obj.getString("t");
+            this.value = obj.getString("v");
+        }
+
+        public static ArrayList<NavigationWrapper> getNavigationWrappers(String jsonArr) throws JSONException {
+            ArrayList<NavigationWrapper> output = new ArrayList<>();
+
+            JSONArray arr = new JSONArray(jsonArr);
+
+            for (int i = 0; i < arr.length(); i++) {
+                NavigationWrapper n = new NavigationWrapper(arr.getString(i));
+                output.add(n);
+            }
+
+            return output;
+        }
+    }
 
 
     public class LastCustomerLocationAsync extends AsyncTask<Void, String, String> implements GoogleMap.InfoWindowAdapter {
 
-        private  BazaryabInfo location = new BazaryabInfo();
+        private BazaryabInfo location = new BazaryabInfo();
+
         @Override
         public View getInfoWindow(Marker marker) {
             return null;
@@ -726,43 +733,43 @@ else
 
         @Override
         protected void onPostExecute(String state) {
-if (mmapReady==1) {
+            if (mmapReady == 1) {
 
 
-            CircleOptions circleOptions = new CircleOptions();
+                CircleOptions circleOptions = new CircleOptions();
 
 
                 MarkerOptions marker = new MarkerOptions();
 
                 LatLng latLng = new LatLng(lastCustomerL, lastCustomerW);
 
-            if (latLng!=null) {
-                marker.position(latLng);
+                if (latLng != null) {
+                    marker.position(latLng);
 
-                marker.icon(pin);
-                marker.title("اطلاعاتی برای نمایش وجود ندارد ");
+                    marker.icon(pin);
+                    marker.title("اطلاعاتی برای نمایش وجود ندارد ");
 
-                //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
+                    //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
 
-                marker.icon(pinStart);
+                    marker.icon(pinStart);
 
-                circleOptions.center(latLng);
-                circleOptions.radius(100);
-                circleOptions.strokeColor(Color.argb(15, 0, 0, 0)).strokeWidth(2);
-                circleOptions.fillColor(Color.argb(10, 255, 0, 0));
+                    circleOptions.center(latLng);
+                    circleOptions.radius(100);
+                    circleOptions.strokeColor(Color.argb(15, 0, 0, 0)).strokeWidth(2);
+                    circleOptions.fillColor(Color.argb(10, 255, 0, 0));
 
-                float zoomLevel = 15.0f; //This goes up to 21
+                    float zoomLevel = 15.0f; //This goes up to 21
 
-                mMap.addCircle(circleOptions);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
-                //
-                if (marker != null) {
+                    mMap.addCircle(circleOptions);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));
+                    //
+                    if (marker != null) {
 
-                    mMap.addMarker(marker);
+                        mMap.addMarker(marker);
 
+                    }
                 }
             }
-}
         }
 
         @Override
@@ -809,7 +816,7 @@ if (mmapReady==1) {
     }
 
 
-    private void getMyLocation(){
+    private void getMyLocation() {
 
         requestPermission();
 
@@ -839,7 +846,7 @@ if (mmapReady==1) {
 
             new MyLocationAsync().execute();
 
-            new  NearCustomersAsync().execute();
+            new NearCustomersAsync().execute();
 
         } else {
             new android.app.AlertDialog.Builder(this)
@@ -850,7 +857,6 @@ if (mmapReady==1) {
                     .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
 
                         }
                     })
@@ -858,14 +864,11 @@ if (mmapReady==1) {
 
                         public void onClick(DialogInterface arg0, int arg1) {
                             mGoogleApiClient.connect();
-                          getMyLocation();
+                            getMyLocation();
                         }
                     }).create().show();
         }
-    };
-
-
-
+    }
 
     public class NearCustomersAsync extends AsyncTask<Void, String, String> {
 
@@ -891,12 +894,11 @@ if (mmapReady==1) {
                 marker.title(pointha.get(i).get_Code());
 
                 //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
-
-
                 //tsinfo  mMap.addPolyline(polylineOptions);
                 mMap.addMarker(marker);
 
             }
+            swich = 1;
             mMap.setInfoWindowAdapter(new CustomInfoView());
         }
 
@@ -909,7 +911,7 @@ if (mmapReady==1) {
         protected String doInBackground(Void... voids) {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            Log.e("Location","L and W is "+mLatitudeText+" ...  "+mLongitudeText);
+            Log.e("Location", "L and W is " + mLatitudeText + " ...  " + mLongitudeText);
 
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
@@ -922,7 +924,7 @@ if (mmapReady==1) {
 
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_MyNEar_Customers", datas).getProperty(0);
 
-                    Log.e("customers"," "+request2);
+                    Log.e("customers", " " + request2);
 
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
                         SoapObject sp = (SoapObject) request2.getProperty(i);
@@ -935,6 +937,7 @@ if (mmapReady==1) {
                         point.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 2));
                         point.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
                         point.set_Tel(NetworkTools.getSoapPropertyAsNullableString(sp, 4));
+                        point.setWrappers(NavigationWrapper.getNavigationWrappers(NetworkTools.getSoapPropertyAsNullableString(sp, 7)));
 
                         pointha.add(point);
                     }
@@ -951,7 +954,7 @@ if (mmapReady==1) {
 
     }
 
-    public   int requestPermission( ){
+    public int requestPermission() {
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(ActivityGoogleMap.this,
@@ -971,53 +974,120 @@ if (mmapReady==1) {
                         new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_READ_GPS);
 
-                Log.e("Permission","Persmisn is "+MY_PERMISSIONS_REQUEST_READ_GPS);
+                Log.e("Permission", "Persmisn is " + MY_PERMISSIONS_REQUEST_READ_GPS);
                 // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
         }
-        return  MY_PERMISSIONS_REQUEST_READ_GPS;
+        return MY_PERMISSIONS_REQUEST_READ_GPS;
 
 
     }
-private class  CustomInfoView implements GoogleMap.InfoWindowAdapter{
 
-    @Override
-    public View getInfoWindow(Marker marker) {
+    private class CustomInfoView implements GoogleMap.InfoWindowAdapter {
 
-        if (marker == null && TextUtils.isEmpty(marker.getTitle()))
-            return null;
+        @Override
+        public View getInfoWindow(Marker marker) {
 
-        BazaryabInfo currentPoint = null;
+            if (marker == null && TextUtils.isEmpty(marker.getTitle()))
+                return null;
 
-        for (int i = 0;i<pointha.size();i++){
-            if (marker.getTitle().compareTo(pointha.get(i).get_Code()) == 0)
-                currentPoint = pointha.get(i);
+            BazaryabInfo currentPoint = null;
+            if (swich == 1) {
+                for (int i = 0; i < pointha.size(); i++) {
+                    if (marker.getTitle().compareTo(pointha.get(i).get_Code()) == 0)
+                        currentPoint = pointha.get(i);
+                }
+            }
+            if (swich == 2) {
+                if (points.size() > 0) {
+                    for (int i = 0; i < points.size(); i++) {
+                        if (marker.getTitle().compareTo(points.get(i).get_Code()) == 0)
+                            currentPoint = points.get(i);
+                    }
+                }
+            }
+
+            if (currentPoint == null)
+                return null;
+
+            View view = getLayoutInflater().inflate(R.layout.custom_pin_info,
+                    null);
+
+            TextView txtCode = (TextView) view.findViewById(R.id.txtCode);
+            TextView txtName = (TextView) view.findViewById(R.id.txtName);
+            txtCode.setText(currentPoint.get_Code());
+            txtName.setText(currentPoint.get_Name());
+            parseNavigationInfo(currentPoint.getWrappers(), (LinearLayout) view);
+//            txtTell.setText( currentPoint.get_Tel());
+//            txtTell.set(parseNavigationInfo(currentPoint.getWrappers()));
+
+            return view;
         }
 
-        if (currentPoint == null)
+        @Override
+        public View getInfoContents(Marker marker) {
             return null;
-
-        View view = getLayoutInflater().inflate(R.layout.custom_pin_info,
-                null);
-
-        TextView txtCode =(TextView) view.findViewById(R.id.txtCode);
-        TextView txtName =(TextView) view.findViewById(R.id.txtName);
-        TextView txtTell =(TextView) view.findViewById(R.id.txtTell);
-        txtCode.setText(currentPoint.get_Code());
-        txtName.setText(currentPoint.get_Name());
-        txtTell.setText(currentPoint.get_Tel());
-
-        return view;
+        }
     }
 
-    @Override
-    public View getInfoContents(Marker marker) {
-        return null;
-    }
-}
+    private void parseNavigationInfo(ArrayList<NavigationWrapper> wrappers, LinearLayout parent) {
 
+        for (int i = 0; i < wrappers.size(); i++) {
+
+            LinearLayout row = new LinearLayout(getApplicationContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int padding = Convertor.toPixcel(10f, getApplicationContext());
+            row.setPadding(padding, padding, padding, padding);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setLayoutParams(params);
+
+
+            TextView value = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams paramsValue = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f);
+            value.setText(wrappers.get(i).value);
+            value.setLayoutParams(paramsValue);
+            value.setGravity(Gravity.RIGHT);
+            value.setTextColor(Color.BLACK);
+            row.addView(value);
+
+            TextView title = new TextView(getApplicationContext());
+            LinearLayout.LayoutParams paramsTitle = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 0.5f);
+            title.setText(wrappers.get(i).title);
+            title.setTextColor(Color.BLACK);
+            title.setLayoutParams(paramsTitle);
+
+            row.addView(title);
+
+            parent.addView(row);
+        }
+
+
+    }
+
+    private void showPersianCalender(PersianCalendar calender, DatePickerDialog dialog) {
+
+        calender = new PersianCalendar();
+        dialog = DatePickerDialog.newInstance(ActivityGoogleMap.this, calender.getPersianYear(), calender.getPersianMonth(),
+                calender.getPersianDay());
+        dialog.setThemeDark(false);
+        dialog.show(getFragmentManager(), "Datepickerdialog");
+
+
+    }
+
+    private void runBazaryabSabtPathAsync(String date) {
+
+        if (bazaryabSabtPathAsync == null) {
+            points.clear();
+            bazaryabSabtPathAsync = new BazaryabSabtPath();
+            bazaryabSabtPathAsync.execute();
+        } else {
+            return;
+        }
+
+    }
 }
 
 

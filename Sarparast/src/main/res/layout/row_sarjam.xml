@@ -191,7 +191,7 @@
                         android:layout_height="50dp"
                         android:id="@+id/imgSathGheymat"
                         android:layout_marginRight="10dp"
-                        android:padding="8dp"
+                        android:padding="10dp"
                         android:src="@drawable/ic_dollar_black" />
 
                     <ImageView
@@ -199,7 +199,7 @@
                         android:layout_height="50dp"
                         android:id="@+id/imgInfo"
                         android:layout_marginRight="10dp"
-                        android:padding="8dp"
+                        android:padding="10dp"
                         android:src="@drawable/ic_info_black" />
 
                     <ImageView

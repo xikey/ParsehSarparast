@@ -72,6 +72,9 @@ public class ActivityMain extends AppCompatActivity
     private RecyclerView row_GroupProducts;
     private RecyclerView row_TasvieNashodeGroups;
 
+    private MainGroupAsync mainGroupAsync = null;
+
+
     public static final int MY_PERMISSIONS_REQUEST_READ_GPS = 14;
 
     private RecyclerView.LayoutManager row_manager;
@@ -86,8 +89,18 @@ public class ActivityMain extends AppCompatActivity
     private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<UserInfo>();
     private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<UserInfo>();
 
+    private RelativeLayout lyProgress;
+
+    private TextView txtTotal;
+    private TextView txtTaeedKol;
+    private TextView txtEntezar;
+
+    private String total = "0";
+    private String accepted = "0";
+    private String notAccepted = "0";
+
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
-    private int isAFinalRelease=-1;
+    private int isAFinalRelease = -1;
 
     @Override
     protected void onResume() {
@@ -98,14 +111,14 @@ public class ActivityMain extends AppCompatActivity
 
     @Override
 
-    protected void onCreate(Bundle savedInstanceState)  {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
-        isAFinalRelease=1;
+        isAFinalRelease = 0;
 
-        if (isAFinalRelease==1){
+        if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
             t.setDefaultUncaughtExceptionHandler(new Thread.
                     UncaughtExceptionHandler() {
@@ -113,7 +126,7 @@ public class ActivityMain extends AppCompatActivity
                     System.out.println(t + " throws exception: " + e);
 
                     Intent intent = new Intent(ActivityMain.this, ActivityErorHandelling.class);
-                    intent.putExtra("Eror", e.toString()+" "+e.getMessage()+t.toString());
+                    intent.putExtra("Eror", e.toString() + " " + e.getMessage() + t.toString());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
@@ -149,6 +162,21 @@ public class ActivityMain extends AppCompatActivity
         lyMap = (LinearLayout) findViewById(R.id.lyMap);
         lyHead = (LinearLayout) findViewById(R.id.lyHead);
         lyNotVisited = (LinearLayout) findViewById(R.id.lyNotVisited);
+        lyProgress = (RelativeLayout) findViewById(R.id.lyprogress2);
+        lyProgress.setVisibility(View.VISIBLE);
+        txtTotal = (TextView) findViewById(R.id.txtTotal);
+        txtTaeedKol = (TextView) findViewById(R.id.txtTaeedKol);
+        txtEntezar = (TextView) findViewById(R.id.txtEntezar);
+
+        View paren= (View) txtTotal.getParent();
+        paren.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                runReportAsync();
+            }
+        });
+
+
 
         btnNews = (Button) findViewById(R.id.btnNews);
 
@@ -284,6 +312,8 @@ public class ActivityMain extends AppCompatActivity
         txtUserName.setText("" + preferenceHelper.getString(PreferenceHelper.USER_NAME));
 
         FontApplier.applyMainFont(getApplicationContext(), lyHead);
+
+        runReportAsync();
 
 
 //        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
@@ -465,16 +495,11 @@ public class ActivityMain extends AppCompatActivity
             try {
                 Log.e("jkkjjj", "url is " + "http://" + preferenceHelper.getString(NetworkTools.URL));
                 SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_AnalyseOfForoosh", datas).getProperty(0);
-//             SoapObject sp= (SoapObject) request2.getProperty(0);
-//             SoapObject sp1= (SoapObject) request2.getProperty(1);
-////           SoapObject sp2= (SoapObject) request2.getProperty(8);
-////////         Log.e("iiiiii","request is01 "+sp);
-//             Log.e("iiiiii","request is02 "+sp1);
-                Log.e("iiiiii", "request is03 " + request2.getPropertyCount());
+//
 //
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-                    Log.e("iiiiissi", "request is " + sp);
+
 
 
                     UserInfo userInfo = new UserInfo();
@@ -485,13 +510,13 @@ public class ActivityMain extends AppCompatActivity
                     userInfo.setImage_user(R.drawable.user);
                     userInfos_khales.add(userInfo);
 
-//                Log.e("JJJJJJ","names is + "+ customer.getCustomer_name().toString());
+//
                 }
 
 
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-                    Log.e("iiiiissi", "request is " + sp);
+
 
 
                     UserInfo userInfo = new UserInfo();
@@ -503,16 +528,11 @@ public class ActivityMain extends AppCompatActivity
                     userInfos_Tasvie.add(userInfo);
 
 
-//                Log.e("JJJJJJ","names is + "+ customer.getCustomer_name().toString());
                 }
 
 
-//          Log.e("iiiiii","request is "+request);
-//          Log.e("iiiiissi","request is "+request2);
-//             Log.e("idsiiiissi","request lenght "+request2.getPropertyCount());
-
             } catch (Exception e) {
-                Log.e("iiiiiii", "connot read Soap");
+
                 e.printStackTrace();
             }
             return null;
@@ -556,19 +576,19 @@ public class ActivityMain extends AppCompatActivity
             HashMap<String, Object> datas = new HashMap<String, Object>();
             String tokenid = preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
-//            Log.e("ffffi","token id is "+tokenid);
+
 
             datas.put("TokenID", tokenid);
 
             try {
-//                Log.e("jkkjjj","url is "+"http://"+preferenceHelper.getString(NetworkTools.URL));
+
                 SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_AnalyseOfProducts", datas).getProperty(0);
 
-//                Log.e("iiiiii","request is03 "+request2.getPropertyCount());
+
 
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-//                    Log.e("iiiiissi","request is "+sp);
+
 
                     UserInfo userInfo = new UserInfo();
                     userInfo.setCode_user("گروه");
@@ -582,7 +602,7 @@ public class ActivityMain extends AppCompatActivity
 
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-                    Log.e("iiiiissi", "request is " + sp);
+
 
                     UserInfo userInfo = new UserInfo();
                     userInfo.setCode_user("گروه");
@@ -670,6 +690,75 @@ public class ActivityMain extends AppCompatActivity
         public void run() {
             throw new RuntimeException();
         }
+    }
+
+
+    public void runReportAsync() {
+        if (mainGroupAsync == null) {
+            lyProgress.setVisibility(View.VISIBLE);
+            mainGroupAsync = new MainGroupAsync();
+            mainGroupAsync.execute();
+        } else {
+            return;
+        }
+
+    }
+
+
+    public class MainGroupAsync extends AsyncTask<Void, String, String> {
+
+
+        Boolean isonline = NetworkTools.isOnline(ActivityMain.this);
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            HashMap<String, Object> datas = new HashMap<String, Object>();
+
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+
+            if (isonline) {
+                try {
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_MainGroup_Report", datas).getProperty(0);
+
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
+                    }
+                    SoapObject rq= (SoapObject) request2.getProperty(0);
+                    if (request2 != null) {
+                        total = (NetworkTools.getSoapPropertyAsNullableString(rq, 0));
+                        accepted = (NetworkTools.getSoapPropertyAsNullableString(rq, 1));
+                        notAccepted = (NetworkTools.getSoapPropertyAsNullableString(rq, 2));
+                    }
+
+                } catch (Exception e) {
+
+                    Log.e("iiiiiii", "connot read Soap");
+                    e.printStackTrace();
+                    return "Eror";
+                }
+                return "Online";
+            }
+            return "NotOnline";
+
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            if (s.equals("Online")) {
+
+                txtTotal.setText(total.toString());
+                txtTaeedKol.setText(accepted);
+                txtEntezar.setText(notAccepted);
+                mainGroupAsync=null;
+                lyProgress.setVisibility(View.GONE);
+            }
+
+            super.onPostExecute(s);
+        }
+
     }
 
 }

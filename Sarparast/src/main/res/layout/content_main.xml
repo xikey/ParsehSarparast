@@ -568,7 +568,7 @@
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0.5"
                         android:orientation="vertical"
                         android:gravity="center">
@@ -579,7 +579,7 @@
                             xmlns:card_view="http://schemas.android.com/apk/res-auto"
                             cardUseCompatPadding="true"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginBottom="8dip"
 
                             android:layout_marginLeft="6dp"
@@ -595,19 +595,151 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
 
-                                <ImageView
-
+                                <LinearLayout
+                                    android:orientation="horizontal"
                                     android:layout_width="match_parent"
-                                    android:layout_height="190dp"
+                                    android:layout_height="190dp">
 
-                                    android:layout_alignParentEnd="false"
-                                    android:layout_alignParentLeft="false"
-                                    android:layout_alignParentRight="false"
-                                    android:layout_alignParentStart="false"
-                                    android:cropToPadding="true"
-                                    android:padding="30dp"
-                                    android:scaleType="fitCenter"
-                                    android:src="@drawable/taeed_darkhast" />
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView28"
+                                        android:layout_toStartOf="@+id/imageView28"
+                                        android:layout_weight="50"
+                                        android:id="@+id/lyReload">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="کل سفارشات :"
+                                            android:id="@+id/textView105"
+                                            android:layout_alignParentTop="true"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="New Text"
+                                            android:id="@+id/txtTotal"
+                                            android:layout_below="@+id/textView105"
+                                            android:layout_alignRight="@+id/textView105"
+                                            android:layout_alignEnd="@+id/textView105"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#000000" />
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:layout_below="@+id/txtTotal"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
+                                            android:background="#90A4AE"
+                                            android:id="@+id/linearLayout28"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"></LinearLayout>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="سفارشات تایید شده :"
+                                            android:id="@+id/textView112"
+                                            android:layout_below="@+id/linearLayout28"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="12sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="New Text"
+                                            android:id="@+id/txtTaeedKol"
+                                            android:layout_below="@+id/textView112"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#000000" />
+
+                                        <LinearLayout
+                                            android:orientation="vertical"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:layout_below="@+id/txtTaeedKol"
+                                            android:layout_alignRight="@+id/textView114"
+                                            android:layout_alignEnd="@+id/textView114"
+                                            android:background="#90A4AE"
+                                            android:id="@+id/linearLayout29"
+                                            android:layout_marginTop="5dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_marginRight="5dp"></LinearLayout>
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="سفارشات در انتظار :"
+                                            android:id="@+id/textView115"
+                                            android:textSize="12sp"
+                                            android:layout_below="@+id/linearLayout29"
+                                            android:layout_alignRight="@+id/txtTaeedKol"
+                                            android:layout_alignEnd="@+id/txtTaeedKol" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="New Text"
+                                            android:id="@+id/txtEntezar"
+                                            android:layout_below="@+id/textView115"
+                                            android:layout_alignRight="@+id/textView115"
+                                            android:layout_alignEnd="@+id/textView115"
+                                            android:layout_marginTop="5dp"
+                                            android:textSize="14sp"
+                                            android:textStyle="bold"
+                                            android:textColor="#000000" />
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:gravity="center"
+                                            android:visibility="gone"
+                                            android:id="@+id/lyprogress2"
+                                            android:background="#ffffff">
+
+                                            <ProgressBar
+                                                style="?android:attr/progressBarStyleLarge"
+                                                android:id="@+id/progressBar5"
+                                                android:layout_width="40dp"
+                                                android:layout_height="40dp"
+                                                android:layout_marginBottom="8dp"
+                                                android:visibility="visible" />
+                                        </RelativeLayout>
+                                    </RelativeLayout>
+
+                                    <ImageView
+
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+
+                                        android:cropToPadding="true"
+                                        android:padding="30dp"
+                                        android:scaleType="fitCenter"
+                                        android:src="@drawable/taeed_darkhast"
+                                        android:id="@+id/imageView28"
+                                        android:layout_alignParentTop="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_weight="50" />
+
+                                </LinearLayout>
 
                                 <ImageView
                                     android:layout_width="match_parent"
@@ -645,7 +777,6 @@
 
 
                     </LinearLayout>
-
 
 
 
@@ -814,7 +945,7 @@
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentStart="true"
                                         android:gravity="center"
-                                        android:text="عدم ویزیت شده"
+                                        android:text="عدم سفارش"
                                         android:textAppearance="?android:attr/textAppearanceSmall"
                                         android:textColor="#ffffff"
                                         android:textSize="16sp" />

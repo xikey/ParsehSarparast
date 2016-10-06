@@ -1,5 +1,7 @@
 package com.example.zikey.sarparast;
 
+import java.util.ArrayList;
+
 /**
  * Created by Zikey on 18/07/2016.
  */
@@ -21,7 +23,26 @@ public class BazaryabInfo {
     private String _Total;
     private String _NotOrdered;
 
+    private String _CustomerLat;
+    private String _CustomerLong;
 
+    public String get_CustomerLat() {
+        return _CustomerLat;
+    }
+
+    public void set_CustomerLat(String _CustomerLat) {
+        this._CustomerLat = _CustomerLat;
+    }
+
+    public String get_CustomerLong() {
+        return _CustomerLong;
+    }
+
+    public void set_CustomerLong(String _CustomerLong) {
+        this._CustomerLong = _CustomerLong;
+    }
+
+    private ArrayList<ActivityGoogleMap.NavigationWrapper> wrappers = new ArrayList<>();
 
     public String get_Name() {
         return _Name;
@@ -125,5 +146,13 @@ public class BazaryabInfo {
 
     public void set_NotOrdered(String _NotOrdered) {
         this._NotOrdered = _NotOrdered;
+    }
+
+    public ArrayList<ActivityGoogleMap.NavigationWrapper> getWrappers() {
+        return wrappers;
+    }
+
+    public void setWrappers(ArrayList<ActivityGoogleMap.NavigationWrapper> wrappers) {
+        this.wrappers = wrappers;
     }
 }

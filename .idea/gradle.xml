@@ -10,14 +10,18 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CustomGauge" />
+            <option value="$PROJECT_DIR$/PersianMaterialDateTimePicker-master" />
             <option value="$PROJECT_DIR$/Sarparast" />
+            <option value="$PROJECT_DIR$/persianmaterialdatetimepicker" />
           </set>
         </option>
         <option name="myModules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CustomGauge" />
+            <option value="$PROJECT_DIR$/PersianMaterialDateTimePicker-master" />
             <option value="$PROJECT_DIR$/Sarparast" />
+            <option value="$PROJECT_DIR$/persianmaterialdatetimepicker" />
           </set>
         </option>
       </GradleProjectSettings>

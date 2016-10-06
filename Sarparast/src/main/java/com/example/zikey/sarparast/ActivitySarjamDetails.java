@@ -177,7 +177,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
 
-            Log.e("tttttttttttt", "" + "Do in background is ok");
+//            Log.e("tttttttttttt", "" + "Do in background is ok");
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 

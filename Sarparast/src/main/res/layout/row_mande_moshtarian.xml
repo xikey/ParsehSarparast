@@ -213,7 +213,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="2dp"
                     android:layout_weight="14.8"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -223,7 +223,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -233,7 +233,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -243,7 +243,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -253,7 +253,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -263,7 +263,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="3dp" />
+                    android:padding="10dp" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -273,7 +273,7 @@
                     android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_weight="14.8"
-                    android:padding="5dp" />
+                    android:padding="10dp" />
             </LinearLayout>
 
         </LinearLayout>

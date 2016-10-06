@@ -267,7 +267,7 @@
         android:layout_height="match_parent"
         android:id="@+id/imgCall"
         android:src="@drawable/ic_call_black_24dp"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
 
@@ -279,7 +279,7 @@
         android:layout_height="match_parent"
         android:id="@+id/imgInfo"
         android:src="@drawable/ic_info_black"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
 
@@ -290,7 +290,7 @@
         android:layout_height="match_parent"
         android:id="@+id/imgOrders"
         android:src="@drawable/ic_dollar_black"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginRight="8dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"

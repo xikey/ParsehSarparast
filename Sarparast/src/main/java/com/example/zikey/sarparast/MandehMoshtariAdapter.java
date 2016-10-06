@@ -326,8 +326,8 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
 
                         Intent intent = new Intent(activity, ActivityGoogleMap.class);
                         intent.putExtra("state", "NotOrdered");
-                        intent.putExtra("Lat", L);
-                        intent.putExtra("Long", W);
+                        intent.putExtra("Lat", W);
+                        intent.putExtra("Long", L);
                         activity.startActivity(intent);
 
                     }

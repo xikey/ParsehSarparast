@@ -187,7 +187,6 @@ public class ActivityMandehMoshtarian extends AppCompatActivity {
                         Log.e("LasttIndex", "LastIndex us " + lastIndex);
 
                         runMandehMoshtarianAsync();
-
 //                                 row_adapter.notifyDataSetChanged();
                     }
                 }
@@ -221,7 +220,7 @@ public class ActivityMandehMoshtarian extends AppCompatActivity {
                 new AlertDialog.Builder(ActivityMandehMoshtarian.this)
                         .setCancelable(false)
                         .setTitle("خطا")
-                        .setMessage("اطلاعاتی جها نمایش وجود ندارد")
+                        .setMessage("اطلاعاتی جهت نمایش وجود ندارد")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -318,8 +317,5 @@ public class ActivityMandehMoshtarian extends AppCompatActivity {
         }
 
     }
-
-
-
 
 }

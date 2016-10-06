@@ -75,13 +75,13 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
         });
 
         if (controler.equals("Date")) {
-            txtHead.setText("عدم ویزیت روزانه");
+            txtHead.setText("عدم سفارش روزانه");
             methodName = "S_Adam_Visit_Day";
             runAsync();
         }
 
         if (controler.equals("Month")) {
-            txtHead.setText("عدم ویزیت ماهانه");
+            txtHead.setText("عدم سفارش ماهانه");
             methodName = "S_Adam_Visit_Month";
             runAsync();
         }

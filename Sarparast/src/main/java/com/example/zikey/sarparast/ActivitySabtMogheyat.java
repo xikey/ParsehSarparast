@@ -14,12 +14,16 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
@@ -40,11 +44,18 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     double l=0.0;
     double w=0.0;
 
+    private String search = "";
+    private int firstIndex = 0;
+    private int lastIndex = 100;
+    private boolean isLoading = false;
+    private MandehMoshtarianAsync mandehMoshtarianAsync=null;
+
     GetMyLocationCommunicator communicator;
 
     private  int ID;
 
     private EditText edtSearch;
+    private ImageView btnSearch;
 
     private PreferenceHelper preferenceHelper;
 
@@ -64,7 +75,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         row_Mandeh = (RecyclerView) findViewById(R.id.row_Mandeh);
 
         edtSearch = (EditText) findViewById( R.id.edtSearch);
-
+        btnSearch= (ImageView) findViewById(R.id.btnSearch);
 
 
         preferenceHelper = new PreferenceHelper(this);
@@ -78,23 +89,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
             }
         });
 
-        edtSearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                row_adapter.getFilter().filter(editable);
-
-            }
-        });
 
         row_Mandeh.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -115,7 +110,103 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                     .build();
         }
 
-                new   MandehMoshtarianAsync().execute();
+
+        row_Mandeh.setFocusable(false);
+        row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        row_Mandeh.setLayoutManager(row_manager);
+        row_adapter = new SabtMogheyatAdapter( );
+        row_adapter.setActivity(ActivitySabtMogheyat.this);
+        row_adapter.setCustomer(MandehMoshtaries);
+        row_Mandeh.setAdapter(row_adapter);
+
+
+               runMandehMoshtarianAsync();
+
+
+        edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+//                  if (TextUtils.isEmpty(edtSearch.getText().toString())) {
+                    MandehMoshtaries.clear();
+                    firstIndex=0;
+                    lastIndex=100;
+                    isLoading = false;
+                    search = edtSearch.getText().toString();
+                    runMandehMoshtarianAsync();
+
+                } else {
+                    MandehMoshtaries.clear();
+                    search = edtSearch.getText().toString();
+                    isLoading = true;
+                    firstIndex=0;
+                    lastIndex=100;
+                    runMandehMoshtarianAsync();
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(edtSearch.getText().toString())) {
+                    MandehMoshtaries.clear();
+                    firstIndex=0;
+                    lastIndex=100;
+                    isLoading = false;
+                    search = edtSearch.getText().toString();
+                    runMandehMoshtarianAsync();
+
+                } else {
+                    MandehMoshtaries.clear();
+                    search = edtSearch.getText().toString();
+                    isLoading = true;
+                    firstIndex=0;
+                    lastIndex=100;
+                    runMandehMoshtarianAsync();
+                }
+            }
+        });
+
+
+
+        final LinearLayoutManager layoutManager = (LinearLayoutManager) row_Mandeh.getLayoutManager();
+
+
+        row_Mandeh.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (layoutManager != null) {
+
+                    Log.e("Log", "last index is .." + layoutManager.findLastVisibleItemPosition());
+
+                    if (!isLoading && layoutManager.getItemCount() - 1 == layoutManager.findLastVisibleItemPosition()) {
+
+                        firstIndex = lastIndex + 1;
+                        lastIndex += 100;
+
+//                        Log.e("FirstIndex", "FirsiIndex us " + firstIndex);
+//                        Log.e("LasttIndex", "LastIndex us " + lastIndex);
+
+                        runMandehMoshtarianAsync();
+
+//                                 row_adapter.notifyDataSetChanged();
+                    }
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -136,6 +227,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     public class MandehMoshtarianAsync extends AsyncTask<Void,String,String> {
 
         Boolean isonline= NetworkTools.isOnline(ActivitySabtMogheyat.this);
+        ArrayList<MandehMoshtariInfo> newData = new ArrayList<>();
 
         ProgressDialog dialog;
 
@@ -146,7 +238,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                 new AlertDialog.Builder(ActivitySabtMogheyat.this)
                         .setCancelable(false)
                         .setTitle("خطا")
-                        .setMessage("اطلاعاتی جها نمایش وجود ندارد")
+                        .setMessage("اطلاعاتی جهت نمایش وجود ندارد")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
@@ -160,11 +252,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
             if (state.equals("Online")) {
 
 
-                row_Mandeh.setFocusable(false);
-                row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                row_Mandeh.setLayoutManager(row_manager);
-                row_adapter = new SabtMogheyatAdapter( MandehMoshtaries);
-                row_adapter.setActivity(ActivitySabtMogheyat.this);
+
 
                     row_adapter.setCommunicator(new GetMyLocationCommunicator() {
                         @Override
@@ -184,7 +272,9 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         }
                     });
 
-                 row_Mandeh.setAdapter(row_adapter);
+               row_adapter.addCustomer(newData);
+
+                mandehMoshtarianAsync=null;
 
                 if (dialog != null)
                     dialog.dismiss();
@@ -221,7 +311,9 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
             String tokenid =  preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
             datas.put("TokenID",tokenid);
-            datas.put("search","");
+            datas.put("search",search);
+            datas.put("firstIndex",firstIndex);
+            datas.put("lastIndex",lastIndex);
 
             if (isonline) {
 
@@ -241,7 +333,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         mandeh.set_LastW(NetworkTools.getSoapPropertyAsNullableString(sp, 6));
 
 
-                        MandehMoshtaries.add(mandeh);
+                        newData.add(mandeh);
                     }
 
                 } catch (Exception e) {
@@ -450,13 +542,13 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
             datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("customerID", ID);
-            datas.put("L",Latitude );
-            datas.put("W",Longitude );
+            datas.put("W",Latitude );
+            datas.put("L",Longitude );
 
             if (isonline) {
                 try {
 
-                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "Navigation_CreateNavigation", datas);
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_SettCustomers_Location", datas);
 
 
                     temp=(NetworkTools.getSoapPropertyAsNullableString(request2, 0).toString());
@@ -478,6 +570,16 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     }
 
 
+
+    private  void runMandehMoshtarianAsync(){
+        if (mandehMoshtarianAsync==null){
+            mandehMoshtarianAsync = new MandehMoshtarianAsync();
+            mandehMoshtarianAsync.execute();
+        }
+        else {
+            return;
+        }
+    }
 
 
 }

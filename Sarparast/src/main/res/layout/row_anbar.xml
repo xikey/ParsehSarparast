@@ -224,7 +224,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/imgSathGheymat"
                 android:src="@drawable/ic_dollar_black"
-                android:padding="6dp"
+                android:padding="10dp"
                 android:layout_marginRight="6dp" />
 
             <ImageView
@@ -232,7 +232,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/imgInfo"
                 android:src="@drawable/ic_info_black"
-                android:padding="6dp"
+                android:padding="10dp"
                 android:layout_marginRight="6dp" />
 
             <ImageView

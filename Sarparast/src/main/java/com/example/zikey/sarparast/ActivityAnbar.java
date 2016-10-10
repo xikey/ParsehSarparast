@@ -17,31 +17,32 @@ public class ActivityAnbar extends AppCompatActivity {
     LinearLayout lyForoshVije;
     LinearLayout lyNews;
     LinearLayout lyPictures;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__anbar);
 
         preferenceHelper = new PreferenceHelper(this);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
 
-       lyKala = (LinearLayout) findViewById(R.id.lyMojodi);
-       lyForoshVije = (LinearLayout) findViewById(R.id.lyForoshVije);
-       lyNews = (LinearLayout) findViewById(R.id.lyNew);
-       lyPictures = (LinearLayout) findViewById(R.id.lyPictures);
+        lyKala = (LinearLayout) findViewById(R.id.lyMojodi);
+        lyForoshVije = (LinearLayout) findViewById(R.id.lyForoshVije);
+        lyNews = (LinearLayout) findViewById(R.id.lyNew);
+        lyPictures = (LinearLayout) findViewById(R.id.lyPictures);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                  finish();
+                finish();
             }
         });
 
         lyKala.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityAnbar.this,ActivityAnbarDetails.class);
-                intent.putExtra("State","MojodiKol");
+                Intent intent = new Intent(ActivityAnbar.this, ActivityAnbarDetails.class);
+                intent.putExtra("State", "MojodiKol");
                 startActivity(intent);
 
             }
@@ -50,8 +51,8 @@ public class ActivityAnbar extends AppCompatActivity {
         lyForoshVije.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityAnbar.this,ActivityAnbarDetails.class);
-                intent.putExtra("State","ForooshVije");
+                Intent intent = new Intent(ActivityAnbar.this, ActivityAnbarDetails.class);
+                intent.putExtra("State", "ForooshVije");
                 startActivity(intent);
 
             }
@@ -60,8 +61,8 @@ public class ActivityAnbar extends AppCompatActivity {
         lyNews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ActivityAnbar.this,ActivityAnbarDetails.class);
-                intent.putExtra("State","News");
+                Intent intent = new Intent(ActivityAnbar.this, ActivityAnbarDetails.class);
+                intent.putExtra("State", "News");
 
                 startActivity(intent);
 

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppTheme.MHZLogin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zikey.sarparast.ActivityCustomersDistance">
+
+    <RelativeLayout
+        android:id="@+id/lyProgress"
+        style="@style/AppTheme.MHZLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="visible">
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="@style/AppTheme"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+
+            android:layout_marginBottom="8dp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyEror"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtEror"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:gravity="center"
+            android:text="اطلاعاتی جهت نمایش وجود ندارد"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/backsvg" />
+
+        <TextView
+            android:id="@+id/txtTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="40dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="لیست مشتریان"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+
+        android:id="@+id/lyContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/mhztoolbar"
+        android:layout_toEndOf="@+id/lyEror"
+        android:layout_toRightOf="@+id/lyEror"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/lyMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+
+            <RelativeLayout
+                android:id="@+id/linearLayout10"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="#0277BD"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/edtSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="#0277BD"
+                    android:enabled="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:hint="جستجو"
+                    android:paddingRight="50dp"
+                    android:textColor="#ffffff"
+                    android:textColorHint="#ffffff" />
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_search_black_24dp" />
+
+                <ImageView
+
+                    android:id="@+id/imgCalendar"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="4dp"
+                    android:src="@drawable/ic_date_range_black_48px" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/lyView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/linearLayout10">
+
+                <LinearLayout
+                    android:id="@+id/lyAverage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#e3dede"
+                    android:gravity="right|center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <TextView
+                            android:id="@+id/txtAverage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text=" میانگین مسافت ویزیتور : " />
+
+                    </android.support.v7.widget.CardView>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/row_Customers"
+                    android:paddingTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/lyAverage"
+                    android:background="#e3dede"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:scrollbars="vertical"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

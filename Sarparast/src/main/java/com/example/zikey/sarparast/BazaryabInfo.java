@@ -5,14 +5,14 @@ import java.util.ArrayList;
 /**
  * Created by Zikey on 18/07/2016.
  */
-public class BazaryabInfo {
-    private  String _Name;
-    private  String _Code;
-    private  String _ID;
-    private  String _Time;
+public class BazaryabInfo implements Comparable<BazaryabInfo> {
+    private String _Name;
+    private String _Code;
+    private String _ID;
+    private String _Time;
 
-    private  String _W;
-    private  String _L;
+    private String _W;
+    private String _L;
 
     private String _CustomerCode;
     private String _CustomerName;
@@ -25,6 +25,16 @@ public class BazaryabInfo {
 
     private String _CustomerLat;
     private String _CustomerLong;
+
+    private double _Distance;
+
+    public double get_Distance() {
+        return _Distance;
+    }
+
+    public void set_Distance(double _Distance) {
+        this._Distance = _Distance;
+    }
 
     public String get_CustomerLat() {
         return _CustomerLat;
@@ -154,5 +164,14 @@ public class BazaryabInfo {
 
     public void setWrappers(ArrayList<ActivityGoogleMap.NavigationWrapper> wrappers) {
         this.wrappers = wrappers;
+    }
+
+    @Override
+    public int compareTo(BazaryabInfo another) {
+        if (another.get_Distance() > get_Distance())
+            return 1;
+        if (another.get_Distance() < get_Distance())
+            return -1;
+        return 0;
     }
 }

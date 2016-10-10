@@ -30,9 +30,9 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
     private String searchString = null;
 
 
-    private  String code;
+    private String code;
 
-    private  String asyncMethod;
+    private String asyncMethod;
 
     private RelativeLayout lyEror;
     private android.widget.RelativeLayout lyContent;
@@ -41,9 +41,9 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
 
     private ArrayList<CustomersInfo> customersInfos = new ArrayList<>();
 
-    private  RecyclerView row_orders;
-    private  RecyclerView.LayoutManager row_manager;
-    private  CustomersTopSellesORReturnedGoodsAdapter row_adapter;
+    private RecyclerView row_orders;
+    private RecyclerView.LayoutManager row_manager;
+    private CustomersTopSellesORReturnedGoodsAdapter row_adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
 
         code = getIntent().getStringExtra("code");
         asyncMethod = getIntent().getStringExtra("Method");
+
 
         preferenceHelper = new PreferenceHelper(this);
         imgBack = (ImageView) findViewById(R.id.imgBack);
@@ -66,6 +67,14 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
         lyEror.setVisibility(View.GONE);
         lyContent.setVisibility(View.GONE);
         lyProgress.setVisibility(View.VISIBLE);
+
+        txtTop.setText("کالاهای مورد علاقه");
+
+        if (asyncMethod.equals("S_GetListOf_Top_Returned_Goods")) {
+
+            txtTop.setText("بیشترین برگشتی ها");
+        }
+
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +89,7 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
             }
         });
 
-       new  TopOrderOrReturnedAsync().execute();
+        new TopOrderOrReturnedAsync().execute();
     }
 
 
@@ -146,11 +155,11 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-            datas.put("code",code);
+            datas.put("code", code);
 
             if (isonline) {
                 try {
-                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL),asyncMethod, datas).getProperty(0);
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), asyncMethod, datas).getProperty(0);
 
                     if (request2.getPropertyCount() <= 0) {
                         return "Null";
@@ -161,10 +170,10 @@ public class ActivityTopSelledOrReturnedGoods extends AppCompatActivity {
 
                         CustomersInfo customersInfo = new CustomersInfo();
 
-                        customersInfo.set_Row(NetworkTools.getSoapPropertyAsNullableString(sp,0));
-                        customersInfo.set_IDHeaeder(NetworkTools.getSoapPropertyAsNullableString(sp,1));
-                        customersInfo.set_Name( NetworkTools.getSoapPropertyAsNullableString(sp,2));
-                        customersInfo.set_Price(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp,3).toString())));
+                        customersInfo.set_Row(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                        customersInfo.set_IDHeaeder(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                        customersInfo.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 2));
+                        customersInfo.set_Price(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 3).toString())));
 
                         customersInfos.add(customersInfo);
                     }

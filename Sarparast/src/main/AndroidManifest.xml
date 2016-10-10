@@ -190,7 +190,11 @@
         <activity android:name=".ActivityListOfAdamVisit" />
         <activity android:name=".ActivityListOfAdamVisitMoshjtarian" />
         <activity android:name=".ActivityReasonsNotVisited" />
-        <activity android:name=".ActivityErorHandelling"></activity>
+        <activity android:name=".ActivityErorHandelling" />
+        <activity android:name=".ActivityCustomersDistance" />
+        <activity
+            android:name=".ActivityOrdersPointsMap"
+            android:label="@string/title_activity_orders_points_map"></activity>
     </application>
 
 </manifest>

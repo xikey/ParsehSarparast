@@ -116,7 +116,7 @@ public class ActivityMain extends AppCompatActivity
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
-        isAFinalRelease = 0;
+        isAFinalRelease = 1;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -168,14 +168,13 @@ public class ActivityMain extends AppCompatActivity
         txtTaeedKol = (TextView) findViewById(R.id.txtTaeedKol);
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
 
-        View paren= (View) txtTotal.getParent();
+        View paren = (View) txtTotal.getParent();
         paren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 runReportAsync();
             }
         });
-
 
 
         btnNews = (Button) findViewById(R.id.btnNews);
@@ -501,7 +500,6 @@ public class ActivityMain extends AppCompatActivity
                     SoapObject sp = (SoapObject) request2.getProperty(i);
 
 
-
                     UserInfo userInfo = new UserInfo();
                     userInfo.setCode_user(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
                     userInfo.setName_user(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
@@ -516,7 +514,6 @@ public class ActivityMain extends AppCompatActivity
 
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-
 
 
                     UserInfo userInfo = new UserInfo();
@@ -577,13 +574,11 @@ public class ActivityMain extends AppCompatActivity
             String tokenid = preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
 
-
             datas.put("TokenID", tokenid);
 
             try {
 
                 SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_AnalyseOfProducts", datas).getProperty(0);
-
 
 
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
@@ -724,7 +719,7 @@ public class ActivityMain extends AppCompatActivity
                     if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
-                    SoapObject rq= (SoapObject) request2.getProperty(0);
+                    SoapObject rq = (SoapObject) request2.getProperty(0);
                     if (request2 != null) {
                         total = (NetworkTools.getSoapPropertyAsNullableString(rq, 0));
                         accepted = (NetworkTools.getSoapPropertyAsNullableString(rq, 1));
@@ -752,7 +747,7 @@ public class ActivityMain extends AppCompatActivity
                 txtTotal.setText(total.toString());
                 txtTaeedKol.setText(accepted);
                 txtEntezar.setText(notAccepted);
-                mainGroupAsync=null;
+                mainGroupAsync = null;
                 lyProgress.setVisibility(View.GONE);
             }
 

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
@@ -16,11 +17,17 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,6 +35,7 @@ import android.widget.TextView;
 import com.example.zikey.sarparast.Helpers.Convertor;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
+import com.google.android.gms.ads.formats.NativeAd;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -51,7 +59,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.serialization.SoapObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, DatePickerDialog.OnDateSetListener {
@@ -61,14 +72,17 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
     double lastCustomerL;
     double lastCustomerW;
+    private TextView txtAverage;
 
     private Button btnDate;
+    private ImageView imgDetails;
 
     private int swich;
 
     private Marker marker;
 
     private ArrayList<BazaryabInfo> pointha = new ArrayList<>();
+    private ArrayList<BazaryabInfo> customersDistances = null;
 
     private String TempL;
     private String TempW;
@@ -85,6 +99,12 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
     private GoogleApiClient mGoogleApiClient;
     private String thisDate = "";
 
+    private RelativeLayout lyAdapter;
+
+    private RecyclerView recyclerView;
+    private CustomersDistancesAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private boolean started = false;
 
     @Override
@@ -92,7 +112,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
         mGoogleApiClient.connect();
         started = true;
-
 
         super.onStart();
     }
@@ -117,7 +136,8 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
     private Double myL;
 
     private RelativeLayout lyProgress;
-
+    private RelativeLayout lyMap;
+    private ImageView imgBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +146,26 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
         btnDate = (Button) findViewById(R.id.btnDate);
         lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
+        lyMap = (RelativeLayout) findViewById(R.id.lyMap);
+
+        btnDate = (Button) findViewById(R.id.btnDate);
+        imgDetails = (ImageView) findViewById(R.id.imgDetails);
+
+        btnDate.setVisibility(View.GONE);
+        imgDetails.setVisibility(View.GONE);
+
+        imgBack = (ImageView) findViewById(R.id.imgBack);
+
+        lyAdapter = (RelativeLayout) findViewById(R.id.lyAdapter);
+        lyAdapter.setVisibility(View.GONE);
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lyAdapter.setVisibility(View.GONE);
+                lyMap.setVisibility(View.VISIBLE);
+            }
+        });
 
         btnDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,7 +186,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                     .build();
         }
 
-
         points = new ArrayList<>();
         points.clear();
 
@@ -162,8 +201,12 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         }
 
         if (state.equals("MasirSabt")) {
+            initRecycleView();
+            initSearchAction();
+
             lyProgress.setVisibility(View.VISIBLE);
             runBazaryabSabtPathAsync(thisDate);
+
         }
 
         if (state.equals("CustomerPastLocation")) {
@@ -175,7 +218,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
                 lastCustomerL = Double.parseDouble(TempL);
                 lastCustomerW = Double.parseDouble(TempW);
-
             }
         }
 
@@ -187,6 +229,8 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+
+        customersDistances.clear();
         String month;
         String day;
         if (monthOfYear < 10) month = "0" + (monthOfYear + 1);
@@ -197,6 +241,7 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
 
         thisDate = year + "/" + month + "/" + day;
+        mMap.clear();
         runBazaryabSabtPathAsync(thisDate);
 
         btnDate.setText(thisDate);
@@ -498,14 +543,17 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
     public class BazaryabSabtPath extends AsyncTask<Void, String, String> {
 
+
         MarkerOptions marker = new MarkerOptions();
         MarkerOptions customerMarker = new MarkerOptions();
-        PolylineOptions options = new PolylineOptions();
+
+        PolylineOptions options;
 
         Double customerLat;
         Double customerLong;
 
-//        private ArrayList<BazaryabInfo> customersPoints = new ArrayList<>();
+
+        private ArrayList<BazaryabInfo> customersPoints = new ArrayList<>();
 
 
         Boolean isonline = NetworkTools.isOnline(ActivityGoogleMap.this);
@@ -514,6 +562,17 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         @Override
         protected void onPostExecute(String state) {
 
+            btnDate.setVisibility(View.VISIBLE);
+            imgDetails.setVisibility(View.VISIBLE);
+
+            imgDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lyProgress.setVisibility(View.GONE);
+                    lyMap.setVisibility(View.GONE);
+                    lyAdapter.setVisibility(View.VISIBLE);
+                }
+            });
 
             bazaryabSabtPathAsync = null;
 
@@ -546,47 +605,47 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                         .show();
 
             } else {
-                //PolylineOptions polylineOptions = new PolylineOptions();
-
-
-//                for (int j = 0; j < customersPoints.size(); j++) {
-//
-//                    if (customersPoints.get(j).get_L() != null || !customersPoints.get(j).get_L().equals("0")) {
-//
-//                        customerLat = customersPoints.get(j).get_L();
-//                        customerLong = customersPoints.get(j).get_W();
-//
-//                        MarkerOptions markerOptions = new MarkerOptions();
-//
-//                    }
-//                }
 
 
                 for (int i = 0; i < points.size(); i++) {
 
+                    BazaryabInfo distanc = new BazaryabInfo();
                     if (points.get(i).get_L() != null) {
                         L = Double.valueOf((((points.get(i)).get_L())));
                         W = Double.valueOf((((points.get(i)).get_W())));
 
-
                         customerLong = Double.valueOf(points.get(i).get_CustomerLat());
                         customerLat = Double.valueOf(points.get(i).get_CustomerLong());
-
 
                         LatLng latLng = new LatLng(W, L);
 
                         if (customerLong != 0) {
                             LatLng customerLatLng = new LatLng(customerLat, customerLong);
+                            LatLng latLng1 = new LatLng(W, L);
                             customerMarker.position(customerLatLng);
+                            options = new PolylineOptions();
 
-                            options.width(5).color(Color.BLUE).geodesic(true);
-                            options.add(latLng);
+                            options.width(2).color(Color.BLACK).geodesic(true);
+                            options.add(latLng1);
                             options.add(customerLatLng);
                             mMap.addPolyline(options);
+                            float[] results = new float[1];
+                            Location.distanceBetween(customerLat, customerLong, W, L, results);
+
+                            distanc.set_Name(points.get(i).get_Name());
+                            distanc.set_Code(points.get(i).get_Code());
+                            //    Double distanceMeter = CalculationByDistance(latLng1, customerLatLng);
+
+//                            DecimalFormat twoDForm = new DecimalFormat("#");
+
+
+                            distanc.set_Distance(Double.valueOf((Math.round(results[0]))));
+
+                            customersDistances.add(distanc);
 
                         }
-                        marker.position(latLng);
 
+                        marker.position(latLng);
 
                         marker.icon(pin);
                         marker.title(points.get(i).get_Code());
@@ -595,7 +654,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                         customerMarker.title(points.get(i).get_Code());
 
                         //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
-
 
                         if (i == 0) {
                             marker.icon(pinStart);
@@ -611,10 +669,20 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                         //tsinfo  mMap.addPolyline(polylineOptions);
 
                         mMap.addMarker(marker);
-                        mMap.addMarker(customerMarker);
+                        if (customerMarker.getPosition() != null) {
+                            mMap.addMarker(customerMarker);
+                        }
+                    }
+
+                    if (adapter != null || customersDistances != null) {
+
+                        Collections.sort(customersDistances);
+                        adapter.setItem(customersDistances);
+                        txtAverage.setText("  میانگین مسافت: " + (int) getDistanceAverage(customersDistances) + " متر ");
                     }
                     swich = 2;
                     mMap.setInfoWindowAdapter(new CustomInfoView());
+                    lyMap.setVisibility(View.VISIBLE);
                     lyProgress.setVisibility(View.VISIBLE);
                 }
 
@@ -624,17 +692,18 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         @Override
         protected void onPreExecute() {
 
+            lyMap.setVisibility(View.GONE);
+            customersDistances = new ArrayList<>();
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-            HashMap<String, Object> datas = new HashMap<String, Object>();
 
+            HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("ID", ID);
             datas.put("thisDate", thisDate);
-
 
             if (isonline) {
                 try {
@@ -643,7 +712,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                     if (request2.getPropertyCount() <= 0) {
 
                         return "";
-
 
                     }
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
@@ -691,6 +759,7 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
         public String value;
 
         public NavigationWrapper(String jsonStr) throws JSONException {
+
             JSONObject obj = new JSONObject(jsonStr);
 
             this.title = obj.getString("t");
@@ -879,7 +948,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
         @Override
         protected void onPostExecute(String state) {
-
 
             for (int i = 0; i < pointha.size(); i++) {
                 L = Double.valueOf((((pointha.get(i)).get_L())));
@@ -1081,12 +1149,86 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
 
         if (bazaryabSabtPathAsync == null) {
             points.clear();
+
             bazaryabSabtPathAsync = new BazaryabSabtPath();
             bazaryabSabtPathAsync.execute();
         } else {
             return;
         }
 
+    }
+
+    private void initRecycleView() {
+
+        recyclerView = (RecyclerView) findViewById(R.id.row_customer);
+        txtAverage = (TextView) findViewById(R.id.txtAverage);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new CustomersDistancesAdapter(ActivityGoogleMap.this);
+        adapter.setItem(customersDistances);
+        recyclerView.setAdapter(adapter);
+
+    }
+
+    public double CalculationByDistance(LatLng StartP, LatLng EndP) {
+        int Radius = 6371;// radius of earth in Km
+        double lat1 = StartP.latitude;
+        double lat2 = EndP.latitude;
+        double lon1 = StartP.longitude;
+        double lon2 = EndP.longitude;
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(lat1))
+                * Math.cos(Math.toRadians(lat2)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+        double meter = valueResult % 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+        Log.i("Radius Value", "" + valueResult + "   KM  " + kmInDec
+                + " Meter   " + meterInDec);
+
+        return meter;
+    }
+
+    private double getDistanceAverage(ArrayList<BazaryabInfo> array) {
+
+        if (array == null || array.size() == 0)
+            return 0;
+        double average = 0;
+        int i = array.size();
+        for (int j = 0; j < i; j++) {
+            average += array.get(j).get_Distance();
+        }
+        return average / i;
+
+    }
+
+    private void initSearchAction() {
+
+        EditText edtSearch = (EditText) findViewById(R.id.edtSearch);
+
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+                adapter.getFilter().filter(editable.toString());
+            }
+        });
     }
 }
 

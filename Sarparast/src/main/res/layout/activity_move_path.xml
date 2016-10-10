@@ -1,5 +1,6 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,50 +9,158 @@
     android:background="#FFFFFF">
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lyMap">
+
+        <fragment
+            android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ActivityGoogleMap" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:text="امروز"
+
+            android:id="@+id/btnDate"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="#FFFFFF"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:id="@+id/imgDetails"
+            android:layout_alignTop="@+id/btnDate"
+            android:layout_toRightOf="@+id/btnDate"
+            android:layout_toEndOf="@+id/btnDate"
+            android:layout_marginLeft="20dp"
+            android:background="#ffffff"
+            android:src="@drawable/ic_toc_black_24dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lyAdapter">
+
+        <android.support.v7.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mhztoolbar"
+            android:background="#0277BD"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_width="match_parent">
+            <ImageView
+                android:layout_width="30dp"
+                android:src="@drawable/backsvg"
+                android:layout_height="match_parent"
+                android:id="@+id/imgBack" />
+            <TextView
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:paddingLeft="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="میزان مسافت"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/relativeLayout4"
+            android:gravity="center_vertical"
+            android:background="#0277BD"
+            android:layout_below="@id/mhztoolbar"
+            android:layout_centerHorizontal="true">
+
+            <EditText
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"
+                android:hint="جستجو"
+                android:background="#0277BD"
+                android:focusable="true"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/edtSearch"
+                android:layout_weight="1"
+                android:enabled="true"
+                android:focusableInTouchMode="true"
+                android:paddingRight="50dp"
+                />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView27"
+                android:src="@drawable/ic_search_black_24dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" />
+        </RelativeLayout>
+
+       <LinearLayout
+
+           android:background="#e3dede"
+           android:layout_below="@id/relativeLayout4"
+           android:orientation="vertical"
+           android:id="@+id/lyAverage"
+           android:gravity="right|center"
+           android:layout_width="match_parent"
+           android:layout_height="50dp">
+
+           <android.support.v7.widget.CardView
+               android:layout_marginTop="5dp"
+               android:layout_marginRight="5dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
+
+               <TextView
+                   android:layout_margin="5dp"
+                   android:id="@+id/txtAverage"
+                   android:textSize="18sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content" />
+
+           </android.support.v7.widget.CardView>
 
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ActivityGoogleMap" />
+       </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="امروز"
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/row_customer"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/lyAverage"
+            android:background="#e3dede">
 
-        android:id="@+id/btnDate"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:background="#FFFFFF"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        </android.support.v7.widget.RecyclerView>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="45dp"
-        android:id="@+id/imageView47"
-        android:layout_alignTop="@+id/btnDate"
-        android:layout_toRightOf="@+id/btnDate"
-        android:layout_toEndOf="@+id/btnDate"
-        android:layout_marginLeft="20dp"
-        android:background="#ffffff"
-        android:src="@drawable/ic_toc_black_24dp" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lyProgress"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"

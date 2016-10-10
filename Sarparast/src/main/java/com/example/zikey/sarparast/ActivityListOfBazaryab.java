@@ -25,9 +25,7 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivityListOfBazaryab extends AppCompatActivity
-{
-
+public class ActivityListOfBazaryab extends AppCompatActivity {
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
 
@@ -36,15 +34,15 @@ public class ActivityListOfBazaryab extends AppCompatActivity
     private BazaryabInfoAdapterMasirHarkat row_masirharkat;
     private VisitorsNotOrderedAdapter row_notOrdered;
 
-    private   RecyclerView.LayoutManager row_manager;
-    private   RecyclerView.Adapter row_adapter;
+    private RecyclerView.LayoutManager row_manager;
+    private RecyclerView.Adapter row_adapter;
     private EditText edtSearch;
 
     private GetListOfBazaryabAsync getListOfBazaryabAsync = null;
 
     private TextView txtToolbar;
 
-    private  String state;
+    private String state;
 
     /**
      * its param for fake bind
@@ -63,9 +61,9 @@ public class ActivityListOfBazaryab extends AppCompatActivity
         state = getIntent().getStringExtra("state");
 
         preferenceHelper = new PreferenceHelper(this);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
 
-        txtToolbar= (TextView) findViewById(R.id.txtToolbar);
+        txtToolbar = (TextView) findViewById(R.id.txtToolbar);
 
         row_bazaryab = (RecyclerView) findViewById(R.id.row_bazaryab);
 
@@ -84,95 +82,94 @@ public class ActivityListOfBazaryab extends AppCompatActivity
                 finish();
             }
         });
-if (state.equals("BazaryabLists"))
-{
+        if (state.equals("BazaryabLists")) {
 
-    //Masir Harkat
-    edtSearch.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            //Masir Harkat
+            edtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        }
+                }
 
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        }
+                }
 
-        @Override
-        public void afterTextChanged(Editable editable) {
+                @Override
+                public void afterTextChanged(Editable editable) {
 
-            row_masirharkat.getFilter().filter(editable.toString());
-        }
-    });
-    runGetListOfBazaryabAsync();
-
-}
-
-if (state.equals("NotOrdered")){
-
-    edtSearch.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    row_masirharkat.getFilter().filter(editable.toString());
+                }
+            });
+            runGetListOfBazaryabAsync();
 
         }
 
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (state.equals("NotOrdered")) {
 
+            edtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    row_notOrdered.getFilter().filter(editable.toString());
+                }
+            });
+            txtToolbar.setText("مشتریانی ک خرید نکرده اند");
+            new ListOFCustomersNotOrdered().execute();
         }
 
-        @Override
-        public void afterTextChanged(Editable editable) {
-            row_notOrdered.getFilter().filter(editable.toString());
+
+        if (state.equals("SabtSefaresh")) {
+
+            txtToolbar.setText("مسیر ثبت سفارش");
+            edtSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                    row_masirsabt.getFilter().filter(editable.toString());
+                }
+            });
+
+
+            new GetListOfBazaryabMasirSabtAsync().execute();
         }
-    });
-       txtToolbar.setText("مشتریانی ک خرید نکرده اند");
-       new  ListOFCustomersNotOrdered().execute();
-}
-
-
-if (state.equals("SabtSefaresh")){
-
-    txtToolbar.setText("مسیر ثبت سفارش");
-    edtSearch.addTextChangedListener(new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-            row_masirsabt.getFilter().filter(editable.toString());
-        }
-    });
-
-
-    new  GetListOfBazaryabMasirSabtAsync().execute();
-}
 
     }
 
-    private void runGetListOfBazaryabAsync()
-    {
+    private void runGetListOfBazaryabAsync() {
         if (getListOfBazaryabAsync != null)
             return;
 
         //if is online?
 
-        getListOfBazaryabAsync = new  GetListOfBazaryabAsync();
+        getListOfBazaryabAsync = new GetListOfBazaryabAsync();
         getListOfBazaryabAsync.execute();
 
     }
 
 
-    public class GetListOfBazaryabAsync extends AsyncTask<Void,String,String> {
+    public class GetListOfBazaryabAsync extends AsyncTask<Void, String, String> {
 
-        Boolean isonline= NetworkTools.isOnline(ActivityListOfBazaryab.this);
+        Boolean isonline = NetworkTools.isOnline(ActivityListOfBazaryab.this);
         ProgressDialog dialog;
 
         private Throwable error = null;
@@ -182,21 +179,19 @@ if (state.equals("SabtSefaresh")){
 
             getListOfBazaryabAsync = null;
 
-            if (isfakeBind)
-            {
+            if (isfakeBind) {
                 row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
 
                 row_bazaryab.setLayoutManager(row_manager);
 
                 bazaryabs.clear();
 
-                for (int i = 0 ; i< 2 ; i++)
-                {
+                for (int i = 0; i < 2; i++) {
                     BazaryabInfo info = new BazaryabInfo();
 
-                    info.set_Name("test "+ i);
-                    info.set_Code("1000"+i);
-                    info.set_ID(""+i);
+                    info.set_Name("test " + i);
+                    info.set_Code("1000" + i);
+                    info.set_ID("" + i);
                     info.set_Time("1395/12/12");
                     bazaryabs.add(info);
                 }
@@ -210,7 +205,7 @@ if (state.equals("SabtSefaresh")){
                 return;
             }
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -226,7 +221,7 @@ if (state.equals("SabtSefaresh")){
 
             if (state.equals("Online")) {
 
-              row_masirharkat = new BazaryabInfoAdapterMasirHarkat(bazaryabs);
+                row_masirharkat = new BazaryabInfoAdapterMasirHarkat(bazaryabs);
                 row_masirharkat.setActivity(ActivityListOfBazaryab.this);
                 row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 row_bazaryab.setLayoutManager(row_manager);
@@ -235,8 +230,7 @@ if (state.equals("SabtSefaresh")){
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-            else  if (state.equals("NotOnline")) {
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -263,8 +257,7 @@ if (state.equals("SabtSefaresh")){
         @Override
         protected String doInBackground(Void... voids) {
 
-            if (isfakeBind)
-            {
+            if (isfakeBind) {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
@@ -275,14 +268,13 @@ if (state.equals("SabtSefaresh")){
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
 
             if (isonline) {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitors", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0)
-                    {
+                    if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
 
@@ -311,15 +303,15 @@ if (state.equals("SabtSefaresh")){
 
     }
 
-    public class GetListOfBazaryabMasirSabtAsync extends AsyncTask<Void,String,String> {
+    public class GetListOfBazaryabMasirSabtAsync extends AsyncTask<Void, String, String> {
 
-        Boolean isonline= NetworkTools.isOnline(ActivityListOfBazaryab.this);
+        Boolean isonline = NetworkTools.isOnline(ActivityListOfBazaryab.this);
         ProgressDialog dialog;
 
         @Override
         protected void onPostExecute(String state) {
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -343,8 +335,7 @@ if (state.equals("SabtSefaresh")){
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-            else  if (state.equals("NotOnline")) {
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -372,14 +363,13 @@ if (state.equals("SabtSefaresh")){
         protected String doInBackground(Void... voids) {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
 
             if (isonline) {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitors_MasirSabt", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0)
-                    {
+                    if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
 
@@ -409,9 +399,9 @@ if (state.equals("SabtSefaresh")){
     }
 
 
-    public class ListOFCustomersNotOrdered extends AsyncTask<Void,String,String> {
+    public class ListOFCustomersNotOrdered extends AsyncTask<Void, String, String> {
 
-        Boolean isonline= NetworkTools.isOnline(ActivityListOfBazaryab.this);
+        Boolean isonline = NetworkTools.isOnline(ActivityListOfBazaryab.this);
         ProgressDialog dialog;
 
         private Throwable error = null;
@@ -449,7 +439,7 @@ if (state.equals("SabtSefaresh")){
 //                return;
 //            }
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -465,7 +455,7 @@ if (state.equals("SabtSefaresh")){
 
             if (state.equals("Online")) {
 
-               row_notOrdered = new VisitorsNotOrderedAdapter(bazaryabs);
+                row_notOrdered = new VisitorsNotOrderedAdapter(bazaryabs);
                 row_notOrdered.setActivity(ActivityListOfBazaryab.this);
                 row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 row_bazaryab.setLayoutManager(row_manager);
@@ -475,8 +465,7 @@ if (state.equals("SabtSefaresh")){
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-            else  if (state.equals("NotOnline")) {
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivityListOfBazaryab.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -503,8 +492,7 @@ if (state.equals("SabtSefaresh")){
         @Override
         protected String doInBackground(Void... voids) {
 
-            if (isfakeBind)
-            {
+            if (isfakeBind) {
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
@@ -515,14 +503,13 @@ if (state.equals("SabtSefaresh")){
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
 
             if (isonline) {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitor_Not_Ordered", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0)
-                    {
+                    if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
                     for (int i = 0; i < request2.getPropertyCount(); i++) {

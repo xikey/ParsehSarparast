@@ -632,7 +632,6 @@ public class ActivityMain extends AppCompatActivity
         final Indicator indicator = (Indicator) findViewById(R.id.indicatorBox);
         indicator.setViewPager(pager);
 
-
     }
 
 
@@ -696,12 +695,9 @@ public class ActivityMain extends AppCompatActivity
         } else {
             return;
         }
-
     }
 
-
     public class MainGroupAsync extends AsyncTask<Void, String, String> {
-
 
         Boolean isonline = NetworkTools.isOnline(ActivityMain.this);
 

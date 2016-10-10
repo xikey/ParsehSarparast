@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.Filterable;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.zikey.sarparast.Helpers.Convertor;
 import com.example.zikey.sarparast.Helpers.FontApplier;
 
 import java.util.ArrayList;
@@ -31,9 +34,12 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
     private Double customerLat = 0.0;
     private Double customerLong = 0.0;
 
+
     public CustomersDistanceListAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
+
+
 
     public void setItem(ArrayList<BazaryabInfo> item) {
         if (item == null || item.size() == 0)
@@ -63,6 +69,7 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
 
         holder.txtDistance.setText("" + item.get(position).get_Distance() + " متر ");
 
+        parseNavigationInfo(item.get(position).getWrappers(), (LinearLayout) holder.lyJson);
 
         visitorLat = Double.valueOf(item.get(position).get_W());
         visitorLong = Double.valueOf(item.get(position).get_L());
@@ -161,6 +168,7 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
         private TextView txtTell;
         private TextView txtAddress;
         private LinearLayout lyRoot;
+        private LinearLayout lyJson;
 
         public CustomerViewHolder(View itemView) {
             super(itemView);
@@ -170,6 +178,9 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
             txtDistance = (TextView) itemView.findViewById(R.id.txtDistance);
             txtTell = (TextView) itemView.findViewById(R.id.txtTell);
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
+            lyJson = (LinearLayout) itemView.findViewById(R.id.lyJson);
+
+
 
             lyRoot = (LinearLayout) itemView.findViewById(R.id.lyRoot);
             FontApplier.applyMainFont(activity, lyRoot);
@@ -187,5 +198,46 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
             });
 
         }
+    }
+
+
+    private void parseNavigationInfo(ArrayList<ActivityGoogleMap.NavigationWrapper> wrappers, LinearLayout parent) {
+       int margin =  Convertor.toPixcel(98f, activity.getApplicationContext());
+
+        parent.removeAllViews();
+
+        for (int i = 0; i < wrappers.size(); i++) {
+
+            LinearLayout row = new LinearLayout(activity.getApplicationContext());
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            int padding = Convertor.toPixcel(5f, activity.getApplicationContext());
+            int paddingRight = Convertor.toPixcel(10f, activity.getApplicationContext());
+            row.setPadding(paddingRight, padding, paddingRight, padding);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setLayoutParams(params);
+
+            TextView value = new TextView(activity.getApplicationContext());
+            LinearLayout.LayoutParams paramsValue = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+            value.setText(wrappers.get(i).value);
+            value.setLayoutParams(paramsValue);
+            value.setGravity(Gravity.RIGHT);
+             value.setTextColor(Color.parseColor("#263238"));
+            row.addView(value);
+
+            TextView title = new TextView(activity.getApplicationContext());
+            LinearLayout.LayoutParams paramsTitle = new LinearLayout.LayoutParams(margin, LinearLayout.LayoutParams.WRAP_CONTENT, 0f);
+            title.setText(wrappers.get(i).title);
+
+            title.setTextColor(Color.parseColor("#263238"));
+            title.setLayoutParams(paramsTitle);
+
+            row.addView(title);
+            FontApplier.applyMainFont(activity.getApplicationContext(),parent);
+
+            parent.addView(row);
+
+
+        }
+
     }
 }

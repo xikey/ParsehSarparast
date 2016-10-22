@@ -116,7 +116,7 @@ public class ActivityMain extends AppCompatActivity
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
-        isAFinalRelease = 1;
+        isAFinalRelease = -1;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -400,7 +400,14 @@ public class ActivityMain extends AppCompatActivity
             finish();
             startActivity(getIntent());
 
-        } else if (id == R.id.nav_exit) {
+        }
+        else if(id==R.id.nav_managment){
+
+            ActivityManagmentFooter.start(ActivityMain.this);
+        }
+
+
+        else if (id == R.id.nav_exit) {
             new AlertDialog.Builder(this)
                     .setTitle("خروج")
                     .setMessage("مایل به بستن برنامه میباشید؟")
@@ -469,8 +476,10 @@ public class ActivityMain extends AppCompatActivity
             userInfoAdapterTS.setActivity(ActivityMain.this);
             row_TasvieNashode.setAdapter(userInfoAdapterTS);
 
-            if (dialog != null)
+            if (dialog!=null){
                 dialog.dismiss();
+            }
+
 
         }
 

@@ -146,7 +146,7 @@ public class FragmentAllBazaryab   extends DialogFragment {
             datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             try {
 
-                SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_GetListOF_Bazaryab", datas).getProperty(0);
+                SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "Android_S_GetListOfVisitor", datas).getProperty(0);
 
                 if (request2.getPropertyCount()<=0)
                 {

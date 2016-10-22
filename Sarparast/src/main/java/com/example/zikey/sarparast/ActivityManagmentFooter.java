@@ -1,6 +1,8 @@
 package com.example.zikey.sarparast;
 
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,41 +25,42 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivityListOfAdamVisit extends AppCompatActivity {
+public class ActivityManagmentFooter extends AppCompatActivity {
 
     private ImageView imgBack;
     private TextView txtHead;
-    private String controler;
-
     private PreferenceHelper preferenceHelper;
-
     private TextView txtEror;
-
     private RelativeLayout lyEror;
     private RelativeLayout lyContent;
     private RelativeLayout lyProgress;
-
-    private String methodName;
-
+    private LinearLayoutManager layoutManager;
     private EditText edtSearch;
 
-    ArrayList<AdamVisitInfo> items = new ArrayList<>();
-
-    private RecyclerView row_AdamVisit;
+    private ListOfVisitorsAsync listOfVisitorsAsync = null;
+    private RecyclerView visitorsRecycle;
     private RecyclerView.LayoutManager row_manager;
-    private AdamVisitInfoAdapter row_adapter;
+    private ListOfAllVisitorsAdapter row_adapter;
 
-    private AdamVisitAsync adamVisitAsync = null;
+    private ArrayList<BazaryabInfo> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity_list_of_adam_visit);
+        setContentView(R.layout.activity_managment_footer);
 
-        row_AdamVisit = (RecyclerView) findViewById(R.id.row_AdamVisit);
+        initViews();
+        initRecycleView();
+        runAsync();
 
-        controler = getIntent().getStringExtra("state");
+    }
 
+    public static void start(FragmentActivity context) {
+        Intent starter = new Intent(context, ActivityManagmentFooter.class);
+        context.startActivity(starter);
+    }
+
+    private void initViews() {
 
         txtHead = (TextView) findViewById(R.id.txtHead);
 
@@ -73,19 +77,6 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
             }
         });
 
-        if (controler.equals("Date")) {
-            txtHead.setText("عدم سفارش روزانه");
-            methodName = "S_Adam_Visit_Day";
-            runAsync();
-        }
-
-        if (controler.equals("Month")) {
-            txtHead.setText("عدم سفارش ماهانه");
-            methodName = "S_Adam_Visit_Month";
-            runAsync();
-        }
-
-
         lyContent = (RelativeLayout) findViewById(R.id.lyContent);
         lyEror = (RelativeLayout) findViewById(R.id.lyEror);
         lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
@@ -94,6 +85,8 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
         lyEror.setVisibility(View.GONE);
         lyContent.setVisibility(View.GONE);
         lyProgress.setVisibility(View.VISIBLE);
+
+        txtHead.setText("مدیریت ویزیتور ها");
 
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,18 +105,19 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
             }
         });
-
     }
 
+    public class ListOfVisitorsAsync extends AsyncTask<Void, String, String> {
 
-    public class AdamVisitAsync extends AsyncTask<Void, String, String> {
+        FragmentActivity activity;
 
-        Boolean isonline = NetworkTools.isOnline(ActivityListOfAdamVisit.this);
+
+        Boolean isonline = NetworkTools.isOnline(ActivityManagmentFooter.this);
 
         @Override
         protected void onPostExecute(String state) {
 
-            adamVisitAsync = null;
+            listOfVisitorsAsync = null;
 
             if (state.equals("Null")) {
 
@@ -142,32 +136,19 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
 
             if (state.equals("Online")) {
 
-                Log.e("Is Online", "Online is ok ");
+                row_adapter.setItem(items);
 
-                lyContent.setVisibility(View.VISIBLE);
                 lyProgress.setVisibility(View.GONE);
+                lyContent.setVisibility(View.VISIBLE);
                 lyEror.setVisibility(View.GONE);
-                row_adapter = new AdamVisitInfoAdapter(items);
 
-                row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
-                row_AdamVisit.setLayoutManager(row_manager);
-
-                row_AdamVisit.setAdapter(row_adapter);
-                row_adapter.setState(1);
-
-                if (controler.equals("Date")) {
-                    row_adapter.setChecker("date");
-                }
-
-                if (controler.equals("Month")) {
-                    row_adapter.setChecker("month");
-                }
-                row_adapter.setActivity(ActivityListOfAdamVisit.this);
 
             } else if (state.equals("NotOnline"))
 
             {
                 txtEror.setText("اتصال به اینترنت خود را چک نمایید");
+
+                lyEror.setVisibility(View.VISIBLE);
             }
         }
 
@@ -179,9 +160,6 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
 
-
-            Log.e("tttttttttttt", "" + "Do in background is ok");
-
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
@@ -189,7 +167,7 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
             if (isonline) {
                 try {
 
-                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), methodName, datas).getProperty(0);
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_GetListOF_Bazaryab", datas).getProperty(0);
 
                     if (request2.getPropertyCount() <= 0) {
                         return "Null";
@@ -199,13 +177,13 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
                         SoapObject sp = (SoapObject) request2.getProperty(i);
                         Log.e("tttttttttttt", "" + sp);
 
-                        AdamVisitInfo item = new AdamVisitInfo();
+                        BazaryabInfo item = new BazaryabInfo();
 
-                        item.setCode(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-                        item.setName(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
-                        item.setCount(NetworkTools.getSoapPropertyAsNullableString(sp, 2));
+                        item.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                        item.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
 
                         items.add(item);
+
                     }
 
                 } catch (Exception e) {
@@ -221,11 +199,26 @@ public class ActivityListOfAdamVisit extends AppCompatActivity {
     }
 
     private void runAsync() {
-        if (adamVisitAsync != null) {
+        if (listOfVisitorsAsync != null) {
             return;
         } else {
-            adamVisitAsync = new AdamVisitAsync();
-            adamVisitAsync.execute();
+            listOfVisitorsAsync = new ListOfVisitorsAsync();
+            listOfVisitorsAsync.execute();
         }
     }
+
+    private void initRecycleView() {
+
+        visitorsRecycle = (RecyclerView) findViewById(R.id.row_AllVisitors);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        visitorsRecycle.setLayoutManager(layoutManager);
+        row_adapter = new ListOfAllVisitorsAdapter();
+        row_adapter.setItem(items);
+        row_adapter.setActivity(ActivityManagmentFooter.this);
+        visitorsRecycle.setAdapter(row_adapter);
+
+
+
+    }
+
 }

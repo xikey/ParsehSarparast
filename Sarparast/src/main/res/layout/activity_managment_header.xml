@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_managment_header"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zikey.sarparast.ActivityManagmentHeader">
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mhztoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#0277BD"
+            android:minHeight="?attr/actionBarSize"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/backsvg" />
+
+            <TextView
+                android:id="@+id/txtHead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+        </android.support.v7.widget.Toolbar>
+
+
+        <RelativeLayout
+            android:id="@+id/lyProgress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mhztoolbar"
+            android:gravity="center">
+
+            <ProgressBar
+                android:id="@+id/progressBar2"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lyEror"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mhztoolbar"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/txtEror"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="خطا در دریافت اطالاعت " />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/lyContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/mhztoolbar">
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <ImageView
+
+                        android:id="@+id/imageView47"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentRight="true"
+                        android:padding="10dp"
+                        app:srcCompat="@drawable/userm"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/txtName"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="24dp"
+                        android:gravity="center"
+                        android:text="TextView" />
+
+                    <TextView
+                        android:id="@+id/txtCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="TextView" />
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/tanzimat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/card"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp"
+                android:text="تنظیمات" />
+
+            <ScrollView
+                android:paddingBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tanzimat">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/cardviewTanzimat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="20dp">
+
+
+                        <RelativeLayout
+
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <RelativeLayout
+                                android:id="@+id/lyCanUse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp">
+
+                                <TextView
+                                    android:layout_marginLeft="50dp"
+                                    android:id="@+id/txtCanUse"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="امکان استفاده از برنامه"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_alignParentRight="true"
+                                    android:id="@+id/detailsCanUse"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtCanUse"
+                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:text="@string/managment_can_use"
+                                    android:textSize="12dp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/detailsCanUse"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#BDBDBD">
+
+                                </View>
+
+
+                                <android.support.v7.widget.AppCompatCheckBox
+                                    android:id="@+id/chkCanUse"
+                                    android:layout_width="match_parent"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="20dp"
+
+                                    android:checked="true"
+                                    android:paddingLeft="20dp" />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/lyShowAllCustomers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/lyCanUse">
+
+                                <TextView
+                                    android:layout_marginLeft="50dp"
+                                    android:id="@+id/txtAllcustomerHeader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+
+                                    android:layout_marginTop="10dp"
+                                    android:text="امکان مشاهده کلیه مشتریان"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_alignParentRight="true"
+                                    android:id="@+id/detailsAllCustomer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtAllcustomerHeader"
+                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:text="@string/managment_show_allcustomers"
+                                    android:textSize="12dp" />
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/detailsAllCustomer"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:background="#BDBDBD">
+
+                                </View>
+
+
+                                <android.support.v7.widget.AppCompatCheckBox
+                                    android:id="@+id/chkAllCustomers"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+
+
+                                    android:layout_alignBaseline="@+id/txtAllcustomerHeader"
+                                    android:layout_alignBottom="@+id/txtAllcustomerHeader"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:checked="true"
+                                    android:paddingLeft="20dp" />
+
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/lyUpdate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/lyShowAllCustomers"
+                                android:layout_marginBottom="10dp">
+
+                                <TextView
+                                    android:layout_marginLeft="50dp"
+                                    android:id="@+id/txtCanUpdate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="اجبار به بروز رسانی برنامه  بعد از هربار ارسال سفارش"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_alignParentRight="true"
+                                    android:id="@+id/detailsCanUpdate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/txtCanUpdate"
+                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:text="@string/managment_show_allcustomers"
+                                    android:textSize="12dp" />
+
+
+                                <View
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/detailsCanUpdate"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#BDBDBD">
+
+                                </View>
+
+
+                                <android.support.v7.widget.AppCompatCheckBox
+                                    android:id="@+id/chkCanUpdate"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp"
+
+                                    android:checked="true"
+                                    android:paddingLeft="20dp" />
+
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_marginLeft="50dp"
+                                android:id="@+id/txtdetail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@id/lyUpdate"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp"
+                                android:text="امکان ثبت سفارش بدون در نظر گرفتن موقعیت"
+
+                                android:textColor="#000000" />
+
+                            <android.support.v7.widget.AppCompatCheckBox
+                                android:id="@+id/chkDistance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@id/lyUpdate"
+                                android:layout_marginLeft="20dp"
+                                android:layout_marginTop="4dp"
+                                android:checked="true"
+                                android:paddingLeft="20dp" />
+
+
+                            <RelativeLayout
+                                android:id="@+id/lyDistance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/txtDistanceDetail">
+
+                                <TextView
+
+                                    android:id="@+id/txtDistance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="فاصله مجاز برای ثبت موقعیت : "
+                                    android:textColor="#000000" />
+                                <TextView
+                                    android:layout_marginLeft="25dp"
+                                    android:id="@+id/txtMeter"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_below="@id/txtDistance"
+                                    android:layout_marginTop="10dp"
+
+                                    android:text="متر"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content" />
+.
+
+                                <EditText
+
+                                    android:id="@+id/edtDistance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/txtMeter"
+
+
+                                    android:layout_alignEnd="@+id/txtDistance"
+                                    android:layout_alignRight="@+id/txtDistance"
+                                    android:layout_below="@+id/txtDistance"
+                                    android:hint="مسافت (متر)"
+                                    android:inputType="number"
+                                    android:padding="10dp"
+                                    android:singleLine="true" />
+
+
+
+                            </RelativeLayout>
+
+                            <TextView
+
+                                android:id="@+id/txtDistanceDetail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/txtdetail"
+                                android:layout_marginLeft="50dp"
+                                android:layout_marginRight="10dp"
+                                android:gravity="right"
+                                android:text="@string/managment_distance_describtion1"
+                                android:textSize="12dp" />
+
+                            <Button
+
+                                android:id="@+id/btnSave"
+                                android:layout_width="50dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@+id/lyDistance"
+                                android:layout_marginLeft="10dp"
+                                android:background="#004CAF50"
+                                android:text="ذخیره"
+                                android:textColor="#0277BD"
+                                android:textStyle="normal|bold" />
+
+
+
+                        </RelativeLayout>
+
+
+                    </android.support.v7.widget.CardView>
+
+
+                    <android.support.v7.widget.CardView
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginTop="10dp"
+                       android:layout_below="@id/cardviewTanzimat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/txtTarget"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_alignParentRight="true"
+                                android:text="تارگت فروش ویزیتور"
+                                android:textColor="#000000"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <EditText
+
+                                android:inputType="number"
+                                android:hint="تارگت (ریال)"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="10dp"
+                                android:id="@+id/edtTarget"
+                                android:layout_alignParentRight="true"
+                                android:layout_below="@id/txtTarget"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toRightOf="@+id/btnTargetSave"
+                                android:layout_toEndOf="@+id/btnTargetSave" />
+
+
+                            <Button
+
+                                android:id="@+id/btnTargetSave"
+                                android:layout_width="50dp"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true"
+                                android:layout_below="@id/edtTarget"
+                                android:layout_marginLeft="15dp"
+                                android:background="#004CAF50"
+
+                                android:text="ذخیره"
+                                android:textColor="#0277BD"
+                                android:textStyle="normal|bold" />
+
+                            <TextView
+
+                                android:id="@+id/txtRial"
+                                android:text="ریال"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="50dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBaseline="@+id/edtTarget"
+                                android:layout_alignBottom="@+id/edtTarget"
+                                android:layout_alignParentLeft="true"
+                                android:layout_alignParentStart="true" />
+
+                        </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+
+
+                </RelativeLayout>
+
+
+
+            </ScrollView>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>

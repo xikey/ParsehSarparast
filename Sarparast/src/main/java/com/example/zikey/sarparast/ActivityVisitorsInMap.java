@@ -18,9 +18,6 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
    private   Location mLastLocation;
    private GoogleApiClient mGoogleApiClient;
 
-
-
-
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
 

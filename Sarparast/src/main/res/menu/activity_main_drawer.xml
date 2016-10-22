@@ -26,9 +26,14 @@
                 android:icon="@drawable/refresh"
                 android:title="بارگزاری مجدد" />
             <item
+                android:id="@+id/nav_managment"
+                android:icon="@drawable/ic_managment_ind_white_24dp"
+                android:title="مدیریت ویزیتور ها" />
+            <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/exit"
                 android:title="خروج" />
+
         </menu>
     </item>
 

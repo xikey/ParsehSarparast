@@ -194,7 +194,13 @@
         <activity android:name=".ActivityCustomersDistance" />
         <activity
             android:name=".ActivityOrdersPointsMap"
-            android:label="@string/title_activity_orders_points_map"></activity>
+            android:label="@string/title_activity_orders_points_map" />
+        <activity android:name=".ActivityManagmentFooter" />
+        <activity
+            android:windowSoftInputMode="stateHidden"
+            android:name=".ActivityManagmentHeader">
+
+        </activity>
     </application>
 
 </manifest>

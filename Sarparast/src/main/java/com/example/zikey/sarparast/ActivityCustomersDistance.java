@@ -50,6 +50,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
     private DatePickerDialog datePickerDialog = null;
     private GetCustomerAsync getCustomerAsync = null;
     private LinearLayoutManager layoutManager;
+    private int notPointed = 0;
 
     private CustomersDistanceListAdapter adapter;
     private ArrayList<BazaryabInfo> points = new ArrayList<>();
@@ -73,7 +74,6 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
     @Override
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
-
         String date = changeDate(year, monthOfYear, dayOfMonth);
         runAsunc(date);
 
@@ -88,7 +88,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         txtAverage = (TextView) findViewById(R.id.txtAverage);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         imgCalendar = (ImageView) findViewById(R.id.imgCalendar);
-        lyContent = (RelativeLayout) findViewById(R.id.lyContent);
+        lyContent = (RelativeLayout) findViewById(R.id.lyView);
         lyEror = (RelativeLayout) findViewById(R.id.lyEror);
         lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
         preferenceHelper = new PreferenceHelper(this);
@@ -184,7 +184,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         if (array == null || array.size() == 0)
             return 0;
         double average = 0;
-        int i = array.size();
+        int i = array.size()-notPointed;
         for (int j = 0; j < i; j++) {
             average += array.get(j).get_Distance();
         }
@@ -244,7 +244,6 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
                                 point.set_CustomerLat(NetworkTools.getSoapPropertyAsNullableString(sp, 8));
                                 point.set_CustomerLong(NetworkTools.getSoapPropertyAsNullableString(sp, 9));
 
-
                                 if (!NetworkTools.getSoapPropertyAsNullableString(sp, 8).equals("0")) {
                                     float[] results = new float[1];
                                     Double lat1 = Double.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
@@ -256,7 +255,9 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
 
                                     point.set_Distance(Double.valueOf(Math.round(results[0])));
                                 }
-
+                                if (NetworkTools.getSoapPropertyAsNullableString(sp, 8).equals("0")||NetworkTools.getSoapPropertyAsNullableString(sp, 0).equals("0")){
+                                    notPointed++;
+                                }
                                 points.add(point);
                             }
                         }
@@ -276,6 +277,8 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
             getCustomerAsync = null;
 
             if (points.size()==0||points==null){
+                edtSearch.setEnabled(false);
+                lyContent.setVisibility(View.GONE);
                 lyProgress.setVisibility(View.GONE);
                 lyEror.setVisibility(View.VISIBLE);
                 txtEror.setText("اطلاعاتی جهت نمایش وجود ندارد");
@@ -284,12 +287,14 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
 
             if (s.equals("null")) {
 
+                edtSearch.setEnabled(false);
                 lyProgress.setVisibility(View.GONE);
                 lyEror.setVisibility(View.VISIBLE);
             }
 
             if (s.equals("Online")) {
 
+                edtSearch.setEnabled(true);
                 Collections.sort(points);
                 adapter.setItem(points);
                 txtAverage.setText(" میانگین مسافت ویزیتور: " + getDistanceAverage(points) + " متر ");
@@ -299,6 +304,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
             }
 
             if (s.equals("NotOnline")) {
+                edtSearch.setEnabled(false);
                 lyProgress.setVisibility(View.GONE);
                 lyEror.setVisibility(View.VISIBLE);
                 txtEror.setText("خطا در اتصال به اینترنت");
@@ -338,7 +344,6 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
                 ActivityGoogleMap.NavigationWrapper n = new ActivityGoogleMap.NavigationWrapper(arr.getString(i));
                 output.add(n);
             }
-
             return output;
         }
     }

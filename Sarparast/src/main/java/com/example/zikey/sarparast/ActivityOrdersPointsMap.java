@@ -3,6 +3,7 @@ package com.example.zikey.sarparast;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -79,7 +80,7 @@ public class ActivityOrdersPointsMap extends FragmentActivity implements OnMapRe
             mMap.addMarker(visitorMarker);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(visitorLatLng, zoomLevel));
         }
-
+        Log.e("customer",""+customerLat);
         if (customerLat != 0.0) {
             LatLng customerLatlong = new LatLng(customerLat, customerLong);
             customerMarker.position(customerLatlong);

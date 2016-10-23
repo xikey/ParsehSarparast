@@ -29,16 +29,10 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
     private ArrayList<BazaryabInfo> itemDump;
     private FragmentActivity activity;
 
-    private Double visitorLat = 0.0;
-    private Double visitorLong = 0.0;
-    private Double customerLat = 0.0;
-    private Double customerLong = 0.0;
-
 
     public CustomersDistanceListAdapter(FragmentActivity activity) {
         this.activity = activity;
     }
-
 
 
     public void setItem(ArrayList<BazaryabInfo> item) {
@@ -71,10 +65,10 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
 
         parseNavigationInfo(item.get(position).getWrappers(), (LinearLayout) holder.lyJson);
 
-        visitorLat = Double.valueOf(item.get(position).get_W());
-        visitorLong = Double.valueOf(item.get(position).get_L());
-        customerLat = Double.valueOf(item.get(position).get_CustomerLat());
-        customerLong = Double.valueOf(item.get(position).get_CustomerLong());
+        holder.visitorLat = Double.valueOf(item.get(position).get_W());
+        holder.visitorLong = Double.valueOf(item.get(position).get_L());
+        holder.customerLat = Double.valueOf(item.get(position).get_CustomerLat());
+        holder.customerLong = Double.valueOf(item.get(position).get_CustomerLong());
 
 
         if (item.get(position).get_Distance() == 0.0) {
@@ -169,6 +163,11 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
         private TextView txtAddress;
         private LinearLayout lyRoot;
         private LinearLayout lyJson;
+        private Double visitorLat;
+        private Double visitorLong;
+        private Double customerLat;
+        private Double customerLong;
+
 
         public CustomerViewHolder(View itemView) {
             super(itemView);
@@ -180,7 +179,10 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
             lyJson = (LinearLayout) itemView.findViewById(R.id.lyJson);
 
-
+            visitorLat = 0.0;
+            visitorLong = 0.0;
+            customerLat = 0.0;
+            customerLong = 0.0;
 
             lyRoot = (LinearLayout) itemView.findViewById(R.id.lyRoot);
             FontApplier.applyMainFont(activity, lyRoot);
@@ -202,7 +204,7 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
 
 
     private void parseNavigationInfo(ArrayList<ActivityGoogleMap.NavigationWrapper> wrappers, LinearLayout parent) {
-       int margin =  Convertor.toPixcel(98f, activity.getApplicationContext());
+        int margin = Convertor.toPixcel(98f, activity.getApplicationContext());
 
         parent.removeAllViews();
 
@@ -221,7 +223,7 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
             value.setText(wrappers.get(i).value);
             value.setLayoutParams(paramsValue);
             value.setGravity(Gravity.RIGHT);
-             value.setTextColor(Color.parseColor("#263238"));
+            value.setTextColor(Color.parseColor("#263238"));
             row.addView(value);
 
             TextView title = new TextView(activity.getApplicationContext());
@@ -232,7 +234,7 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
             title.setLayoutParams(paramsTitle);
 
             row.addView(title);
-            FontApplier.applyMainFont(activity.getApplicationContext(),parent);
+            FontApplier.applyMainFont(activity.getApplicationContext(), parent);
 
             parent.addView(row);
 

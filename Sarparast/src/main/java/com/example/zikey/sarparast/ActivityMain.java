@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -33,6 +35,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,9 +43,19 @@ import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.Helpers.Indicator;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.ksoap2.serialization.SoapObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -89,6 +102,9 @@ public class ActivityMain extends AppCompatActivity
     private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<UserInfo>();
     private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<UserInfo>();
 
+    private ArrayList<ChartInfo> chartInfoArrayList = new ArrayList<>();
+    private GetPieChartInfos getPieChartInfos = null;
+
     private RelativeLayout lyProgress;
 
     private TextView txtTotal;
@@ -98,6 +114,13 @@ public class ActivityMain extends AppCompatActivity
     private String total = "0";
     private String accepted = "0";
     private String notAccepted = "0";
+
+
+    //PieChart
+    private PieChart mChart;
+    private RelativeLayout lyProgressPieChart;
+    private RelativeLayout lyContentPieChart;
+
 
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
     private int isAFinalRelease = -1;
@@ -115,6 +138,7 @@ public class ActivityMain extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
+
 
         isAFinalRelease = -1;
 
@@ -142,6 +166,9 @@ public class ActivityMain extends AppCompatActivity
 
         requestPermission();
         initVersionName();
+        runGetPiechartAsync();
+
+
 
 
 //        int permiss = ContextCompat.checkSelfPermission(ActivityMain.this,
@@ -400,14 +427,10 @@ public class ActivityMain extends AppCompatActivity
             finish();
             startActivity(getIntent());
 
-        }
-        else if(id==R.id.nav_managment){
+        } else if (id == R.id.nav_managment) {
 
             ActivityManagmentFooter.start(ActivityMain.this);
-        }
-
-
-        else if (id == R.id.nav_exit) {
+        } else if (id == R.id.nav_exit) {
             new AlertDialog.Builder(this)
                     .setTitle("خروج")
                     .setMessage("مایل به بستن برنامه میباشید؟")
@@ -476,7 +499,7 @@ public class ActivityMain extends AppCompatActivity
             userInfoAdapterTS.setActivity(ActivityMain.this);
             row_TasvieNashode.setAdapter(userInfoAdapterTS);
 
-            if (dialog!=null){
+            if (dialog != null) {
                 dialog.dismiss();
             }
 
@@ -589,10 +612,8 @@ public class ActivityMain extends AppCompatActivity
 
                 SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_AnalyseOfProducts", datas).getProperty(0);
 
-
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-
 
                     UserInfo userInfo = new UserInfo();
                     userInfo.setCode_user("گروه");
@@ -761,4 +782,209 @@ public class ActivityMain extends AppCompatActivity
 
     }
 
+    private void runGetPiechartAsync() {
+
+        lyProgressPieChart = (RelativeLayout) findViewById(R.id.lyProgressPieChart);
+        lyContentPieChart = (RelativeLayout) findViewById(R.id.lyContentPieChart);
+        lyContentPieChart.setVisibility(View.GONE);
+        lyProgressPieChart.setVisibility(View.VISIBLE);
+
+
+        if (getPieChartInfos != null) return;
+
+        getPieChartInfos = new GetPieChartInfos();
+        getPieChartInfos.execute();
+
+    }
+
+
+    private void initPieChart() {
+
+        lyContentPieChart.setVisibility(View.VISIBLE);
+        lyProgressPieChart.setVisibility(View.GONE);
+
+        mChart = (PieChart) findViewById(R.id.chart1);
+        mChart.setUsePercentValues(true);
+        mChart.getDescription().setEnabled(false);
+        mChart.setExtraOffsets(5, 10, 5, 5);
+
+        mChart.setDragDecelerationFrictionCoef(0.95f);
+
+        mChart.setDrawHoleEnabled(true);
+        mChart.setHoleColor(Color.TRANSPARENT);
+
+        mChart.setTransparentCircleColor(Color.WHITE);
+        mChart.setTransparentCircleAlpha(100);
+
+        mChart.setHoleRadius(58f);
+        mChart.setTransparentCircleRadius(61f);
+
+        mChart.setDrawCenterText(true);
+        mChart.setCenterText("فروش گروه های اصلی");
+        mChart.setCenterTextSize(16f);
+
+        mChart.setRotationAngle(0);
+        // enable rotation of the chart by touch
+        mChart.setRotationEnabled(true);
+        mChart.setHighlightPerTapEnabled(true);
+
+        // mChart.setUnit(" €");
+        // mChart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+//        mChart.setOnChartValueSelectedListener(this);
+
+        int count = chartInfoArrayList.size();
+
+        setData(count, 100);
+
+        mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+        // mChart.spin(2000, 0, 360);
+
+        Legend l = mChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+
+        // entry label styling
+        mChart.setEntryLabelColor(Color.WHITE);
+//        mChart.setEntryLabelTypeface(mTfRegular);
+        mChart.setEntryLabelTextSize(14f);
+
+        mChart.setDrawEntryLabels(false);
+    }
+
+    private void setData(int count, float range) {
+
+        float mult = range;
+
+         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+       for (int i = 0; i < count; i++) {
+           entries.add(new PieEntry((float) chartInfoArrayList.get(i).getSharePercent(),chartInfoArrayList.get(i).getGroupName()) );
+       }
+
+        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+
+//        dataSet.set
+
+
+
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+
+        // add a lot of colors
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+
+        dataSet.setColors(colors);
+//        dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+
+        data.setValueTextColor(Color.WHITE);
+        //data.setValueTypeface(50);
+        mChart.setData(data);
+
+        // undo all highlights
+        mChart.highlightValues(null);
+
+        mChart.invalidate();
+    }
+
+
+
+
+    //Async For Get Percent of Pie Chart from Server
+
+    private class GetPieChartInfos extends AsyncTask<Void, String, String> {
+
+        public ChartInfo chartInfo;
+
+        Boolean isonline = NetworkTools.isOnline(ActivityMain.this);
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            HashMap<String, Object> datas = new HashMap<String, Object>();
+
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+
+
+            try {
+                if (isonline) {
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_PieChart_Android", datas).getProperty(0);
+
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
+                    }
+
+                    for (int i = 0; i < request2.getPropertyCount(); i++) {
+                        SoapObject sp = (SoapObject) request2.getProperty(i);
+
+                        chartInfo = new ChartInfo();
+
+                        chartInfo.setSarparast_id(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                        chartInfo.setGroupName(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                        chartInfo.setKhalesR(Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString()));
+                        chartInfo.setGroupID(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
+                        chartInfo.setSharePercent(Double.parseDouble(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString()));
+
+                        chartInfoArrayList.add(chartInfo);
+                    }
+
+                    return "OK";
+
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Eror";
+            }
+            return "ofline";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            getPieChartInfos = null;
+
+
+//            lyProgress.setVisibility(View.GONE);
+//            lyContent.setVisibility(View.VISIBLE);
+
+            if (s.equals("OK")) {
+
+                initPieChart();
+
+                super.onPostExecute(s);
+            }
+        }
+
+    }
 }

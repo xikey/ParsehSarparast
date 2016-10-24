@@ -1,1 +1,1 @@
-include ':Sarparast', ':CustomGauge', ':PersianMaterialDateTimePicker-master', ':persianmaterialdatetimepicker'
+include ':Sarparast', ':CustomGauge', ':persianmaterialdatetimepicker'

@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CustomGauge/CustomGauge.iml" filepath="$PROJECT_DIR$/CustomGauge/CustomGauge.iml" />
       <module fileurl="file://$PROJECT_DIR$/ParsehSarparast.iml" filepath="$PROJECT_DIR$/ParsehSarparast.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PersianMaterialDateTimePicker-master/PersianMaterialDateTimePicker-master.iml" filepath="$PROJECT_DIR$/PersianMaterialDateTimePicker-master/PersianMaterialDateTimePicker-master.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sarparast/Sarparast.iml" filepath="$PROJECT_DIR$/Sarparast/Sarparast.iml" />
       <module fileurl="file://$PROJECT_DIR$/persianmaterialdatetimepicker/persianmaterialdatetimepicker.iml" filepath="$PROJECT_DIR$/persianmaterialdatetimepicker/persianmaterialdatetimepicker.iml" />
     </modules>

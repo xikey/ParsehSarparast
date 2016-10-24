@@ -1048,6 +1048,12 @@
                 </LinearLayout>
 
 
+
+                <include
+                    layout="@layout/cycle_chart_mainpage"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"

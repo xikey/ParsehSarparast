@@ -331,21 +331,20 @@ public class ActivityManagmentHeader extends AppCompatActivity {
 
                         } else {
 
-                            if (managmentModify.compareTo(managmentInfo) == 0) {
+
+                            if (Long.parseLong(edtDistance.getText().toString()) > 1000) {
 
                                 new AlertDialog.Builder(ActivityManagmentHeader.this)
                                         .setCancelable(false)
                                         .setTitle("خطا")
-                                        .setMessage("تغییری در تنظیمات اعمال نشده است")
+                                        .setMessage("مقدار مسافت بیشتر از 1000 متر میباشد")
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
                                             public void onClick(DialogInterface dialog, int which) {
                                             }
                                         })
                                         .setIcon(R.drawable.eror_dialog)
                                         .show();
                             } else {
-
                                 new AlertDialog.Builder(ActivityManagmentHeader.this)
                                         .setTitle("ارسال")
                                         .setMessage("مایل به ذخیره تنظیمات میباشید ؟")
@@ -357,8 +356,9 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                                             }
                                         }).create().show();
                             }
-
                         }
+
+
                     }
                 });
 
@@ -428,76 +428,76 @@ public class ActivityManagmentHeader extends AppCompatActivity {
             //s==0 means that supervisor denied to send datas cuse permissions
             //s==-1 means that successfully sent but nothin changes in server
 
-            if (s.equals("ofline")){
+            if (s.equals("ofline")) {
                 new AlertDialog.Builder(ActivityManagmentHeader.this)
                         .setCancelable(false)
                         .setTitle("خطا")
-                        .setMessage("برقراری ارتباط با اینترنت امکان پذیر")
+                        .setMessage("برقراری ارتباط با اینترنت امکان پذیر نمیباشد")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-
-                                targetInfo.setPriceTarget(targetInfoModify.getPriceTarget());
-                                targetInfo.setPriceTargetSeprated(targetInfoModify.getPriceTargetSeprated());
-                            }
-                        })
-                        .setIcon(R.drawable.eror_dialog)
-                        .show();
-            }
-
-
-            if (s.equals("1")) {
-
-                new AlertDialog.Builder(ActivityManagmentHeader.this)
-                        .setCancelable(false)
-                        .setTitle("موفقیت")
-                        .setMessage("ارسال اطلاعات با موفقیت انجام شد")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                managmentInfo.setCode(managmentModify.getCode());
-                                managmentInfo.setCanOrder(managmentModify.getCanOrder());
-                                managmentInfo.setCanRegister(managmentModify.getCanRegister());
-                                managmentInfo.setDistance(managmentModify.getDistance());
-                                managmentInfo.setCanReadAllCustomer(managmentModify.getCanReadAllCustomer());
-                                managmentInfo.setCanUpdate(managmentModify.getCanUpdate());
-                                managmentInfo.setForceToLoguot(managmentModify.getForceToLoguot());
-
-                                isanythingChanged();
 
                             }
                         })
                         .setIcon(R.drawable.eror_dialog)
                         .show();
             }
+else {
 
 
-            if (s.equals("0")) {
+                if (s.equals("1")||s.equals("2")||s.equals("3")||s.equals("4")||s.equals("5")) {
 
-                new AlertDialog.Builder(ActivityManagmentHeader.this)
-                        .setCancelable(false)
-                        .setTitle("موفقیت")
-                        .setMessage("اطلاعات با موفقیت ارسال شد اما تغییری در سمت سرور ایجاد نشده است!")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .setIcon(R.drawable.eror_dialog)
-                        .show();
-            }
-            if (s.equals("-1")) {
+                    new AlertDialog.Builder(ActivityManagmentHeader.this)
+                            .setCancelable(false)
+                            .setTitle("موفقیت")
+                            .setMessage("ارسال اطلاعات با موفقیت انجام شد")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
 
-                new AlertDialog.Builder(ActivityManagmentHeader.this)
-                        .setCancelable(false)
-                        .setTitle("خطا")
-                        .setMessage("متاسفانه خطایی هنگام ارسال اطلاعات به وجود آمده است. لطفا دوباره تلاش کنید در صورت مشکل مجدد با پشتیبانی پارسه تماس بگیرید")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .setIcon(R.drawable.eror_dialog)
-                        .show();
+                                    managmentInfo.setCode(managmentModify.getCode());
+                                    managmentInfo.setCanOrder(managmentModify.getCanOrder());
+                                    managmentInfo.setCanRegister(managmentModify.getCanRegister());
+                                    managmentInfo.setDistance(managmentModify.getDistance());
+                                    managmentInfo.setCanReadAllCustomer(managmentModify.getCanReadAllCustomer());
+                                    managmentInfo.setCanUpdate(managmentModify.getCanUpdate());
+                                    managmentInfo.setForceToLoguot(managmentModify.getForceToLoguot());
+
+                                    isanythingChanged();
+
+                                }
+                            })
+                            .setIcon(R.drawable.eror_dialog)
+                            .show();
+                }
+
+
+                if (s.equals("0")) {
+
+                    new AlertDialog.Builder(ActivityManagmentHeader.this)
+                            .setCancelable(false)
+                            .setTitle("موفقیت")
+                            .setMessage("اطلاعات با موفقیت ارسال شد اما تغییری در سمت سرور ایجاد نشده است!")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .setIcon(R.drawable.eror_dialog)
+                            .show();
+                }
+                if (s.equals("-1")) {
+
+                    new AlertDialog.Builder(ActivityManagmentHeader.this)
+                            .setCancelable(false)
+                            .setTitle("خطا")
+                            .setMessage("متاسفانه خطایی هنگام ارسال اطلاعات به وجود آمده است. لطفا دوباره تلاش کنید در صورت مشکل مجدد با پشتیبانی پارسه تماس بگیرید")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .setIcon(R.drawable.eror_dialog)
+                            .show();
+                }
             }
             super.onPostExecute(s);
         }
@@ -631,7 +631,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
             //s==0 means that supervisor denied to send datas cuse permissions
             //s==-1 means that successfully sent but nothin changes in server
 
-            if (s.equals("ofline")){
+            if (s.equals("ofline")) {
                 new AlertDialog.Builder(ActivityManagmentHeader.this)
                         .setCancelable(false)
                         .setTitle("خطا")

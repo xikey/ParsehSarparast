@@ -30,11 +30,7 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
     private TextView btnDarsad;
     private String code;
 
-
-
     private PreferenceHelper preferenceHelper;
-
-
 
  private TextView txtcodeB;
  private TextView txtNameB;
@@ -71,9 +67,6 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
 
         imgBack= (ImageView) findViewById(R.id.imgBack);
 
-
-
-
         txtcodeB = (TextView) findViewById(R.id.txtPrice);
         txtNameB = (TextView) findViewById(R.id.txtNumber);
         txtTFForoosh = (TextView) findViewById(R.id.txtTFForoosh);
@@ -93,7 +86,6 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
         imgCall= (ImageView) findViewById(R.id.imgCall);
         imgSMS = (ImageView) findViewById(R.id.imgSMS);
 
-
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,12 +93,7 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
             }
         });
 
-
         gauge2 = (CustomGauge) findViewById(R.id.gauge2);
-
-
-
-
 
 
         new VisitorsInfoAsync().execute();
@@ -114,16 +101,11 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
 
     }
 
-
-
     public class VisitorsInfoAsync extends AsyncTask<Void,String,String > {
-
 
         ProgressDialog dialog;
 
         Boolean isonline= NetworkTools.isOnline(ActivityListOfVisitorInfo.this);
-
-
 
         @Override
         protected void onPostExecute(String value) {
@@ -141,7 +123,6 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
                         .setIcon(R.drawable.eror_dialog)
                         .show();
             }
-
 
             if (value.equals("Online")) {
                 txtcodeB.setText(visitor.get_CodeB());
@@ -163,7 +144,6 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
                 long starRating = Long.parseLong((""+visitor.get_DarsadF()));
                 long gaugeRating = Long.parseLong((""+visitor.get_DarsadTargetF()));
 
-
                 visitorRate.setRating(starRating / 20);
 
                 gauge2.setValue(((int) gaugeRating));
@@ -171,7 +151,6 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
                 if (gaugeRating>50){
                     btnDarsad.setTextColor(Color.parseColor("#424242"));
                 }
-
 
                 imgCall.setOnClickListener(new View.OnClickListener() {
                     @Override

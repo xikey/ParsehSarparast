@@ -27,7 +27,7 @@
             android:textColor="#ffffff"
             android:paddingLeft="10dp"
             android:layout_marginLeft="10dp"
-            android:text="گروه مشتری"
+            android:text=" گروه مشتری (از اول ماه)"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>

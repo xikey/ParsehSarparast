@@ -86,7 +86,7 @@ public class ActivityListOfTSGroupInfo extends AppCompatActivity {
         });
 
 
-        username.setText("تسویه نشده گروه "+groupName);
+        username.setText("تسویه نشده گروه "+groupName +"(از اول ماه)");
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

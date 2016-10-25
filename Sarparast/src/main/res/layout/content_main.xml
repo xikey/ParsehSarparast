@@ -7,7 +7,8 @@
     android:focusable="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ActivityMain"
-    tools:showIn="@layout/app_bar_main">
+    tools:showIn="@layout/app_bar_main"
+    android:id="@+id/lyCrollCountainer">
 
 
     <ScrollView
@@ -765,7 +766,7 @@
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentStart="true"
                                         android:gravity="center"
-                                        android:text="تایید درخواست ها"
+                                        android:text="   تایید درخواست ها امروز"
                                         android:textAppearance="?android:attr/textAppearanceSmall"
                                         android:textColor="#ffffff"
                                         android:textSize="16sp" />
@@ -1047,12 +1048,11 @@
 
                 </LinearLayout>
 
-
-
                 <include
                     layout="@layout/cycle_chart_mainpage"
                     android:layout_width="match_parent"
                     android:layout_height="400dp" />
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -10,7 +10,7 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        android:icon="@drawable/homew"
+        android:icon="@drawable/ic_managment_ind_white_24dp"
         android:gravity="left"
         android:layout_gravity="left"
 

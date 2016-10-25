@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -18,6 +19,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -31,6 +33,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -69,7 +72,6 @@ public class ActivityMain extends AppCompatActivity
     private Button btnNews;
     private LayoutInflater inflater;
 
-
     private LinearLayout lyForoosh;
     private LinearLayout lyAnbar;
     private LinearLayout lyHadaf;
@@ -84,9 +86,9 @@ public class ActivityMain extends AppCompatActivity
     private RecyclerView row_TasvieNashode;
     private RecyclerView row_GroupProducts;
     private RecyclerView row_TasvieNashodeGroups;
+    private RelativeLayout lyPieChart;
 
     private MainGroupAsync mainGroupAsync = null;
-
 
     public static final int MY_PERMISSIONS_REQUEST_READ_GPS = 14;
 
@@ -120,6 +122,8 @@ public class ActivityMain extends AppCompatActivity
     private PieChart mChart;
     private RelativeLayout lyProgressPieChart;
     private RelativeLayout lyContentPieChart;
+    private boolean isPieChartInited = false;
+    private boolean fakePie = false;
 
 
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
@@ -131,7 +135,6 @@ public class ActivityMain extends AppCompatActivity
         super.onResume();
     }
 
-
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +143,7 @@ public class ActivityMain extends AppCompatActivity
         preferenceHelper = new PreferenceHelper(this);
 
 
-        isAFinalRelease = -1;
+        isAFinalRelease = 1;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -169,8 +172,6 @@ public class ActivityMain extends AppCompatActivity
         runGetPiechartAsync();
 
 
-
-
 //        int permiss = ContextCompat.checkSelfPermission(ActivityMain.this,
 //                android.Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -194,15 +195,12 @@ public class ActivityMain extends AppCompatActivity
         txtTotal = (TextView) findViewById(R.id.txtTotal);
         txtTaeedKol = (TextView) findViewById(R.id.txtTaeedKol);
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
+        scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-        View paren = (View) txtTotal.getParent();
-        paren.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                runReportAsync();
-            }
-        });
+//        lyPieChart = (RelativeLayout) findViewById(R.id.lyPieChart);
 
+
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
 
         btnNews = (Button) findViewById(R.id.btnNews);
 
@@ -376,11 +374,7 @@ public class ActivityMain extends AppCompatActivity
         }
 
         if (id == R.id.action_settings) {
-            String url = "http://razanpardazesh.com";
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
-
+            ActivityManagmentFooter.start(ActivityMain.this);
             return true;
         }
 //        if (id == R.id.action_settings2) {
@@ -660,6 +654,7 @@ public class ActivityMain extends AppCompatActivity
         params.height = height;
         advertiseHeaderBox.setLayoutParams(params);
         final Indicator indicator = (Indicator) findViewById(R.id.indicatorBox);
+
         indicator.setViewPager(pager);
 
     }
@@ -784,6 +779,7 @@ public class ActivityMain extends AppCompatActivity
 
     private void runGetPiechartAsync() {
 
+
         lyProgressPieChart = (RelativeLayout) findViewById(R.id.lyProgressPieChart);
         lyContentPieChart = (RelativeLayout) findViewById(R.id.lyContentPieChart);
         lyContentPieChart.setVisibility(View.GONE);
@@ -800,15 +796,20 @@ public class ActivityMain extends AppCompatActivity
 
     private void initPieChart() {
 
+        isPieChartInited = true;
+
         lyContentPieChart.setVisibility(View.VISIBLE);
         lyProgressPieChart.setVisibility(View.GONE);
 
         mChart = (PieChart) findViewById(R.id.chart1);
+        mChart.setDrawingCacheBackgroundColor(Color.parseColor("#ffffff"));
+        mChart.setBackgroundColor(Color.parseColor("#ffffff"));
+        mChart.setTransparentCircleColor(Color.parseColor("#ffffff"));
         mChart.setUsePercentValues(true);
         mChart.getDescription().setEnabled(false);
         mChart.setExtraOffsets(5, 10, 5, 5);
 
-        mChart.setDragDecelerationFrictionCoef(0.95f);
+        // mChart.setDragDecelerationFrictionCoef(0.95f);
 
         mChart.setDrawHoleEnabled(true);
         mChart.setHoleColor(Color.TRANSPARENT);
@@ -835,17 +836,18 @@ public class ActivityMain extends AppCompatActivity
 //        mChart.setOnChartValueSelectedListener(this);
 
         int count = chartInfoArrayList.size();
-
-        setData(count, 100);
+        setData(count, 0);
 
         mChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
-        // mChart.spin(2000, 0, 360);
+        //mChart.spin(2000, 0, 360);
 
         Legend l = mChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+
+         l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
+
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
@@ -862,19 +864,17 @@ public class ActivityMain extends AppCompatActivity
 
         float mult = range;
 
-         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-       for (int i = 0; i < count; i++) {
-           entries.add(new PieEntry((float) chartInfoArrayList.get(i).getSharePercent(),chartInfoArrayList.get(i).getGroupName()) );
-       }
+        for (int i = 0; i < count; i++) {
+            entries.add(new PieEntry((float) chartInfoArrayList.get(i).getSharePercent(), chartInfoArrayList.get(i).getGroupName()));
+        }
 
-        PieDataSet dataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dataSet = new PieDataSet(entries, "");
 
 //        dataSet.set
-
-
 
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
@@ -882,6 +882,7 @@ public class ActivityMain extends AppCompatActivity
         // add a lot of colors
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
+
 
         for (int c : ColorTemplate.VORDIPLOM_COLORS)
             colors.add(c);
@@ -898,12 +899,16 @@ public class ActivityMain extends AppCompatActivity
         for (int c : ColorTemplate.PASTEL_COLORS)
             colors.add(c);
 
-        colors.add(ColorTemplate.getHoloBlue());
+        // colors.add(Color.rgb(51, 181, 229));
+
 
         dataSet.setColors(colors);
+
+
 //        dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
+
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
 
@@ -917,13 +922,11 @@ public class ActivityMain extends AppCompatActivity
         mChart.invalidate();
     }
 
-
-
-
     //Async For Get Percent of Pie Chart from Server
 
     private class GetPieChartInfos extends AsyncTask<Void, String, String> {
 
+        private boolean fake = false;
         public ChartInfo chartInfo;
 
         Boolean isonline = NetworkTools.isOnline(ActivityMain.this);
@@ -934,7 +937,6 @@ public class ActivityMain extends AppCompatActivity
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-
 
             try {
                 if (isonline) {
@@ -960,7 +962,6 @@ public class ActivityMain extends AppCompatActivity
 
                     return "OK";
 
-
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -980,11 +981,32 @@ public class ActivityMain extends AppCompatActivity
 
             if (s.equals("OK")) {
 
-                initPieChart();
+
+                scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                    @Override
+                    public void onScrollChanged() {
+                        Log.e("scrollview", "" + scrollView.getScrollY());
+
+                        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.lyHead);
+                        if (linearLayout.getMeasuredHeight() <= scrollView.getScrollY() +
+                                scrollView.getHeight()) {
+                            //do something
+                            if (isPieChartInited == false) {
+                                initPieChart();
+
+                            }
+                        } else {
+                            //do nothing
+                        }
+
+                    }
+                });
 
                 super.onPostExecute(s);
             }
         }
 
     }
+
+
 }

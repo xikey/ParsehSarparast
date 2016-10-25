@@ -93,7 +93,7 @@
                     android:src="@drawable/ic_search_black_24dp"
                     android:scaleType="fitCenter"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true" />
+                    android:layout_alignParentRight="true" />
 
             </RelativeLayout>
 

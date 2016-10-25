@@ -184,11 +184,11 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         if (array == null || array.size() == 0)
             return 0;
         double average = 0;
-        int i = array.size();
+        int i = array.size()-notPointed;
         for (int j = 0; j < i; j++) {
             average += array.get(j).get_Distance();
         }
-        return Math.round(average / i-notPointed);
+        return Math.round(average / i);
 
     }
 

@@ -119,14 +119,14 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
         }
 
        if (value.equals("Manategh")){
-                  txtTop.setText("مناطق");
+                  txtTop.setText("مناطق (از اول ماه)");
 
               }
        if (value.equals("Date")){
-                  txtTop.setText("تاریخ");
+                  txtTop.setText("تاریخ (از اول ماه)");
               }
        if (value.equals("Visitor")){
-            txtTop.setText("ویزیتور");
+            txtTop.setText("ویزیتور (از اول ماه)");
               }
 
 

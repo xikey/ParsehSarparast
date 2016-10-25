@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:id="@+id/imgBack" />
         <TextView
-            android:text="مسیر حرکت بازاریاب"
+            android:text="مسیر حرکت بازاریاب (امروز)"
             android:textSize="16sp"
             android:gravity="center"
             android:textColor="#ffffff"

@@ -124,7 +124,7 @@ public class ActivityListOfBazaryab extends AppCompatActivity {
                     row_notOrdered.getFilter().filter(editable.toString());
                 }
             });
-            txtToolbar.setText("مشتریانی ک خرید نکرده اند");
+            txtToolbar.setText("مشتریانی ک خرید نکرده اند (از اول ماه)");
             new ListOFCustomersNotOrdered().execute();
         }
 

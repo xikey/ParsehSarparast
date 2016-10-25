@@ -67,7 +67,7 @@
             android:src="@drawable/ic_search_black_24dp"
             android:scaleType="fitCenter"
             android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentRight="true" />
     </RelativeLayout>
 
 

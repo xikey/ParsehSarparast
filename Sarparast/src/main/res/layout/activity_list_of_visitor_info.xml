@@ -27,7 +27,7 @@
             android:textColor="#ffffff"
             android:paddingLeft="10dp"
            android:layout_marginLeft="10dp"
-            android:text="آنالیز فروش"
+            android:text=" ( از اول ماه )آنالیز فروش"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>

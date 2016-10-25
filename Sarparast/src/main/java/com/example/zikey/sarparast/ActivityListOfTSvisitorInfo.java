@@ -60,12 +60,10 @@ public class ActivityListOfTSvisitorInfo extends AppCompatActivity {
         imgBack= (ImageView) findViewById(R.id.imgBack);
         row_TSFactor= (RecyclerView) findViewById(R.id.row_TSFactors);
 
-
         code = getIntent().getStringExtra("Code_Bazaryab");
         name = getIntent().getStringExtra("Name_Bazaryab");
 
-
-        username.setText("تسویه نشده :"+name);
+        username.setText("تسویه نشده :"+name +"(از اول ماه)");
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

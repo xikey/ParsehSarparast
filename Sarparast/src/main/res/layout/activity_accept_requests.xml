@@ -29,7 +29,7 @@
             android:textColor="#ffffff"
             android:paddingLeft="10dp"
             android:layout_marginLeft="10dp"
-            android:text="لیست درخواست ها "
+            android:text="لیست درخواست ها (امروز) "
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </android.support.v7.widget.Toolbar>

@@ -169,7 +169,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/imgBazaryab"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_portrait_black_24dp"
+                    android:src="@drawable/ic_account_circle_black_24dp"
                     android:padding="15dp" />
 
             </LinearLayout>

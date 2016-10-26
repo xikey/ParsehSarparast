@@ -40,46 +40,109 @@
                     android:layout_weight="40">
 
 
-                    <android.support.v4.view.ViewPager
-                        android:id="@+id/pager"
+
+                    <include
+                        android:id="@+id/lineChart"
+                        layout="@layout/cubic_line_chart_mainreport"
                         android:layout_width="match_parent"
-                        android:layout_height="175dp" />
+                        android:layout_height="match_parent" />
 
 
-                    <com.example.zikey.sarparast.Helpers.Indicator
-                        android:id="@+id/indicatorBox"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:paddingBottom="10dp">
+
+                         <!--<com.example.zikey.sarparast.Helpers.Indicator-->
+                        <!--android:id="@+id/indicatorBox"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_alignParentBottom="true"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:paddingBottom="10dp">-->
 
 
-                    </com.example.zikey.sarparast.Helpers.Indicator>
+                    <!--</com.example.zikey.sarparast.Helpers.Indicator>-->
 
                 </RelativeLayout>
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="90dp"
+                    android:layout_height="wrap_content"
                     android:background="#e3dede"
-                    android:gravity="bottom"
+
                     android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnNews"
+
+                    <android.support.v7.widget.CardView
+                        app:cardCornerRadius="0dp"
+                        android:padding="1dp"
+
+                        app:cardBackgroundColor="#039BE5"
+                        app:cardElevation="0dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="25dp"
-                        android:background="#26C6DA"
-                        android:gravity="center"
-                        android:text="@string/news"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp" />
+                        android:layout_height="wrap_content">
+
+                         <RelativeLayout
+                             android:gravity="right"
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content">
+
+                             <TextView
+                                 android:textSize="15sp"
+                                 android:textStyle="bold"
+                                 android:textColor="#ffffff"
+                                 android:layout_marginRight="10dp"
+                                 android:layout_alignParentRight="true"
+                                 android:id="@+id/txtKhalesMonth"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_width="wrap_content"
+                                 android:text="خالص فروش تا امروز :"
+                                 android:layout_height="wrap_content" />
+
+                             <TextView
+                                 android:textSize="15sp"
+                                 android:textStyle="bold"
+                                 android:textColor="#ffffff"
+                                 android:text="..."
+                                 android:layout_marginRight="40dp"
+                                 android:layout_toLeftOf="@id/txtKhalesMonth"
+                                 android:layout_width="wrap_content"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_height="wrap_content" />
+
+                             <TextView
+                                 android:textSize="15sp"
+                                 android:textStyle="bold"
+                                 android:textColor="#ffffff"
+                                 android:id="@+id/txtKhalesDay"
+                                 android:text="خالص فروش امروز :"
+                                 android:layout_marginRight="10dp"
+                                 android:layout_marginTop="10dp"
+
+                                 android:paddingBottom="10dp"
+                                 android:layout_width="wrap_content"
+                                 android:layout_alignParentRight="true"
+                                 android:layout_below="@+id/txtKhalesMonth"
+                                 android:layout_height="wrap_content" />
+
+                             <TextView
+                                 android:textSize="15sp"
+                                 android:textStyle="bold"
+                                 android:textColor="#ffffff"
+                                 android:text="..."
+                                 android:layout_marginRight="54dp"
+                                 android:layout_marginTop="10dp"
+                                 android:layout_below="@id/txtKhalesMonth"
+                                 android:layout_toLeftOf="@id/txtKhalesDay"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content" />
+
+
+
+                         </RelativeLayout>
+
+                     </android.support.v7.widget.CardView>
 
                 </LinearLayout>
 
@@ -124,8 +187,8 @@
                                 android:layout_marginRight="6dp"
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
-                                card_view:cardCornerRadius="5dp"
-                                card_view:cardElevation="2dp">
+                                card_view:cardCornerRadius="0dp"
+                                card_view:cardElevation="0dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:layout_width="match_parent"
@@ -197,6 +260,7 @@
                                 xmlns:android="http://schemas.android.com/apk/res/android"
                                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                                 cardUseCompatPadding="true"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginBottom="8dip"
@@ -205,8 +269,8 @@
                                 android:layout_marginRight="6dp"
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
-                                card_view:cardCornerRadius="5dp"
-                                card_view:cardElevation="2dp">
+                                card_view:cardCornerRadius="0dp"
+                                card_view:cardElevation="0dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyForoosh"
@@ -299,8 +363,8 @@
                                 android:layout_marginRight="6dp"
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
-                                card_view:cardCornerRadius="5dp"
-                                card_view:cardElevation="2dp">
+                                card_view:cardCornerRadius="0dp"
+                                card_view:cardElevation="0dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyAnbar"
@@ -381,8 +445,8 @@
                                 android:layout_marginRight="6dp"
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
-                                card_view:cardCornerRadius="5dp"
-                                card_view:cardElevation="2dp">
+                                card_view:cardCornerRadius="0dp"
+                                card_view:cardElevation="0dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyHadaf"

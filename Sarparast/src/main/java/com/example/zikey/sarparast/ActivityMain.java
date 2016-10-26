@@ -47,13 +47,21 @@ import com.example.zikey.sarparast.Helpers.Indicator;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import org.ksoap2.serialization.SoapObject;
@@ -117,7 +125,6 @@ public class ActivityMain extends AppCompatActivity
     private String accepted = "0";
     private String notAccepted = "0";
 
-
     //PieChart
     private PieChart mChart;
     private RelativeLayout lyProgressPieChart;
@@ -125,6 +132,10 @@ public class ActivityMain extends AppCompatActivity
     private boolean isPieChartInited = false;
     private boolean fakePie = false;
 
+
+    //LineChart
+    private RelativeLayout lyLineChart;
+    private LineChart cubeChart;
 
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
     private int isAFinalRelease = -1;
@@ -170,6 +181,7 @@ public class ActivityMain extends AppCompatActivity
         requestPermission();
         initVersionName();
         runGetPiechartAsync();
+        initCubeChart();
 
 
 //        int permiss = ContextCompat.checkSelfPermission(ActivityMain.this,
@@ -202,7 +214,7 @@ public class ActivityMain extends AppCompatActivity
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
 
-        btnNews = (Button) findViewById(R.id.btnNews);
+
 
         preferenceHelper = new PreferenceHelper(this);
 
@@ -274,42 +286,30 @@ public class ActivityMain extends AppCompatActivity
         });
 
 
-        btnNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
 
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
 
-        ArrayList<Integer> imageIDS = new ArrayList<>();
-        for (int i = 1; i < 4; i++) {
-            int imageID = getApplicationContext().getResources().getIdentifier("picture_0" + i, "drawable", getApplicationContext().getPackageName());
-            imageIDS.add(imageID);
-        }
+//        ArrayList<Integer> imageIDS = new ArrayList<>();
+//        for (int i = 1; i < 4; i++) {
+//            int imageID = getApplicationContext().getResources().getIdentifier("picture_0" + i, "drawable", getApplicationContext().getPackageName());
+//            imageIDS.add(imageID);
+//        }
 
 
-        pager = (ViewPager) findViewById(R.id.pager);
+        lyLineChart = (RelativeLayout) findViewById(R.id.lineChart);
 
-        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(imageIDS);
-        myPagerAdapter.setInflater(inflater);
-
-        pager.setAdapter(myPagerAdapter);
-
-
-        Indicator indicator = new Indicator(getApplicationContext());
-
-        indicator.setViewPager(pager);
-
+//        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(imageIDS);
+//        myPagerAdapter.setInflater(inflater);
+//        pager.setAdapter(myPagerAdapter);
+//        Indicator indicator = new Indicator(getApplicationContext());
+//        indicator.setViewPager(pager);
 
         initAdvertiseBox();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -644,18 +644,18 @@ public class ActivityMain extends AppCompatActivity
 
 
     private void initAdvertiseBox() {
-        View advertiseHeaderBox = findViewById(R.id.pager);
+        View advertiseHeaderBox = lyLineChart;
 
         int width = getResources().getDisplayMetrics().widthPixels;
 
-        int height = width / 2;
+        int height = (int) (width / 1.5);
 
         ViewGroup.LayoutParams params = advertiseHeaderBox.getLayoutParams();
         params.height = height;
         advertiseHeaderBox.setLayoutParams(params);
-        final Indicator indicator = (Indicator) findViewById(R.id.indicatorBox);
 
-        indicator.setViewPager(pager);
+//        final Indicator indicator = (Indicator) findViewById(R.id.indicatorBox);
+//        indicator.setViewPager(pager);
 
     }
 
@@ -759,7 +759,6 @@ public class ActivityMain extends AppCompatActivity
 
         }
 
-
         @Override
         protected void onPostExecute(String s) {
 
@@ -843,10 +842,11 @@ public class ActivityMain extends AppCompatActivity
 
         Legend l = mChart.getLegend();
 
-         l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
-         l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.CENTER);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
         l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
+        l.setTextSize(12);
 
         l.setXEntrySpace(7f);
         l.setYEntrySpace(0f);
@@ -1009,4 +1009,159 @@ public class ActivityMain extends AppCompatActivity
     }
 
 
+    private void initCubeChart() {
+        cubeChart = (LineChart) findViewById(R.id.cubeChart);
+        cubeChart.setViewPortOffsets(0, 0, 0, 0);
+//        cubeChart.setBackgroundColor(Color.rgb(104, 241, 175));
+        cubeChart.setBackgroundColor(Color.parseColor("#ffffff"));
+
+        // no description text
+        cubeChart.getDescription().setEnabled(false);
+
+        // enable touch gestures
+        cubeChart.setTouchEnabled(true);
+        cubeChart.setNoDataTextColor(Color.parseColor("#000000"));
+        cubeChart.setGridBackgroundColor(Color.parseColor("#000000"));
+        cubeChart.setBorderColor(Color.parseColor("#000000"));
+
+        // enable scaling and dragging
+        cubeChart.setDragEnabled(true);
+        cubeChart.setScaleEnabled(true);
+
+        // if disabled, scaling can be done on x- and y-axis separately
+        cubeChart.setPinchZoom(false);
+
+        cubeChart.setDrawGridBackground(false);
+        cubeChart.setMaxHighlightDistance(300);
+
+        XAxis x = cubeChart.getXAxis();
+        x.setEnabled(false);
+
+        YAxis y = cubeChart.getAxisLeft();
+
+
+        y.setLabelCount(6, false);
+        y.setTextColor(Color.BLACK);
+        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        y.setDrawGridLines(false);
+        y.setTextSize(12);
+        y.setAxisLineColor(Color.WHITE);
+
+        cubeChart.getAxisRight().setEnabled(false);
+
+        // add data
+        setCubicChartData(45, 100);
+
+        cubeChart.getLegend().setEnabled(false);
+
+        cubeChart.animateXY(2000, 2000);
+
+        // dont forget to refresh the drawing
+        cubeChart.invalidate();
+    }
+
+
+    private void setCubicChartData(int count, float range) {
+        int[] mColors = new int[]{
+                ColorTemplate.COLORFUL_COLORS[0],
+                ColorTemplate.PASTEL_COLORS[1],
+                ColorTemplate.JOYFUL_COLORS[2]
+        };
+
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+
+        for (int z = 0; z < 3; z++) {
+
+            ArrayList<Entry> values = new ArrayList<Entry>();
+
+            for (int i = 0; i < 20; i++) {
+                double val = (Math.random() * 20) + 3;
+                values.add(new Entry(i, (float) val));
+            }
+
+
+
+
+            LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
+
+            if (cubeChart.getData() != null &&
+                  cubeChart.getData().getDataSetCount() > 0) {
+                d = (LineDataSet)cubeChart.getData().getDataSetByIndex(0);
+                d.setValues(values);
+                cubeChart.getData().notifyDataChanged();
+                cubeChart.notifyDataSetChanged();
+            }
+
+else {
+                d.setLineWidth(2.5f);
+                d.setCircleRadius(4f);
+
+
+                d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                d.setDrawCircles(true);
+
+                d.setDrawFilled(true);
+                d.setFillColor(Color.parseColor("#000000"));
+
+                d.setLineWidth(1.8f);
+                d.setCircleRadius(4f);
+                d.setCircleColor(Color.WHITE);
+                d.setHighLightColor(Color.rgb(244, 117, 117));
+                d.setColor(Color.BLACK);
+                d.setFillColor(Color.BLACK);
+                d.setFillAlpha(1);
+
+
+                d.disableDashedLine();
+                d.setColor(Color.BLUE);
+                d.setDrawFilled(true);
+                d.setLineWidth(2f);
+                d.setDrawCircleHole(true);
+                d.setFillColor(Color.BLUE);
+                d.setFillAlpha(65);
+                d.setDrawHorizontalHighlightIndicator(false);
+
+                d.setFillFormatter(new IFillFormatter() {
+                    @Override
+                    public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
+                        return -10;
+                    }
+                });
+
+                int color = mColors[z % mColors.length];
+                d.setColor(color);
+                d.setCircleColor(color);
+
+                d.disableDashedLine();
+                d.setColor(color);
+                d.setDrawFilled(true);
+                d.setLineWidth(2f);
+                d.setDrawCircleHole(true);
+                d.setFillColor(color);
+                d.setFillAlpha(65);
+                d.setDrawHorizontalHighlightIndicator(false);
+
+                dataSets.add(d);
+            }
+        }
+
+        // make the first DataSet dashed
+        ((LineDataSet) dataSets.get(0)).enableDashedLine(10, 10, 0);
+        ((LineDataSet) dataSets.get(0)).setColors(ColorTemplate.VORDIPLOM_COLORS);
+        ((LineDataSet) dataSets.get(0)).setCircleColors(ColorTemplate.VORDIPLOM_COLORS);
+
+        LineData data = new LineData(dataSets);
+        data.setValueTextSize(9f);
+        data.setDrawValues(false);
+
+        data.setHighlightEnabled(false);
+
+        cubeChart.setData(data);
+        cubeChart.invalidate();
+
+
+    }
 }
+
+

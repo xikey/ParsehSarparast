@@ -179,9 +179,9 @@ public class SabtMogheyatAdapter extends RecyclerView.Adapter<SabtMogheyatAdapte
         private String lastL;
         private String lastW;
 
-        ImageView btnShowDetails;
+//        ImageView btnShowDetails;
         ImageView imgSetLocation;
-        ImageView imgPastLocation;
+//        ImageView imgPastLocation;
 
         RelativeLayout lyRootReq;
 
@@ -197,82 +197,60 @@ public class SabtMogheyatAdapter extends RecyclerView.Adapter<SabtMogheyatAdapte
 
             lyRootReq = (RelativeLayout) itemView.findViewById(R.id.lyRootReq);
 
-            btnShowDetails = (ImageView) itemView.findViewById(R.id.btnShowDetails);
+//            btnShowDetails = (ImageView) itemView.findViewById(R.id.btnShowDetails);
             imgSetLocation = (ImageView) itemView.findViewById(R.id.imgSetLocation);
-            imgPastLocation = (ImageView) itemView.findViewById(R.id.imgPastLocation);
+//            imgPastLocation = (ImageView) itemView.findViewById(R.id.imgPastLocation);
 
 //            lyRootr = (RelativeLayout) itemView.findViewById(R.id.lyRootReq);
 
 
-            btnShowDetails.setOnClickListener(new View.OnClickListener() {
+//            btnShowDetails.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View view) {
+//
+//                    Intent intent = new Intent(activity, ActivityGoogleMap.class);
+//                    intent.putExtra("state", "MyNearCustomers");
+//                    activity.startActivity(intent);
+//
+//                }
+//            });
 
-                @Override
-                public void onClick(View view) {
 
-                    Intent intent = new Intent(activity, ActivityGoogleMap.class);
-                    intent.putExtra("state", "MyNearCustomers");
-                    activity.startActivity(intent);
-
-                }
-            });
-
-
-            imgPastLocation.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View view) {
-
-                    if (!lastL.equals("0") || !lastW.equals("0")) {
-                        Intent intent = new Intent(activity, ActivityGoogleMap.class);
-                        intent.putExtra("state", "CustomerPastLocation");
-                        intent.putExtra("Lat", lastW);
-                        intent.putExtra("Long", lastL);
-
-                        activity.startActivity(intent);
-                    } else {
-
-                        new AlertDialog.Builder(activity)
-                                .setCancelable(false)
-                                .setTitle("خطا")
-                                .setMessage("موقعیت این مشتری ثبت نشده است")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                })
-                                .setIcon(R.drawable.eror_dialog)
-                                .show();
-                    }
-                }
-            });
-
+//            imgPastLocation.setOnClickListener(new View.OnClickListener() {
+//
+//                @Override
+//                public void onClick(View view) {
+//
+//                    if (!lastL.equals("0") || !lastW.equals("0")) {
+//                        Intent intent = new Intent(activity, ActivityGoogleMap.class);
+//                        intent.putExtra("state", "CustomerPastLocation");
+//                        intent.putExtra("Lat", lastW);
+//                        intent.putExtra("Long", lastL);
+//
+//                        activity.startActivity(intent);
+//                    } else {
+//
+//                        new AlertDialog.Builder(activity)
+//                                .setCancelable(false)
+//                                .setTitle("خطا")
+//                                .setMessage("موقعیت این مشتری ثبت نشده است")
+//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int which) {
+//
+//                                    }
+//                                })
+//                                .setIcon(R.drawable.eror_dialog)
+//                                .show();
+//                    }
+//                }
+//            });
 
             imgSetLocation.setOnClickListener(new View.OnClickListener() {
-                int code;
-
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
 
-                    new AlertDialog.Builder(activity)
-                            .setTitle("ثبت موقعیت")
-                            .setMessage("مایل به ثبت موقعیت مشتری میباشید ؟")
-                            .setNegativeButton(android.R.string.no, null)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    if (txtCode.getText().toString() != "") {
-                                        code = Integer.parseInt(txtCode.getText().toString());
-
-                                        if (communicator != null) {
-                                            communicator.onClick(code);
-                                        }
-                                    }
-
-                                }
-                            }).create().show();
-
-
+                     ActivitySetCustomerLocationMap.start(activity,Double.valueOf(lastW), Double.valueOf(lastL),txtName.getText().toString(),txtCode.getText().toString(),1200);
                 }
             });
 

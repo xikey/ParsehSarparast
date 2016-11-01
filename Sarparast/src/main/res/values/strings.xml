@@ -50,5 +50,6 @@
  \nنکته: این تنظیم برای مشتریانی که موقعیت انها ثبت نشده است نادیده گرفته خواهد شد
  \nنکته: تغییرات این تنظیم با روزرسانی بعدی ویزیتور اعمال خواهد شد.
 </string>
+    <string name="title_activity_set_customer_location_map">Map</string>
 
 </resources>

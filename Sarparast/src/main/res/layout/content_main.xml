@@ -42,8 +42,10 @@
 
 
                     <include
+
                         android:id="@+id/lineChart"
-                        layout="@layout/cubic_line_chart_mainreport"
+
+                        layout="@layout/bar_chart_mainreport"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
 

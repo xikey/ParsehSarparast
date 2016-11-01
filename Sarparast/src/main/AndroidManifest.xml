@@ -187,28 +187,33 @@
             android:name=".ActivityAdamVisit"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.MHZ" />
-
-        <activity   android:screenOrientation="portrait"
-            android:name=".ActivityListOfAdamVisit" />
-        <activity   android:screenOrientation="portrait"
-            android:name=".ActivityListOfAdamVisitMoshjtarian" />
-        <activity   android:screenOrientation="portrait"
-            android:name=".ActivityReasonsNotVisited" />
-        <activity   android:screenOrientation="portrait"
-            android:name=".ActivityErorHandelling" />
-        <activity   android:screenOrientation="portrait"
-            android:name=".ActivityCustomersDistance" />
+        <activity
+            android:name=".ActivityListOfAdamVisit"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityListOfAdamVisitMoshjtarian"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityReasonsNotVisited"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityErorHandelling"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityCustomersDistance"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityOrdersPointsMap"
             android:label="@string/title_activity_orders_points_map" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ActivityManagmentFooter" />
-
+            android:name=".ActivityManagmentFooter"
+            android:screenOrientation="portrait" />
         <activity
-            android:windowSoftInputMode="stateHidden"
-            android:name=".ActivityManagmentHeader">
-        </activity>
+            android:name=".ActivityManagmentHeader"
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity
+            android:name=".ActivitySetCustomerLocationMap"
+            android:label="@string/title_activity_set_customer_location_map"></activity>
     </application>
 
 </manifest>

@@ -49,15 +49,19 @@ import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.data.RadarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
@@ -136,6 +140,13 @@ public class ActivityMain extends AppCompatActivity
     //LineChart
     private RelativeLayout lyLineChart;
     private LineChart cubeChart;
+    private ArrayList<CubicChartInfo> cubicChartInfoArrayList = new ArrayList<>();
+    private GetCubicChartInfos getCubicChartInfos = null;
+    int[] mColors = new int[]{
+            ColorTemplate.COLORFUL_COLORS[0],
+            ColorTemplate.PASTEL_COLORS[1],
+            ColorTemplate.JOYFUL_COLORS[2]
+    };
 
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
     private int isAFinalRelease = -1;
@@ -154,7 +165,7 @@ public class ActivityMain extends AppCompatActivity
         preferenceHelper = new PreferenceHelper(this);
 
 
-        isAFinalRelease = 1;
+        isAFinalRelease = 0;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -181,7 +192,7 @@ public class ActivityMain extends AppCompatActivity
         requestPermission();
         initVersionName();
         runGetPiechartAsync();
-        initCubeChart();
+        runGetCubicChartInfos();
 
 
 //        int permiss = ContextCompat.checkSelfPermission(ActivityMain.this,
@@ -209,16 +220,7 @@ public class ActivityMain extends AppCompatActivity
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-//        lyPieChart = (RelativeLayout) findViewById(R.id.lyPieChart);
-
-
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-
-
-
         preferenceHelper = new PreferenceHelper(this);
-
-//txtUserName.setText(""+preferenceHelper.getString(PreferenceHelper.USER_NAME));
 
         lyNotVisited.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,25 +288,9 @@ public class ActivityMain extends AppCompatActivity
         });
 
 
-
-
         scrollView = (ScrollView) findViewById(R.id.scrollView);
 
-
-//        ArrayList<Integer> imageIDS = new ArrayList<>();
-//        for (int i = 1; i < 4; i++) {
-//            int imageID = getApplicationContext().getResources().getIdentifier("picture_0" + i, "drawable", getApplicationContext().getPackageName());
-//            imageIDS.add(imageID);
-//        }
-
-
         lyLineChart = (RelativeLayout) findViewById(R.id.lineChart);
-
-//        MyPagerAdapter myPagerAdapter = new MyPagerAdapter(imageIDS);
-//        myPagerAdapter.setInflater(inflater);
-//        pager.setAdapter(myPagerAdapter);
-//        Indicator indicator = new Indicator(getApplicationContext());
-//        indicator.setViewPager(pager);
 
         initAdvertiseBox();
 
@@ -315,8 +301,7 @@ public class ActivityMain extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "پیام جدید وجود ندارد", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+
                 finish();
                 startActivity(getIntent());
             }
@@ -338,12 +323,6 @@ public class ActivityMain extends AppCompatActivity
         FontApplier.applyMainFont(getApplicationContext(), lyHead);
 
         runReportAsync();
-
-
-//        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
-//        navigationView.addHeaderView(header);
-//        TextView text = (TextView) header.findViewById(R.id.txtuserName);
-//        text.setText("HELLO");
 
 
 //____________________________________EXECUTE ASYNC TASK____________________________________________
@@ -648,7 +627,7 @@ public class ActivityMain extends AppCompatActivity
 
         int width = getResources().getDisplayMetrics().widthPixels;
 
-        int height = (int) (width / 1.5);
+        int height = (int) (width / 2);
 
         ViewGroup.LayoutParams params = advertiseHeaderBox.getLayoutParams();
         params.height = height;
@@ -934,6 +913,8 @@ public class ActivityMain extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
 
+            getPieChartInfos=null;
+
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
@@ -1034,25 +1015,90 @@ public class ActivityMain extends AppCompatActivity
         cubeChart.setDrawGridBackground(false);
         cubeChart.setMaxHighlightDistance(300);
 
+        cubeChart.setDragEnabled(true);
+
         XAxis x = cubeChart.getXAxis();
-        x.setEnabled(false);
+        x.setEnabled(true);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+        x.setTextSize(10f);
+        x.setTextColor(Color.BLACK);
+        x.setGridColor(Color.parseColor("#CFD8DC"));
+        x.setDrawAxisLine(true);
+        x.setDrawGridLines(true);
+        x.setDrawLabels(true);
+       // x.setLabelCount(10);
+        x.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+                int temp = (int) value;
+                float remind = (temp == 0) ? 0 : value % temp;
+
+                if (remind != 0f)
+                    return "";
+
+                switch (temp) {
+                    case 0:
+                        return cubicChartInfoArrayList.get(0).getDate();
+                    case 1:
+                        return cubicChartInfoArrayList.get(1).getDate();
+                    case 2:
+                        return cubicChartInfoArrayList.get(2).getDate();
+                    case 3:
+                        return cubicChartInfoArrayList.get(3).getDate();
+                    case 4:
+                        return cubicChartInfoArrayList.get(4).getDate();
+                    case 5:
+                        return cubicChartInfoArrayList.get(5).getDate();
+                    case 6:
+                        return cubicChartInfoArrayList.get(6).getDate();
+                    case 7:
+                        return cubicChartInfoArrayList.get(7).getDate();
+                    case 8:
+                        return cubicChartInfoArrayList.get(8).getDate();
+                    case 9:
+                        return cubicChartInfoArrayList.get(9).getDate();
+                }
+                return "";
+            }
+
+            @Override
+            public int getDecimalDigits() {
+                return 0;
+            }
+        });
 
         YAxis y = cubeChart.getAxisLeft();
-
+        //float f = cubicChartInfoArrayList.size();
+        // cubeChart.setVisibleXRange(0,f);
 
         y.setLabelCount(6, false);
+        y.setEnabled(true);
+        y.setGridColor(Color.parseColor("#CFD8DC"));
         y.setTextColor(Color.BLACK);
         y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
-        y.setDrawGridLines(false);
+        y.setDrawGridLines(true);
         y.setTextSize(12);
         y.setAxisLineColor(Color.WHITE);
 
         cubeChart.getAxisRight().setEnabled(false);
-
         // add data
-        setCubicChartData(45, 100);
+        setCubicChartData();
 
-        cubeChart.getLegend().setEnabled(false);
+
+        Legend l = cubeChart.getLegend();
+
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setTextSize(14);
+        l.setXEntrySpace(25f);
+        l.setYEntrySpace(10f);
+        l.setYOffset(1f);
+        l.setXOffset(40f);
+
+
+        cubeChart.getLegend().setEnabled(true);
 
         cubeChart.animateXY(2000, 2000);
 
@@ -1061,107 +1107,127 @@ public class ActivityMain extends AppCompatActivity
     }
 
 
-    private void setCubicChartData(int count, float range) {
-        int[] mColors = new int[]{
-                ColorTemplate.COLORFUL_COLORS[0],
-                ColorTemplate.PASTEL_COLORS[1],
-                ColorTemplate.JOYFUL_COLORS[2]
-        };
+    private void setCubicChartData() {
 
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+//        ArrayList<Entry> lineSalesValues = new ArrayList<>();
+        ArrayList<Entry> lineReturnsValues = new ArrayList<>();
+        ArrayList<Entry> lineKhalesRsValues = new ArrayList<>();
 
-        for (int z = 0; z < 3; z++) {
-
-            ArrayList<Entry> values = new ArrayList<Entry>();
-
-            for (int i = 0; i < 20; i++) {
-                double val = (Math.random() * 20) + 3;
-                values.add(new Entry(i, (float) val));
-            }
-
-
-
-
-            LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
-
-            if (cubeChart.getData() != null &&
-                  cubeChart.getData().getDataSetCount() > 0) {
-                d = (LineDataSet)cubeChart.getData().getDataSetByIndex(0);
-                d.setValues(values);
-                cubeChart.getData().notifyDataChanged();
-                cubeChart.notifyDataSetChanged();
-            }
-
-else {
-                d.setLineWidth(2.5f);
-                d.setCircleRadius(4f);
-
-
-                d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                d.setDrawCircles(true);
-
-                d.setDrawFilled(true);
-                d.setFillColor(Color.parseColor("#000000"));
-
-                d.setLineWidth(1.8f);
-                d.setCircleRadius(4f);
-                d.setCircleColor(Color.WHITE);
-                d.setHighLightColor(Color.rgb(244, 117, 117));
-                d.setColor(Color.BLACK);
-                d.setFillColor(Color.BLACK);
-                d.setFillAlpha(1);
-
-
-                d.disableDashedLine();
-                d.setColor(Color.BLUE);
-                d.setDrawFilled(true);
-                d.setLineWidth(2f);
-                d.setDrawCircleHole(true);
-                d.setFillColor(Color.BLUE);
-                d.setFillAlpha(65);
-                d.setDrawHorizontalHighlightIndicator(false);
-
-                d.setFillFormatter(new IFillFormatter() {
-                    @Override
-                    public float getFillLinePosition(ILineDataSet dataSet, LineDataProvider dataProvider) {
-                        return -10;
-                    }
-                });
-
-                int color = mColors[z % mColors.length];
-                d.setColor(color);
-                d.setCircleColor(color);
-
-                d.disableDashedLine();
-                d.setColor(color);
-                d.setDrawFilled(true);
-                d.setLineWidth(2f);
-                d.setDrawCircleHole(true);
-                d.setFillColor(color);
-                d.setFillAlpha(65);
-                d.setDrawHorizontalHighlightIndicator(false);
-
-                dataSets.add(d);
-            }
+        for (int i = 0; i < cubicChartInfoArrayList.size(); i++) {
+//            lineSalesValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getSales()));
+         lineReturnsValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getReturned()));
+            lineKhalesRsValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getKhalesR()));
         }
 
-        // make the first DataSet dashed
-        ((LineDataSet) dataSets.get(0)).enableDashedLine(10, 10, 0);
-        ((LineDataSet) dataSets.get(0)).setColors(ColorTemplate.VORDIPLOM_COLORS);
-        ((LineDataSet) dataSets.get(0)).setCircleColors(ColorTemplate.VORDIPLOM_COLORS);
+//        LineDataSet lineSalesDataSet = new LineDataSet(lineSalesValues, " فروش ");
+        LineDataSet lineReturnsDataSet = new LineDataSet(lineReturnsValues, " بازگشتی");
+        LineDataSet lineKhalesRsDataSet = new LineDataSet(lineKhalesRsValues, " خالص فروش ");
 
-        LineData data = new LineData(dataSets);
-        data.setValueTextSize(9f);
-        data.setDrawValues(false);
+//        setDataSetSeting(lineSalesDataSet,Color.parseColor("#00E5FF"));
+        setDataSetSeting(lineReturnsDataSet,Color.parseColor("#FF3D00"),false);
+        setDataSetSeting(lineKhalesRsDataSet, Color.parseColor("#FFFF00"),true);
 
-        data.setHighlightEnabled(false);
 
+//        LineData data = new LineData(lineSalesDataSet);
+        LineData data = new LineData(lineKhalesRsDataSet);
+
+        data.addDataSet(lineReturnsDataSet);
+//        data.addDataSet(lineKhalesRsDataSet);
         cubeChart.setData(data);
         cubeChart.invalidate();
+    }
 
+    private void setDataSetSeting(LineDataSet dataSet, int color,Boolean fillable) {
+
+
+        dataSet.setMode(LineDataSet.Mode.LINEAR);
+        dataSet.setDrawCircles(true);
+        dataSet.setDrawFilled(fillable);
+        dataSet.setDrawValues(false);
+        dataSet.setCubicIntensity(0f);
+        dataSet.setCircleRadius(4f);
+        dataSet.setHighLightColor(Color.rgb(244, 117, 117));
+        dataSet.setCircleColor(color);
+        dataSet.disableDashedLine();
+        dataSet.setCircleHoleRadius(3f);
+        dataSet.setColor(color);
+        dataSet.setLineWidth(1f);
+        dataSet.setDrawCircleHole(true);
+        dataSet.setFillColor(color);
+        dataSet.setFillAlpha(95);
+//        dataSet.setDrawHorizontalHighlightIndicator(false);
+        dataSet.setDrawHorizontalHighlightIndicator(true);
+    }
+
+    private void runGetCubicChartInfos() {
+        if (getCubicChartInfos != null) return;
+
+        getCubicChartInfos = new GetCubicChartInfos();
+        getCubicChartInfos.execute();
 
     }
+
+    private class GetCubicChartInfos extends AsyncTask<Void, String, String> {
+
+        private boolean fake = false;
+        public CubicChartInfo cubicChartInfo;
+
+        Boolean isonline = NetworkTools.isOnline(ActivityMain.this);
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            HashMap<String, Object> datas = new HashMap<String, Object>();
+
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+
+            try {
+                if (isonline) {
+                    SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_CubicChart_Android", datas).getProperty(0);
+
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
+                    }
+
+                    for (int i = request2.getPropertyCount() - 1; i >= 0; i--) {
+                        SoapObject sp = (SoapObject) request2.getProperty(i);
+
+                        cubicChartInfo = new CubicChartInfo();
+
+                        cubicChartInfo.setDate(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                        cubicChartInfo.setSales(Long.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 1).toString()));
+                        cubicChartInfo.setReturned(Long.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString()));
+                        cubicChartInfo.setKhalesR(Long.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 3).toString()));
+
+                        cubicChartInfoArrayList.add(cubicChartInfo);
+                    }
+
+                    return "OK";
+
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return "Eror";
+            }
+            return "ofline";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            getPieChartInfos = null;
+
+            if (s.equals("OK")) {
+
+                initCubeChart();
+            }
+
+            super.onPostExecute(s);
+        }
+    }
+
+
 }
 
 

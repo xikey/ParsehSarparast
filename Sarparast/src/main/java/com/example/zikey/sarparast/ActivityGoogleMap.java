@@ -334,11 +334,8 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                 myW = Double.valueOf((((points.get(i)).get_L())));
                 myL = Double.valueOf((((points.get(i)).get_W())));
 
-
                 MarkerOptions marker = new MarkerOptions();
-
                 LatLng latLng = new LatLng(myW, myL);
-
                 marker.position(latLng);
                 marker.icon(pin);
                 marker.title("اطلاعاتی برای نمایش وجود ندارد ");

@@ -13,6 +13,7 @@ public class AdamVisitInfo {
     private String Address;
     private String Title;
     private String darsad;
+    private String reason;
 
 
 
@@ -52,6 +53,10 @@ public class AdamVisitInfo {
         return Address;
     }
 
+    public String getReason() {
+        return reason;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -86,5 +91,9 @@ public class AdamVisitInfo {
 
     public void setAddress(String address) {
         Address = address;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

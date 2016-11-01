@@ -49,7 +49,6 @@ public class ActivityListOfAdamVisitMoshjtarian extends AppCompatActivity {
 
     private AdamVisitMoshtarianAsync adamVisitAsync = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +217,7 @@ public class ActivityListOfAdamVisitMoshjtarian extends AppCompatActivity {
                         item.setTell(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
                         item.setMobile(NetworkTools.getSoapPropertyAsNullableString(sp, 4));
                         item.setAddress(NetworkTools.getSoapPropertyAsNullableString(sp, 5));
+                        item.setReason(NetworkTools.getSoapPropertyAsNullableString(sp, 7));
 
                         items.add(item);
                     }

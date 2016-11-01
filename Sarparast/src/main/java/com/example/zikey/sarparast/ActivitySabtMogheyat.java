@@ -3,6 +3,7 @@ package com.example.zikey.sarparast;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
@@ -120,7 +121,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         row_Mandeh.setAdapter(row_adapter);
 
 
-               runMandehMoshtarianAsync();
+        runMandehMoshtarianAsync();
 
 
         edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -254,25 +255,25 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
 
 
-                    row_adapter.setCommunicator(new GetMyLocationCommunicator() {
-                        @Override
-                        public void onClick(int listener) {
-                            getMyLocation();
-                            ID = listener;
-                            if (l!=0.0){
+                row_adapter.setCommunicator(new GetMyLocationCommunicator() {
+                    @Override
+                    public void onClick(int listener) {
+                        getMyLocation();
+                        ID = listener;
+                        if (l!=0.0){
 
-                                new SetLocationAsync().execute();
+                            new SetLocationAsync().execute();
 
-                            }
-
-                            else if (l==0.0)
-                            {
-
-                            }
                         }
-                    });
 
-               row_adapter.addCustomer(newData);
+                        else if (l==0.0)
+                        {
+
+                        }
+                    }
+                });
+
+                row_adapter.addCustomer(newData);
 
                 mandehMoshtarianAsync=null;
 
@@ -306,6 +307,8 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
         @Override
         protected String doInBackground(Void... voids) {
+
+            mandehMoshtarianAsync=null;
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
             String tokenid =  preferenceHelper.getString(preferenceHelper.TOKEN_ID);
@@ -373,12 +376,12 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         Log.e("LastLocation", "last location is  " + mLastLocation);
         if (mLastLocation != null) {
-           w = mLastLocation.getLatitude();
-           l = mLastLocation.getLongitude();
+            w = mLastLocation.getLatitude();
+            l = mLastLocation.getLongitude();
 
-      //     new MyNearCustomersAsync().execute();
+            //     new MyNearCustomersAsync().execute();
 
-          //  Log.e("latlong", "lat and long is " + mLatitudeText + "  " + mLongitudeText);
+            //  Log.e("latlong", "lat and long is " + mLatitudeText + "  " + mLongitudeText);
         } else {
             new android.app.AlertDialog.Builder(this)
                     .setTitle("خطا")
@@ -581,5 +584,16 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                super.onActivityResult(requestCode, resultCode, data);
 
+
+        if (requestCode==1200&&resultCode==RESULT_OK){
+            MandehMoshtaries.clear();
+
+            runMandehMoshtarianAsync();
+        }
+
+    }
 }

@@ -75,6 +75,7 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
         productoViewHolder.txtTell.setText("" + item.get(i).getTell());
         productoViewHolder.txtMobile.setText("" + item.get(i).getMobile());
         productoViewHolder.txtAddress.setText("" + item.get(i).getAddress());
+        productoViewHolder.txtReason.setText("" + item.get(i).getReason());
 
     }
 
@@ -149,8 +150,8 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
     }
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName, txtTime, txtTell, txtMobile, txtAddress;
-        ImageView imgDetails;
+        TextView txtCode, txtName, txtTime, txtTell, txtMobile, txtAddress, txtReason;
+
 
         public productoViewHolder(final View itemView) {
             super(itemView);
@@ -161,24 +162,7 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
             txtTell = (TextView) itemView.findViewById(R.id.txtTel);
             txtMobile = (TextView) itemView.findViewById(R.id.txtMobile);
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
-
-//            imgDetails = (ImageView) itemView.findViewById(R.id.imgDetails);
-
-
-//            imgDetails.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//
-//                    Intent intent = new Intent(activity, ActivityListOfAdamVisitMoshjtarian.class);
-//                    if (checker != null) {
-//
-//                        intent.putExtra("checker", checker);
-//                        intent.putExtra("hedare", txtName.getText().toString());
-//                        intent.putExtra("ID",txtCode.getText().toString());
-//                        activity.startActivity(intent);
-//                    }
-//                }
-//            });
+            txtReason = (TextView) itemView.findViewById(R.id.txtReason);
 
         }
     }

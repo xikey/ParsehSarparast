@@ -134,28 +134,10 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imgPastLocation"
-                android:layout_marginRight="15dp"
-                android:src="@drawable/loupe"
-                android:padding="8dp" />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
                 android:id="@+id/imgSetLocation"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/add"
+                android:src="@drawable/ic_add_location_black_24dp"
                 android:padding="7dp" />
-
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:id="@+id/btnShowDetails"
-                android:src="@drawable/ic_location_black"
-                android:padding="8dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentTop="true"
-            />
 
         </LinearLayout>
 

@@ -181,53 +181,6 @@ public class ActivityManagmentHeader extends AppCompatActivity {
         Log.e("number", "" + m);
 
 
-//        edtTarget.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-//            private int focus = 0;
-//
-//            @Override
-//            public void onFocusChange(View v, boolean hasFocus) {
-//
-//                if (hasFocus) {
-//                    focus = 1;
-//
-//                    edtTarget.setText(targetInfoModify.getPriceTarget());
-//                    edtTarget.setSelection(edtTarget.getText().length());
-//                    InputMethodManager imm = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
-//                    imm.showSoftInput(edtTarget, InputMethodManager.SHOW_IMPLICIT);
-//
-//                    edtTarget.addTextChangedListener(new TextWatcher() {
-//                        @Override
-//                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//
-//                        }
-//
-//                        @Override
-//                        public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//                        }
-//
-//                        @Override
-//                        public void afterTextChanged(Editable s) {
-//
-//                            if (focus == 1) {
-//                                targetInfoModify.setPriceTarget(s.toString());
-//                                targetInfoModify.setPriceTargetSeprated(String.format("%,d", Long.parseLong(s.toString())));
-//                                isTargetChanged();
-//                            }
-//
-//                        }
-//                    });
-//
-//                } else {
-//
-//                    focus = 0;
-//                    edtTarget.setText("" + targetInfoModify.getPriceTargetSeprated());
-//                }
-//            }
-//        });
-
-
         preferenceHelper = new PreferenceHelper(this);
 
         name = parseIntent(getIntent(), "name");

@@ -165,7 +165,7 @@ public class ActivityMain extends AppCompatActivity
         preferenceHelper = new PreferenceHelper(this);
 
 
-        isAFinalRelease = 0;
+        isAFinalRelease = 1;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());

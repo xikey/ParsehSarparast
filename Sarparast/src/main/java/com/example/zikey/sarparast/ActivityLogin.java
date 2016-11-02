@@ -37,12 +37,12 @@ import java.util.HashMap;
 
 public class ActivityLogin extends AppCompatActivity {
     public PreferenceHelper preferenceHelper;
-      private AutoCompleteTextView userID;
-      private AutoCompleteTextView pass;
-      private AutoCompleteTextView edtUrl;
+    private AutoCompleteTextView userID;
+    private AutoCompleteTextView pass;
+    private AutoCompleteTextView edtUrl;
 
 
- //   FloatingActionButton login;
+    //   FloatingActionButton login;
     Button login;
 
 
@@ -58,9 +58,7 @@ public class ActivityLogin extends AppCompatActivity {
         edtUrl = (AutoCompleteTextView) findViewById(R.id.edtUrl);
 
 
-
-
-      //  login = (FloatingActionButton) findViewById(R.id.btnLogin);
+        //  login = (FloatingActionButton) findViewById(R.id.btnLogin);
         login = (Button) findViewById(R.id.btnLogin);
         lyHead = (LinearLayout) findViewById(R.id.lyrt);
 
@@ -141,6 +139,7 @@ public class ActivityLogin extends AppCompatActivity {
 
     public class LoginAsync extends AsyncTask<Void, String, String> {
         ProgressDialog dialog;
+        private String eror;
 
         @Override
         protected String doInBackground(Void... params) {
@@ -169,7 +168,6 @@ public class ActivityLogin extends AppCompatActivity {
                     int response = connection.getResponseCode();
                     Log.e("ggggggggggggggg", "response" + response + "___" + myurl);
 
-
                 } catch (MalformedURLException e) {
 
                     Log.e("URL EROR", "URL is not Valid");
@@ -181,12 +179,10 @@ public class ActivityLogin extends AppCompatActivity {
                     return "url";
                 }
 
-
                 Log.i("connection_log", "you are connected");
                 HashMap<String, Object> datas = new HashMap<String, Object>();
                 datas.put("id", ID);
                 datas.put("password", password);
-
 
                 try {
                     SoapObject request = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), NetworkTools.METHOD_NAME, datas).getProperty(0);
@@ -205,17 +201,12 @@ public class ActivityLogin extends AppCompatActivity {
                     if (isTrue) {
                         preferenceHelper.putString(preferenceHelper.TOKEN_ID, tokenId);
                         preferenceHelper.putString(preferenceHelper.USER_NAME, userName);
-
-
-//                       String tkk=  preferenceHelper.getString(preferenceHelper.TOKEN_ID);
-//                         Log.e("ppppppppppppppp","tokrn hast ..."+tkk);
                         return "1";
                     }
 
                 } catch (Exception e) {
-                    Log.i("MyLog_SoapObject", "soap object is not Valid");
-                    e.printStackTrace();
-
+                    eror = (e.toString());
+                    return "eror";
                 }
             }
             return "0";
@@ -269,6 +260,19 @@ public class ActivityLogin extends AppCompatActivity {
                         .setCancelable(false)
                         .setTitle("خطا")
                         .setMessage("اتصال به اینترنت مقدور نمیباشد")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        })
+                        .setIcon(R.drawable.eror_dialog)
+                        .show();
+            }
+
+            if (state.equals("eror")) {
+                new AlertDialog.Builder(ActivityLogin.this)
+                        .setCancelable(false)
+                        .setTitle("خطا")
+                        .setMessage(eror)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                             }

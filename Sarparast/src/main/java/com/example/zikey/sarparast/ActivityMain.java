@@ -93,6 +93,8 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
 
+
+
     private RecyclerView row_khales;
 
     private RecyclerView row_TasvieNashode;
@@ -411,8 +413,7 @@ public class ActivityMain extends AppCompatActivity
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface arg0, int arg1) {
-                            preferenceHelper.putString(PreferenceHelper.TOKEN_ID, "");
-                            Log.e("LOG_onDestroyMain", "token Cleaned");
+
                             finish();
                         }
                     }).create().show();
@@ -440,8 +441,7 @@ public class ActivityMain extends AppCompatActivity
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface arg0, int arg1) {
-                        preferenceHelper.putString(PreferenceHelper.TOKEN_ID, "");
-                        Log.e("LOG_onDestroyMain", "token Cleaned");
+
                         finish();
                     }
                 }).create().show();
@@ -991,6 +991,8 @@ public class ActivityMain extends AppCompatActivity
 
 
     private void initCubeChart() {
+
+
         cubeChart = (LineChart) findViewById(R.id.cubeChart);
         cubeChart.setViewPortOffsets(0, 0, 0, 0);
 //        cubeChart.setBackgroundColor(Color.rgb(104, 241, 175));

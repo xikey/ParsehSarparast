@@ -3,12 +3,16 @@ package com.example.zikey.sarparast;
 import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.os.Binder;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -34,13 +38,14 @@ import java.util.HashMap;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class MyLocationServices extends IntentService implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class MyLocationServices extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
     // TODO: Rename actions, choose action names that describe tasks that this
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_GETLOCATION = "getLocation";
 //    private static final String ACTION_BAZ = "com.example.zikey.sarparast.action.BAZ";
 
-    // TODO: Rename parameters
+    // TODO: Rename
+    private boolean isStarted = false;
     private String EXTRA_LATITUDE = "0";
     private String EXTRA_LONGITUDE = "0";
     private String tokenID;
@@ -60,8 +65,16 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
     private PendingIntent pendingIntent;
 
 
-    public MyLocationServices() {
-        super("MyLocationServices");
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return myBinder;
+    }
+
+    MyBinder myBinder = new MyBinder();
+
+    public class MyBinder extends Binder {
+
     }
 
     /**
@@ -93,7 +106,7 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
 //        context.startService(intent);
 //    }
     @Override
-    protected void onHandleIntent(Intent intent) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
 
         mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
                 .addConnectionCallbacks(this)
@@ -102,15 +115,28 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
                 .build();
 
         mGoogleApiClient.connect();
-
-//        final String param1 = intent.getStringExtra(EXTRA_LATITUDE);
-//        final String param2 = intent.getStringExtra(EXTRA_LONGITUDE);
-
         preferenceHelper = new PreferenceHelper(getApplicationContext());
         isonline = NetworkTools.isOnline(getApplicationContext());
         tokenID = preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
         handleActionGetLocation();
+
+        onHandleIntent(intent);
+        if (isStarted==false){
+            setAlarmManager(getApplicationContext(), 1);
+
+        }
+        return START_STICKY;
+    }
+
+    protected void onHandleIntent(Intent intent) {
+
+
+
+//        final String param1 = intent.getStringExtra(EXTRA_LATITUDE);
+//        final String param2 = intent.getStringExtra(EXTRA_LONGITUDE);
+
+
 
     }
 
@@ -121,7 +147,7 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
     private void handleActionGetLocation() {
 
 
-        getLocation();
+
 
         // TODO: Handle action Foo
         //   throw new UnsupportedOperationException("Not yet implemented");
@@ -144,6 +170,19 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 //        startLocationUpdate();
+        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+        PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "SARPARST");
+        try {
+            wl.acquire();
+            getLocation();
+        } catch (Exception ex) {
+            Log.e("sarparast", "onConnected: "+ex.toString() );
+        } finally {
+            setAlarmManager(getApplicationContext(), 1);
+            wl.release();
+        }
+
+
     }
 
 
@@ -211,6 +250,24 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
     private class SendUserLocationAsync extends AsyncTask<Void, Void, Void> {
 
         @Override
+        protected void onPostExecute(Void aVoid) {
+            locationAsync = null;
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected void onCancelled(Void aVoid) {
+            locationAsync = null;
+            super.onCancelled(aVoid);
+        }
+
+        @Override
+        protected void onCancelled() {
+            locationAsync = null;
+            super.onCancelled();
+        }
+
+        @Override
         protected Void doInBackground(Void... voids) {
 
             HashMap<String, Object> datas = new HashMap<>();
@@ -236,6 +293,8 @@ public class MyLocationServices extends IntentService implements GoogleApiClient
     }
 
     public void setAlarmManager(Context context, int repeatTime) {
+
+        isStarted=true;
 
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 

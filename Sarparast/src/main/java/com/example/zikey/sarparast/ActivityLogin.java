@@ -205,7 +205,7 @@ public class ActivityLogin extends AppCompatActivity {
                     }
 
                 } catch (Exception e) {
-                    eror = (e.toString());
+                    eror ="رمز عبور یا نام کاربری اشتباه میباشد"+ (e.toString());
                     return "eror";
                 }
             }

@@ -3,21 +3,7 @@
   android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="match_parent">
 
-        <ProgressBar
-            android:id="@+id/pieProgres"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="8dp"
-            android:visibility="visible" />
-
-    </RelativeLayout>
 
     <RelativeLayout
 
@@ -33,6 +19,23 @@
             android:paddingBottom="50dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lyCubicProgress"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/pieProgres"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

@@ -38,9 +38,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
     private RelativeLayout lyEror;
     private RelativeLayout lyContent;
     private RelativeLayout lyProgress;
-
-
-
+    public GetListOfSefareshatASYNC getListOfSefareshatASYNC = null;
     private ArrayList<AnalyseSefareshatInfo> sefareshatInfos = new ArrayList<>();
 
     private RecyclerView row_sefaresh;
@@ -50,6 +48,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
     private EditText edtSearch;
 
     String value;
+    int level=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,25 +59,25 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
         row_sefaresh = (RecyclerView) findViewById(R.id.row_sefareshat);
 
-  edtSearch.addTextChangedListener(new TextWatcher() {
-    @Override
-    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    }
+            }
 
-    @Override
-    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-    }
+            }
 
-    @Override
-    public void afterTextChanged(Editable editable) {
-        row_adapter.getFilter().filter(editable);
+            @Override
+            public void afterTextChanged(Editable editable) {
+                row_adapter.getFilter().filter(editable);
 
-    }
-});
+            }
+        });
 
-        if (getIntent().getExtras()!=null){
+        if (getIntent().getExtras() != null) {
 
             value = getIntent().getStringExtra("State");
 
@@ -106,38 +105,40 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
         row_sefaresh.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-              // hideSoftKeyboard(ActivityAnalyseOfSefareshat.this);
+                // hideSoftKeyboard(ActivityAnalyseOfSefareshat.this);
                 return false;
             }
         });
 
 
-        if (value.equals("Mahane")){
+        if (value.equals("Mahane")) {
             txtTop.setText("ماهانه");
-
+            runAsync();
 
         }
 
-       if (value.equals("Manategh")){
-                  txtTop.setText("مناطق (از اول ماه)");
+        if (value.equals("Manategh")) {
+            level = getIntent().getIntExtra("level",0);
+            txtTop.setText("مناطق (از اول ماه)");
 
-              }
-       if (value.equals("Date")){
-                  txtTop.setText("تاریخ (از اول ماه)");
-              }
-       if (value.equals("Visitor")){
+        }
+        if (value.equals("Date")) {
+            txtTop.setText("تاریخ (از اول ماه)");
+            runAsync();
+        }
+        if (value.equals("Visitor")) {
             txtTop.setText("ویزیتور (از اول ماه)");
-              }
+            runAsync();
+        }
 
 
-        new  GetListOfSefareshatASYNC().execute();
+
 
     }
 
     public class GetListOfSefareshatASYNC extends AsyncTask<Void, String, String> {
 
         Boolean isonline = NetworkTools.isOnline(ActivityAnalyseOfSefareshat.this);
-
 
 
         @Override
@@ -161,7 +162,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
             if (state.equals("Online")) {
 
-                Log.e("Is Online","Online is ok ");
+                Log.e("Is Online", "Online is ok ");
                 AnalyseSefareshatAdapter adapter = new AnalyseSefareshatAdapter(sefareshatInfos);
 //                adapter.setAct(ActivityAnalyseOfSefareshat.this);
 
@@ -171,18 +172,15 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 row_adapter = adapter;
                 row_adapter.setAct(ActivityAnalyseOfSefareshat.this);
                 row_adapter.setCgroup(value);
-                if (value.equals("Visitor")){
-                     row_adapter.setState(1);
+                if (value.equals("Visitor")) {
+                    row_adapter.setState(1);
                 }
                 row_sefaresh.setAdapter(row_adapter);
 
                 lyContent.setVisibility(View.VISIBLE);
                 lyProgress.setVisibility(View.GONE);
 
-
-
-            }
-            else if (state.equals("NotOnline"))
+            } else if (state.equals("NotOnline"))
 
             {
                 txtEror.setText("اتصال به اینترنت خود را چک نمایید");
@@ -200,7 +198,8 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
 
-            Log.e("tttttttttttt", "" + "Do in background is ok");
+            getListOfSefareshatASYNC=null;
+
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
@@ -211,8 +210,8 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 try {
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Analyse_OF_Sefareshat", datas).getProperty(0);
 
-                    if (request2.getPropertyCount()<=0){
-                        return  "Null" ;
+                    if (request2.getPropertyCount() <= 0) {
+                        return "Null";
                     }
 
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
@@ -220,15 +219,13 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
                         AnalyseSefareshatInfo sefaresh = new AnalyseSefareshatInfo();
 
-                       sefaresh.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
-                       sefaresh.set_TForosh(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
-                       sefaresh.set_RForoosh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString())));
-                       sefaresh.set_TBargasht(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
-                       sefaresh.set_RBargasht(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString())));
-                       sefaresh.set_KhalesForosh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
-
-                       sefaresh.set_GroupCode(NetworkTools.getSoapPropertyAsNullableString(sp,19));
-
+                        sefaresh.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
+                        sefaresh.set_TForosh(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
+                        sefaresh.set_RForoosh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString())));
+                        sefaresh.set_TBargasht(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
+                        sefaresh.set_RBargasht(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString())));
+                        sefaresh.set_KhalesForosh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
+                        sefaresh.set_GroupCode(NetworkTools.getSoapPropertyAsNullableString(sp, 19));
 
 
                         sefareshatInfos.add(sefaresh);
@@ -243,17 +240,20 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 return "Online";
             }
             return "NotOnline";
-
         }
 
     }
 
 
-    public    void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
+    public void runAsync() {
 
+        if (getListOfSefareshatASYNC!=null)
+            return;
+
+            getListOfSefareshatASYNC = new GetListOfSefareshatASYNC();
+            getListOfSefareshatASYNC.execute();
+
+    }
 
 
 }

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.example.zikey.sarparast.Helpers.DeviceInfos;
 import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
@@ -40,6 +41,7 @@ public class ActivityLogin extends AppCompatActivity {
     private AutoCompleteTextView userID;
     private AutoCompleteTextView pass;
     private AutoCompleteTextView edtUrl;
+    private String deviceInfo;
 
 
     //   FloatingActionButton login;
@@ -64,6 +66,8 @@ public class ActivityLogin extends AppCompatActivity {
 
         preferenceHelper = new PreferenceHelper(this);
 
+        deviceInfo = DeviceInfos.getDeviceModel() + " " + DeviceInfos.getAndroidVersion();
+
 
         FontApplier.applyMainFont(getApplicationContext(), lyHead);
 
@@ -80,20 +84,11 @@ public class ActivityLogin extends AppCompatActivity {
             edtUrl.setText("");
         }
 
-
-        //dakhele getString bayad yedoone KEY bedim ta betoone azoon key  ==> value bargardoone
-//        String login_cheker = preferenceHelper.getString(preferenceHelper.IS_LOGIN);
-//        Log.i("mmmmmmmmmmmm",""+login_cheker);
-//        if(login_cheker.equals("yes")){
-//           Intent intent = new Intent(ActivityLogin.this,ActivityMain.class);
-//            startActivity(intent);
-//           finish();
-//        }
         userID.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-//                    attemptLogin();
+
                     return true;
                 }
                 return false;
@@ -109,9 +104,6 @@ public class ActivityLogin extends AppCompatActivity {
 
                 preferenceHelper.putString("UserName", userID.getText().toString());
 
-//                if (edtUrl.getText().equals("")){
-//                    edtUrl.setError("please insert URL");
-//                }
 
                 if (userID.getText().toString().equals("")) {
                     userID.setError("please insert userID");
@@ -164,12 +156,9 @@ public class ActivityLogin extends AppCompatActivity {
                             .openConnection();
                     connection.setRequestMethod("GET");
                     connection.setDoOutput(true);
-//                      connection.connect();
                     int response = connection.getResponseCode();
                     Log.e("ggggggggggggggg", "response" + response + "___" + myurl);
-
                 } catch (MalformedURLException e) {
-
                     Log.e("URL EROR", "URL is not Valid");
                     e.printStackTrace();
                     return "url";
@@ -179,33 +168,31 @@ public class ActivityLogin extends AppCompatActivity {
                     return "url";
                 }
 
-                Log.i("connection_log", "you are connected");
+
                 HashMap<String, Object> datas = new HashMap<String, Object>();
                 datas.put("id", ID);
                 datas.put("password", password);
+                datas.put("deviceInfo", deviceInfo);
 
                 try {
                     SoapObject request = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), NetworkTools.METHOD_NAME, datas).getProperty(0);
-                    // Log.i("TokenID","Token id is "+ request);
+
+                    if (request.getPropertyCount()==1){
+                        eror = "رمز عبور یا نام کاربری اشتباه میباشد";
+                        return  "eror";
+                    }
+
                     String tokenId = NetworkTools.getSoapPropertyAsNullableString(request, 0);
-                    String cheker = NetworkTools.getSoapPropertyAsNullableString(request, 1);
+
                     String userName = NetworkTools.getSoapPropertyAsNullableString(request, 2);
-                    //String rq = NetworkTools.getSoapPropertyAsNullableString((SoapObject) tokenId, "TokenID");
-                    Log.i("TokenID", "Token id is " + tokenId);
-                    Log.i("cheker", "user exixst " + cheker);
-                    Log.i("username", "user name is  " + userName);
 
-                    boolean isTrue = Boolean.parseBoolean(cheker);
-                    Log.i("Boolean cheker", "boolean is  " + isTrue);
-
-                    if (isTrue) {
                         preferenceHelper.putString(preferenceHelper.TOKEN_ID, tokenId);
                         preferenceHelper.putString(preferenceHelper.USER_NAME, userName);
                         return "1";
-                    }
+
 
                 } catch (Exception e) {
-                    eror ="رمز عبور یا نام کاربری اشتباه میباشد"+ (e.toString());
+                    eror = "  امکان برقراری ارتباط با آدرس سرور وارد شده نمیباشد.  " + (e.toString());
                     return "eror";
                 }
             }

@@ -23,14 +23,14 @@
             android:id="@+id/lyHead"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:background="#e3dede"
             android:orientation="vertical">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ebdfdf"
+                android:background="#e3dede"
                 android:orientation="vertical">
 
 
@@ -208,7 +208,7 @@
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
                                 card_view:cardCornerRadius="0dp"
-                                card_view:cardElevation="0dp">
+                                card_view:cardElevation="5dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:layout_width="match_parent"
@@ -226,7 +226,8 @@
                                         android:layout_alignParentStart="false"
                                         android:padding="30dp"
                                         android:scaleType="fitCenter"
-                                        android:src="@drawable/geography" />
+                                        android:src="@drawable/geography"
+                                        android:id="@+id/imageView49" />
 
 
                                     <ImageView
@@ -290,7 +291,7 @@
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
                                 card_view:cardCornerRadius="0dp"
-                                card_view:cardElevation="0dp">
+                                card_view:cardElevation="5dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyForoosh"
@@ -384,7 +385,7 @@
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
                                 card_view:cardCornerRadius="0dp"
-                                card_view:cardElevation="0dp">
+                                card_view:cardElevation="5dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyAnbar"
@@ -466,7 +467,7 @@
                                 android:layout_marginTop="8dip"
                                 android:background="#363030"
                                 card_view:cardCornerRadius="0dp"
-                                card_view:cardElevation="0dp">
+                                card_view:cardElevation="5dp">
 
                                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                     android:id="@+id/lyHadaf"
@@ -562,6 +563,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="#e3dede"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -617,28 +619,29 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="90sp"
-                    android:background="#e3dede"
-                    android:orientation="vertical">
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="90sp"-->
+                    <!--android:background="#e3dede"-->
+                    <!--android:orientation="vertical">-->
 
-                    <Button
-                        android:id="@+id/txtPanel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="20dp"
-                        android:background="#8BC34A"
-                        android:gravity="center"
-                        android:text="پنل"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp" />
-                </LinearLayout>
+                    <!--<Button-->
+                        <!--android:id="@+id/txtPanel"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_margin="20dp"-->
+                        <!--android:background="#8BC34A"-->
+                        <!--android:gravity="center"-->
+                        <!--android:text="پنل"-->
+                        <!--android:textColor="#ffffff"-->
+                        <!--android:textSize="18sp" />-->
+                <!--</LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:layout_weight=".5"
                     android:background="#e3dede"
                     android:orientation="horizontal"
@@ -671,8 +674,8 @@
                             android:layout_marginRight="6dp"
                             android:layout_marginTop="8dip"
                             android:background="#363030"
-                            card_view:cardCornerRadius="5dp"
-                            card_view:cardElevation="2dp">
+                            card_view:cardCornerRadius="0dp"
+                            card_view:cardElevation="5dp">
 
                             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                 android:id="@+id/lyAcceptRequests"
@@ -870,8 +873,21 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp">
+
+                    <include
+                        layout="@layout/visitors_proceeds"
+                        android:layout_width="match_parent"
+                        android:layout_height="240dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_weight=".5"
                     android:background="#e3dede"
                     android:orientation="horizontal"
@@ -901,8 +917,8 @@
                             android:layout_marginRight="6dp"
                             android:layout_marginTop="8dip"
                             android:background="#363030"
-                            card_view:cardCornerRadius="5dp"
-                            card_view:cardElevation="2dp">
+                            card_view:cardCornerRadius="0dp"
+                            card_view:cardElevation="5dp">
 
                             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                 android:layout_width="match_parent"
@@ -983,8 +999,8 @@
                             android:layout_marginRight="6dp"
                             android:layout_marginTop="8dip"
                             android:background="#363030"
-                            card_view:cardCornerRadius="5dp"
-                            card_view:cardElevation="2dp">
+                            card_view:cardCornerRadius="0dp"
+                            card_view:cardElevation="5dp">
 
                             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                 android:id="@+id/lyNotVisited"
@@ -1042,11 +1058,6 @@
 
 
                     </LinearLayout>
-
-
-
-
-
 
                 </LinearLayout>
 

@@ -5,7 +5,7 @@
     tools:context=".ActivityLogin"
     android:windowSoftInputMode="adjustResize"
     android:orientation="vertical"
-    android:background="#1565C0"
+    android:background="#1976D2"
     android:paddingLeft="16dp"
     android:paddingTop="16dp"
     android:paddingRight="16dp"
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#1565C0"
+        android:background="#1976D2"
         android:id="@+id/ly"
         android:gravity="center"
         android:layout_weight=".25">
@@ -35,7 +35,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/lyrt"
-        android:background="#1565C0"
+        android:background="#1976D2"
         android:layout_weight=".098">
 
         <android.support.design.widget.TextInputLayout
@@ -101,7 +101,7 @@
             android:layout_marginTop="25dp"
             android:text="ورود"
             android:textStyle="bold"
-            android:background="#FFFFFF"
+            android:background="#ffffff"
             android:textSize="18sp"
             android:focusable="false" />
 

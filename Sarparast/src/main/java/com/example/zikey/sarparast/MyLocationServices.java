@@ -181,8 +181,6 @@ public class MyLocationServices extends Service implements GoogleApiClient.Conne
             setAlarmManager(getApplicationContext(), 1);
             wl.release();
         }
-
-
     }
 
 

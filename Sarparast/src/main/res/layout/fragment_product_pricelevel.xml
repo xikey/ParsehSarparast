@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="1dp"
+    android:minWidth="1000dp"
+
+    card_view:cardElevation="2dp"
+
+    cardUseCompatPadding="true"
+    android:layout_marginTop="18dp"
+    android:layout_marginBottom="5dip"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:background="#e3dede">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lyContent"
+            android:visibility="visible">
+
+
+            <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:id="@+id/lyEror"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اطلاعاتی جهت نمایش وجود ندارد٬!"
+                android:id="@+id/txtEror"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:id="@+id/lyProgress"
+            android:visibility="visible" >
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:id="@+id/progressBar4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lyRoot">
+
+                <ScrollView
+                    android:layout_below="@id/relativeLayout7"
+                    android:layout_width="match_parent"
+                   android:id="@+id/Scrol"
+                    android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/relativeLayout7"
+                                android:id="@+id/lyRows">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout8"
+                                    android:layout_marginBottom="10dp">
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 1"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView31"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum1"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView31"
+                                        android:layout_toStartOf="@+id/imageView31"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp"></LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout13"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 2"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView35"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum2"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView35"
+                                        android:layout_toStartOf="@+id/imageView35"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout14"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 3"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView36"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum3"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView36"
+                                        android:layout_toStartOf="@+id/imageView36"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout15"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 4"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView38"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum4"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView38"
+                                        android:layout_toStartOf="@+id/imageView38"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout16"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 5"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView39"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum5"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView39"
+                                        android:layout_toStartOf="@+id/imageView39"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout17"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 6"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView41"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum6"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView41"
+                                        android:layout_toStartOf="@+id/imageView41"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout18"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 7"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView42"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum7"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView42"
+                                        android:layout_toStartOf="@+id/imageView42"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout19"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 8"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView43"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum8"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView43"
+                                        android:layout_toStartOf="@+id/imageView43"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout20"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 9"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView44"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum9"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView44"
+                                        android:layout_toStartOf="@+id/imageView44"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout21"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 10"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView45"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum10"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView45"
+                                        android:layout_toStartOf="@+id/imageView45"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout74"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 11"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView54"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum11"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView54"
+                                        android:layout_toStartOf="@+id/imageView54"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout23"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 12"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView47"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum12"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView47"
+                                        android:layout_toStartOf="@+id/imageView47"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout25"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 13"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView48"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum13"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toLeftOf="@+id/imageView48"
+                                        android:layout_toStartOf="@+id/imageView48"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp" />
+                                </RelativeLayout>
+
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout7"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout29"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 14"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView50"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum14"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toStartOf="@+id/imageView50"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toLeftOf="@+id/imageView50" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="#546E7A"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginLeft="10dp" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/relativeLayout78"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="10dp"
+                                    android:id="@+id/relativeLayout22"
+                                    android:layout_marginBottom="10dp" >
+
+                                    <TextView
+                                        android:gravity="center"
+                                        android:text="سطح قیمت 15"
+                                        android:layout_width="100dp"
+                                        android:layout_height="35dp"
+                                        android:id="@+id/imageView51"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginRight="10dp"
+                                        android:padding="2dp" />
+
+                                    <TextView
+                                        android:layout_marginRight="10dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="..."
+                                        android:id="@+id/txtNum15"
+                                        android:layout_centerVertical="true"
+                                        android:layout_toStartOf="@+id/imageView51"
+                                        android:gravity="center"
+                                        android:textSize="16sp"
+                                        android:textColor="#000000"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_toLeftOf="@+id/imageView51" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                </ScrollView>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="#78909C"
+                    android:id="@+id/relativeLayout7">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/imageView30"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/list4"
+                        android:layout_marginRight="10dp"
+                        android:padding="4dp" />
+
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtName"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="..."
+                        android:id="@+id/txtprofit"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/btnExit"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/error"
+                        android:padding="6dp" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+
+</android.support.v7.widget.CardView>

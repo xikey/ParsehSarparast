@@ -92,6 +92,7 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lySarjam;
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
+    RelativeLayout lyReload;
 
 
 
@@ -167,7 +168,7 @@ public class ActivityMain extends AppCompatActivity
         preferenceHelper = new PreferenceHelper(this);
 
 
-        isAFinalRelease = 1;
+        isAFinalRelease = 0;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -221,6 +222,14 @@ public class ActivityMain extends AppCompatActivity
         txtTaeedKol = (TextView) findViewById(R.id.txtTaeedKol);
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
+        lyReload = (RelativeLayout) findViewById(R.id.lyReload);
+
+        lyReload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runReportAsync();
+            }
+        });
 
         preferenceHelper = new PreferenceHelper(this);
 

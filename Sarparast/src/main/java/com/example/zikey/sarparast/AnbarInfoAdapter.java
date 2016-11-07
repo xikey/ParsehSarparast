@@ -194,11 +194,10 @@ public class AnbarInfoAdapter extends RecyclerView.Adapter<AnbarInfoAdapter.prod
                 @Override
                 public void onClick(View view) {
 
-                    Fragment_ProductsTenPropertyOrPrice fragment = new Fragment_ProductsTenPropertyOrPrice();
+                    Fragment_ProductPriceLevel fragment = new Fragment_ProductPriceLevel();
                     fragment.setActivity(activity);
                     fragment.setName(txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
-                    fragment.setChecker("Gheymat");
                     fragment.show(manager,"SathGheymat");
                 }
             });

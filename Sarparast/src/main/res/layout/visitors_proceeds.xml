@@ -5,6 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,8 +18,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="240dp"
-         >
+            android:layout_height="240dp">
 
             <Button
                 android:layout_width="match_parent"
@@ -27,12 +28,14 @@
                 android:text="آنالیز پوشش"
                 android:textColor="#ffffff"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:id="@+id/button3" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_above="@+id/button3">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -41,7 +44,8 @@
                     android:layout_toLeftOf="@+id/imageView28"
                     android:layout_toStartOf="@+id/imageView28"
                     android:layout_weight="50"
-                    android:id="@+id/lyReload">
+                    android:id="@+id/lyReloadCoverage">
+
 
                     <TextView
                         android:textStyle="bold"
@@ -140,18 +144,17 @@
                         android:layout_alignRight="@+id/textView115"
                         android:layout_alignEnd="@+id/textView115"
                         android:layout_marginTop="5dp"
-                        android:textSize="14sp"
+                        android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="#000000" />
+                        android:textColor="#b71c1c" />
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+
+                    <LinearLayout
+                        android:id="@+id/lyCoverageProgress"
+                        android:background="#8fffffff"
                         android:gravity="center"
-                        android:visibility="gone"
-                        android:id="@+id/lyprogress2"
-                        android:background="#ffffff">
-
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                         <ProgressBar
                             style="?android:attr/progressBarStyleLarge"
                             android:id="@+id/progressBar5"
@@ -159,8 +162,13 @@
                             android:layout_height="40dp"
                             android:layout_marginBottom="8dp"
                             android:visibility="visible" />
-                    </RelativeLayout>
+
+
+                    </LinearLayout>
+
                 </RelativeLayout>
+
+
 
                 <ImageView
 
@@ -180,8 +188,11 @@
             </LinearLayout>
 
 
+
         </RelativeLayout>
 
     </android.support.v7.widget.CardView>
+
+
 
 </LinearLayout>

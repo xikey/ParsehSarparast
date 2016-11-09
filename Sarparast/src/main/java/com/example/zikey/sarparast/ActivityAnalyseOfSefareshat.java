@@ -44,11 +44,11 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
     private RecyclerView row_sefaresh;
     private RecyclerView.LayoutManager row_manager;
     private AnalyseSefareshatAdapter row_adapter;
+    private String level=" ";
 
     private EditText edtSearch;
-
     String value;
-    int level=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,18 +114,19 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
         if (value.equals("Mahane")) {
             txtTop.setText("ماهانه");
             runAsync();
-
         }
 
         if (value.equals("Manategh")) {
-            level = getIntent().getIntExtra("level",0);
+            level =String.valueOf( getIntent().getIntExtra("level",0));
             txtTop.setText("مناطق (از اول ماه)");
-
+            runAsync();
         }
+
         if (value.equals("Date")) {
             txtTop.setText("تاریخ (از اول ماه)");
             runAsync();
         }
+
         if (value.equals("Visitor")) {
             txtTop.setText("ویزیتور (از اول ماه)");
             runAsync();
@@ -166,7 +167,6 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 AnalyseSefareshatAdapter adapter = new AnalyseSefareshatAdapter(sefareshatInfos);
 //                adapter.setAct(ActivityAnalyseOfSefareshat.this);
 
-
                 row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
                 row_sefaresh.setLayoutManager(row_manager);
                 row_adapter = adapter;
@@ -189,10 +189,8 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 lyEror.setVisibility(View.VISIBLE);
             }
         }
-
         @Override
         protected void onPreExecute() {
-
         }
 
         @Override
@@ -200,11 +198,11 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
             getListOfSefareshatASYNC=null;
 
-
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("Group", value);
+            datas.put("Code",level);
 
             if (isonline) {
                 try {
@@ -213,7 +211,6 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                     if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
-
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
                         SoapObject sp = (SoapObject) request2.getProperty(i);
 
@@ -226,7 +223,6 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                         sefaresh.set_RBargasht(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 4).toString())));
                         sefaresh.set_KhalesForosh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
                         sefaresh.set_GroupCode(NetworkTools.getSoapPropertyAsNullableString(sp, 19));
-
 
                         sefareshatInfos.add(sefaresh);
                     }

@@ -378,16 +378,18 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             HashMap<String, Object> datas = new HashMap<String, Object>();
             HashMap<String, Object> datas2 = new HashMap<String, Object>();
 
+            if (points!=null&&points.size()>0){
+                points.clear();
+            }
+
             String w;
             String l;
 
             l = String.valueOf(myL);
             w = String.valueOf(myW);
 
-
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("ID", ID);
-
 
             if (isonline) {
                 try {

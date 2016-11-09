@@ -1,20 +1,12 @@
 package com.razanPardazesh.supervisor.repo;
 
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
-import android.support.v4.util.ArrayMap;
-
-
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
-import com.razanPardazesh.supervisor.model.Product;
 import com.razanPardazesh.supervisor.model.wrapper.ProductAnswer;
 import com.razanPardazesh.supervisor.repo.iRepo.IProduct;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
-
 import org.json.JSONObject;
-import org.ksoap2.serialization.SoapObject;
-
 import java.util.HashMap;
 
 /**
@@ -45,6 +37,7 @@ public class ProductServerRepo implements IProduct {
             }
             JSONObject jsonObject = new JSONObject(request2);
             product.fillByJson(jsonObject);
+
 
 
         } catch (Exception ex) {

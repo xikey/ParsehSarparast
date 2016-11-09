@@ -67,6 +67,8 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
+import com.razanPardazesh.supervisor.repo.ReportServerRepo;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -93,7 +95,6 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
     RelativeLayout lyReload;
-
 
 
     private RecyclerView row_khales;
@@ -151,6 +152,17 @@ public class ActivityMain extends AppCompatActivity
             ColorTemplate.JOYFUL_COLORS[2]
     };
 
+    //CoveragePercent
+    private ReportServerRepo reportServerRepo = null;
+    private ReportAnswer reportAnswer = null;
+    private GetCoverageReportAsync getCoverageReportAsync = null;
+    private TextView txtDayCustomers;
+    private TextView txtDayProceed;
+    private TextView txtNotProceed;
+    private RelativeLayout lyReloadCoverage;
+    private LinearLayout lyCoverageProgress;
+
+
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
     private int isAFinalRelease = -1;
 
@@ -187,27 +199,18 @@ public class ActivityMain extends AppCompatActivity
 
                 }
             });
-            // this will call run() function
+
         }
-
-//        alarmManager.setInexactRepeating(AlarmManager.RTC,9000,9000,);
-
         requestPermission();
         initVersionName();
         runGetPiechartAsync();
         runGetCubicChartInfos();
-
-
-//        int permiss = ContextCompat.checkSelfPermission(ActivityMain.this,
-//                android.Manifest.permission.ACCESS_FINE_LOCATION);
+        initCoveragePercentReport();
 
         MyLocationServices.startActionGetLocation(getApplicationContext());
 
-
         inflater = (LayoutInflater) getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
 
-//        Thread.setDefaultUncaughtExceptionHandler();
-//;
         lyForoosh = (LinearLayout) findViewById(R.id.lyForoosh);
         lyAnbar = (LinearLayout) findViewById(R.id.lyAnbar);
         lyHadaf = (LinearLayout) findViewById(R.id.lyHadaf);
@@ -922,7 +925,7 @@ public class ActivityMain extends AppCompatActivity
         @Override
         protected String doInBackground(Void... params) {
 
-            getPieChartInfos=null;
+            getPieChartInfos = null;
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
@@ -1037,7 +1040,7 @@ public class ActivityMain extends AppCompatActivity
         x.setDrawAxisLine(true);
         x.setDrawGridLines(true);
         x.setDrawLabels(true);
-       // x.setLabelCount(10);
+        // x.setLabelCount(10);
         x.setValueFormatter(new IAxisValueFormatter() {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -1127,7 +1130,7 @@ public class ActivityMain extends AppCompatActivity
 
         for (int i = 0; i < cubicChartInfoArrayList.size(); i++) {
 //            lineSalesValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getSales()));
-         lineReturnsValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getReturned()));
+            lineReturnsValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getReturned()));
             lineKhalesRsValues.add(new Entry(i, cubicChartInfoArrayList.get(i).getKhalesR()));
         }
 
@@ -1136,8 +1139,8 @@ public class ActivityMain extends AppCompatActivity
         LineDataSet lineKhalesRsDataSet = new LineDataSet(lineKhalesRsValues, " خالص فروش ");
 
 //        setDataSetSeting(lineSalesDataSet,Color.parseColor("#00E5FF"));
-        setDataSetSeting(lineReturnsDataSet,Color.parseColor("#FF3D00"),false);
-        setDataSetSeting(lineKhalesRsDataSet, Color.parseColor("#FFFF00"),true);
+        setDataSetSeting(lineReturnsDataSet, Color.parseColor("#FF3D00"), false);
+        setDataSetSeting(lineKhalesRsDataSet, Color.parseColor("#FFFF00"), true);
 
 
 //        LineData data = new LineData(lineSalesDataSet);
@@ -1149,7 +1152,7 @@ public class ActivityMain extends AppCompatActivity
         cubeChart.invalidate();
     }
 
-    private void setDataSetSeting(LineDataSet dataSet, int color,Boolean fillable) {
+    private void setDataSetSeting(LineDataSet dataSet, int color, Boolean fillable) {
 
 
         dataSet.setMode(LineDataSet.Mode.LINEAR);
@@ -1236,6 +1239,86 @@ public class ActivityMain extends AppCompatActivity
 
             super.onPostExecute(s);
         }
+    }
+
+    private void initCoveragePercentReport() {
+        txtDayCustomers = (TextView) findViewById(R.id.txtDayCustomers);
+        txtDayProceed = (TextView) findViewById(R.id.txtDayProceed);
+        txtNotProceed = (TextView) findViewById(R.id.txtNotProceed);
+        lyReloadCoverage = (RelativeLayout) findViewById(R.id.lyReloadCoverage);
+        lyCoverageProgress = (LinearLayout) findViewById(R.id.lyCoverageProgress);
+        lyReloadCoverage.setVisibility(View.VISIBLE);
+
+        reportServerRepo = new ReportServerRepo();
+        reportAnswer = new ReportAnswer();
+
+        runGetCoverageReportAsync();
+
+        lyReloadCoverage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runGetCoverageReportAsync();
+            }
+        });
+    }
+
+    private void runGetCoverageReportAsync() {
+
+        if (getCoverageReportAsync != null)
+            return;
+        getCoverageReportAsync = new GetCoverageReportAsync();
+        getCoverageReportAsync.execute();
+    }
+
+    public class GetCoverageReportAsync extends AsyncTask<Void, String, String> {
+
+        private String message;
+
+        @Override
+        protected void onPreExecute() {
+            lyCoverageProgress.setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            reportAnswer = reportServerRepo.mainCoveragePercent(getApplicationContext(), "", 0, 0);
+
+            if (reportAnswer.getIsSuccess() == 0) {
+
+                return "0";
+            }
+            return "1";
+        }
+
+        @Override
+        protected void onPostExecute(String value) {
+            getCoverageReportAsync = null;
+
+
+            if (value.equals("1")) {
+
+                Long dayCovered = reportAnswer.getReport().getTotalCustomers() - reportAnswer.getReport().getNotVisited();
+                txtDayCustomers.setText(reportAnswer.getReport().getTotalCustomers().toString());
+                txtNotProceed.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(), dayCovered).toString() + " ٪ ");
+                txtDayProceed.setText(dayCovered.toString());
+                lyCoverageProgress.setVisibility(View.GONE);
+
+            }
+            if (value.equals("0")) {
+                txtDayCustomers.setText("خطا");
+                txtNotProceed.setText("خطا");
+                txtDayProceed.setText("خطا");
+            }
+        }
+
+        private Long coverageProceed(Long total, Long visited) {
+
+            if (total == 0) return 0l;
+            return ((total - visited) / total) * 100;
+
+        }
+
     }
 
 

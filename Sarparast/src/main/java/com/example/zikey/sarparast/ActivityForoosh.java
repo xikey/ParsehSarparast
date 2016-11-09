@@ -59,7 +59,7 @@ public class ActivityForoosh extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                CharSequence options[] = new CharSequence[]{"سطح یک", "سطح دو", "سطح سه", "سطح چهار", "سطح پنج"};
+                CharSequence options[] = new CharSequence[]{"سطح یک", "سطح دو", "سطح سه", "سطح چهار"};
 
                 new android.app.AlertDialog.Builder(ActivityForoosh.this)
                         .setTitle("انتخاب سطح منطقه")
@@ -88,11 +88,7 @@ public class ActivityForoosh extends AppCompatActivity {
                                         dialog.dismiss();
                                         break;
                                     }
-                                    case 4: {
-                                        regionLevelChooser(5);
-                                        dialog.dismiss();
-                                        break;
-                                    }
+
                                 }
                             }
                         }).create().show();

@@ -13,11 +13,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class ActivityVisitorsInMap extends AppCompatActivity    {
 
-//    String mLatitudeText;
-//    String mLongitudeText;
-   private   Location mLastLocation;
-   private GoogleApiClient mGoogleApiClient;
-
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
 
@@ -26,19 +21,10 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
     private LinearLayout lyNearCustomers;
     private LinearLayout lyNotOrdered;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visitors_in_map);
-
-//        if (mGoogleApiClient == null) {
-//            mGoogleApiClient = new GoogleApiClient.Builder(this)
-//                    .addConnectionCallbacks(this)
-//                    .addOnConnectionFailedListener(this)
-//                    .addApi(MyLocationServices.API)
-//                    .build();
-//        }
 
         preferenceHelper = new PreferenceHelper(this);
         imgBack= (ImageView) findViewById(R.id.imgBack);
@@ -61,8 +47,6 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
 
                 Intent intent = new Intent(ActivityVisitorsInMap.this,ActivityGoogleMap.class);
                 intent.putExtra("state","MyNearCustomers");
-//                intent.putExtra("Lat",mLatitudeText);
-//                intent.putExtra("Long",mLongitudeText);
                 startActivity(intent);
 
             }
@@ -103,21 +87,7 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
             }
         });
 
-
-
-
-
-
-//        Location mLastLocation = MyLocationServices.FusedLocationApi.getLastLocation( mGoogleApiClient);
-//        Log.e("LastLocation","last location is  "+mLastLocation);
-//        if (mLastLocation != null) {
-//            mLatitudeText=(String.valueOf(mLastLocation.getLatitude()));
-//            mLongitudeText=(String.valueOf(mLastLocation.getLongitude()));
-//
-//            Log.e("latlong","lat and long is "+mLatitudeText+"  "+mLongitudeText);
-
         }
-
 
     }
 

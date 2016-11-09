@@ -11,7 +11,9 @@ import org.json.JSONObject;
 
 public class ProductAnswer extends ServerAnswer {
 
-    private static final String KEY_prices = "pr";
+    private  final String KEY_prices = "pr";
+
+    private Product product;
 
     public Product getProduct() {
         return product;
@@ -21,7 +23,7 @@ public class ProductAnswer extends ServerAnswer {
         this.product = product;
     }
 
-    private Product product;
+
 
     @Override
     public void fillByJson(JSONObject jsonObject) {

@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -67,6 +68,7 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.razanPardazesh.supervisor.CoveragePercentageActivity;
 import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
 import com.razanPardazesh.supervisor.repo.ReportServerRepo;
 
@@ -1248,6 +1250,13 @@ public class ActivityMain extends AppCompatActivity
         lyReloadCoverage = (RelativeLayout) findViewById(R.id.lyReloadCoverage);
         lyCoverageProgress = (LinearLayout) findViewById(R.id.lyCoverageProgress);
         lyReloadCoverage.setVisibility(View.VISIBLE);
+        ImageView lyCoveragePercent = (ImageView) findViewById(R.id.lyCoveragePercent);
+        lyCoveragePercent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CoveragePercentageActivity.start(ActivityMain.this);
+           }
+        });
 
         reportServerRepo = new ReportServerRepo();
         reportAnswer = new ReportAnswer();

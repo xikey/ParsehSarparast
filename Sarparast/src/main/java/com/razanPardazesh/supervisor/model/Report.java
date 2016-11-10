@@ -3,6 +3,8 @@ package com.razanPardazesh.supervisor.model;
 import android.content.Context;
 
 import com.razanPardazesh.supervisor.model.interfaces.IJson;
+import com.razanPardazesh.supervisor.model.user.IUser;
+import com.razanPardazesh.supervisor.model.user.Visitor;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
 import org.json.JSONException;
@@ -23,6 +25,8 @@ public class Report implements IJson {
     private Long notVisited = 0l;
     private Long orderCount = 0l;
     private Long cantOrderCount = 0l;
+
+
 
 
     public Long getTotalCustomers() {
@@ -78,6 +82,7 @@ public class Report implements IJson {
                 LogWrapper.loge("fillByJson: price1: ", e);
             }
         }
+
         if (jsonObject.has(KEY_orderCount)) {
             try {
                 setOrderCount(jsonObject.getLong(KEY_orderCount));
@@ -85,6 +90,7 @@ public class Report implements IJson {
                 LogWrapper.loge("fillByJson: price1: ", e);
             }
         }
+
         if (jsonObject.has(KEY_cantOrderCount)) {
             try {
                 setCantOrderCount(jsonObject.getLong(KEY_cantOrderCount));
@@ -92,6 +98,7 @@ public class Report implements IJson {
                 LogWrapper.loge("fillByJson: price1: ", e);
             }
         }
+
     }
 
     @Override

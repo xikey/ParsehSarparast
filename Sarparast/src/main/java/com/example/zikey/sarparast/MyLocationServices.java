@@ -111,7 +111,7 @@ public class MyLocationServices extends Service implements GoogleApiClient.Conne
         mGoogleApiClient = new GoogleApiClient.Builder(getApplicationContext())
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
-                .addApi(com.google.android.gms.location.LocationServices.API)
+                .addApi(LocationServices.API)
                 .build();
 
         mGoogleApiClient.connect();

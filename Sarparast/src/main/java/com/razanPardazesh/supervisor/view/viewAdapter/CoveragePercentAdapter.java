@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
 import com.example.zikey.sarparast.AdamVisitInfo;
 import com.example.zikey.sarparast.R;
 import com.razanPardazesh.supervisor.model.Report;
+
 import java.util.ArrayList;
 
 /**
@@ -126,7 +128,7 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
     }
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName;
+        TextView txtCode, txtName, txtTotal, txtCovered, txtAdamSefaresh, notVisited;
 
 
         public productoViewHolder(final View itemView) {
@@ -134,7 +136,10 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
 
             txtName = (TextView) itemView.findViewById(R.id.txtName);
             txtCode = (TextView) itemView.findViewById(R.id.txtCode);
-
+            txtTotal = (TextView) itemView.findViewById(R.id.txtTotal);
+            txtCovered = (TextView) itemView.findViewById(R.id.txtCovered);
+            txtAdamSefaresh = (TextView) itemView.findViewById(R.id.txtAdamSefaresh);
+            notVisited = (TextView) itemView.findViewById(R.id.notVisited);
 
 
         }

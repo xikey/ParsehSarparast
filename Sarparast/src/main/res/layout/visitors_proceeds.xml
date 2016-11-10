@@ -17,6 +17,7 @@
         app:cardCornerRadius="0dp">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="240dp">
 
@@ -179,7 +180,7 @@
                     android:padding="30dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/worldwide"
-                    android:id="@+id/imageView28"
+                    android:id="@+id/lyCoveragePercent"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"

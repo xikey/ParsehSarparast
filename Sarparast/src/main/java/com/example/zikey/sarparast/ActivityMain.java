@@ -161,6 +161,8 @@ public class ActivityMain extends AppCompatActivity
     private TextView txtDayCustomers;
     private TextView txtDayProceed;
     private TextView txtNotProceed;
+    private TextView txtNotProceedPercen;
+    private TextView txtDayProceedPercent;
     private RelativeLayout lyReloadCoverage;
     private LinearLayout lyCoverageProgress;
 
@@ -1247,15 +1249,31 @@ public class ActivityMain extends AppCompatActivity
         txtDayCustomers = (TextView) findViewById(R.id.txtDayCustomers);
         txtDayProceed = (TextView) findViewById(R.id.txtDayProceed);
         txtNotProceed = (TextView) findViewById(R.id.txtNotProceed);
+        txtNotProceedPercen = (TextView) findViewById(R.id.txtNotProceedPercen);
+        txtDayProceedPercent = (TextView) findViewById(R.id.txtDayProceedPercent);
         lyReloadCoverage = (RelativeLayout) findViewById(R.id.lyReloadCoverage);
         lyCoverageProgress = (LinearLayout) findViewById(R.id.lyCoverageProgress);
         lyReloadCoverage.setVisibility(View.VISIBLE);
+        ImageView imgInfo = (ImageView) findViewById(R.id.imgInfo);
         ImageView lyCoveragePercent = (ImageView) findViewById(R.id.lyCoveragePercent);
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(ActivityMain.this)
+                        .setTitle("آنالیز پوشش")
+                        .setMessage(R.string.coverage_proceed_info)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface arg0, int arg1) {
+
+                            }
+                        }).create().show();
+            }
+        });
         lyCoveragePercent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CoveragePercentageActivity.start(ActivityMain.this);
-           }
+            }
         });
 
         reportServerRepo = new ReportServerRepo();
@@ -1309,8 +1327,10 @@ public class ActivityMain extends AppCompatActivity
 
                 Long dayCovered = reportAnswer.getReport().getTotalCustomers() - reportAnswer.getReport().getNotVisited();
                 txtDayCustomers.setText(reportAnswer.getReport().getTotalCustomers().toString());
-                txtNotProceed.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(), dayCovered).toString() + " ٪ ");
+                txtNotProceed.setText( reportAnswer.getReport().getNotVisited().toString());
+                txtNotProceedPercen.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(), dayCovered) + " % ");
                 txtDayProceed.setText(dayCovered.toString());
+                txtDayProceedPercent.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(),reportAnswer.getReport().getNotVisited())+" % ");
                 lyCoverageProgress.setVisibility(View.GONE);
 
             }
@@ -1321,10 +1341,11 @@ public class ActivityMain extends AppCompatActivity
             }
         }
 
-        private Long coverageProceed(Long total, Long visited) {
+        private String coverageProceed(Long total, Long visited) {
 
-            if (total == 0) return 0l;
-            return ((total - visited) / total) * 100;
+            if (total == 0) return "0";
+            float val = ((((float) (total - visited)) / total) * 100);
+            return String.valueOf( val).substring(0,5);
 
         }
 

@@ -43,6 +43,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:background="#e3dede"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lyContent"
@@ -62,7 +63,7 @@
                 android:layout_height="match_parent"
                 android:focusable="true"
                 android:scrollbars="vertical"
-
+                android:backgroundTint="#e3dede"
                 android:focusableInTouchMode="true"
                 android:visibility="visible"
                 android:layout_below="@+id/linearLayout11" />

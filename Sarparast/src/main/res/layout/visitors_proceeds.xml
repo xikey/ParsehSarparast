@@ -8,10 +8,11 @@
 
 
     <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
 
         android:elevation="10dp"
         app:cardCornerRadius="0dp">
@@ -73,6 +74,7 @@
                         android:textStyle="bold"
                         android:textColor="#000000" />
 
+
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
@@ -90,7 +92,7 @@
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="تعداد پوشش داده شده"
+                        android:text="پوشش داده شده"
                         android:id="@+id/textView112"
                         android:layout_below="@+id/linearLayout28"
                         android:layout_alignParentRight="true"
@@ -99,7 +101,9 @@
                         android:textSize="12sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+
+                        android:gravity="right"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="..."
                         android:id="@+id/txtDayProceed"
@@ -110,6 +114,19 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/txtDayProceedPercent"
+                        android:text="..."
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="#1565C0"
+
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/textView112"
+                        android:layout_toLeftOf="@+id/txtDayProceed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:orientation="vertical"
@@ -137,7 +154,8 @@
                         android:layout_alignEnd="@+id/txtTaeedKol" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:gravity="right"
+                        android:layout_width="60dp"
                         android:layout_height="wrap_content"
                         android:text="..."
                         android:id="@+id/txtNotProceed"
@@ -145,17 +163,33 @@
                         android:layout_alignRight="@+id/textView115"
                         android:layout_alignEnd="@+id/textView115"
                         android:layout_marginTop="5dp"
-                        android:textSize="15sp"
+                         android:textSize="16sp"
+                        android:textColor="#000000"
                         android:textStyle="bold"
-                        android:textColor="#b71c1c" />
+                         />
 
+                    <TextView
+                        android:id="@+id/txtNotProceedPercen"
+                        android:text="..."
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="#d50000"
+
+                        android:layout_marginTop="5dp"
+                        android:layout_below="@+id/textView115"
+                        android:layout_toLeftOf="@+id/txtNotProceed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
                     <LinearLayout
                         android:id="@+id/lyCoverageProgress"
                         android:background="#8fffffff"
                         android:gravity="center"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true">
                         <ProgressBar
                             style="?android:attr/progressBarStyleLarge"
                             android:id="@+id/progressBar5"
@@ -188,7 +222,14 @@
 
             </LinearLayout>
 
-
+            <ImageView
+                android:id="@+id/imgInfo"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_question"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentLeft="true"
+                android:layout_width="40dp"
+                android:layout_height="40dp" />
 
         </RelativeLayout>
 

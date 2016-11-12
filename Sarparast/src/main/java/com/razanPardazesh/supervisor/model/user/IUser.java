@@ -17,8 +17,8 @@ public abstract class IUser implements IJson{
     // type for VISITOR is 2
     //type for Suoervisor is 1
 
-    private int type=0;
-    private static final String KEY_USER_TYPE = "type";
+    private   int type=0;
+    private  final String KEY_USER_TYPE = "type";
 
     public int getType() {
         return type;

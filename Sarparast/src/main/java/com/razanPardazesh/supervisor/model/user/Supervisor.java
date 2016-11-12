@@ -1,10 +1,19 @@
 package com.razanPardazesh.supervisor.model.user;
 
+import com.razanPardazesh.supervisor.tools.LogWrapper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by Zikey on 10/11/2016.
  */
 
-public class Supervisor  implements IUser{
+public class Supervisor  extends IUser{
+    @Override
+    public int getType() {
+        return super.getType();
+    }
 
     private final String KEY_ID = "id";
     private final String KEY_CODE = "code";
@@ -49,5 +58,34 @@ public class Supervisor  implements IUser{
 
     public String getKEY_NAME() {
         return KEY_NAME;
+    }
+
+    @Override
+    public void fillByJson(JSONObject jsonObject) {
+        super.fillByJson(jsonObject);
+        if (jsonObject == null)
+            return;
+
+        if (jsonObject.has(KEY_ID)) {
+            try {
+                setId(jsonObject.getLong(KEY_ID));
+            } catch (JSONException e) {
+                LogWrapper.loge("fillByJson: price1: ", e);
+            }
+        }
+        if (jsonObject.has(KEY_NAME)) {
+            try {
+                setName(jsonObject.getString(KEY_NAME));
+            } catch (JSONException e) {
+                LogWrapper.loge("fillByJson: price1: ", e);
+            }
+        }
+        if (jsonObject.has(KEY_CODE)) {
+            try {
+                setCode(jsonObject.getLong(KEY_CODE));
+            } catch (JSONException e) {
+                LogWrapper.loge("fillByJson: price1: ", e);
+            }
+        }
     }
 }

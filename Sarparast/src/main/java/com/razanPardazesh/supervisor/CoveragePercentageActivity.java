@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,12 +17,17 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.zikey.sarparast.ActivityManagmentFooter;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
+import com.example.zikey.sarparast.ListOfAllVisitorsAdapter;
 import com.example.zikey.sarparast.R;
+import com.razanPardazesh.supervisor.model.Report;
+import com.razanPardazesh.supervisor.model.wrapper.ReportsAnswer;
+import com.razanPardazesh.supervisor.repo.ReportServerRepo;
+import com.razanPardazesh.supervisor.view.viewAdapter.CoveragePercentAdapter;
 
-import org.ksoap2.serialization.SoapObject;
+import java.util.ArrayList;
 
-import java.util.HashMap;
 
 public class CoveragePercentageActivity extends AppCompatActivity {
 
@@ -32,9 +38,15 @@ public class CoveragePercentageActivity extends AppCompatActivity {
     private RelativeLayout lyEror;
     private RelativeLayout lyContent;
     private RelativeLayout lyProgress;
-    private LinearLayoutManager layoutManager;
     private EditText edtSearch;
     private CoveragePercentAsync coveragePercentAsync = null;
+    private ReportServerRepo reportServerRepo = null;
+    private ReportsAnswer reportsAnswer = null;
+    private ArrayList<Report> reports = new ArrayList<>();
+
+    private RecyclerView visitorsRecycle;
+    private CoveragePercentAdapter row_adapter;
+    private LinearLayoutManager layoutManager;
 
 
     @Override
@@ -42,6 +54,7 @@ public class CoveragePercentageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coverage_percentage);
 
+        initRecycleView();
         initViews();
 
     }
@@ -68,6 +81,9 @@ public class CoveragePercentageActivity extends AppCompatActivity {
         lyProgress.setVisibility(View.VISIBLE);
         txtHead.setText("آمار پوشش روزانه ویزیتورها");
 
+
+        runAsync();
+
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -79,31 +95,67 @@ public class CoveragePercentageActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                // row_adapter.getFilter().filter(editable.toString());
+                row_adapter.getFilter().filter(editable.toString());
             }
         });
+    }
+
+
+    private void initRecycleView() {
+
+        visitorsRecycle = (RecyclerView) findViewById(R.id.row_AllVisitors);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        visitorsRecycle.setLayoutManager(layoutManager);
+        row_adapter = new CoveragePercentAdapter();
+        row_adapter.setItem(reports);
+        row_adapter.setContext(getApplicationContext());
+        visitorsRecycle.setAdapter(row_adapter);
+
     }
 
     public class CoveragePercentAsync extends AsyncTask<Void, String, String> {
 
         @Override
         protected void onPreExecute() {
+
+            reportsAnswer = new ReportsAnswer();
+            reportServerRepo = new ReportServerRepo();
+
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(Void... params) {
-            return null;
+
+            reportsAnswer = reportServerRepo.visitorsCoveragePercent(getApplicationContext(), "", 0, 0);
+            if (reportsAnswer.getIsSuccess() == 0) {
+                return "0";
+            }
+
+            return "1";
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            if (s.equals("1")) {
+                lyProgress.setVisibility(View.GONE);
+                lyContent.setVisibility(View.VISIBLE);
+
+                reports = reportsAnswer.getReports();
+                if (reports!=null){
+                    row_adapter.setItem(reports);
+
+                }
+            }
         }
+
     }
 
+
     private void runAsync() {
-     if (coveragePercentAsync!=null) return;
+        if (coveragePercentAsync != null) return;
         coveragePercentAsync = new CoveragePercentAsync();
         coveragePercentAsync.execute();
     }

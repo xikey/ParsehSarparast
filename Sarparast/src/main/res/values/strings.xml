@@ -52,4 +52,6 @@
 </string>
     <string name="title_activity_set_customer_location_map">Map</string>
 
+    <string name="coverage_proceed_info">در این بخش می توان میزان پوشش دهی امروز مشتریان توسط مشاوران فروش را مشاهده کرد. صفر بودن تعداد مشتریان بدین معناست که شما برای مشاوران فروش خود مشتریانی را به عنوان تارگت مشخص ننموده اید.</string>
+
 </resources>

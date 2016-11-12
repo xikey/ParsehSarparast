@@ -1,7 +1,7 @@
 package com.razanPardazesh.supervisor.view.viewAdapter;
 
-import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
@@ -10,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zikey.sarparast.AdamVisitInfo;
+import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.R;
 import com.razanPardazesh.supervisor.model.Report;
+import com.razanPardazesh.supervisor.model.user.Visitor;
 
 import java.util.ArrayList;
 
@@ -22,42 +25,54 @@ import java.util.ArrayList;
  * Created by Zikey on 09/11/2016.
  */
 
-public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercentAdapter.productoViewHolder> implements Filterable {
+public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercentAdapter.VisitorsViewHolder> implements Filterable {
     public ArrayList<Report> item;
     public ArrayList<Report> itemDump;
+    private Context context;
 
-
-    private AppCompatActivity activity;
-    private FragmentManager manager;
-
-    public void setManager(FragmentManager manager) {
-        this.manager = manager;
+    public Context getContext() {
+        return context;
     }
 
-    public void setActivity(AppCompatActivity activity) {
-        this.activity = activity;
+    public void setContext(Context context) {
+        this.context = context;
     }
 
+    private Visitor user = new Visitor();
 
-    public CoveragePercentAdapter(ArrayList<Report> item) {
+
+    public void setItem(ArrayList<Report> item) {
+
+        if (item == null) return;
         this.item = item;
         this.itemDump = item;
+        notifyDataSetChanged();
     }
 
+
     @Override
-    public CoveragePercentAdapter.productoViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public VisitorsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_coverage_percentage, viewGroup, false);
-        CoveragePercentAdapter.productoViewHolder producto = new CoveragePercentAdapter.productoViewHolder(v);
+        VisitorsViewHolder visitors = new VisitorsViewHolder(v);
 
-        return producto;
+        return visitors;
     }
 
     @Override
-    public void onBindViewHolder(CoveragePercentAdapter.productoViewHolder productoViewHolder, int i) {
+    public void onBindViewHolder(VisitorsViewHolder productoViewHolder, int i) {
 
-//        productoViewHolder.txtName.setText("" + item.get(i).getName());
+        if (item.get(i).getUser() instanceof Visitor) {
+            user = (Visitor) item.get(i).getUser();
 
-
+            productoViewHolder.txtName.setText("" + user.getName().toString());
+            productoViewHolder.txtCode.setText("" + user.getCode().toString());
+        }
+        productoViewHolder.txtTotal.setText("" + item.get(i).getTotalCustomers());
+        productoViewHolder.txtAdamSefaresh.setText("" + item.get(i).getCantOrderCount());
+        productoViewHolder.txtCovered.setText("" + item.get(i).getOrderCount());
+        productoViewHolder.txtnotVisited.setText("" + item.get(i).getNotVisited());
+        long covered =   (item.get(i).getTotalCustomers()-item.get(i).getNotVisited());
+        productoViewHolder.txtpercent.setText(""+(coverageProceed(item.get(i).getTotalCustomers(),item.get(i).getNotVisited()))+"%");
     }
 
     @Override
@@ -70,7 +85,7 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
-            ArrayList<AdamVisitInfo> temp = new ArrayList<>();
+            ArrayList<Report> temp = new ArrayList<>();
 
             if (TextUtils.isEmpty(charSequence)) {
 
@@ -85,9 +100,15 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
 
                 for (Report item : itemDump) {
 
-//                    if (!TextUtils.isEmpty(item.getName()) && item.getName().contains(charSequence)) {
-//                        temp.add(item);
-//                    }
+                    Visitor visitor = new Visitor();
+                    visitor = (Visitor) item.getUser();
+
+                   if (!TextUtils.isEmpty(visitor.getName()) && visitor.getName().contains(charSequence)) {
+                        temp.add(item);
+                    }
+                    if (!TextUtils.isEmpty(visitor.getCode().toString()) && visitor.getCode().toString().contains(charSequence)) {
+                        temp.add(item);
+                    }
 
                 }
             }
@@ -127,11 +148,12 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
         return filter;
     }
 
-    public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName, txtTotal, txtCovered, txtAdamSefaresh, notVisited;
+    public class VisitorsViewHolder extends RecyclerView.ViewHolder {
+        TextView txtCode, txtName, txtTotal, txtCovered, txtAdamSefaresh, txtnotVisited,txtpercent;
+        RelativeLayout lyHead;
 
 
-        public productoViewHolder(final View itemView) {
+        public VisitorsViewHolder(final View itemView) {
             super(itemView);
 
             txtName = (TextView) itemView.findViewById(R.id.txtName);
@@ -139,10 +161,21 @@ public class CoveragePercentAdapter extends RecyclerView.Adapter<CoveragePercent
             txtTotal = (TextView) itemView.findViewById(R.id.txtTotal);
             txtCovered = (TextView) itemView.findViewById(R.id.txtCovered);
             txtAdamSefaresh = (TextView) itemView.findViewById(R.id.txtAdamSefaresh);
-            notVisited = (TextView) itemView.findViewById(R.id.notVisited);
+            txtnotVisited = (TextView) itemView.findViewById(R.id.txtnotVisited);
+            txtpercent = (TextView) itemView.findViewById(R.id.txtpercent);
+            lyHead = (RelativeLayout) itemView.findViewById(R.id.lyHead);
+
+            FontApplier.applyMainFont(context,lyHead);
 
 
         }
+    }
+
+    private int coverageProceed(Long total, Long visited) {
+
+        if (total == 0) return 0;
+        return (int) ((((float) (total - visited)) / total) * 100);
+
     }
 
 

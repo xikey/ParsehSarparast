@@ -34,13 +34,12 @@ public class ActivityManagmentFooter extends AppCompatActivity {
     private RelativeLayout lyEror;
     private RelativeLayout lyContent;
     private RelativeLayout lyProgress;
-    private LinearLayoutManager layoutManager;
     private EditText edtSearch;
-
     private ListOfVisitorsAsync listOfVisitorsAsync = null;
+
     private RecyclerView visitorsRecycle;
-    private RecyclerView.LayoutManager row_manager;
     private ListOfAllVisitorsAdapter row_adapter;
+    private LinearLayoutManager layoutManager;
 
     private ArrayList<BazaryabInfo> items = new ArrayList<>();
 
@@ -216,8 +215,6 @@ public class ActivityManagmentFooter extends AppCompatActivity {
         row_adapter.setItem(items);
         row_adapter.setActivity(ActivityManagmentFooter.this);
         visitorsRecycle.setAdapter(row_adapter);
-
-
 
     }
 

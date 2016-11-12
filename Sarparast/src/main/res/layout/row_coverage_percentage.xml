@@ -14,8 +14,11 @@
     card_view:cardCornerRadius="0dp">
 
     <RelativeLayout
+        android:id="@+id/lyHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
+     </RelativeLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/lyRoot"
@@ -31,6 +34,8 @@
                 android:layout_weight="0.5"
                 android:orientation="vertical"
                 android:paddingBottom="10dp">
+
+
 
 
                 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -138,7 +143,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout23"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -185,7 +190,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout28"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -225,7 +230,7 @@
                             android:id="@+id/textView151"
                             android:layout_width="120dp"
                             android:layout_height="wrap_content"
-                            android:text="پوشش داده شده"
+                            android:text="تعداد سفارش"
                             android:textColor="#000000"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -277,7 +282,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
-                    android:id="@+id/linearLayout28"
+                    android:id="@+id/linearLayout808"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -296,7 +301,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/notVisited"
+                            android:id="@+id/txtnotVisited"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="8dp"
@@ -353,18 +358,34 @@
                 android:gravity="left|center"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imgBazaryab"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:padding="15dp"
-                    android:src="@drawable/ic_account_circle_black_24dp" />
+              <RelativeLayout
+
+                  android:gravity="center"
+                  android:padding="10dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+                  <ImageView
+                      android:src="@drawable/ic_shape"
+                      android:layout_width="match_parent"
+                      android:layout_height="100dp" />
+
+                  <TextView
+                      android:id="@+id/txtpercent"
+                      android:textSize="24sp"
+                      android:textColor="#b71c1c"
+                      android:textStyle="bold"
+                      android:gravity="center"
+                      android:text="100%"
+                      android:layout_width="match_parent"
+                      android:layout_height="100dp" />
+
+              </RelativeLayout>
 
             </LinearLayout>
         </LinearLayout>
 
-    </RelativeLayout>
+
 
 
 </android.support.v7.widget.CardView>

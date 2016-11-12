@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.razanPardazesh.supervisor.model.interfaces.IJson;
 import com.razanPardazesh.supervisor.model.user.IUser;
+import com.razanPardazesh.supervisor.model.user.Supervisor;
 import com.razanPardazesh.supervisor.model.user.Visitor;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
@@ -20,14 +21,17 @@ public class Report implements IJson {
     private final String KEY_notVisited = "nv";
     private final String KEY_orderCount = "oc";
     private final String KEY_cantOrderCount = "coc";
+    private final String KEY_USER = "user";
 
     private Long totalCustomers = 0l;
     private Long notVisited = 0l;
     private Long orderCount = 0l;
     private Long cantOrderCount = 0l;
+    private IUser user;
 
-
-
+    public IUser getUser() {
+        return user;
+    }
 
     public Long getTotalCustomers() {
         return totalCustomers;
@@ -94,6 +98,22 @@ public class Report implements IJson {
         if (jsonObject.has(KEY_cantOrderCount)) {
             try {
                 setCantOrderCount(jsonObject.getLong(KEY_cantOrderCount));
+            } catch (JSONException e) {
+                LogWrapper.loge("fillByJson: price1: ", e);
+            }
+        }
+
+        if (jsonObject.has(KEY_USER)) {
+            try {
+                this.user = new Visitor();
+
+                user.fillByJson(jsonObject.getJSONObject(KEY_USER));
+
+                if (user.getType()==1){
+                    user = new Supervisor();
+                    user.fillByJson(jsonObject.getJSONObject(KEY_USER));
+                }
+
             } catch (JSONException e) {
                 LogWrapper.loge("fillByJson: price1: ", e);
             }

@@ -63,7 +63,7 @@ public class ActivityListOfTSvisitorInfo extends AppCompatActivity {
         code = getIntent().getStringExtra("Code_Bazaryab");
         name = getIntent().getStringExtra("Name_Bazaryab");
 
-        username.setText("تسویه نشده :"+name +"(از اول ماه)");
+        username.setText("تسویه نشده :"+name +"(از اول سال)");
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -185,7 +185,6 @@ public class ActivityListOfTSvisitorInfo extends AppCompatActivity {
                         SoapObject sp = (SoapObject) request2.getProperty(i);
                         if (sp.getPropertyCount()<=0){
                             return "Null";
-
                         }
 
                         TSFactorHeader factor = new TSFactorHeader();

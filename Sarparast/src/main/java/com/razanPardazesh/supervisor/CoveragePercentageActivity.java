@@ -130,6 +130,10 @@ public class CoveragePercentageActivity extends AppCompatActivity {
             reportsAnswer = reportServerRepo.visitorsCoveragePercent(getApplicationContext(), "", 0, 0);
             if (reportsAnswer.getIsSuccess() == 0) {
                 return "0";
+
+            }
+            if (reportsAnswer.getMessage()!=null){
+                return "-1";
             }
 
             return "1";
@@ -149,6 +153,22 @@ public class CoveragePercentageActivity extends AppCompatActivity {
 
                 }
             }
+            if (s.equals("-1")){
+
+                lyProgress.setVisibility(View.GONE);
+                lyContent.setVisibility(View.GONE);
+                lyEror.setVisibility(View.VISIBLE);
+                txtEror.setText("خطا در دریافت اطلاعات");
+            }
+
+            if (s.equals("0")){
+                lyProgress.setVisibility(View.GONE);
+                lyContent.setVisibility(View.GONE);
+                lyEror.setVisibility(View.VISIBLE);
+                txtEror.setText("اطلاعاتی جهت نمایش وجود ندارد");
+            }
+
+
         }
 
     }

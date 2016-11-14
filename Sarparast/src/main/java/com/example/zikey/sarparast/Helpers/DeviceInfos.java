@@ -1,6 +1,7 @@
 package com.example.zikey.sarparast.Helpers;
 
 import android.os.Build;
+import android.text.format.DateFormat;
 
 /**
  * Created by Zikey on 01/11/2016.
@@ -16,6 +17,8 @@ public class DeviceInfos {
 
         return String.valueOf("Android "+Build.VERSION.RELEASE);
     }
+
+
 
 }
 

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 24
@@ -7,8 +8,8 @@ android {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 950813
-        versionName "95.08.13"
+        versionCode 950823
+        versionName "95.08.23"
 
         // Enabling multidex support.
         multiDexEnabled true

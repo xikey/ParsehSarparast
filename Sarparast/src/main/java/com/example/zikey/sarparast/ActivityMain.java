@@ -184,7 +184,7 @@ public class ActivityMain extends AppCompatActivity
         preferenceHelper = new PreferenceHelper(this);
 
 
-        isAFinalRelease = 0;
+        isAFinalRelease = 1;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -1345,7 +1345,10 @@ public class ActivityMain extends AppCompatActivity
 
             if (total == 0) return "0";
             float val = ((((float) (total - visited)) / total) * 100);
-            return String.valueOf( val).substring(0,5);
+            if (String.valueOf(val).length()>5) {
+                return String.valueOf(val).substring(0, 5);
+            }
+            return String.valueOf(val);
 
         }
 

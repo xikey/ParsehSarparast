@@ -44,7 +44,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
     private RecyclerView row_sefaresh;
     private RecyclerView.LayoutManager row_manager;
     private AnalyseSefareshatAdapter row_adapter;
-    private String level=" ";
+    private String level = " ";
 
     private EditText edtSearch;
     String value;
@@ -112,27 +112,25 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
 
         if (value.equals("Mahane")) {
-            txtTop.setText("ماهانه");
+            txtTop.setText("گزارش فروش‌ ـ ماهانه");
             runAsync();
         }
 
         if (value.equals("Manategh")) {
-            level =String.valueOf( getIntent().getIntExtra("level",0));
-            txtTop.setText("مناطق (از اول ماه)");
+            level = String.valueOf(getIntent().getIntExtra("level", 0));
+            txtTop.setText("گزارش فروش ـ مناطق (از اول ماه)");
             runAsync();
         }
 
         if (value.equals("Date")) {
-            txtTop.setText("تاریخ (از اول ماه)");
+            txtTop.setText("گزارش فروش ـ تاریخ (از اول ماه)");
             runAsync();
         }
 
         if (value.equals("Visitor")) {
-            txtTop.setText("ویزیتور (از اول ماه)");
+            txtTop.setText("گزارش فروش ـ ویزیتور (از اول ماه)");
             runAsync();
         }
-
-
 
 
     }
@@ -189,6 +187,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
                 lyEror.setVisibility(View.VISIBLE);
             }
         }
+
         @Override
         protected void onPreExecute() {
         }
@@ -196,13 +195,13 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
 
-            getListOfSefareshatASYNC=null;
+            getListOfSefareshatASYNC = null;
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("Group", value);
-            datas.put("Code",level);
+            datas.put("Code", level);
 
             if (isonline) {
                 try {
@@ -243,11 +242,11 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
     public void runAsync() {
 
-        if (getListOfSefareshatASYNC!=null)
+        if (getListOfSefareshatASYNC != null)
             return;
 
-            getListOfSefareshatASYNC = new GetListOfSefareshatASYNC();
-            getListOfSefareshatASYNC.execute();
+        getListOfSefareshatASYNC = new GetListOfSefareshatASYNC();
+        getListOfSefareshatASYNC.execute();
 
     }
 

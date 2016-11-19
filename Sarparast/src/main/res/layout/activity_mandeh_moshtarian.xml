@@ -6,84 +6,119 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="com.example.zikey.sarparast.ActivityAcceptRequests"
-    android:background="#e3dede">
+    android:background="#e3dede"
+    tools:context="com.example.zikey.sarparast.ActivityAcceptRequests">
 
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mhztoolbar"
-        android:background="#0277BD"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent">
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize">
 
         <ImageView
+            android:id="@+id/imgBack"
             android:layout_width="30dp"
-            android:src="@drawable/backsvg"
             android:layout_height="match_parent"
-            android:id="@+id/imgBack" />
+            android:src="@drawable/backsvg" />
+
         <TextView
-            android:layout_marginRight="30dp"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
-            android:paddingLeft="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="ثبت موقعیت"
+            android:id="@+id/txtHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtHeader" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="ثبت موقعیت"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
 
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/row_Mandeh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:focusable="true"
-        android:scrollbars="vertical"
-        android:background="#e3dede"
-        android:focusableInTouchMode="true"
-        android:layout_alignParentStart="false"
-        android:layout_marginBottom="10dp"
-        android:layout_below="@+id/relativeLayout5" />
-
     <RelativeLayout
-        android:orientation="horizontal"
+        android:id="@+id/relativeLayout5"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/relativeLayout5"
-        android:gravity="center_vertical"
-        android:background="#0277BD"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/mhztoolbar"
-        android:layout_centerHorizontal="true">
+        android:background="#0277BD"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <EditText
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/btnSearch"
+            android:layout_toStartOf="@+id/btnSearch"
+            android:layout_weight="1"
+            android:background="#0277BD"
             android:hint="جستجو"
             android:imeOptions="actionSearch"
             android:inputType="text"
-            android:background="#0277BD"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/edtSearch"
-            android:layout_weight="1"
             android:paddingRight="10dp"
-            android:layout_toStartOf="@+id/btnSearch"
-            android:visibility="visible"
-            android:layout_toLeftOf="@+id/btnSearch" />
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:visibility="visible" />
 
         <ImageView
+            android:id="@+id/btnSearch"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:id="@+id/btnSearch"
-            android:scaleType="fitCenter"
-            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/ic_search_black_24dp" />
     </RelativeLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/lyDetails"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout5"
+        android:background="#e3dede">
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/imageView9"
+            android:layout_marginRight="15dp"
+            android:padding="1dp"
+            android:clickable="false"
+
+            android:src="@drawable/yellow_cycle" />
+
+        <TextView
+            android:textSize="16dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/imageView19"
+            android:text="بدون موقعیت"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/row_Mandeh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e3dede"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:scrollbars="vertical"
+        android:layout_below="@+id/lyDetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

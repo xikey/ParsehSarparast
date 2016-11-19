@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.zikey.sarparast.Helpers.NetworkTools;
@@ -37,36 +38,31 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivitySabtMogheyat extends AppCompatActivity   implements   GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
+public class ActivitySabtMogheyat extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    Location mLastLocation;
     GoogleApiClient mGoogleApiClient;
 
-    double l=0.0;
-    double w=0.0;
+    double l = 0.0;
+    double w = 0.0;
 
     private String search = "";
     private int firstIndex = 0;
     private int lastIndex = 100;
     private boolean isLoading = false;
-    private MandehMoshtarianAsync mandehMoshtarianAsync=null;
+    private MandehMoshtarianAsync mandehMoshtarianAsync = null;
 
     GetMyLocationCommunicator communicator;
 
-    private  int ID;
-
+    private int ID;
     private EditText edtSearch;
     private ImageView btnSearch;
-
     private PreferenceHelper preferenceHelper;
-
     private ImageView imgBack;
-
     private RecyclerView row_Mandeh;
-    private   RecyclerView.LayoutManager row_manager;
+    private RecyclerView.LayoutManager row_manager;
     private SabtMogheyatAdapter row_adapter;
 
-    private   ArrayList<MandehMoshtariInfo> MandehMoshtaries = new ArrayList<>();
+    private ArrayList<MandehMoshtariInfo> MandehMoshtaries = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,24 +70,17 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         setContentView(R.layout.activity_mandeh_moshtarian);
 
         row_Mandeh = (RecyclerView) findViewById(R.id.row_Mandeh);
-
-        edtSearch = (EditText) findViewById( R.id.edtSearch);
-        btnSearch= (ImageView) findViewById(R.id.btnSearch);
-
+        edtSearch = (EditText) findViewById(R.id.edtSearch);
+        btnSearch = (ImageView) findViewById(R.id.btnSearch);
 
         preferenceHelper = new PreferenceHelper(this);
-
-        imgBack= (ImageView) findViewById(R.id.imgBack);
-
+        imgBack = (ImageView) findViewById(R.id.imgBack);
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
-
-
         row_Mandeh.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -115,7 +104,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         row_Mandeh.setFocusable(false);
         row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         row_Mandeh.setLayoutManager(row_manager);
-        row_adapter = new SabtMogheyatAdapter( );
+        row_adapter = new SabtMogheyatAdapter();
         row_adapter.setActivity(ActivitySabtMogheyat.this);
         row_adapter.setCustomer(MandehMoshtaries);
         row_Mandeh.setAdapter(row_adapter);
@@ -130,8 +119,8 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 //                  if (TextUtils.isEmpty(edtSearch.getText().toString())) {
                     MandehMoshtaries.clear();
-                    firstIndex=0;
-                    lastIndex=100;
+                    firstIndex = 0;
+                    lastIndex = 100;
                     isLoading = false;
                     search = edtSearch.getText().toString();
                     runMandehMoshtarianAsync();
@@ -140,8 +129,8 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                     MandehMoshtaries.clear();
                     search = edtSearch.getText().toString();
                     isLoading = true;
-                    firstIndex=0;
-                    lastIndex=100;
+                    firstIndex = 0;
+                    lastIndex = 100;
                     runMandehMoshtarianAsync();
 
                     return true;
@@ -155,8 +144,8 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
             public void onClick(View view) {
                 if (TextUtils.isEmpty(edtSearch.getText().toString())) {
                     MandehMoshtaries.clear();
-                    firstIndex=0;
-                    lastIndex=100;
+                    firstIndex = 0;
+                    lastIndex = 100;
                     isLoading = false;
                     search = edtSearch.getText().toString();
                     runMandehMoshtarianAsync();
@@ -165,13 +154,12 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                     MandehMoshtaries.clear();
                     search = edtSearch.getText().toString();
                     isLoading = true;
-                    firstIndex=0;
-                    lastIndex=100;
+                    firstIndex = 0;
+                    lastIndex = 100;
                     runMandehMoshtarianAsync();
                 }
             }
         });
-
 
 
         final LinearLayoutManager layoutManager = (LinearLayoutManager) row_Mandeh.getLayoutManager();
@@ -225,9 +213,9 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
     }
 
-    public class MandehMoshtarianAsync extends AsyncTask<Void,String,String> {
+    public class MandehMoshtarianAsync extends AsyncTask<Void, String, String> {
 
-        Boolean isonline= NetworkTools.isOnline(ActivitySabtMogheyat.this);
+        Boolean isonline = NetworkTools.isOnline(ActivitySabtMogheyat.this);
         ArrayList<MandehMoshtariInfo> newData = new ArrayList<>();
 
         ProgressDialog dialog;
@@ -235,7 +223,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         @Override
         protected void onPostExecute(String state) {
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivitySabtMogheyat.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -253,21 +241,16 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
             if (state.equals("Online")) {
 
 
-
-
                 row_adapter.setCommunicator(new GetMyLocationCommunicator() {
                     @Override
                     public void onClick(int listener) {
                         getMyLocation();
                         ID = listener;
-                        if (l!=0.0){
+                        if (l != 0.0) {
 
                             new SetLocationAsync().execute();
 
-                        }
-
-                        else if (l==0.0)
-                        {
+                        } else if (l == 0.0) {
 
                         }
                     }
@@ -275,12 +258,11 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
                 row_adapter.addCustomer(newData);
 
-                mandehMoshtarianAsync=null;
+                mandehMoshtarianAsync = null;
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-            else  if (state.equals("NotOnline")){
+            } else if (state.equals("NotOnline")) {
 
                 new AlertDialog.Builder(ActivitySabtMogheyat.this)
                         .setCancelable(false)
@@ -308,15 +290,15 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
         @Override
         protected String doInBackground(Void... voids) {
 
-            mandehMoshtarianAsync=null;
+            mandehMoshtarianAsync = null;
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
-            String tokenid =  preferenceHelper.getString(preferenceHelper.TOKEN_ID);
+            String tokenid = preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
-            datas.put("TokenID",tokenid);
-            datas.put("search",search);
-            datas.put("firstIndex",firstIndex);
-            datas.put("lastIndex",lastIndex);
+            datas.put("TokenID", tokenid);
+            datas.put("search", search);
+            datas.put("firstIndex", firstIndex);
+            datas.put("lastIndex", lastIndex);
 
             if (isonline) {
 
@@ -326,7 +308,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
                         SoapObject sp = (SoapObject) request2.getProperty(i);
-                        Log.e("iiiiissdxsdii", "  Soap"+sp);
+                        Log.e("iiiiissdxsdii", "  Soap" + sp);
 
                         MandehMoshtariInfo mandeh = new MandehMoshtariInfo();
                         mandeh.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
@@ -358,7 +340,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     }
 
 
-    private void getMyLocation(){
+    private void getMyLocation() {
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -403,10 +385,12 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         }
                     }).create().show();
         }
-    };
+    }
+
+    ;
 
 
-    private void gpsOnorOf(){
+    private void gpsOnorOf() {
 
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -442,13 +426,14 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         }
                     }).create().show();
         }
-    };
+    }
+
+    ;
 
     @Override
     protected void onStart() {
 
         mGoogleApiClient.connect();
-
 
 
         super.onStart();
@@ -460,22 +445,22 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     }
 //____________________________Async Class___________________________________________________________\\
 
-    public class SetLocationAsync extends AsyncTask<Void,String,String> {
+    public class SetLocationAsync extends AsyncTask<Void, String, String> {
 
         String Latitude;
         String Longitude;
 
 
-        private Boolean isonline= NetworkTools.isOnline(ActivitySabtMogheyat.this);
+        private Boolean isonline = NetworkTools.isOnline(ActivitySabtMogheyat.this);
 
-        private String temp="";
-        private   ProgressDialog dialog;
+        private String temp = "";
+        private ProgressDialog dialog;
 
 
         @Override
         protected void onPostExecute(String state) {
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivitySabtMogheyat.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -500,7 +485,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         .setMessage(" موقعیت جدید با موفقیت ثبت شد")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                if (MandehMoshtaries!=null) {
+                                if (MandehMoshtaries != null) {
                                     MandehMoshtaries.clear();
                                     new MandehMoshtarianAsync().execute();
                                 }
@@ -510,9 +495,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                         })
                         .setIcon(R.drawable.eror_dialog)
                         .show();
-            }
-
-            else  if (state.equals("NotOnline")){
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivitySabtMogheyat.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -543,10 +526,10 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
 
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("customerID", ID);
-            datas.put("W",Latitude );
-            datas.put("L",Longitude );
+            datas.put("W", Latitude);
+            datas.put("L", Longitude);
 
             if (isonline) {
                 try {
@@ -554,10 +537,10 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_SettCustomers_Location", datas);
 
 
-                    temp=(NetworkTools.getSoapPropertyAsNullableString(request2, 0).toString());
+                    temp = (NetworkTools.getSoapPropertyAsNullableString(request2, 0).toString());
 
 
-                    if (temp.equals("")){
+                    if (temp.equals("")) {
                         return null;
                     }
 
@@ -573,23 +556,21 @@ public class ActivitySabtMogheyat extends AppCompatActivity   implements   Googl
     }
 
 
-
-    private  void runMandehMoshtarianAsync(){
-        if (mandehMoshtarianAsync==null){
+    private void runMandehMoshtarianAsync() {
+        if (mandehMoshtarianAsync == null) {
             mandehMoshtarianAsync = new MandehMoshtarianAsync();
             mandehMoshtarianAsync.execute();
-        }
-        else {
+        } else {
             return;
         }
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-                super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
 
-        if (requestCode==1200&&resultCode==RESULT_OK){
+        if (requestCode == 1200 && resultCode == RESULT_OK) {
             MandehMoshtaries.clear();
 
             runMandehMoshtarianAsync();

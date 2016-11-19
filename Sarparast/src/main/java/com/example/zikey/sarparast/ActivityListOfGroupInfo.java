@@ -22,19 +22,14 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
 
     private PreferenceHelper preferenceHelper;
 
-   private   ImageView imgBack;
-   private  String groupName;
-   private TextView txtGroup;
+    private ImageView imgBack;
+    private String groupName;
+    private TextView txtGroup;
 
-   private TextView txtForoosh;
-   private TextView txtBargasht;
-   private TextView txtKhales;
-   private TextView txtTasvieN;
-
-
-
-
-
+    private TextView txtForoosh;
+    private TextView txtBargasht;
+    private TextView txtKhales;
+    private TextView txtTasvieN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +38,12 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
 
         preferenceHelper = new PreferenceHelper(this);
 
-        imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
         txtGroup = (TextView) findViewById(R.id.txtNumber);
-        txtForoosh= (TextView) findViewById(R.id.txtTForoosh);
-        txtBargasht= (TextView) findViewById(R.id.txtBargasht);
-        txtKhales= (TextView) findViewById(R.id.txtKhales);
-        txtTasvieN= (TextView) findViewById(R.id.txtTasvieN);
+        txtForoosh = (TextView) findViewById(R.id.txtTForoosh);
+        txtBargasht = (TextView) findViewById(R.id.txtBargasht);
+        txtKhales = (TextView) findViewById(R.id.txtKhales);
+        txtTasvieN = (TextView) findViewById(R.id.txtTasvieN);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +60,8 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
 
     }
 
-    public class GroupVisitorAsync extends AsyncTask<Void,String,String> {
-        Boolean isonline= NetworkTools.isOnline(ActivityListOfGroupInfo.this);
+    public class GroupVisitorAsync extends AsyncTask<Void, String, String> {
+        Boolean isonline = NetworkTools.isOnline(ActivityListOfGroupInfo.this);
         GroupInfo gi = new GroupInfo();
 
         ProgressDialog dialog;
@@ -75,7 +70,7 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
         @Override
         protected void onPostExecute(String state) {
 
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivityListOfGroupInfo.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -97,8 +92,7 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-            else  if (state.equals("NotOnline")){
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivityListOfGroupInfo.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -128,8 +122,8 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             HashMap<String, Object> datas = new HashMap<String, Object>();
 
-            datas.put("TokenID",preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
-            datas.put("group",groupName);
+            datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
+            datas.put("group", groupName);
 
             if (isonline) {
                 try {
@@ -150,11 +144,11 @@ public class ActivityListOfGroupInfo extends AppCompatActivity {
                 return "Online";
             }
             return "NotOnline";
-            }
         }
-
-
     }
+
+
+}
 
 
 

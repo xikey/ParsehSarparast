@@ -106,7 +106,6 @@ public class Fragment_Customers5Vijegi extends DialogFragment   {
 
         btnCall1= (ImageView) view.findViewById(R.id.btnCall1);
 
-
         lyEror= (RelativeLayout) view.findViewById(R.id.lyEror);
         lyContent= (RelativeLayout) view.findViewById(R.id.lyContent);
         lyProgress= (RelativeLayout) view.findViewById(R.id.lyProgress);
@@ -115,12 +114,9 @@ public class Fragment_Customers5Vijegi extends DialogFragment   {
         lyContent.setVisibility(View.GONE);
         lyEror.setVisibility(View.GONE);
 
-
-        txtName.setText(name);
-
+        txtName.setText(" (5 ویژگی مشتری) "+name);
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-
         getDialog(). setCancelable(true);
         getDialog().setCanceledOnTouchOutside(true);
 

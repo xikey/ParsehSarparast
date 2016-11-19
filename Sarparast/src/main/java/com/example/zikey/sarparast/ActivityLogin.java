@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,6 +66,7 @@ public class ActivityLogin extends AppCompatActivity {
         login = (Button) findViewById(R.id.btnLogin);
         lyHead = (LinearLayout) findViewById(R.id.lyrt);
 
+        initVersionName();
         preferenceHelper = new PreferenceHelper(this);
 
         deviceInfo = DeviceInfos.getDeviceModel() + " " + DeviceInfos.getAndroidVersion();
@@ -280,5 +283,18 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
+    public void initVersionName() {
+        TextView txtParseh = (TextView) findViewById(R.id.textView2);
+        PackageManager manager = getApplicationContext().getPackageManager();
+        PackageInfo info;
+        try {
+            info = manager.getPackageInfo(getApplicationContext().getPackageName(), 0);
+            String version = info.versionName;
+            txtParseh.setText(txtParseh.getText() + " - v." + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

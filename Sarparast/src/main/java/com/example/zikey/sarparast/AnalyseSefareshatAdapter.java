@@ -61,6 +61,7 @@ public class AnalyseSefareshatAdapter extends RecyclerView.Adapter<AnalyseSefare
 
     @Override
     public void onBindViewHolder(productoViewHolder productoViewHolder, int i) {
+
         productoViewHolder.txtName.setText(item.get(i).get_Name());
         productoViewHolder.txtTForosh.setText(item.get(i).get_TForosh());
         productoViewHolder.txtRForosh.setText(item.get(i).get_RForoosh());
@@ -172,7 +173,7 @@ public class AnalyseSefareshatAdapter extends RecyclerView.Adapter<AnalyseSefare
                     manager = act.getFragmentManager();
                     fragmentNahveVosool = new Fragment_NahveVosool();
                     fragmentNahveVosool.setGroupCode(groupCode);
-                    fragmentNahveVosool.setGroupName(txtName.getText().toString());
+                    fragmentNahveVosool.setGroupName("نحوه وصول ـ "+txtName.getText().toString());
                     fragmentNahveVosool.setCgroup(Cgroup);
                     fragmentNahveVosool.setActivity(act);
 
@@ -187,7 +188,7 @@ public class AnalyseSefareshatAdapter extends RecyclerView.Adapter<AnalyseSefare
                     FragmentAnalyseSefareshTargets analyseSefareshTargets = new FragmentAnalyseSefareshTargets();
                     analyseSefareshTargets.setActivity(act);
                     analyseSefareshTargets.setGroupCode(groupCode);
-                    analyseSefareshTargets.setGroupName(txtName.getText().toString());
+                    analyseSefareshTargets.setGroupName(" تارگت ـ "+txtName.getText().toString());
                     analyseSefareshTargets.show(manager,"targets");
 
 
@@ -201,7 +202,7 @@ public class AnalyseSefareshatAdapter extends RecyclerView.Adapter<AnalyseSefare
                     manager = act.getFragmentManager();
                     fragmentAnalyseSefareshDetails = new FragmentAnalyseSefareshDetails();
                     fragmentAnalyseSefareshDetails.setGroupCode(groupCode);
-                    fragmentAnalyseSefareshDetails.setGroupName(txtName.getText().toString());
+                    fragmentAnalyseSefareshDetails.setGroupName("گزارش فروش ـ"+txtName.getText().toString());
                     fragmentAnalyseSefareshDetails.setCgroup(Cgroup);
                     fragmentAnalyseSefareshDetails.setActivity(act);
 

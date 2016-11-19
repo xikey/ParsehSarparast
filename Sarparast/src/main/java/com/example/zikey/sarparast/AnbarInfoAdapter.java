@@ -170,7 +170,7 @@ public class AnbarInfoAdapter extends RecyclerView.Adapter<AnbarInfoAdapter.prod
 
                     Fragment_ProductsTenPropertyOrPrice fragment = new Fragment_ProductsTenPropertyOrPrice();
                     fragment.setActivity(activity);
-                    fragment.setName(txtName.getText().toString());
+                    fragment.setName(" (ویژگی های کالا) "+txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
                     fragment.setChecker("Vijegi");
                     fragment.show(manager,"VijegiKala");
@@ -196,7 +196,7 @@ public class AnbarInfoAdapter extends RecyclerView.Adapter<AnbarInfoAdapter.prod
 
                     Fragment_ProductPriceLevel fragment = new Fragment_ProductPriceLevel();
                     fragment.setActivity(activity);
-                    fragment.setName(txtName.getText().toString());
+                    fragment.setName(" ( سطوح قیمت "+txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
                     fragment.show(manager,"SathGheymat");
                 }

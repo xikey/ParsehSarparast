@@ -1,58 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gauge="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:gauge="http://schemas.android.com/apk/res-auto"
+    android:background="#EEEEEE"
     android:orientation="vertical"
-    tools:context="com.example.zikey.sarparast.ActivityForoosh"
 
-    android:background="#EEEEEE">
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.example.zikey.sarparast.ActivityForoosh">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/mhztoolbar"
-        android:background="#0277BD"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent">
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize">
+
         <ImageView
+            android:id="@+id/imgBack"
             android:layout_width="30dp"
-            android:src="@drawable/backsvg"
             android:layout_height="match_parent"
-            android:id="@+id/imgBack" />
+            android:src="@drawable/backsvg" />
+
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
             android:gravity="center"
-            android:textSize="16sp"
-            android:textColor="#ffffff"
             android:paddingLeft="10dp"
-            android:layout_marginLeft="10dp"
-            android:text=" گروه مشتری (از اول ماه)"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="فروش گروه مشتری (از اول ماه)"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.CardView
 
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        cardUseCompatPadding="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        card_view:cardCornerRadius="5dp"
-        card_view:cardElevation="5dp"
-
-        cardUseCompatPadding="true"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
         android:background="#aab1f7"
         android:paddingLeft="5dp"
-        android:paddingRight="5dp">
+        android:paddingRight="5dp"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="5dp">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
             <RelativeLayout
@@ -62,30 +65,30 @@
                 android:background="#ffffff">
 
                 <ImageView
+                    android:id="@+id/imageView5"
                     android:layout_width="110dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/imageView5"
-                    android:src="@drawable/group_moshtari"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:padding="7dp" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="7dp"
+                    android:src="@drawable/group_moshtari" />
 
                 <TextView
+                    android:id="@+id/txtNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtNumber"
-                    android:textColor="#000000"
-                    android:textSize="25dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="110dp"
                     android:layout_toLeftOf="@+id/imageView5"
                     android:gravity="center"
-                    android:layout_marginLeft="110dp" />
+                    android:textColor="#000000"
+                    android:textSize="25dp" />
 
                 <ImageView
+                    android:id="@+id/imageView13"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:id="@+id/imageView13"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginLeft="20dp"
@@ -97,178 +100,180 @@
 
 
             <ScrollView
+                android:id="@+id/scrollView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/scrollView2"
                 android:layout_weight="0.9">
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                    <LinearLayout android:orientation="horizontal"
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="match_parent"
 
                         android:layout_height="45dp"
-                        xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:background="#FFFDE7"
                         android:layout_marginTop="5dp"
-                        android:gravity="center_vertical">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="right">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txtTForoosh"
-                                android:textSize="18sp"
-                                android:textColor="#000000"
-                                android:layout_marginRight="5dp" />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="right">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ریال فروش"
-                                android:id="@+id/textView"
-                                android:textSize="18sp"
-                                android:textColor="#000000"
-                                android:layout_marginRight="3dp"
-                                android:paddingRight="5dp" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="#FAFAFA"
-                        android:layout_marginTop="0dp"
-                        android:gravity="center_vertical">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="right" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/txtBargasht"
-                                android:textSize="18sp"
-                                android:textColor="#000000"
-                                android:layout_marginRight="5dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="50"
-                            android:gravity="right" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="ریال برگشتی"
-                                android:id="@+id/textView4"
-                                android:textSize="18sp"
-                                android:textColor="#000000"
-                                android:layout_marginRight="3dp"
-                                android:paddingRight="5dp" />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
                         android:background="#FFFDE7"
-                        android:layout_marginTop="0dp"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="50"
-                            android:gravity="right" >
+                            android:gravity="right">
 
                             <TextView
+                                android:id="@+id/txtTForoosh"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/txtKhales"
-                                android:textSize="18sp"
+                                android:layout_marginRight="5dp"
                                 android:textColor="#000000"
-                                android:layout_marginRight="5dp" />
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="50"
-                            android:gravity="right" >
+                            android:gravity="right">
 
                             <TextView
+                                android:id="@+id/textView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="خالص ریالی"
-                                android:id="@+id/textView6"
-                                android:textSize="18sp"
-                                android:textColor="#000000"
                                 android:layout_marginRight="3dp"
-                                android:paddingRight="5dp" />
+                                android:paddingRight="5dp"
+                                android:text="ریال فروش"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="0dp"
+                        android:background="#FAFAFA"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:id="@+id/txtBargasht"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:paddingRight="5dp"
+                                android:text="ریال برگشتی"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
                         </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:background="#FAFAFA"
                         android:layout_marginTop="0dp"
-                        android:gravity="center_vertical">
+                        android:background="#FFFDE7"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="50"
-                            android:gravity="right" >
+                            android:gravity="right">
 
                             <TextView
+                                android:id="@+id/txtKhales"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/txtTasvieN"
-                                android:textSize="18sp"
-                                android:textColor="#ea0000"
-                                android:layout_marginRight="5dp" />
+                                android:layout_marginRight="5dp"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="50"
-                            android:gravity="right" >
+                            android:gravity="right">
 
                             <TextView
+                                android:id="@+id/textView6"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="تسویه نشده"
-                                android:id="@+id/textView10"
-                                android:textSize="18sp"
-                                android:textColor="#ea0000"
                                 android:layout_marginRight="3dp"
-                                android:paddingRight="5dp" />
+                                android:paddingRight="5dp"
+                                android:text="خالص ریالی"
+                                android:textColor="#000000"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginTop="0dp"
+                        android:background="#FAFAFA"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:id="@+id/txtTasvieN"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="5dp"
+                                android:textColor="#ea0000"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="50"
+                            android:gravity="right">
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:paddingRight="5dp"
+                                android:text="تسویه نشده"
+                                android:textColor="#ea0000"
+                                android:textSize="18sp" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -279,10 +284,7 @@
         </LinearLayout>
 
 
-
-
     </android.support.v7.widget.CardView>
-
 
 
 </LinearLayout>

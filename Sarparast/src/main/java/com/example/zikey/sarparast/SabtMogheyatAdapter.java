@@ -179,7 +179,7 @@ public class SabtMogheyatAdapter extends RecyclerView.Adapter<SabtMogheyatAdapte
         private String lastL;
         private String lastW;
 
-//        ImageView btnShowDetails;
+        //        ImageView btnShowDetails;
         ImageView imgSetLocation;
 //        ImageView imgPastLocation;
 
@@ -250,7 +250,7 @@ public class SabtMogheyatAdapter extends RecyclerView.Adapter<SabtMogheyatAdapte
                 @Override
                 public void onClick(View v) {
 
-                     ActivitySetCustomerLocationMap.start(activity,Double.valueOf(lastW), Double.valueOf(lastL),txtName.getText().toString(),txtCode.getText().toString(),1200);
+                    ActivitySetCustomerLocationMap.start(activity, Double.valueOf(lastW), Double.valueOf(lastL), txtName.getText().toString(), txtCode.getText().toString(), 1200);
                 }
             });
 

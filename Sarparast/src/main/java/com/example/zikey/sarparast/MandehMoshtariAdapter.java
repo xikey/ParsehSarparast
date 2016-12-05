@@ -71,11 +71,11 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
     @Override
     public void onBindViewHolder(productoViewHolder productoViewHolder, final int i) {
 
-        productoViewHolder.txtCode.setText("" + item.get(i).get_Code());
-        productoViewHolder.txtName.setText("" + item.get(i).get_Name());
-        productoViewHolder.txtMande.setText("" + item.get(i).get_Mandeh());
-        productoViewHolder.txtVaset.setText("" + item.get(i).get_Vaset());
-        productoViewHolder.txtAddress.setText("" + item.get(i).get_Address());
+        productoViewHolder.txtCode.setText( item.get(i).get_Code());
+        productoViewHolder.txtName.setText( item.get(i).get_Name());
+        productoViewHolder.txtMande.setText( item.get(i).get_Mandeh());
+        productoViewHolder.txtVaset.setText( item.get(i).get_Vaset());
+        productoViewHolder.txtAddress.setText( item.get(i).get_Address());
 
         productoViewHolder.L = item.get(i).get_LastL();
         productoViewHolder.W = item.get(i).get_LastW();
@@ -256,25 +256,27 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
             imgCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (tell != null && mobile != null) {
 
-                    if ((tell.equals("0")) && (mobile.equals("0"))) {
-                        new AlertDialog.Builder(activity)
-                                .setTitle("خطا")
-                                .setMessage("شماره ای به مشتری اختصاص داده نشده است!")
-                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface arg0, int arg1) {
-                                    }
-                                }).create().show();
-                    } else {
+                        if ((tell.equals("0")) && (mobile.equals("0"))) {
+                            new AlertDialog.Builder(activity)
+                                    .setTitle("خطا")
+                                    .setMessage("شماره ای به مشتری اختصاص داده نشده است!")
+                                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface arg0, int arg1) {
+                                        }
+                                    }).create().show();
+                        } else {
 
-                        Fragment_CustomersPhoneNumber showDetails = new Fragment_CustomersPhoneNumber();
-                        showDetails.setName(txtName.getText().toString());
-                        showDetails.setPhone(tell);
-                        showDetails.setMobile(mobile);
-                        showDetails.setActivity(activity);
-                        showDetails.show(manager, "CustomerPhoneNumber");
+                            Fragment_CustomersPhoneNumber showDetails = new Fragment_CustomersPhoneNumber();
+                            showDetails.setName(txtName.getText().toString());
+                            showDetails.setPhone(tell);
+                            showDetails.setMobile(mobile);
+                            showDetails.setActivity(activity);
+                            showDetails.show(manager, "CustomerPhoneNumber");
 
-                        showDetails.setCancelable(true);
+                            showDetails.setCancelable(true);
+                        }
                     }
                 }
             });

@@ -74,7 +74,7 @@ import com.razanPardazesh.supervisor.repo.ReportServerRepo;
 
 import org.ksoap2.serialization.SoapObject;
 
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -135,6 +135,12 @@ public class ActivityMain extends AppCompatActivity
     private String accepted = "0";
     private String notAccepted = "0";
 
+    //khalesForoosh
+    private Double netSaleDay=null;
+    private Double netSaleMonth=null;
+    private TextView txtNetSaleDay;
+    private TextView txtNetSaleMonth;
+
     //PieChart
     private PieChart mChart;
     private RelativeLayout lyProgressPieChart;
@@ -183,7 +189,6 @@ public class ActivityMain extends AppCompatActivity
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
-
         isAFinalRelease = 1;
 
         if (isAFinalRelease == 1) {
@@ -210,6 +215,8 @@ public class ActivityMain extends AppCompatActivity
         runGetPiechartAsync();
         runGetCubicChartInfos();
         initCoveragePercentReport();
+
+        initKhalesForosh();
 
         MyLocationServices.startActionGetLocation(getApplicationContext());
 
@@ -387,20 +394,6 @@ public class ActivityMain extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow)
-//
-// {
-//
-//            if (id == R.id.nav_manage) {
-//
-//        }
-//            else if (id == R.id.nav_share) {
-//
-//        }
         if (id == R.id.nav_changepass) {
 
             Intent intent = new Intent(ActivityMain.this, ActivityChangePass.class);
@@ -1327,10 +1320,10 @@ public class ActivityMain extends AppCompatActivity
 
                 Long dayCovered = reportAnswer.getReport().getTotalCustomers() - reportAnswer.getReport().getNotVisited();
                 txtDayCustomers.setText(reportAnswer.getReport().getTotalCustomers().toString());
-                txtNotProceed.setText( reportAnswer.getReport().getNotVisited().toString());
+                txtNotProceed.setText(reportAnswer.getReport().getNotVisited().toString());
                 txtNotProceedPercen.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(), dayCovered) + " % ");
                 txtDayProceed.setText(dayCovered.toString());
-                txtDayProceedPercent.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(),reportAnswer.getReport().getNotVisited())+" % ");
+                txtDayProceedPercent.setText(coverageProceed(reportAnswer.getReport().getTotalCustomers(), reportAnswer.getReport().getNotVisited()) + " % ");
                 lyCoverageProgress.setVisibility(View.GONE);
 
             }
@@ -1345,12 +1338,19 @@ public class ActivityMain extends AppCompatActivity
 
             if (total == 0) return "0";
             float val = ((((float) (total - visited)) / total) * 100);
-            if (String.valueOf(val).length()>5) {
+            if (String.valueOf(val).length() > 5) {
                 return String.valueOf(val).substring(0, 5);
             }
             return String.valueOf(val);
 
         }
+
+    }
+
+    private void initKhalesForosh() {
+
+        txtNetSaleDay= (TextView) findViewById(R.id.txtNetSaleDay);
+        txtNetSaleMonth= (TextView) findViewById(R.id.txtNetSaleMonth);
 
     }
 

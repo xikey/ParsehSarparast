@@ -145,7 +145,7 @@ public class ActivityListOfBazaryab extends AppCompatActivity {
 
                 @Override
                 public void afterTextChanged(Editable editable) {
-                    row_masirsabt.getFilter().filter(editable.toString());
+                 row_masirsabt.getFilter().filter(editable.toString());
                 }
             });
 

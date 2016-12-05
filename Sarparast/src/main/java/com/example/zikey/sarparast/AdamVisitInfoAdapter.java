@@ -26,9 +26,6 @@ public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdap
     public ArrayList<AdamVisitInfo> itemDump;
 
 
-    //state -1 is VISITOR
-    //state 1 is Kala
-
     private int state;
     private String checker = "0";
 
@@ -50,9 +47,6 @@ public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdap
     public void setState(int state) {
         this.state = state;
     }
-//     public void setItem(ArrayList<SarjamInfo> item) {
-//         this.item = item;
-//     }
 
     public AdamVisitInfoAdapter(ArrayList<AdamVisitInfo> item) {
         this.item = item;

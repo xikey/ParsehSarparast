@@ -317,7 +317,6 @@ public class ActivitySabtMogheyat extends AppCompatActivity implements GoogleApi
                         mandeh.set_LastL(NetworkTools.getSoapPropertyAsNullableString(sp, 5));
                         mandeh.set_LastW(NetworkTools.getSoapPropertyAsNullableString(sp, 6));
 
-
                         newData.add(mandeh);
                     }
 

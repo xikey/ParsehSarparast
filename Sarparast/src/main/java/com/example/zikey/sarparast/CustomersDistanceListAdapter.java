@@ -56,10 +56,10 @@ public class CustomersDistanceListAdapter extends RecyclerView.Adapter<Customers
 
     @Override
     public void onBindViewHolder(CustomersDistanceListAdapter.CustomerViewHolder holder, int position) {
-        holder.txtName.setText("" + item.get(position).get_Name().toString());
-        holder.txtCode.setText("" + item.get(position).get_Code().toString());
-        holder.txtTell.setText("" + item.get(position).get_Tel().toString());
-        holder.txtAddress.setText("" + item.get(position).get_Address().toString());
+        holder.txtName.setText( item.get(position).get_Name());
+        holder.txtCode.setText( item.get(position).get_Code());
+        holder.txtTell.setText( item.get(position).get_Tel());
+        holder.txtAddress.setText(item.get(position).get_Address());
 
         holder.txtDistance.setText("" + item.get(position).get_Distance() + " متر ");
 

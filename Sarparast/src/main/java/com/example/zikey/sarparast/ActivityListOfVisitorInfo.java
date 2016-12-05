@@ -139,7 +139,7 @@ public class ActivityListOfVisitorInfo extends AppCompatActivity {
                 txtSoodR.setText("" + visitor.get_SoodR());
                 txtSoodD.setText("" + visitor.get_SoodD());
 
-                tell = ""+visitor.get_Tell();
+                tell =visitor.get_Tell();
 
                 long starRating = Long.parseLong((""+visitor.get_DarsadF()));
                 long gaugeRating = Long.parseLong((""+visitor.get_DarsadTargetF()));

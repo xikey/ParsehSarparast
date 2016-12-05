@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,9 +26,6 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
     public ArrayList<AdamVisitInfo> item;
     public ArrayList<AdamVisitInfo> itemDump;
 
-
-    //state -1 is VISITOR
-    //state 1 is Kala
 
     private int state;
     private String checker = "0";
@@ -49,9 +48,6 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
     public void setState(int state) {
         this.state = state;
     }
-//     public void setItem(ArrayList<SarjamInfo> item) {
-//         this.item = item;
-//     }
 
     public AdamVisitMoshtarianInfoAdapter(ArrayList<AdamVisitInfo> item) {
         this.item = item;
@@ -76,6 +72,12 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
         productoViewHolder.txtMobile.setText("" + item.get(i).getMobile());
         productoViewHolder.txtAddress.setText("" + item.get(i).getAddress());
         productoViewHolder.txtReason.setText("" + item.get(i).getReason());
+        productoViewHolder.txtComment.setText(item.get(i).getComment());
+
+        productoViewHolder.customerLat = item.get(i).getCustomerLat();
+        productoViewHolder.customerLong = item.get(i).getCustomerLong();
+        productoViewHolder.orderLat = item.get(i).getOrderLat();
+        productoViewHolder.orderLong = item.get(i).getOrderLong();
 
     }
 
@@ -150,7 +152,15 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
     }
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName, txtTime, txtTell, txtMobile, txtAddress, txtReason;
+
+        TextView txtCode, txtName, txtTime, txtTell, txtMobile, txtAddress, txtReason, txtComment;
+
+        LinearLayout lyRoot;
+
+        Double customerLat;
+        Double customerLong;
+        Double orderLat;
+        Double orderLong;
 
 
         public productoViewHolder(final View itemView) {
@@ -163,6 +173,19 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
             txtMobile = (TextView) itemView.findViewById(R.id.txtMobile);
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
             txtReason = (TextView) itemView.findViewById(R.id.txtReason);
+            txtComment = (TextView) itemView.findViewById(R.id.txtComment);
+
+            lyRoot = (LinearLayout) itemView.findViewById(R.id.lyRoot);
+
+            lyRoot.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ActivityAdamVisitMoshtarianMap.start(activity,customerLat,customerLong,orderLat,orderLong);
+
+                }
+            });
+
 
         }
     }

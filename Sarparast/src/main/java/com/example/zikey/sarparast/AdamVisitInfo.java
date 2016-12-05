@@ -15,6 +15,14 @@ public class AdamVisitInfo {
     private String darsad;
     private String reason;
 
+    private String comment;
+
+    private Double customerLat;
+    private Double customerLong;
+    private Double orderLat;
+    private Double orderLong;
+
+
 
 
     public String getName() {
@@ -57,6 +65,26 @@ public class AdamVisitInfo {
         return reason;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public Double getCustomerLat() {
+        return customerLat;
+    }
+
+    public Double getCustomerLong() {
+        return customerLong;
+    }
+
+    public Double getOrderLat() {
+        return orderLat;
+    }
+
+    public Double getOrderLong() {
+        return orderLong;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -95,5 +123,25 @@ public class AdamVisitInfo {
 
     public void setReason(String reason) {
         this.reason = reason;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setCustomerLat(Double customerLat) {
+        this.customerLat = customerLat;
+    }
+
+    public void setCustomerLong(Double customerLong) {
+        this.customerLong = customerLong;
+    }
+
+    public void setOrderLat(Double orderLat) {
+        this.orderLat = orderLat;
+    }
+
+    public void setOrderLong(Double orderLong) {
+        this.orderLong = orderLong;
     }
 }

@@ -219,6 +219,12 @@ public class ActivityListOfAdamVisitMoshjtarian extends AppCompatActivity {
                         item.setAddress(NetworkTools.getSoapPropertyAsNullableString(sp, 5));
                         item.setReason(NetworkTools.getSoapPropertyAsNullableString(sp, 7));
 
+                        item.setComment(NetworkTools.getSoapPropertyAsNullableString(sp, 8));
+                        item.setCustomerLat(Double.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 9)));
+                        item.setCustomerLong(Double.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 10)));
+                        item.setOrderLat(Double.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 11)));
+                        item.setOrderLong(Double.valueOf(NetworkTools.getSoapPropertyAsNullableString(sp, 12)));
+
                         items.add(item);
                     }
 

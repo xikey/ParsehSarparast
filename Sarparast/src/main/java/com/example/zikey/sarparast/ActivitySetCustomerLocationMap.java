@@ -262,7 +262,7 @@ public class ActivitySetCustomerLocationMap extends FragmentActivity implements 
 
         if (mLastLocation != null) {
             float zoomLevel = 17.0f; //This goes up to 21
-            MarkerOptions marker = new MarkerOptions();
+
             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoomLevel));

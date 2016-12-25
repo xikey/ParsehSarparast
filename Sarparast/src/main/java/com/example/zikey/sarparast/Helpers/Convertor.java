@@ -2,8 +2,12 @@ package com.example.zikey.sarparast.Helpers;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Torabi on 9/8/2016.
@@ -25,6 +29,20 @@ public class Convertor {
         int dp = Math.round(px / (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
         return dp;
 
+    }
+
+    public static Date toDate(String dateStr)
+    {
+        if (TextUtils.isEmpty(dateStr))
+            return null;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            return dateFormat.parse(dateStr);
+        } catch (Throwable e) {
+        }
+
+        return null;
     }
 
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * on 05/08/2015.
  */
 public class AdamVisitInfoAdapter extends RecyclerView.Adapter<AdamVisitInfoAdapter.productoViewHolder> implements Filterable {
+
     public ArrayList<AdamVisitInfo> item;
     public ArrayList<AdamVisitInfo> itemDump;
 

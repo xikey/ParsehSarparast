@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.icu.util.Calendar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,10 +25,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
+import com.example.zikey.sarparast.Helpers.Convertor;
 import com.example.zikey.sarparast.Helpers.DeviceInfos;
 import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendarConstants;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendarUtils;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -35,6 +40,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -56,6 +62,7 @@ public class ActivityLogin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login5);
+
 
         userID = (AutoCompleteTextView) findViewById(R.id.username);
         pass = (AutoCompleteTextView) findViewById(R.id.password);
@@ -132,6 +139,9 @@ public class ActivityLogin extends AppCompatActivity {
 
     }
 
+
+
+
     public class LoginAsync extends AsyncTask<Void, String, String> {
         ProgressDialog dialog;
         private String eror;
@@ -180,18 +190,18 @@ public class ActivityLogin extends AppCompatActivity {
                 try {
                     SoapObject request = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), NetworkTools.METHOD_NAME, datas).getProperty(0);
 
-                    if (request.getPropertyCount()==1){
+                    if (request.getPropertyCount() == 1) {
                         eror = "رمز عبور یا نام کاربری اشتباه میباشد";
-                        return  "eror";
+                        return "eror";
                     }
 
                     String tokenId = NetworkTools.getSoapPropertyAsNullableString(request, 0);
 
                     String userName = NetworkTools.getSoapPropertyAsNullableString(request, 2);
 
-                        preferenceHelper.putString(preferenceHelper.TOKEN_ID, tokenId);
-                        preferenceHelper.putString(preferenceHelper.USER_NAME, userName);
-                        return "1";
+                    preferenceHelper.putString(preferenceHelper.TOKEN_ID, tokenId);
+                    preferenceHelper.putString(preferenceHelper.USER_NAME, userName);
+                    return "1";
 
 
                 } catch (Exception e) {
@@ -296,5 +306,6 @@ public class ActivityLogin extends AppCompatActivity {
         }
 
     }
+
 
 }

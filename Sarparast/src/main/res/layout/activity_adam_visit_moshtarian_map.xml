@@ -51,6 +51,8 @@
         android:src="@drawable/pin_end" />
 
     <TextView
+        android:textStyle="bold"
+        android:id="@+id/txtCustomer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mhztoolbar"
@@ -67,9 +69,11 @@
         android:layout_below="@+id/customerpin"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:src="@drawable/placeholderorder" />
+        android:src="@drawable/start_pin" />
 
     <TextView
+        android:textStyle="bold"
+        android:id="@+id/txtOrder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/customerpin"
@@ -78,10 +82,24 @@
         android:layout_toLeftOf="@id/savePin"
         android:text="مکان ثبت عدم سفارش" />
 
+        <TextView
+            android:id="@+id/txtDistance"
+            android:text="مسافت : "
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/txtOrder"
+            android:textStyle="bold"
+            android:textSize="19dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
     <RelativeLayout
 
         android:id="@+id/lyProgress"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/mhztoolbar"

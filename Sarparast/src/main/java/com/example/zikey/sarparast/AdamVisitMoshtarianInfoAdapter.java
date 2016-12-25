@@ -155,7 +155,7 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
 
         TextView txtCode, txtName, txtTime, txtTell, txtMobile, txtAddress, txtReason, txtComment;
 
-        LinearLayout lyRoot;
+        ImageView imgLocation;
 
         Double customerLat;
         Double customerLong;
@@ -175,9 +175,9 @@ public class AdamVisitMoshtarianInfoAdapter extends RecyclerView.Adapter<AdamVis
             txtReason = (TextView) itemView.findViewById(R.id.txtReason);
             txtComment = (TextView) itemView.findViewById(R.id.txtComment);
 
-            lyRoot = (LinearLayout) itemView.findViewById(R.id.lyRoot);
+            imgLocation = (ImageView) itemView.findViewById(R.id.imgLocation);
 
-            lyRoot.setOnClickListener(new View.OnClickListener() {
+            imgLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

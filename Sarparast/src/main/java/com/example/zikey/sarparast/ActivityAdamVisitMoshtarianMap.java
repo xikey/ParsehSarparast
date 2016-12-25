@@ -1,12 +1,13 @@
 package com.example.zikey.sarparast;
 
-import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements OnMapReadyCallback {
+
     private static final String KEY_CUSTOMER_LAT = "CLAT";
     private static final String KEY_CUSTOMER_LONG = "CLONG";
     private static final String KEY_ORDER_LAT = "OLAT";
@@ -31,6 +33,10 @@ public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements 
     private BitmapDescriptor customerPin;
     private BitmapDescriptor orderPin;
 
+    private TextView txtCustomer;
+    private TextView txtOrder;
+    private TextView txtDistance;
+
     private GoogleMap mMap;
 
     @Override
@@ -38,6 +44,7 @@ public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adam_visit_moshtarian_map);
 
+        initViews();
         parseIntent();
         initToolbar();
         initMap();
@@ -47,7 +54,7 @@ public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap=googleMap;
+        mMap = googleMap;
 
         pinLocations();
 
@@ -84,7 +91,6 @@ public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements 
     private void parseIntent() {
 
 
-
         Intent intent = getIntent();
 
         if (intent.hasExtra(KEY_CUSTOMER_LAT)) {
@@ -111,35 +117,83 @@ public class ActivityAdamVisitMoshtarianMap extends FragmentActivity implements 
         lyProgress.setVisibility(View.GONE);
 
         customerPin = BitmapDescriptorFactory.fromResource(R.drawable.pin_end);
-        orderPin = BitmapDescriptorFactory.fromResource(R.drawable.placeholderorder);
-        float zoomLevel = 19.0f;
+        orderPin = BitmapDescriptorFactory.fromResource(R.drawable.start_pin);
+        final float zoomLevel = 16.0f;
+
+        LatLng customerLocation = null;
+        LatLng visitorLocation = null;
+
 
         if (customerLat != null && customerLat != 0) {
 
             MarkerOptions marker = new MarkerOptions();
-            LatLng customer = new LatLng(customerLat, customerLong);
+            final LatLng customer = new LatLng(customerLat, customerLong);
+            customerLocation = customer;
             marker.position(customer);
             marker.title("مکان مشتری");
             marker.icon(customerPin);
             mMap.addMarker(marker);
+
+            txtCustomer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(customer, zoomLevel));
+
+                }
+            });
 
         }
 
         if (orderLat != null && orderLat != 0) {
 
             MarkerOptions marker = new MarkerOptions();
-            LatLng visitor = new LatLng(orderLat, orderLong);
+            final LatLng visitor = new LatLng(orderLat, orderLong);
+            visitorLocation = visitor;
             marker.position(visitor);
             marker.title("مکان ثبت");
             marker.icon(orderPin);
             mMap.addMarker(marker);
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(visitor, zoomLevel));
 
-            return;
+            txtOrder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(visitor, zoomLevel));
+
+                }
+            });
+
         }
+
+        calculateDistance(customerLocation,visitorLocation);
 
 
     }
 
+    private void initViews() {
+
+        txtCustomer = (TextView) findViewById(R.id.txtCustomer);
+        txtOrder = (TextView) findViewById(R.id.txtOrder);
+        txtDistance = (TextView) findViewById(R.id.txtDistance);
+
+    }
+
+    private void calculateDistance(LatLng location1, LatLng location2) {
+        txtDistance.setText("مسافت: نامشخص");
+
+        if (location1 == null || location2 == null)
+            return;
+
+        float[] results = new float[1];
+        Double lat1 = location1.latitude;
+        Double long1 = location1.longitude;
+        Double lat2 = location2.latitude;
+        Double long2 = location2.longitude;
+        Location.distanceBetween(lat1, long1, lat2, long2, results);
+
+        txtDistance.setText("مسافت: "+String.valueOf(Math.round(results[0])) + "متر");
+
+
+    }
 
 }

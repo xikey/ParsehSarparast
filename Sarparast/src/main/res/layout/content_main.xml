@@ -69,14 +69,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#e3dede"
-
                     android:orientation="vertical">
 
 
                     <android.support.v7.widget.CardView
                         app:cardCornerRadius="0dp"
                         android:padding="1dp"
-
                         app:cardBackgroundColor="#039BE5"
                         app:cardElevation="0dp"
                         android:layout_marginTop="15dp"
@@ -86,12 +84,13 @@
                         android:layout_height="wrap_content">
 
                          <RelativeLayout
-                             android:visibility="visible"
+                             android:visibility="gone"
                              android:gravity="right"
                              android:layout_width="match_parent"
                              android:layout_height="wrap_content">
 
                              <TextView
+
                                  android:textSize="15sp"
                                  android:textStyle="bold"
                                  android:textColor="#ffffff"
@@ -148,7 +147,7 @@
                          </RelativeLayout>
 
                         <RelativeLayout
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:gravity="center"
                             android:layout_width="match_parent"
                             android:layout_height="50dp">

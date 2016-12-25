@@ -265,9 +265,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linearLayout90"
                     android:layout_centerHorizontal="true"
-                    android:paddingBottom="15dp"
                     android:gravity="right"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:id="@+id/txtComment"
@@ -290,6 +290,35 @@
                         android:textSize="16sp" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout12"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_below="@+id/linearLayout46"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <View
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="1dp"
+                        android:background="#55000000">
+
+                    </View>
+
+                    <ImageView
+                        android:alpha="0.7"
+                        android:id="@+id/imgLocation"
+                        android:background="@drawable/ic_location_black"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="10dp" />
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/lyButtom"
@@ -318,7 +347,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:background="#607D8B"
-                    android:orientation="vertical"></LinearLayout>
+                    android:orientation="vertical">
+
+                </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
 

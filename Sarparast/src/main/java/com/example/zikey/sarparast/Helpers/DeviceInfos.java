@@ -9,15 +9,13 @@ import android.text.format.DateFormat;
 
 public class DeviceInfos {
 
-    public static String getDeviceModel(){
-        return Build.BRAND+" "+Build.MODEL;
+    public static String getDeviceModel() {
+        return Build.BRAND + " " + Build.MODEL;
     }
 
-    public static String getAndroidVersion(){
-
-        return String.valueOf("Android "+Build.VERSION.RELEASE);
+    public static String getAndroidVersion() {
+        return String.valueOf("Android " + Build.VERSION.RELEASE);
     }
-
 
 
 }

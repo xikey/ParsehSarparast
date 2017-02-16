@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edited_customer_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.razanPardazesh.supervisor.EditedCustomerListActivity">
+
+    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mhztoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/backsvg" />
+
+        <TextView
+            android:id="@+id/txtHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="30dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/mhztoolbar"
+        android:background="#0277BD"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#0277BD"
+            android:maxLines="1"
+           android:inputType="text"
+            android:enabled="true"
+            android:imeOptions="actionSearch"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center|right"
+            android:hint="جستجو"
+            android:paddingRight="40dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#f0ffffff" />
+
+        <ImageView
+            android:id="@+id/imgSearch"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="#0277BD"
+            android:padding="2dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_search_black_24dp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvCustomers"
+        android:layout_below="@id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:alpha="0.4"
+        android:visibility="gone"
+        android:id="@+id/lyProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mhztoolbar"
+        android:background="#ffffff">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

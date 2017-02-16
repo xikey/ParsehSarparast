@@ -199,53 +199,6 @@ public class SabtMogheyatAdapter extends RecyclerView.Adapter<SabtMogheyatAdapte
 
 //            btnShowDetails = (ImageView) itemView.findViewById(R.id.btnShowDetails);
             imgSetLocation = (ImageView) itemView.findViewById(R.id.imgSetLocation);
-//            imgPastLocation = (ImageView) itemView.findViewById(R.id.imgPastLocation);
-
-//            lyRootr = (RelativeLayout) itemView.findViewById(R.id.lyRootReq);
-
-
-//            btnShowDetails.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View view) {
-//
-//                    Intent intent = new Intent(activity, ActivityGoogleMap.class);
-//                    intent.putExtra("state", "MyNearCustomers");
-//                    activity.startActivity(intent);
-//
-//                }
-//            });
-
-
-//            imgPastLocation.setOnClickListener(new View.OnClickListener() {
-//
-//                @Override
-//                public void onClick(View view) {
-//
-//                    if (!lastL.equals("0") || !lastW.equals("0")) {
-//                        Intent intent = new Intent(activity, ActivityGoogleMap.class);
-//                        intent.putExtra("state", "CustomerPastLocation");
-//                        intent.putExtra("Lat", lastW);
-//                        intent.putExtra("Long", lastL);
-//
-//                        activity.startActivity(intent);
-//                    } else {
-//
-//                        new AlertDialog.Builder(activity)
-//                                .setCancelable(false)
-//                                .setTitle("خطا")
-//                                .setMessage("موقعیت این مشتری ثبت نشده است")
-//                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int which) {
-//
-//                                    }
-//                                })
-//                                .setIcon(R.drawable.eror_dialog)
-//                                .show();
-//                    }
-//                }
-//            });
-
             imgSetLocation.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

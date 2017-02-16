@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zikey.sarparast"
-    android:versionCode="950921"
-    android:versionName="95.09.21">
+    android:versionCode="951026"
+    android:versionName="95.10.26">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -219,11 +219,23 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.razanPardazesh.supervisor.CoveragePercentageActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ActivityAdamVisitMoshtarianMap"
             android:label="@string/title_activity_adam_visit_moshtarian_map"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.razanPardazesh.supervisor.EditedCustomerListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MHZ" />
+        <activity
+            android:name="com.razanPardazesh.supervisor.EditedCustomerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MHZ"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.razanPardazesh.supervisor.LocationOnMapActivity"
+            android:label="@string/title_activity_location_on_map"></activity>
     </application>
 
 </manifest>

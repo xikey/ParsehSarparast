@@ -91,7 +91,6 @@ public class ActivitySabtMogheyat extends AppCompatActivity implements GoogleApi
             }
         });
 
-
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addConnectionCallbacks(this)
@@ -99,7 +98,6 @@ public class ActivitySabtMogheyat extends AppCompatActivity implements GoogleApi
                     .addApi(LocationServices.API)
                     .build();
         }
-
 
         row_Mandeh.setFocusable(false);
         row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -109,9 +107,7 @@ public class ActivitySabtMogheyat extends AppCompatActivity implements GoogleApi
         row_adapter.setCustomer(MandehMoshtaries);
         row_Mandeh.setAdapter(row_adapter);
 
-
         runMandehMoshtarianAsync();
-
 
         edtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

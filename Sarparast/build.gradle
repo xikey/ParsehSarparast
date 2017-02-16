@@ -8,8 +8,8 @@ android {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 950921
-        versionName "95.09.21"
+        versionCode 951026
+        versionName "95.10.26"
 
         // Enabling multidex support.
         multiDexEnabled true

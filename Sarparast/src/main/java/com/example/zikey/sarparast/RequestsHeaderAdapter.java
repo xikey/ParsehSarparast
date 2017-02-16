@@ -164,15 +164,7 @@ public class RequestsHeaderAdapter extends RecyclerView.Adapter<RequestsHeaderAd
            lyRootr.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
-//
-//                    id = Integer.parseInt( txtShomareSefaresh.getText().toString());
-//                    ActivitySefareshDetails.Price=txtPrice.getText().toString();
-//
-//                    G.ID=id;
-//                    Fragment_AcceptRequestsDialog myDialog = new Fragment_AcceptRequestsDialog();
-//                    myDialog.show(ActivityAcceptRequests.manager,"انتخواب عملیات ");
-//                    myDialog.setCancelable(true);
-//
+
                   Intent intent = new Intent(activity,ActivityAcceptRequests.class);
                   intent.putExtra("Code",code);
                    activity.startActivity(intent);

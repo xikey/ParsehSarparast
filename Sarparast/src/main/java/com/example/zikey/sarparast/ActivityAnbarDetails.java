@@ -253,6 +253,7 @@ public class ActivityAnbarDetails extends AppCompatActivity {
                 super.onPreExecute();
             }
         }
+
         @Override
         protected String doInBackground(Void... voids) {
 

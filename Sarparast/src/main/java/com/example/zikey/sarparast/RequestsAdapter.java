@@ -56,6 +56,7 @@ public class RequestsAdapter  extends RecyclerView.Adapter<RequestsAdapter.produ
 
     @Override
     public void onBindViewHolder(productoViewHolder productoViewHolder, final int i) {
+
         productoViewHolder. txtShomareSefaresh  .setText(""+item.get(i).get_SefareshID());
         productoViewHolder. txtDate             .setText(""+item.get(i).get_OrderDate());
         productoViewHolder. txtCodeMoshtari     .setText(""+item.get(i).get_CodeMoshtari());
@@ -416,7 +417,7 @@ else {
                                         ActivityAcceptRequests.state = "paused";
                                         activity.startActivity(intent);
 
-//                                    G.currentActivity.finish();
+
                                     }
                                 }).create().show();
                     }
@@ -424,24 +425,6 @@ else {
             });
 
 
-//            lyRootr.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    id = Integer.parseInt( txtShomareSefaresh.getText().toString());
-//                    ActivitySefareshDetails.Price=txtPrice.getText().toString();
-//
-//                    G.ID=id;
-//                    Fragment_AcceptRequestsDialog myDialog = new Fragment_AcceptRequestsDialog();
-//                    myDialog.show(ActivityAcceptRequests.manager,"انتخواب عملیات ");
-//                    myDialog.setCancelable(true);
-//
-////                    Intent intent = new Intent(G.currentActivity,ActivityListOfGroupInfo.class);
-////                   // intent.putExtra("Group_Asli",code);
-////                    G.currentActivity.startActivity(intent);
-//
-//                }
-//            });
         }
     }
 

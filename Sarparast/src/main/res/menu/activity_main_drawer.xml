@@ -30,9 +30,14 @@
                 android:icon="@drawable/ic_managment_ind_white_24dp"
                 android:title="مدیریت ویزیتور ها" />
             <item
+                android:id="@+id/nav_customers_edit"
+                android:icon="@drawable/ic_mode_edit_black_24dp"
+                android:title="درخواست ویرایش اطلاعات " />
+            <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/exit"
                 android:title="خروج" />
+
 
         </menu>
     </item>

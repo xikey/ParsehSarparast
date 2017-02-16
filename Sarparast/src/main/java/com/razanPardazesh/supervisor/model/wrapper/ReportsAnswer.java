@@ -41,12 +41,10 @@ public class ReportsAnswer extends ServerAnswer {
                     JSONObject obj = array.getJSONObject(i);
                     Report r = new Report();
                     r.fillByJson(obj);
-
                     reports.add(r);
                 }
 
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 LogWrapper.loge("ReportAnswer_fillByJson_Exception: ", ex);
             }
         }

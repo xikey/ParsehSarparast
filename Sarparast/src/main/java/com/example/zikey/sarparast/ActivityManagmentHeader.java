@@ -14,7 +14,6 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zikey.sarparast.Helpers.FontApplier;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
@@ -54,6 +52,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
     private CheckBox chkCanUse;
     private CheckBox chkAllCustomers;
     private CheckBox chkCanUpdate;
+    private CheckBox chkNeedGPS;
 
     private ManagmentInfo managmentModify = new ManagmentInfo();
     private ManagmentInfo managmentInfo = new ManagmentInfo();
@@ -99,7 +98,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
 
         } else if (value == 0) {
             checkBox.setChecked(false);
-            if (layout != null) ltDistance.setVisibility(View.VISIBLE);
+            if (layout != null) layout.setVisibility(View.VISIBLE);
         }
     }
 
@@ -140,6 +139,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
         chkCanUse = (CheckBox) findViewById(R.id.chkCanUse);
         chkAllCustomers = (CheckBox) findViewById(R.id.chkAllCustomers);
         chkCanUpdate = (CheckBox) findViewById(R.id.chkCanUpdate);
+        chkNeedGPS = (CheckBox) findViewById(R.id.chkNeedGPS);
 
         ltDistance = (RelativeLayout) findViewById(R.id.lyDistance);
 
@@ -236,6 +236,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                     managmentInfo.setCanReadAllCustomer(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 4)));
                     managmentInfo.setCanUpdate(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 5)));
                     managmentInfo.setForceToLoguot(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 6)));
+                    managmentInfo.setNeedGPS(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 7)));
 
                     managmentModify.setCode(NetworkTools.getSoapPropertyAsNullableString(request2, 0));
                     managmentModify.setCanOrder(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 2)));
@@ -244,6 +245,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                     managmentModify.setCanReadAllCustomer(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 4)));
                     managmentModify.setCanUpdate(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 5)));
                     managmentModify.setForceToLoguot(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 6)));
+                    managmentModify.setNeedGPS(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 7)));
 
 //                    Log.e("kkk",""+managmentInfo.getCanOrder()  +"  "+managmentInfo.getDistance());
 //                    Log.e("kkk2",""+managmentModify.getCanOrder() +"  "+managmentModify.getDistance());
@@ -271,6 +273,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                 checkboxChanger(managmentModify.getCanRegister(), chkCanUse, null);
                 checkboxChanger(managmentModify.getCanUpdate(), chkCanUpdate, null);
                 checkboxChanger(managmentModify.getCanReadAllCustomer(), chkAllCustomers, null);
+                checkboxChanger(managmentModify.getNeedGPS(), chkNeedGPS, null);
 
                 edtDistance.setText("" + managmentModify.getDistance());
 
@@ -344,6 +347,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
             datas.put("canReadAllCustomer", managmentModify.getCanReadAllCustomer());
             datas.put("forceToUpdate", managmentModify.getCanUpdate());
             datas.put("forceToLoguot", managmentModify.getForceToLoguot());
+            datas.put("needGPS", managmentModify.getNeedGPS());
 
             if (isonline) {
 
@@ -393,11 +397,10 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                         })
                         .setIcon(R.drawable.eror_dialog)
                         .show();
-            }
-else {
+            } else {
 
 
-                if (s.equals("1")||s.equals("2")||s.equals("3")||s.equals("4")||s.equals("5")) {
+                if (s.equals("1") || s.equals("2") || s.equals("3") || s.equals("4") || s.equals("5")) {
 
                     new AlertDialog.Builder(ActivityManagmentHeader.this)
                             .setCancelable(false)
@@ -413,6 +416,7 @@ else {
                                     managmentInfo.setCanReadAllCustomer(managmentModify.getCanReadAllCustomer());
                                     managmentInfo.setCanUpdate(managmentModify.getCanUpdate());
                                     managmentInfo.setForceToLoguot(managmentModify.getForceToLoguot());
+                                    managmentInfo.setNeedGPS(managmentModify.getNeedGPS());
 
                                     isanythingChanged();
 
@@ -735,6 +739,27 @@ else {
                 } else if (!chkCanUpdate.isChecked()) {
 
                     managmentModify.setCanUpdate(0);
+
+                }
+
+                isanythingChanged();
+            }
+        });
+
+        chkNeedGPS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+                //can register is canUse
+
+                if (chkNeedGPS.isChecked()) {
+
+                    managmentModify.setNeedGPS(1);
+
+                } else if (!chkNeedGPS.isChecked()) {
+
+                    managmentModify.setNeedGPS(0);
 
                 }
 

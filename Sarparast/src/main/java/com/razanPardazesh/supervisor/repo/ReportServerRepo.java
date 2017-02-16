@@ -9,7 +9,6 @@ import com.razanPardazesh.supervisor.model.wrapper.ReportsAnswer;
 import com.razanPardazesh.supervisor.repo.iRepo.IReport;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -38,7 +37,6 @@ public class ReportServerRepo implements IReport {
 
             if (request == null) {
                 reportAnswer.setMessage("empty");
-
             }
 
             JSONObject jsonObject = new JSONObject(request);

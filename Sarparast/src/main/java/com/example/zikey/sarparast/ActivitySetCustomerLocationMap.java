@@ -94,7 +94,6 @@ public class ActivitySetCustomerLocationMap extends FragmentActivity implements 
                     .build();
         }
 
-
     }
 
     @Override

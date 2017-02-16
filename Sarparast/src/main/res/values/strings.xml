@@ -55,4 +55,18 @@
     <string name="coverage_proceed_info">در این بخش می توان میزان پوشش دهی امروز مشتریان توسط مشاوران فروش را مشاهده کرد. صفر بودن تعداد مشتریان بدین معناست که شما برای مشاوران فروش خود مشتریانی را به عنوان تارگت مشخص ننموده اید.</string>
     <string name="title_activity_adam_visit_moshtarian_map">Map</string>
 
+     <string name="managment_needGPS_describtion1"> تمامی فعالیت های ویزیتورها نیازمند روشن بودن gps می باشد.
+ \nنکته: در صورتی که این تنظیم فعال باشد ویزیتور دیگر نمیتواند فعالیت هایی مانند به روز رسانی، ورود به برنامه، ارسال سفارشات، دریافت موجودی کالا، مشاهده اطلاعاات مشتریان و ویرایش سفارشات ارسالی امروز را بدون روشن نمودن سنسورgps خود انجام دهد
+ \nنکته: روشن بودن سنسور gps  تضمین ارسال موقعیت کاربر به سرور نیست.
+</string>
+
+
+    <string name="name">نام</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="tellphone">تلفن</string>
+    <string name="mobile">تلفن همراه</string>
+    <string name="address">آدرس</string>
+    <string name="title_activity_location_on_map">Map</string>
+
+
 </resources>

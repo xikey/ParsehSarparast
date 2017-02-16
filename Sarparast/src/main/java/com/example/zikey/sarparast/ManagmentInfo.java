@@ -13,6 +13,7 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
     private int CanUpdate;
     private int forceToLoguot;
     private int turner;
+    private int needGPS;
 
     public int getTurner() {
         return turner;
@@ -78,6 +79,14 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
         this.distance = distance;
     }
 
+    public int getNeedGPS() {
+        return needGPS;
+    }
+
+    public void setNeedGPS(int needGPS) {
+        this.needGPS = needGPS;
+    }
+
     @Override
     public int compareTo(ManagmentInfo another) {
         if (getCanRegister() < another.getCanRegister())
@@ -113,10 +122,14 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
         if (getForceToLoguot() < another.getForceToLoguot())
             return -1;
 
-          if (getForceToLoguot() > another.getForceToLoguot())
+        if (getForceToLoguot() > another.getForceToLoguot())
             return 1;
 
+        if (getNeedGPS() < another.getNeedGPS())
+            return -1;
 
+        if (getNeedGPS() > another.getNeedGPS())
+            return 1;
 
         return 0;
     }

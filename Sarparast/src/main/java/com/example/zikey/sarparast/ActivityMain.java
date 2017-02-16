@@ -69,6 +69,7 @@ import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.razanPardazesh.supervisor.CoveragePercentageActivity;
+import com.razanPardazesh.supervisor.EditedCustomerListActivity;
 import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
 import com.razanPardazesh.supervisor.repo.ReportServerRepo;
 
@@ -136,8 +137,8 @@ public class ActivityMain extends AppCompatActivity
     private String notAccepted = "0";
 
     //khalesForoosh
-    private Double netSaleDay=null;
-    private Double netSaleMonth=null;
+    private Double netSaleDay = null;
+    private Double netSaleMonth = null;
     private TextView txtNetSaleDay;
     private TextView txtNetSaleMonth;
 
@@ -189,7 +190,7 @@ public class ActivityMain extends AppCompatActivity
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
 
-        isAFinalRelease = 1;
+        isAFinalRelease = 0;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -414,7 +415,11 @@ public class ActivityMain extends AppCompatActivity
         } else if (id == R.id.nav_managment) {
 
             ActivityManagmentFooter.start(ActivityMain.this);
+        } else if (id == R.id.nav_customers_edit) {
+            EditedCustomerListActivity.start(ActivityMain.this);
+
         } else if (id == R.id.nav_exit) {
+
             new AlertDialog.Builder(this)
                     .setTitle("خروج")
                     .setMessage("مایل به بستن برنامه میباشید؟")
@@ -432,7 +437,6 @@ public class ActivityMain extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     protected void onDestroy() {
@@ -463,7 +467,6 @@ public class ActivityMain extends AppCompatActivity
         @Override
         protected void onPostExecute(Void aVoid) {
 
-
             row_khales = (RecyclerView) findViewById(R.id.row_khales);
             row_khales.setFocusable(false);
             row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -471,7 +474,6 @@ public class ActivityMain extends AppCompatActivity
             useradapter = new UserInfoAdapter(userInfos_khales);
             useradapter.setActivity(ActivityMain.this);
             row_khales.setAdapter(useradapter);
-
 
             row_TasvieNashode = (RecyclerView) findViewById(R.id.row_TasvieNashode);
             row_TasvieNashode.setFocusable(false);
@@ -484,8 +486,6 @@ public class ActivityMain extends AppCompatActivity
             if (dialog != null) {
                 dialog.dismiss();
             }
-
-
         }
 
 
@@ -508,11 +508,9 @@ public class ActivityMain extends AppCompatActivity
             try {
                 Log.e("jkkjjj", "url is " + "http://" + preferenceHelper.getString(NetworkTools.URL));
                 SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_AnalyseOfForoosh", datas).getProperty(0);
-//
-//
+
                 for (int i = 0; i < request2.getPropertyCount(); i++) {
                     SoapObject sp = (SoapObject) request2.getProperty(i);
-
 
                     UserInfo userInfo = new UserInfo();
                     userInfo.setCode_user(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
@@ -522,7 +520,6 @@ public class ActivityMain extends AppCompatActivity
                     userInfo.setImage_user(R.drawable.user);
                     userInfos_khales.add(userInfo);
 
-//
                 }
 
 
@@ -1349,8 +1346,8 @@ public class ActivityMain extends AppCompatActivity
 
     private void initKhalesForosh() {
 
-        txtNetSaleDay= (TextView) findViewById(R.id.txtNetSaleDay);
-        txtNetSaleMonth= (TextView) findViewById(R.id.txtNetSaleMonth);
+        txtNetSaleDay = (TextView) findViewById(R.id.txtNetSaleDay);
+        txtNetSaleMonth = (TextView) findViewById(R.id.txtNetSaleMonth);
 
     }
 

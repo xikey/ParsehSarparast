@@ -275,11 +275,9 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
                     countrinfo.set_RialTedadBargashti((String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(cr, 6).toString()))));
                     countrinfo.set_RialTedadLaghv((String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(cr, 7).toString()))));
 
-
-
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
-                        SoapObject sp = (SoapObject) request2.getProperty(i);
 
+                        SoapObject sp = (SoapObject) request2.getProperty(i);
                         Log.e("fffffff","request is "+ sp);
 
                         RequestsInfo requestsInfo = new RequestsInfo();

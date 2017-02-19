@@ -45,6 +45,8 @@ public class EditedCustomerListActivity extends AppCompatActivity {
     private CustomersRequestEditAsynk customersRequestAsynk;
     private String keySearch = "";
 
+    private boolean hasMore = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +89,7 @@ public class EditedCustomerListActivity extends AppCompatActivity {
 
                         if (adapter != null)
                             adapter.clearList();
+                        firstIndex = 0;
                         startAsync();
                     }
 
@@ -113,6 +116,30 @@ public class EditedCustomerListActivity extends AppCompatActivity {
         adapter = new CustomersEditAdapter(EditedCustomerListActivity.this);
         rvCustomers.setAdapter(adapter);
 
+
+        rvCustomers.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (layoutManager != null) {
+
+                    if (hasMore && (layoutManager.getItemCount()-1  == layoutManager.findLastVisibleItemPosition())) {
+
+                        firstIndex += ROW_COUNT;
+                        startAsync();
+                    }
+                }
+            }
+        });
+
+
     }
 
     public class CustomersRequestEditAsynk extends AsyncTask<Void, String, String> {
@@ -130,6 +157,7 @@ public class EditedCustomerListActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
 
             customersRequestAsynk = null;
+            hasMore = false;
 
             answer = serverRepo.getEditedList(getApplicationContext(), keySearch, firstIndex, ROW_COUNT);
 
@@ -158,28 +186,8 @@ public class EditedCustomerListActivity extends AppCompatActivity {
                 lyProgress.setVisibility(View.GONE);
 
                 if (answer.getHasMore() == 1) {
+                    hasMore = true;
 
-                    rvCustomers.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-                        @Override
-                        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                            super.onScrollStateChanged(recyclerView, newState);
-                        }
-
-                        @Override
-                        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                            super.onScrolled(recyclerView, dx, dy);
-
-                            if (layoutManager != null) {
-
-                                if (layoutManager.getItemCount() - 2 == layoutManager.findLastVisibleItemPosition()) {
-
-                                    firstIndex = ROW_COUNT + 1;
-                                    startAsync();
-                                }
-                            }
-                        }
-                    });
                 }
             }
             if (s.equals("0"))
@@ -218,9 +226,11 @@ public class EditedCustomerListActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode==STATUS_CHANGE_REQUEST_CODE&&resultCode==RESULT_OK){
+        if (requestCode == STATUS_CHANGE_REQUEST_CODE && resultCode == RESULT_OK) {
+
 
             adapter.clearList();
+            firstIndex = 0;
             startAsync();
 
         }

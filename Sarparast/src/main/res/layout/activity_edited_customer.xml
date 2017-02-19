@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:layoutDirection="ltr"
-
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.razanPardazesh.supervisor.EditedCustomerActivity">
 
@@ -27,6 +26,7 @@
 
         <TextView
             android:id="@+id/txtHead"
+            android:text="اطلاعات مشتری"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -60,29 +60,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
 
+                <TextView
+                    android:id="@+id/txtName"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
                     android:clickable="false"
-                    android:imeOptions="actionNext"
-                    android:inputType="none">
+                    android:ellipsize="end"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/txtName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:enabled="false"
-                        android:hint="@string/name"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="نام :" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -99,29 +94,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilFamily"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
+                <TextView
+                    android:id="@+id/txtFamily"
+                    android:layout_width="0dp"
+                    android:paddingRight="10dp"
+                    android:layout_height="60dp"
                     android:layout_weight="1"
                     android:clickable="false"
-                    android:imeOptions="actionNext"
-                    android:inputType="none">
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1" />
 
-                    <AutoCompleteTextView
-                        android:id="@+id/txtFamily"
-                        android:layout_width="match_parent"
-                        android:enabled="false"
-                        android:layout_height="wrap_content"
-                        android:text="هادی زاده"
-                        android:clickable="false"
-                        android:hint="@string/family"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-
-                </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:text="نام خانوادگی :" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -138,26 +128,25 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilTel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:inputType="none">
 
-                    <AutoCompleteTextView
+
+                    <TextView
                         android:id="@+id/txtTel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
                         android:clickable="false"
-                        android:enabled="false"
-                        android:hint="@string/tellphone"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
-                </android.support.design.widget.TextInputLayout>
+                        android:ellipsize="end"
+                        android:paddingRight="10dp"
+                        android:gravity="center_vertical|right"
+                        android:maxLines="1" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="تلفن :" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -173,27 +162,26 @@
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilMobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:inputType="none">
 
-                    <AutoCompleteTextView
+
+                    <TextView
                         android:id="@+id/txtMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_height="60dp"
+                        android:layout_weight="1"
                         android:clickable="false"
-                        android:hint="@string/mobile"
-                        android:enabled="false"
-                        android:imeOptions="actionNext"
-                        android:inputType="text"
-                        android:maxLines="1"
-                        android:singleLine="true" />
+                        android:ellipsize="end"
+                        android:textSize="16sp"
+                        android:paddingRight="10dp"
+                        android:gravity="center_vertical|right"
+                        android:maxLines="1" />
 
-                </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="همراه :" />
+
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -208,27 +196,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/tilAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false" >
 
-                    <AutoCompleteTextView
+                    <TextView
                         android:id="@+id/txtAddress"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="16sp"
+                        android:paddingRight="10dp"
                         android:clickable="false"
-                        android:hint="@string/address"
-                        android:enabled="false"
-                        android:imeOptions="actionDone"
-                        android:inputType="text"
                         android:ellipsize="end"
-                        android:maxLines="5"
-                        android:singleLine="true" />
+                        android:gravity="center_vertical|right"
+                        android:maxLines="3" />
 
-                </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="آدرس :" />
+
+
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -272,8 +259,7 @@
                     android:gravity="center"
                     android:text="رد"
                     android:textColor="#f44336"
-                    android:textSize="20sp"
-                     />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/txtAccept"
@@ -283,8 +269,7 @@
                     android:gravity="center"
                     android:text="تایید"
                     android:textColor="#8BC34A"
-                    android:textSize="20sp"
-                      />
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -294,16 +279,16 @@
 
     <RelativeLayout
         android:id="@+id/lyProgress"
-        android:alpha="0.6"
-        android:background="#CCffffff"
-        android:layout_below="@id/mhztoolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/mhztoolbar"
+        android:alpha="0.6"
+        android:background="#CCffffff">
 
         <ProgressBar
-            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
 
     </RelativeLayout>
 

@@ -28,6 +28,7 @@
             android:layout_marginRight="30dp"
             android:gravity="center"
             android:paddingLeft="10dp"
+            android:text="لیست درخواست ها"
             android:textColor="#ffffff"
             android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
@@ -49,14 +50,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#0277BD"
-            android:maxLines="1"
-           android:inputType="text"
             android:enabled="true"
-            android:imeOptions="actionSearch"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="center|right"
             android:hint="جستجو"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
             android:paddingRight="40dp"
             android:textColor="#ffffff"
             android:textColorHint="#f0ffffff" />
@@ -75,20 +76,20 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvCustomers"
-        android:layout_below="@id/linearLayout11"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/linearLayout11">
 
     </android.support.v7.widget.RecyclerView>
 
     <RelativeLayout
-        android:alpha="0.4"
-        android:visibility="gone"
         android:id="@+id/lyProgress"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mhztoolbar"
-        android:background="#ffffff">
+        android:alpha="0.6"
+        android:background="#ffffff"
+        android:visibility="gone">
 
         <ProgressBar
             android:id="@+id/progressBar"

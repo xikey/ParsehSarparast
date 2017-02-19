@@ -31,7 +31,6 @@ import java.util.Date;
 public class EditedCustomerActivity extends AppCompatActivity {
 
 
-
     private static final String KEY_ID = "ID";
     private final int ACCEPT_CUSTOMER = 1;
     private final int REJECT_CUSTOMER = 2;
@@ -40,11 +39,11 @@ public class EditedCustomerActivity extends AppCompatActivity {
     private RelativeLayout lyProgress;
     private ImageView imgBack;
     private TextView txtHead;
-    private AutoCompleteTextView txtName;
-    private AutoCompleteTextView txtFamily;
-    private AutoCompleteTextView txtTel;
-    private AutoCompleteTextView txtMobile;
-    private AutoCompleteTextView txtAddress;
+    private TextView txtName;
+    private TextView txtFamily;
+    private TextView txtTel;
+    private TextView txtMobile;
+    private TextView txtAddress;
     private LinearLayout lyLocation;
     private TextView txtRejection;
     private TextView txtAccept;
@@ -68,11 +67,11 @@ public class EditedCustomerActivity extends AppCompatActivity {
 
     }
 
-    public static void start(FragmentActivity context, long id,int requestCode) {
+    public static void start(FragmentActivity context, long id, int requestCode) {
 
         Intent starter = new Intent(context, EditedCustomerActivity.class);
         starter.putExtra(KEY_ID, id);
-        context.startActivityForResult(starter,requestCode);
+        context.startActivityForResult(starter, requestCode);
     }
 
     private void initViews() {
@@ -80,11 +79,11 @@ public class EditedCustomerActivity extends AppCompatActivity {
         lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
         imgBack = (ImageView) findViewById(R.id.imgBack);
         txtHead = (TextView) findViewById(R.id.txtHead);
-        txtName = (AutoCompleteTextView) findViewById(R.id.txtName);
-        txtFamily = (AutoCompleteTextView) findViewById(R.id.txtFamily);
-        txtTel = (AutoCompleteTextView) findViewById(R.id.txtTel);
-        txtMobile = (AutoCompleteTextView) findViewById(R.id.txtMobile);
-        txtAddress = (AutoCompleteTextView) findViewById(R.id.txtAddress);
+        txtName = (TextView) findViewById(R.id.txtName);
+        txtFamily = (TextView) findViewById(R.id.txtFamily);
+        txtTel = (TextView) findViewById(R.id.txtTel);
+        txtMobile = (TextView) findViewById(R.id.txtMobile);
+        txtAddress = (TextView) findViewById(R.id.txtAddress);
         lyLocation = (LinearLayout) findViewById(R.id.lyLocation);
         txtRejection = (TextView) findViewById(R.id.txtRejection);
         txtAccept = (TextView) findViewById(R.id.txtAccept);
@@ -106,13 +105,31 @@ public class EditedCustomerActivity extends AppCompatActivity {
         txtAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startChangeCustomerStatusAsync(ACCEPT_CUSTOMER);
+
+                new android.app.AlertDialog.Builder(EditedCustomerActivity.this)
+                        .setMessage("مایل به تایید اطلاعات ویرایش شده میباشید؟")
+                        .setNegativeButton("خیر", null)
+                        .setPositiveButton("بلی", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                startChangeCustomerStatusAsync(ACCEPT_CUSTOMER);
+                            }
+                        }).create().show();
             }
         });
         txtRejection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startChangeCustomerStatusAsync(REJECT_CUSTOMER);
+                new android.app.AlertDialog.Builder(EditedCustomerActivity.this)
+                        .setMessage("مایل به رد اطلاعات ویرایش شده میباشید؟")
+                        .setNegativeButton("خیر", null)
+                        .setPositiveButton("بلی", new DialogInterface.OnClickListener() {
+
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                startChangeCustomerStatusAsync(REJECT_CUSTOMER);
+                            }
+                        }).create().show();
+
             }
         });
 
@@ -281,8 +298,8 @@ public class EditedCustomerActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... params) {
             changeCustomerStatusAsync = null;
-           String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-            answer = serverRepo.setEditedCustomerStatus(getApplicationContext(), ID,currentDateTimeString, statusCode);
+            String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
+            answer = serverRepo.setEditedCustomerStatus(getApplicationContext(), ID, currentDateTimeString, statusCode);
 
             if (answer.getMessage() != null || !TextUtils.isEmpty(answer.getMessage())) {
                 message = answer.getMessage();
@@ -329,5 +346,6 @@ public class EditedCustomerActivity extends AppCompatActivity {
         changeCustomerStatusAsync = new CustomerRequestEditChangeStatusAsynk(status);
         changeCustomerStatusAsync.execute();
     }
+
 
 }

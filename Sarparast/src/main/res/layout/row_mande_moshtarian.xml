@@ -5,275 +5,286 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    cardUseCompatPadding="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardCornerRadius="1dp"
-    card_view:cardElevation="2dp"
-
-    cardUseCompatPadding="true"
-    android:layout_marginTop="18dp"
     android:layout_marginBottom="5dip"
+
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
-    android:background="#fffbfb">
+    android:layout_marginTop="18dp"
+    android:background="#fffbfb"
+    card_view:cardCornerRadius="1dp"
+    card_view:cardElevation="2dp">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:background="#ffffff"
         android:id="@+id/lyRootReq"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
         android:padding="1dp">
 
-      <LinearLayout
-          android:orientation="horizontal"
-          android:id="@+id/ly01"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:gravity="right"
-          android:layout_marginTop="10dp"
-          android:weightSum="1">
-
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="... "
-              android:id="@+id/txtCode"
-              android:layout_weight="1.00"
-              android:gravity="right"
-              android:layout_marginRight="50dp"
-              android:textColor="#000000"
-              android:textSize="17sp" />
-
-          <TextView
-              android:layout_width="110dp"
-              android:layout_height="wrap_content"
-              android:text="کد مشتری"
-              android:id="@+id/textView49"
-              android:paddingRight="10dp"
-              android:textColor="#000000"
-              android:textSize="16sp" />
-      </LinearLayout>
-
         <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/ly02"
-            android:layout_below="@id/ly01"
+            android:id="@+id/ly01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="right"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <TextView
+                android:id="@+id/txtCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
+                android:layout_marginRight="50dp"
+                android:layout_weight="1.00"
+                android:gravity="right"
+                android:text="... "
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="کد مشتری"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ly01"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
                 android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
                 android:layout_weight="1.00"
                 android:gravity="center|right"
-                android:layout_marginRight="50dp"
-                android:textColor="#000000"
                 android:paddingRight="4dp"
-                android:textSize="17sp" />
+                android:text="..."
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:text="نام مشتری"
                 android:id="@+id/textView50"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
                 android:paddingRight="10dp"
+                android:text="نام مشتری"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
         </LinearLayout>
-<LinearLayout
-    android:orientation="horizontal"
+
+        <LinearLayout
             android:id="@+id/ly03"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@id/ly02"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-    android:gravity="right"
-    android:layout_marginTop="10dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="..."
-
-        android:layout_weight="1.00"
-        android:gravity="right"
-        android:layout_marginRight="50dp"
-        android:paddingRight="4dp"
-        android:id="@+id/txtMande"
-        android:textSize="17sp"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="110dp"
-        android:layout_height="wrap_content"
-        android:text="مانده مشتری"
-        android:id="@+id/textView51"
-        android:paddingRight="10dp"
-        android:textSize="16sp"
-        android:textColor="#000000" />
-</LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/ly04"
-            android:layout_below="@id/ly03"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="right"
-            android:layout_marginTop="10dp">
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgMandehLine"
+                android:alpha="0.5"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_error_outline_blue_24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
 
             <TextView
+                android:id="@+id/txtMande"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
-                android:id="@+id/txtVaset"
+                android:layout_marginRight="50dp"
                 android:layout_weight="1.00"
                 android:gravity="right"
-                android:layout_marginRight="50dp"
-                android:textColor="#000000"
                 android:paddingRight="4dp"
-                android:textSize="17sp" />
+                android:text="..."
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/textView51"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="نام واسط اصلی"
-
-                android:layout_marginBottom="10dp"
                 android:paddingRight="10dp"
+                android:text="مانده مشتری"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:id="@+id/lyAddress"
-            android:layout_below="@id/ly04"
+            android:id="@+id/ly04"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right">
+            android:layout_below="@id/ly03"
+            android:layout_marginTop="10dp"
+            android:gravity="right"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txtVaset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="..."
-                android:id="@+id/txtAddress"
+                android:layout_marginRight="50dp"
                 android:layout_weight="1.00"
                 android:gravity="right"
-                android:layout_marginRight="50dp"
-                android:textColor="#000000"
                 android:paddingRight="4dp"
-                android:textSize="17sp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginBottom="10dp" />
+                android:text="..."
+                android:textColor="#000000"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="آدرس"
                 android:layout_marginBottom="10dp"
                 android:paddingRight="10dp"
+                android:text="نام واسط اصلی"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_below="@id/lyAddress"
-            android:orientation="horizontal"
+            android:id="@+id/lyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ly04"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="50dp"
+                android:layout_weight="1.00"
+                android:gravity="right"
+                android:paddingRight="4dp"
+                android:text="..."
+                android:textColor="#000000"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingRight="10dp"
+                android:text="آدرس"
+                android:textColor="#000000"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lyKhat"
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:layout_below="@id/lyAddress"
             android:background="#e3dede"
-            android:id="@+id/lyKhat">
+            android:orientation="horizontal">
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_below="@id/lyKhat"
-            android:orientation="horizontal"
+            android:id="@+id/lyButtom"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_below="@id/lyKhat"
+            android:layout_marginTop="1dp"
             android:gravity="right"
-            android:id="@+id/lyButtom"
-            android:layout_marginTop="1dp">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:alpha="0.5"
                 android:gravity="right"
-                android:layout_weight="30">
+                android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/imgDislike"
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/imgDislike"
-                    android:src="@drawable/ic_dislike_black"
-                    android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="2dp"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="14.8"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_dislike_black" />
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
                     android:id="@+id/imgLike"
-                    android:src="@drawable/ic_like_blavk"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="14.8"
-                    android:padding="10dp" />
-
-                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="14.8"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_like_blavk" />
+
+                <ImageView
                     android:id="@+id/imgNavigate"
-                    android:src="@drawable/ic_location_black"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="14.8"
-                    android:padding="10dp" />
-
-                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="14.8"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_location_black" />
+
+                <ImageView
                     android:id="@+id/imgCall"
-                    android:src="@drawable/ic_call_black_24dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="14.8"
-                    android:padding="10dp" />
-
-                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="14.8"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_call_black_24dp" />
+
+                <ImageView
                     android:id="@+id/imgInfo"
-                    android:src="@drawable/ic_info_black"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="14.8"
-                    android:padding="10dp" />
-
-                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="14.8"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_info_black" />
+
+                <ImageView
                     android:id="@+id/img5Vijegi"
-                    android:src="@drawable/ic_person_black_24dp"
-                    android:layout_marginRight="7dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_weight="14.8"
-                    android:padding="10dp" />
-
-                <ImageView
                     android:layout_width="50dp"
                     android:layout_height="match_parent"
-                    android:id="@+id/btnShowDetails"
-                    android:src="@drawable/ic_dollar_black"
-                    android:layout_marginRight="7dp"
                     android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
                     android:layout_weight="14.8"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person_black_24dp" />
+
+                <ImageView
+                    android:id="@+id/btnShowDetails"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="14.8"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_dollar_black" />
             </LinearLayout>
 
         </LinearLayout>

@@ -179,7 +179,6 @@ public class Fragment_MandehMoshtarian extends DialogFragment {
 
             if (statee == 1) {
 
-//
                 Code.setText(mandehMoshtariInfo.get_Code().toString());
                 Name.setText(mandehMoshtariInfo.get_Name().toString());
                 Mandeh.setText(mandehMoshtariInfo.get_Mandeh().toString());
@@ -237,15 +236,12 @@ public class Fragment_MandehMoshtarian extends DialogFragment {
                     statee = 0;
                     return "";
                 }
-                Log.e("wqqqqqqqqqqq", "info is " + sp);
-//                    Log.e("wqqqqqqqqqqq", "info is " + sp);
-//                    Log.e("propertyCount", "info is " + request2.getPropertyCount());
+
                 mandehMoshtariInfo.set_Code(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
                 mandehMoshtariInfo.set_Name(NetworkTools.getSoapPropertyAsNullableString(sp, 1));
                 mandehMoshtariInfo.set_Vaset(NetworkTools.getSoapPropertyAsNullableString(sp, 3));
                 mandehMoshtariInfo.set_Mandeh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 2).toString())));
                 mandehMoshtariInfo.set_TFrorosh(NetworkTools.getSoapPropertyAsNullableString(sp, 4));
-                // Log.i("TForoosh","T Foroosh is "+(NetworkTools.getSoapPropertyAsNullableString(sp, 4)));
                 mandehMoshtariInfo.set_RFrososh(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 5).toString())));
                 mandehMoshtariInfo.set_TBargashti(NetworkTools.getSoapPropertyAsNullableString(sp, 6));
                 mandehMoshtariInfo.set_RBargashti(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 7).toString())));
@@ -257,8 +253,6 @@ public class Fragment_MandehMoshtarian extends DialogFragment {
                 mandehMoshtariInfo.set_RHoghooghi(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 13).toString())));
                 mandehMoshtariInfo.set_TVosool(NetworkTools.getSoapPropertyAsNullableString(sp, 14));
                 mandehMoshtariInfo.set_RVosool(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 15).toString())));
-
-
                 mandehMoshtariInfo.set_TPasShode(NetworkTools.getSoapPropertyAsNullableString(sp, 16));
                 mandehMoshtariInfo.set_RPasShode(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 17).toString())));
 

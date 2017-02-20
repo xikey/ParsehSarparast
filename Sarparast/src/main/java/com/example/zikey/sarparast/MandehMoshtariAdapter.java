@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
+import com.razanPardazesh.supervisor.CustomerDeptDividedLineFragment;
 
 import java.util.ArrayList;
 
@@ -52,12 +54,12 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
     public void setCustomer(ArrayList<MandehMoshtariInfo> item) {
         this.item = item;
         notifyDataSetChanged();
-      //  this.itemDump = item;
+        //  this.itemDump = item;
     }
 
     public void addCustomer(ArrayList<MandehMoshtariInfo> item) {
         this.item.addAll(item);
-       // this.itemDump.addAll(item);
+        // this.itemDump.addAll(item);
         notifyDataSetChanged();
     }
 
@@ -71,11 +73,11 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
     @Override
     public void onBindViewHolder(productoViewHolder productoViewHolder, final int i) {
 
-        productoViewHolder.txtCode.setText( item.get(i).get_Code());
-        productoViewHolder.txtName.setText( item.get(i).get_Name());
-        productoViewHolder.txtMande.setText( item.get(i).get_Mandeh());
-        productoViewHolder.txtVaset.setText( item.get(i).get_Vaset());
-        productoViewHolder.txtAddress.setText( item.get(i).get_Address());
+        productoViewHolder.txtCode.setText(item.get(i).get_Code());
+        productoViewHolder.txtName.setText(item.get(i).get_Name());
+        productoViewHolder.txtMande.setText(item.get(i).get_Mandeh());
+        productoViewHolder.txtVaset.setText(item.get(i).get_Vaset());
+        productoViewHolder.txtAddress.setText(item.get(i).get_Address());
 
         productoViewHolder.L = item.get(i).get_LastL();
         productoViewHolder.W = item.get(i).get_LastW();
@@ -179,6 +181,8 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
         ImageView img5Vijegi;
         ImageView imgLike;
         ImageView imgDislike;
+        ImageView imgMandehLine;
+
 
         LinearLayout lyButtom;
 
@@ -198,9 +202,7 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
             txtMande = (TextView) itemView.findViewById(R.id.txtMande);
             txtVaset = (TextView) itemView.findViewById(R.id.txtVaset);
             txtAddress = (TextView) itemView.findViewById(R.id.txtAddress);
-
             lyButtom = (LinearLayout) itemView.findViewById(R.id.lyButtom);
-
             btnShowDetails = (ImageView) itemView.findViewById(R.id.btnShowDetails);
             imgInfo = (ImageView) itemView.findViewById(R.id.imgInfo);
             imgNavigate = (ImageView) itemView.findViewById(R.id.imgNavigate);
@@ -208,8 +210,7 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
             img5Vijegi = (ImageView) itemView.findViewById(R.id.img5Vijegi);
             imgLike = (ImageView) itemView.findViewById(R.id.imgLike);
             imgDislike = (ImageView) itemView.findViewById(R.id.imgDislike);
-
-//            lyRootr = (RelativeLayout) itemView.findViewById(R.id.lyRootReq);
+            imgMandehLine = (ImageView) itemView.findViewById(R.id.imgMandehLine);
 
             imgLike.setOnClickListener(new View.OnClickListener() {
 
@@ -333,6 +334,16 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
                         activity.startActivity(intent);
 
                     }
+                }
+            });
+
+            imgMandehLine.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String code = txtCode.getText().toString();
+                    String name = txtName.getText().toString();
+                    String mandeh = txtMande.getText().toString();
+                    CustomerDeptDividedLineFragment.Show(activity, name, code, mandeh);
                 }
             });
 

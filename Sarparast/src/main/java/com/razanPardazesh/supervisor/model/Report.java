@@ -8,8 +8,11 @@ import com.razanPardazesh.supervisor.model.user.Supervisor;
 import com.razanPardazesh.supervisor.model.user.Visitor;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 09/11/2016.
@@ -123,6 +126,11 @@ public class Report implements IJson {
 
     @Override
     public JSONObject writeJson(Context context) {
+        return null;
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
         return null;
     }
 }

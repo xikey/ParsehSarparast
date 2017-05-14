@@ -60,6 +60,10 @@
  \nنکته: روشن بودن سنسور gps  تضمین ارسال موقعیت کاربر به سرور نیست.
 </string>
 
+     <string name="managment_order_outOfPath">با اعمال این تنظیم ویزیتور فعلی میتواند به صورت آنلاین کلیه مشتریان اختصاص داده شده به وی را ملاحضه نمایند
+\nنکته: این تنظیم نیاز به بروز رسانی تبلت ویزیتورها ندارد
+</string>
+
 
     <string name="name">نام</string>
     <string name="family">نام خانوادگی</string>
@@ -67,6 +71,8 @@
     <string name="mobile">تلفن همراه</string>
     <string name="address">آدرس</string>
     <string name="title_activity_location_on_map">Map</string>
+    <string name="title_activity_around_me_map">Map</string>
+    <string name="title_activity_satisfaction_from">SatisfactionFromActivity</string>
 
 
 </resources>

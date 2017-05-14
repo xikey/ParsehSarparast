@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="1dp"
+        app:cardElevation="3dp"
+        android:layout_marginTop="10dp"
+        android:background="#f0f0f0"
+        android:backgroundTint="#f0f0f0"
+        app:cardBackgroundColor="#f0f0f0">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgHeader"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_person_black_24dp" />
+
+            <TextView
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:paddingTop="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/txtName"
+                android:layout_toLeftOf="@id/imgHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:textSize="18sp"
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:textColor="#cc000000"
+                    android:textSize="16sp"
+                    android:id="@+id/txtTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtDate"
+                    android:layout_centerHorizontal="true"
+                    android:paddingTop="5dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="20dp"
+                android:layout_below="@id/imgHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="right|top"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:id="@+id/txtReason"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+
+                        android:textColor="#000000"
+                        android:textSize="19dp"
+                        android:layout_marginRight="26dp"
+                        android:text="دلیل:"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:paddingBottom="30dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="right|top"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="#000000"
+                        android:textSize="17sp"
+                        android:id="@+id/txtComment"
+                        android:paddingLeft="20dp"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:textColor="#000000"
+                        android:textSize="19dp"
+                        android:layout_marginRight="26dp"
+                        android:text="توضیحات:"
+                        android:layout_width="90dp"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

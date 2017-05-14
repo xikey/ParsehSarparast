@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 
 android {
+
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 951026
-        versionName "95.10.26"
-
+        versionCode 960224
+        versionName "96.02.24"
         // Enabling multidex support.
         multiDexEnabled true
     }
@@ -27,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
     productFlavors {
     }
     compileOptions {
@@ -36,6 +37,7 @@ android {
 }
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar')
     compile project(':CustomGauge')
@@ -47,4 +49,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'
+
 }

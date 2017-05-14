@@ -2,8 +2,11 @@ package com.razanPardazesh.supervisor.model.user;
 
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 10/11/2016.
@@ -87,5 +90,10 @@ public class Supervisor  extends IUser{
                 LogWrapper.loge("fillByJson: price1: ", e);
             }
         }
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
     }
 }

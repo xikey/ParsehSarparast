@@ -72,7 +72,7 @@ public class CustomersEditAdapter extends RecyclerView.Adapter<CustomersEditAdap
     }
 
     @Override
-    public void onBindViewHolder(EditedListViewHolder holder, int position) {
+    public void onBindViewHolder(EditedListViewHolder holder, final int position) {
 
         final long id = item.get(position).getId();
         String name = item.get(position).getCustomerName();
@@ -90,11 +90,10 @@ public class CustomersEditAdapter extends RecyclerView.Adapter<CustomersEditAdap
         if (status == 2) {
             holder.imgStatus2.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_circle_red));
         }
-
         holder.lyRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditedCustomerActivity.start(context, id, STATUS_CHANGE_REQUEST_CODE);
+                EditedCustomerActivity.start(context, item.get(position), STATUS_CHANGE_REQUEST_CODE);
             }
         });
 
@@ -138,7 +137,7 @@ public class CustomersEditAdapter extends RecyclerView.Adapter<CustomersEditAdap
         if (code == 2)
             return "تایید نشده";
 
-        return "نامشخص";
+        return "در انتظار";
 
     }
 

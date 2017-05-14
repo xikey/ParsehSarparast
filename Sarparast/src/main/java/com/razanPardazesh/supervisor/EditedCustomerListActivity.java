@@ -138,8 +138,6 @@ public class EditedCustomerListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     public class CustomersRequestEditAsynk extends AsyncTask<Void, String, String> {
@@ -187,7 +185,6 @@ public class EditedCustomerListActivity extends AppCompatActivity {
 
                 if (answer.getHasMore() == 1) {
                     hasMore = true;
-
                 }
             }
             if (s.equals("0"))
@@ -227,7 +224,6 @@ public class EditedCustomerListActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == STATUS_CHANGE_REQUEST_CODE && resultCode == RESULT_OK) {
-
 
             adapter.clearList();
             firstIndex = 0;

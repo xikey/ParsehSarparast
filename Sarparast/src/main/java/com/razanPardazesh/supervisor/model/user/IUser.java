@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 public abstract class IUser implements IJson{
 
+    // type for Customer is 3
     // type for VISITOR is 2
     //type for Suoervisor is 1
 

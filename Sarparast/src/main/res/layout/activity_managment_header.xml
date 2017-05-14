@@ -221,7 +221,6 @@
                                     android:layout_alignParentRight="true"
                                     android:layout_marginLeft="20dp"
                                     android:layout_marginTop="10dp"
-
                                     android:checked="true"
                                     android:paddingLeft="20dp" />
 
@@ -352,11 +351,68 @@
 
                             </RelativeLayout>
 
+
+                            <RelativeLayout
+                                android:id="@+id/lyOrderOutOfPath"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/lyShowAllCustomers"
+                                android:layout_marginBottom="10dp">
+
+                                <TextView
+                                    android:id="@+id/txtCanOrderOutOfPath"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:text="مجوز ثبت سفارش برای مشتریان خارج از مسیر"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:id="@+id/detailsCanOrderOutOfPath"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:text="@string/managment_order_outOfPath"
+                                    android:layout_below="@id/txtCanOrderOutOfPath"
+                                    android:layout_marginLeft="50dp"
+                                    android:layout_marginRight="10dp"
+                                    android:textSize="12dp" />
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:layout_below="@id/detailsCanOrderOutOfPath"
+                                    android:layout_marginLeft="10dp"
+
+                                    android:layout_marginRight="10dp"
+                                    android:layout_marginTop="10dp"
+                                    android:background="#BDBDBD">
+
+                                </View>
+
+
+                                <android.support.v7.widget.AppCompatCheckBox
+                                    android:id="@+id/chkCanOrderOutOfPath"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:checked="true"
+                                    android:paddingLeft="20dp" />
+                            </RelativeLayout>
+
+
                             <RelativeLayout
                                 android:id="@+id/lyUpdate"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/lyShowAllCustomers"
+                                android:layout_below="@id/lyOrderOutOfPath"
                                 android:layout_marginBottom="10dp">
 
                                 <TextView

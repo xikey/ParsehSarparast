@@ -3,7 +3,10 @@ package com.razanPardazesh.supervisor.model.wrapper;
 import com.razanPardazesh.supervisor.model.CustomerRequestEdit;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 13/02/2017.
@@ -42,6 +45,11 @@ public class CustomerEditAnswer extends ServerAnswer {
 
             LogWrapper.loge("UserAnswer_fillByJson :", ex);
         }
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
     }
 }
 

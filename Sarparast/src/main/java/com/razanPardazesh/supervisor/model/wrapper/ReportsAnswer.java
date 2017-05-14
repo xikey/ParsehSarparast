@@ -49,4 +49,9 @@ public class ReportsAnswer extends ServerAnswer {
             }
         }
     }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
+    }
 }

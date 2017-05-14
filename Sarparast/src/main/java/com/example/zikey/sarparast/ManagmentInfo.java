@@ -14,6 +14,7 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
     private int forceToLoguot;
     private int turner;
     private int needGPS;
+    private int canOrderOutOfPath;
 
     public int getTurner() {
         return turner;
@@ -87,8 +88,17 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
         this.needGPS = needGPS;
     }
 
+    public int getCanOrderOutOfPath() {
+        return canOrderOutOfPath;
+    }
+
+    public void setCanOrderOutOfPath(int canOrderOutOfPath) {
+        this.canOrderOutOfPath = canOrderOutOfPath;
+    }
+
     @Override
     public int compareTo(ManagmentInfo another) {
+
         if (getCanRegister() < another.getCanRegister())
             return -1;
 
@@ -129,6 +139,12 @@ public class ManagmentInfo implements Comparable<ManagmentInfo> {
             return -1;
 
         if (getNeedGPS() > another.getNeedGPS())
+            return 1;
+
+        if (getCanOrderOutOfPath() < another.getCanOrderOutOfPath())
+            return -1;
+
+        if (getCanOrderOutOfPath() > another.getCanOrderOutOfPath())
             return 1;
 
         return 0;

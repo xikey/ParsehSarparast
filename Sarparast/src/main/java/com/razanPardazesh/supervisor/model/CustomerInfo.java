@@ -5,8 +5,11 @@ import android.content.Context;
 import com.razanPardazesh.supervisor.model.interfaces.IJson;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 19/02/2017.
@@ -25,16 +28,32 @@ public class CustomerInfo implements IJson {
     private final String KEY_MANDEH_LINE9 = "ml9";
     private final String KEY_MANDEH_LINE10 = "ml10";
 
-    private long mandeh_line1=0;
-    private long mandeh_line2=0;
-    private long mandeh_line3=0;
-    private long mandeh_line4=0;
-    private long mandeh_line5=0;
-    private long mandeh_line6=0;
-    private long mandeh_line7=0;
-    private long mandeh_line8=0;
-    private long mandeh_line9=0;
-    private long mandeh_line10=0;
+    private final String KEY_LATITUDE = "lt";
+    private final String KEY_LONGITUDE = "ln";
+    private final String KEY_CUSTOMER_TEL = "ct";
+    private final String KEY_CUSTOMER_MOBILE = "cm";
+    private final String KEY_CUSTOMER_CODE = "cc";
+    private final String KEY_CUSTOMER_NAME = "cn";
+    private final String KEY_CUSTOMER_ADDRESS = "ca";
+
+    private long mandeh_line1 = 0;
+    private long mandeh_line2 = 0;
+    private long mandeh_line3 = 0;
+    private long mandeh_line4 = 0;
+    private long mandeh_line5 = 0;
+    private long mandeh_line6 = 0;
+    private long mandeh_line7 = 0;
+    private long mandeh_line8 = 0;
+    private long mandeh_line9 = 0;
+    private long mandeh_line10 = 0;
+
+    private double customerLN;
+    private double customerLT;
+    private String customerTel;
+    private String customerMobile;
+    private long CustomerCode;
+    private String CustomerName;
+    private String customerAddress;
 
     public long getMandeh_line1() {
         return mandeh_line1;
@@ -116,6 +135,62 @@ public class CustomerInfo implements IJson {
         this.mandeh_line10 = mandeh_line10;
     }
 
+    public double getCustomerLN() {
+        return customerLN;
+    }
+
+    public void setCustomerLN(double customerLN) {
+        this.customerLN = customerLN;
+    }
+
+    public double getCustomerLT() {
+        return customerLT;
+    }
+
+    public void setCustomerLT(double customerLT) {
+        this.customerLT = customerLT;
+    }
+
+    public String getCustomerTel() {
+        return customerTel;
+    }
+
+    public void setCustomerTel(String customerTel) {
+        this.customerTel = customerTel;
+    }
+
+    public String getCustomerMobile() {
+        return customerMobile;
+    }
+
+    public void setCustomerMobile(String customerMobile) {
+        this.customerMobile = customerMobile;
+    }
+
+    public long getCustomerCode() {
+        return CustomerCode;
+    }
+
+    public void setCustomerCode(long customerCode) {
+        CustomerCode = customerCode;
+    }
+
+    public String getCustomerName() {
+        return CustomerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        CustomerName = customerName;
+    }
+
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
     @Override
     public void fillByJson(JSONObject jsonObject) {
 
@@ -192,12 +267,65 @@ public class CustomerInfo implements IJson {
             } catch (JSONException e) {
                 LogWrapper.loge("fillByJson: price1: ", e);
             }
+        }
 
+        if (jsonObject.has(KEY_LATITUDE)) {
+            try {
+                setCustomerLT(jsonObject.getDouble(KEY_LATITUDE));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+
+        }  if (jsonObject.has(KEY_LONGITUDE)) {
+            try {
+                setCustomerLN(jsonObject.getDouble(KEY_LONGITUDE));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+
+        }
+        if (jsonObject.has(KEY_CUSTOMER_TEL)) {
+            try {
+                setCustomerTel(jsonObject.getString(KEY_CUSTOMER_TEL));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+
+        } if (jsonObject.has(KEY_CUSTOMER_MOBILE)) {
+            try {
+                setCustomerMobile(jsonObject.getString(KEY_CUSTOMER_MOBILE));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+
+        }if (jsonObject.has(KEY_CUSTOMER_CODE)) {
+            try {
+                setCustomerCode(jsonObject.getLong(KEY_CUSTOMER_CODE));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+        }if (jsonObject.has(KEY_CUSTOMER_NAME)) {
+            try {
+                setCustomerName(jsonObject.getString(KEY_CUSTOMER_NAME));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
+        }if (jsonObject.has(KEY_CUSTOMER_ADDRESS)) {
+            try {
+                setCustomerAddress(jsonObject.getString(KEY_CUSTOMER_ADDRESS));
+            } catch (JSONException e) {
+                LogWrapper.loge("CustomerInfo_fillByJson :", e);
+            }
         }
     }
 
     @Override
     public JSONObject writeJson(Context context) {
+        return null;
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
         return null;
     }
 

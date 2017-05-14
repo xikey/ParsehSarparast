@@ -84,18 +84,6 @@ public class FragmentAllBazaryab   extends DialogFragment {
         getDialog(). setCancelable(true);
         getDialog().setCanceledOnTouchOutside(true);
 
-//        btnExit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dismiss();
-//            }
-//        });
-//        btnClose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                dismiss();
-//            }
-//        });
 
         if (statee==1){
             new AllBazaryabAsync().execute();
@@ -180,7 +168,6 @@ public class FragmentAllBazaryab   extends DialogFragment {
                 return "Null";
             }
             return "Online";
-
         }
 
     }

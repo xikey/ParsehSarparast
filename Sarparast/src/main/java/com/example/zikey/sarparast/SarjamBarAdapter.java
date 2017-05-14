@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * Created by Zikey
  * on 05/08/2015.
  */
-public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.productoViewHolder> implements Filterable{
+public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.productoViewHolder> implements Filterable {
     public ArrayList<SarjamInfo> item;
     public ArrayList<SarjamInfo> itemDump;
 
@@ -71,21 +71,11 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
         productoViewHolder.txtRFactor.setText("" + item.get(i).get_PriceFactor());
 
 
-        if (state==-1){
-            productoViewHolder.lyButtom.setVisibility(View.GONE);
-        }
-        else if (state==1){
+        if (state == -1) {
+            productoViewHolder.lyButtomVisitor.setVisibility(View.VISIBLE);
+        } else if (state == 1) {
             productoViewHolder.lyButtom.setVisibility(View.VISIBLE);
         }
-
-//        if ((Integer.parseInt(m.toString()))%2==0){
-//            productoViewHolder.lyRoot02.setBackgroundColor(Color.parseColor("#ffffff"));
-//        }
-//        if ((Integer.parseInt(m.toString()))%2>0){
-//            productoViewHolder.lyRoot02.setBackgroundColor(Color.parseColor("#ECEFF1"));
-//        }
-
-
     }
 
     @Override
@@ -94,14 +84,14 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
     }
 
 
-    public  class  SarjamBarFilter extends  Filter {
+    public class SarjamBarFilter extends Filter {
 
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
 
             ArrayList<SarjamInfo> temp = new ArrayList<>();
 
-            if(TextUtils.isEmpty(charSequence)){
+            if (TextUtils.isEmpty(charSequence)) {
 
                 FilterResults filterResults = new FilterResults();
                 filterResults.values = itemDump;
@@ -110,11 +100,11 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
                 return filterResults;
             }
 
-            if (itemDump != null && itemDump.size() != 0){
+            if (itemDump != null && itemDump.size() != 0) {
 
-                for(SarjamInfo item : itemDump) {
+                for (SarjamInfo item : itemDump) {
 
-                    if (!TextUtils.isEmpty(item.get_Name()) && item. get_Name().contains(charSequence)) {
+                    if (!TextUtils.isEmpty(item.get_Name()) && item.get_Name().contains(charSequence)) {
                         temp.add(item);
                     }
 
@@ -135,14 +125,12 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
 
-            ArrayList<SarjamInfo>  temp = null;
+            ArrayList<SarjamInfo> temp = null;
 
             try {
                 temp = (ArrayList<SarjamInfo>) filterResults.values;
-            }
-            catch (Exception e)
-            {
-                Log.e("mohsen: ",e.toString());
+            } catch (Exception e) {
+                Log.e("mohsen: ", e.toString());
             }
 
 
@@ -164,10 +152,12 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
     }
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName, txtSefaresh, txtFactor,txtRSefaresh,txtRFactor;
+        TextView txtCode, txtName, txtSefaresh, txtFactor, txtRSefaresh, txtRFactor;
         private LinearLayout lyButtom;
+        private LinearLayout lyButtomVisitor;
         private ImageView imgVijegiKala;
         private ImageView imgInfo;
+        private ImageView imgDetails;
         private ImageView imgSathGheymat;
 
 
@@ -184,8 +174,10 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
             imgVijegiKala = (ImageView) itemView.findViewById(R.id.imgVijegiKala);
             imgInfo = (ImageView) itemView.findViewById(R.id.imgInfo);
             imgSathGheymat = (ImageView) itemView.findViewById(R.id.imgSathGheymat);
+            imgDetails = (ImageView) itemView.findViewById(R.id.imgDetails);
 
             lyButtom = (LinearLayout) itemView.findViewById(R.id.lyButtom);
+            lyButtomVisitor = (LinearLayout) itemView.findViewById(R.id.lyButtomVisitor);
 
             imgVijegiKala.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,7 +188,7 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
                     fragment.setName(txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
                     fragment.setChecker("Vijegi");
-                    fragment.show(manager,"VijegiKala");
+                    fragment.show(manager, "VijegiKala");
 
                 }
             });
@@ -209,7 +201,7 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
                     fragment.setActivity(activity);
                     fragment.setName(txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
-                    fragment.show(manager,"VijegiKala");
+                    fragment.show(manager, "VijegiKala");
                 }
             });
 
@@ -222,10 +214,17 @@ public class SarjamBarAdapter extends RecyclerView.Adapter<SarjamBarAdapter.prod
                     fragment.setName(txtName.getText().toString());
                     fragment.setCode(txtCode.getText().toString());
                     fragment.setChecker("Gheymat");
-                    fragment.show(manager,"SathGheymat");
+                    fragment.show(manager, "SathGheymat");
                 }
             });
 
+
+            imgDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ActivitySarjamDetails.start(activity, "Kala", txtCode.getText().toString());
+                }
+            });
 
 
         }

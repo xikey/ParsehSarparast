@@ -5,8 +5,11 @@ import android.content.Context;
 import com.razanPardazesh.supervisor.model.interfaces.IJson;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 06/11/2016.
@@ -285,6 +288,11 @@ public class Product implements IJson {
 
     @Override
     public JSONObject writeJson(Context context) {
+        return null;
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
         return null;
     }
 }

@@ -3,7 +3,10 @@ package com.razanPardazesh.supervisor.model.wrapper;
 import com.razanPardazesh.supervisor.model.CustomerInfo;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 19/02/2017.
@@ -45,5 +48,10 @@ public class CustomerDeptDividedLineAnswer extends ServerAnswer {
 
             LogWrapper.loge("CustomerDeptServerRepo_fillByJson :", ex);
         }
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
     }
 }

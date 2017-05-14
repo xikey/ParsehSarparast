@@ -43,6 +43,11 @@ public class Navigation implements IJson {
         return null;
     }
 
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
+    }
+
     public String jsonCreator(ArrayList<LocationData> lastData) {
 
         JSONArray jsonArray = new JSONArray();

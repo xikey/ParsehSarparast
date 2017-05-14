@@ -13,7 +13,9 @@ import java.util.Date;
  */
 
 public interface ICustomersEdited {
-    public CustomersEditAnswer getEditedList(Context context,String key,long firstIndex,long count);
-    public CustomerEditAnswer getEditedCustomer(Context context, long requestID);
-    public ServerAnswer setEditedCustomerStatus(Context context, long requestID, String date,int statusCode);
+   CustomersEditAnswer getEditedList(Context context,String key,long firstIndex,long count);
+   CustomerEditAnswer getEditedCustomer(Context context, long requestID);
+   ServerAnswer setEditedCustomerStatus(Context context, long requestID, String date,int statusCode);
+    CustomerEditAnswer getEditedListCount(Context context);
+
 }

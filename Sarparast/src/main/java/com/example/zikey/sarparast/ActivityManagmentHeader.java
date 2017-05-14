@@ -53,6 +53,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
     private CheckBox chkAllCustomers;
     private CheckBox chkCanUpdate;
     private CheckBox chkNeedGPS;
+    private CheckBox chkCanOrderOutOfPath;
 
     private ManagmentInfo managmentModify = new ManagmentInfo();
     private ManagmentInfo managmentInfo = new ManagmentInfo();
@@ -140,6 +141,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
         chkAllCustomers = (CheckBox) findViewById(R.id.chkAllCustomers);
         chkCanUpdate = (CheckBox) findViewById(R.id.chkCanUpdate);
         chkNeedGPS = (CheckBox) findViewById(R.id.chkNeedGPS);
+        chkCanOrderOutOfPath = (CheckBox) findViewById(R.id.chkCanOrderOutOfPath);
 
         ltDistance = (RelativeLayout) findViewById(R.id.lyDistance);
 
@@ -237,6 +239,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                     managmentInfo.setCanUpdate(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 5)));
                     managmentInfo.setForceToLoguot(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 6)));
                     managmentInfo.setNeedGPS(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 7)));
+                    managmentInfo.setCanOrderOutOfPath(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 8)));
 
                     managmentModify.setCode(NetworkTools.getSoapPropertyAsNullableString(request2, 0));
                     managmentModify.setCanOrder(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 2)));
@@ -246,6 +249,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                     managmentModify.setCanUpdate(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 5)));
                     managmentModify.setForceToLoguot(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 6)));
                     managmentModify.setNeedGPS(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 7)));
+                    managmentModify.setCanOrderOutOfPath(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(request2, 8)));
 
 //                    Log.e("kkk",""+managmentInfo.getCanOrder()  +"  "+managmentInfo.getDistance());
 //                    Log.e("kkk2",""+managmentModify.getCanOrder() +"  "+managmentModify.getDistance());
@@ -274,6 +278,8 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                 checkboxChanger(managmentModify.getCanUpdate(), chkCanUpdate, null);
                 checkboxChanger(managmentModify.getCanReadAllCustomer(), chkAllCustomers, null);
                 checkboxChanger(managmentModify.getNeedGPS(), chkNeedGPS, null);
+                checkboxChanger(managmentModify.getCanOrderOutOfPath(), chkCanOrderOutOfPath, null);
+
 
                 edtDistance.setText("" + managmentModify.getDistance());
 
@@ -348,6 +354,7 @@ public class ActivityManagmentHeader extends AppCompatActivity {
             datas.put("forceToUpdate", managmentModify.getCanUpdate());
             datas.put("forceToLoguot", managmentModify.getForceToLoguot());
             datas.put("needGPS", managmentModify.getNeedGPS());
+            datas.put("canOrderOutOfPath", managmentModify.getCanOrderOutOfPath());
 
             if (isonline) {
 
@@ -417,6 +424,8 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                                     managmentInfo.setCanUpdate(managmentModify.getCanUpdate());
                                     managmentInfo.setForceToLoguot(managmentModify.getForceToLoguot());
                                     managmentInfo.setNeedGPS(managmentModify.getNeedGPS());
+                                    managmentInfo.setCanOrderOutOfPath(managmentModify.getCanOrderOutOfPath());
+
 
                                     isanythingChanged();
 
@@ -760,6 +769,27 @@ public class ActivityManagmentHeader extends AppCompatActivity {
                 } else if (!chkNeedGPS.isChecked()) {
 
                     managmentModify.setNeedGPS(0);
+
+                }
+
+                isanythingChanged();
+            }
+        });
+
+        chkCanOrderOutOfPath.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+
+                //can register is canUse
+
+                if (chkCanOrderOutOfPath.isChecked()) {
+
+                    managmentModify.setCanOrderOutOfPath(1);
+
+                } else if (!chkCanOrderOutOfPath.isChecked()) {
+
+                    managmentModify.setCanOrderOutOfPath(0);
 
                 }
 

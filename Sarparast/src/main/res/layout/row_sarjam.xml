@@ -178,6 +178,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:alpha="0.7"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
@@ -212,14 +214,40 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:alpha="0.7"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@+id/linearLayout20"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="right"
+                    android:id="@+id/lyButtomVisitor">
+
+
+                    <ImageView
+
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/imgDetails"
+                        android:layout_marginRight="10dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_details_black_24dp1" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#607D8B"
                     android:layout_above="@+id/lyButtom"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"></LinearLayout>
+                    android:layout_alignParentEnd="true">
+
+                </LinearLayout>
+
             </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

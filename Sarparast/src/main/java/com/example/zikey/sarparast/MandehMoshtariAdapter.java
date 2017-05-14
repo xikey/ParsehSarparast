@@ -16,12 +16,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.zikey.sarparast.Helpers.NetworkTools;
-import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.razanPardazesh.supervisor.CustomerDeptDividedLineFragment;
+import com.razanPardazesh.supervisor.CustomerUnvisitedReasonsActivity;
+import com.razanPardazesh.supervisor.SatisfactionFromActivity;
+import com.razanPardazesh.supervisor.tools.LogWrapper;
 
 import java.util.ArrayList;
 
@@ -182,6 +182,8 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
         ImageView imgLike;
         ImageView imgDislike;
         ImageView imgMandehLine;
+        ImageView imgQuestions;
+        ImageView unvisited;
 
 
         LinearLayout lyButtom;
@@ -211,6 +213,8 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
             imgLike = (ImageView) itemView.findViewById(R.id.imgLike);
             imgDislike = (ImageView) itemView.findViewById(R.id.imgDislike);
             imgMandehLine = (ImageView) itemView.findViewById(R.id.imgMandehLine);
+            imgQuestions = (ImageView) itemView.findViewById(R.id.imgQuestions);
+            unvisited = (ImageView) itemView.findViewById(R.id.unvisited);
 
             imgLike.setOnClickListener(new View.OnClickListener() {
 
@@ -227,7 +231,6 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
             });
 
             imgDislike.setOnClickListener(new View.OnClickListener() {
-
 
                 @Override
                 public void onClick(View view) {
@@ -344,6 +347,34 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
                     String name = txtName.getText().toString();
                     String mandeh = txtMande.getText().toString();
                     CustomerDeptDividedLineFragment.Show(activity, name, code, mandeh);
+                }
+            });
+
+            imgQuestions.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    long code = Long.parseLong(txtCode.getText().toString());
+                    String name = txtName.getText().toString();
+                    double lt = 0;
+                    double lng = 0;
+
+                    try {
+                        lt = Double.valueOf(W);
+                        lng = Double.valueOf(L);
+                    } catch (Exception ex) {
+                        LogWrapper.loge("productoViewHolder_onClick_Exception: ", ex);
+                    }
+
+                    SatisfactionFromActivity.start(activity, code, name, lt, lng);
+                }
+            });
+
+            unvisited.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    long code = Long.parseLong(txtCode.getText().toString());
+                    String name = txtName.getText().toString();
+                    CustomerUnvisitedReasonsActivity.start(activity, code,name);
                 }
             });
 

@@ -10,9 +10,10 @@ import com.razanPardazesh.supervisor.model.wrapper.ReportsAnswer;
  */
 
 public interface IReport  {
-    //key for search
+
 
     public ReportAnswer mainCoveragePercent(Context context,String key, long lastIndex, int Count);
 
     public ReportsAnswer visitorsCoveragePercent(Context context, String key, long lastIndex, int Count);
+
 }

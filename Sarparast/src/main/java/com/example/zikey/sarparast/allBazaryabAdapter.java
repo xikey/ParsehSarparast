@@ -33,6 +33,7 @@ public class allBazaryabAdapter   extends RecyclerView.Adapter<allBazaryabAdapte
 
     @Override
     public void onBindViewHolder(productoViewHolder productoViewHolder, int i) {
+
         productoViewHolder.code_user.setText(item.get(i).getCode_user());
         productoViewHolder.name_user.setText(item.get(i).getName_user());
         productoViewHolder.image_user.setImageResource(item.get(i).getImage_user());
@@ -62,22 +63,11 @@ public class allBazaryabAdapter   extends RecyclerView.Adapter<allBazaryabAdapte
                 @Override
                 public void onClick(View v) {
 
-
-
                     String code = code_user.getText().toString();
                       String name = name_user.getText().toString();
 
                     if (communicator != null)
-                        communicator.onClick(name,code);
-
-//                     communicator.getID(code);
-//                    communicator.getName(name);
-
-                    Log.e("Interface","name and id is "+code + name);
-
-// = new FragmentAllBazaryab();
-//                 dialogFragment = fragmentAllBazaryab.getDialogFragment();
-                 //  dialogFragment.dismiss();
+                        communicator.onClick(code,name);
 
                 }
             });

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -26,14 +27,14 @@ import org.ksoap2.serialization.SoapObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ActivityAcceptRequests extends AppCompatActivity  {
+public class ActivityAcceptRequests extends AppCompatActivity {
 
-    private  ImageView btnShowDetails;
-    private  ImageView btnAccept;
-    private  ImageView btnCancel;
-    private  ImageView btnForward;
+    private ImageView btnShowDetails;
+    private ImageView btnAccept;
+    private ImageView btnCancel;
+    private ImageView btnForward;
 
-    private  String code;
+    private String code;
 
     private TextView txtKol;
     private TextView txtTaeed;
@@ -48,34 +49,34 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
 
-    static    String state="";
+    static String state = "";
 
     private ArrayList<RequestsInfo> requestsInfos = new ArrayList<>();
 
-    private   RequestsInfo countrinfo = new RequestsInfo();
+    private RequestsInfo countrinfo = new RequestsInfo();
 
-    private   RecyclerView row_Requests;
-    private   RecyclerView.LayoutManager row_manager;
-    private   RequestsAdapter row_adapter;
+    private RecyclerView row_Requests;
+    private RecyclerView.LayoutManager row_manager;
+    private RequestsAdapter row_adapter;
 
     private EditText edtSearch;
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView
-        (R.layout.activity_accept_requests);
-
+                (R.layout.activity_accept_requests);
 
 
         code = getIntent().getStringExtra("Code");
 
         row_Requests = (RecyclerView) findViewById(R.id.row_requests);
 
-        btnShowDetails =(ImageView)  findViewById(R.id.btnShowDetails);
-        btnAccept =     (ImageView)  findViewById(R.id.btnAccept);
-        btnCancel =     (ImageView)  findViewById(R.id.btnCancel);
-        btnForward =    (ImageView)  findViewById(R.id.btnForward);
+        btnShowDetails = (ImageView) findViewById(R.id.btnShowDetails);
+        btnAccept = (ImageView) findViewById(R.id.btnAccept);
+        btnCancel = (ImageView) findViewById(R.id.btnCancel);
+        btnForward = (ImageView) findViewById(R.id.btnForward);
 
         txtKol = (TextView) findViewById(R.id.txtKol);
         txtTaeed = (TextView) findViewById(R.id.txtTaeed);
@@ -89,12 +90,11 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
 
         edtSearch = (EditText) findViewById(R.id.edtSearch);
 
-        state="negative";
-
+        state = "negative";
 
 
         preferenceHelper = new PreferenceHelper(this);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
 
 
         imgBack.setOnClickListener(new View.OnClickListener() {
@@ -127,13 +127,13 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
             }
         });
 
- row_Requests.setOnTouchListener(new View.OnTouchListener() {
-     @Override
-     public boolean onTouch(View view, MotionEvent motionEvent) {
-         G.hideSoftKeyboard(ActivityAcceptRequests.this);
-         return false;
-     }
- });
+        row_Requests.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                G.hideSoftKeyboard(ActivityAcceptRequests.this);
+                return false;
+            }
+        });
 
 
     }
@@ -142,7 +142,7 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
     protected void onResume() {
 
 
-        if (state.equals("paused")){
+        if (state.equals("paused")) {
             Intent intent = getIntent();
             finish();
             startActivity(intent);
@@ -158,20 +158,17 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
     }
     //___________________________________SHOW    DETAILS___________________________________________
 
-    private class TSFactorHeaderAsync extends AsyncTask<Void,String,String> {
+    private class TSFactorHeaderAsync extends AsyncTask<Void, String, String> {
 
-        Boolean isonline= NetworkTools.isOnline(ActivityAcceptRequests.this);
-        boolean isnull=true;
+        Boolean isonline = NetworkTools.isOnline(ActivityAcceptRequests.this);
+        boolean isnull = true;
 
         ProgressDialog dialog;
 
         @Override
         protected void onPostExecute(String state) {
 
-
-
-
-            if (state.equals("Null")){
+            if (state.equals("Null")) {
                 new AlertDialog.Builder(ActivityAcceptRequests.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -187,17 +184,15 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
 
             if (state.equals("Online")) {
 
-                txtKol.setText(""+countrinfo.get_TedadKol().toString());
-                txtTaeed.setText(""+countrinfo.get_TedadTaeed().toString());
-                txtLaghv.setText(""+countrinfo.get_TedadLaghv().toString());
-                txtErja.setText(""+countrinfo.get_TedadBargashti().toString());
+                txtKol.setText("" + countrinfo.get_TedadKol().toString());
+                txtTaeed.setText("" + countrinfo.get_TedadTaeed().toString());
+                txtLaghv.setText("" + countrinfo.get_TedadLaghv().toString());
+                txtErja.setText("" + countrinfo.get_TedadBargashti().toString());
 
-                txtRKol.setText((""+countrinfo.get_RialTedadKol().toString()));
-                txtRTaeed.setText((""+countrinfo.get_RialTedadTaeed().toString()));
-                txtRLaghv.setText((""+countrinfo.get_RialTedadLaghv().toString()));
-                txtRErja.setText((""+countrinfo.get_RialTedadBargashti().toString()));
-
-
+                txtRKol.setText(("" + countrinfo.get_RialTedadKol().toString()));
+                txtRTaeed.setText(("" + countrinfo.get_RialTedadTaeed().toString()));
+                txtRLaghv.setText(("" + countrinfo.get_RialTedadLaghv().toString()));
+                txtRErja.setText(("" + countrinfo.get_RialTedadBargashti().toString()));
 
                 row_Requests.setFocusable(false);
                 row_manager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -209,9 +204,7 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
 
                 if (dialog != null)
                     dialog.dismiss();
-            }
-
-            else  if (state.equals("NotOnline")){
+            } else if (state.equals("NotOnline")) {
                 new AlertDialog.Builder(ActivityAcceptRequests.this)
                         .setCancelable(false)
                         .setTitle("خطا")
@@ -242,15 +235,15 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
             HashMap<String, Object> data = new HashMap<String, Object>();
 
 
-            String tokenid =  preferenceHelper.getString(preferenceHelper.TOKEN_ID);
+            String tokenid = preferenceHelper.getString(preferenceHelper.TOKEN_ID);
 
-            datas.put("TokenID",tokenid);
-            datas.put("code",code);
+            datas.put("TokenID", tokenid);
+            datas.put("code", code);
 
-            data.put("TokenID",tokenid);
-            data.put("Code",code);
+            data.put("TokenID", tokenid);
+            data.put("Code", code);
 
-            Log.e("code","Code IS "+code);
+            Log.e("code", "Code IS " + code);
 
 
             if (isonline) {
@@ -258,7 +251,7 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
                 try {
 
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_All_Requests", data).getProperty(0);
-                    if (request2.getPropertyCount()<=0){
+                    if (request2.getPropertyCount() <= 0) {
                         return "Null";
                     }
                     SoapObject Counter = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Requests_Counter", datas).getProperty(0);
@@ -278,7 +271,7 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
                     for (int i = 0; i < request2.getPropertyCount(); i++) {
 
                         SoapObject sp = (SoapObject) request2.getProperty(i);
-                        Log.e("fffffff","request is "+ sp);
+                        Log.e("fffffff", "request is " + sp);
 
                         RequestsInfo requestsInfo = new RequestsInfo();
                         requestsInfo.set_SefareshID(NetworkTools.getSoapPropertyAsNullableString(sp, 0));
@@ -293,15 +286,17 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
                         requestsInfo.set_CntHoghooghi(NetworkTools.getSoapPropertyAsNullableString(sp, 10));
                         requestsInfo.set_SumHoghooghi(String.format("%,d", Long.parseLong(NetworkTools.getSoapPropertyAsNullableString(sp, 11).toString())));
                         requestsInfo.set_VaziatSefarersh(Integer.parseInt(NetworkTools.getSoapPropertyAsNullableString(sp, 12)));
+                        requestsInfo.set_Tel(NetworkTools.getSoapPropertyAsNullableString(sp, 13));
+                        requestsInfo.set_Mobile(NetworkTools.getSoapPropertyAsNullableString(sp, 14));
+                        requestsInfo.set_NahveVosol(NetworkTools.getSoapPropertyAsNullableString(sp, 15));
+                        requestsInfo.set_Tozihat(NetworkTools.getSoapPropertyAsNullableString(sp, 16));
 
-                        requestsInfo.set_Tel( NetworkTools.getSoapPropertyAsNullableString(sp, 13));
-                        requestsInfo.set_Mobile( NetworkTools.getSoapPropertyAsNullableString(sp, 14));
-                        requestsInfo.set_NahveVosol( NetworkTools.getSoapPropertyAsNullableString(sp, 15));
-                        requestsInfo.set_Tozihat( NetworkTools.getSoapPropertyAsNullableString(sp, 16));
+                        String mandeHesab = NetworkTools.getSoapPropertyAsNullableString(sp, 6).toString();
+                        String chekDarJaryan = NetworkTools.getSoapPropertyAsNullableString(sp, 9).toString();
 
+                        requestsInfo.setMandeEtebar(calculateMandehEtebar(mandeHesab, chekDarJaryan));
                         requestsInfos.add(requestsInfo);
                     }
-
 
 
                 } catch (Exception e) {
@@ -316,11 +311,33 @@ public class ActivityAcceptRequests extends AppCompatActivity  {
 
     }
 
-
-
     @Override
     public void onBackPressed() {
         finish();
         super.onBackPressed();
     }
+
+    private String calculateMandehEtebar(String mandehHesab, String rialiCheq) {
+
+        if (isStringNullOrEmpty(mandehHesab) || isStringNullOrEmpty(rialiCheq)) return "-";
+
+        long mande = Long.parseLong(mandehHesab);
+        long rialChek = Long.parseLong(rialiCheq);
+
+        long output = mande + rialChek;
+
+        return String.format("%,d", output);
+
+
+    }
+
+
+    private boolean isStringNullOrEmpty(String s) {
+
+        if (s == null || TextUtils.isEmpty(s))
+            return true;
+
+        return false;
+    }
+
 }

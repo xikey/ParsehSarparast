@@ -10,8 +10,9 @@ import android.widget.LinearLayout;
 
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.razanPardazesh.supervisor.AroundMeMapActivity;
 
-public class ActivityVisitorsInMap extends AppCompatActivity    {
+public class ActivityVisitorsInMap extends AppCompatActivity {
 
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
@@ -27,7 +28,7 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
         setContentView(R.layout.activity_visitors_in_map);
 
         preferenceHelper = new PreferenceHelper(this);
-        imgBack= (ImageView) findViewById(R.id.imgBack);
+        imgBack = (ImageView) findViewById(R.id.imgBack);
 
         lyBazaryabPath = (LinearLayout) findViewById(R.id.lyBazaryabPath);
         lySabtSefaresh = (LinearLayout) findViewById(R.id.lySabtSefaresh);
@@ -45,9 +46,7 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ActivityVisitorsInMap.this,ActivityGoogleMap.class);
-                intent.putExtra("state","MyNearCustomers");
-                startActivity(intent);
+                AroundMeMapActivity.start(ActivityVisitorsInMap.this);
 
             }
         });
@@ -57,8 +56,8 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ActivityVisitorsInMap.this,ActivityListOfBazaryab.class);
-                intent.putExtra("state","BazaryabLists");
+                Intent intent = new Intent(ActivityVisitorsInMap.this, ActivityListOfBazaryab.class);
+                intent.putExtra("state", "BazaryabLists");
                 startActivity(intent);
 
             }
@@ -69,8 +68,8 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ActivityVisitorsInMap.this,ActivityListOfBazaryab.class);
-                intent.putExtra("state","SabtSefaresh");
+                Intent intent = new Intent(ActivityVisitorsInMap.this, ActivityListOfBazaryab.class);
+                intent.putExtra("state", "SabtSefaresh");
                 startActivity(intent);
 
             }
@@ -80,16 +79,16 @@ public class ActivityVisitorsInMap extends AppCompatActivity    {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(ActivityVisitorsInMap.this,ActivityListOfBazaryab.class);
-                intent.putExtra("state","NotOrdered");
+                Intent intent = new Intent(ActivityVisitorsInMap.this, ActivityListOfBazaryab.class);
+                intent.putExtra("state", "NotOrdered");
                 startActivity(intent);
 
             }
         });
 
-        }
-
     }
+
+}
 
 
 

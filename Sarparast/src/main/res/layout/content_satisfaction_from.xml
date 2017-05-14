@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_satisfaction_from"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.razanPardazesh.supervisor.SatisfactionFromActivity"
+    tools:showIn="@layout/activity_satisfaction_from">
+
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="1dp">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <RatingBar
+android:layout_marginRight="20dp"
+                android:id="@+id/rtbTotalRate"
+                style="@style/Base.Widget.AppCompat.RatingBar.Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:rating="0" />
+
+            <Button
+                android:id="@+id/btnSend"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/bg_blue_button"
+                android:text="ارسال فرم"
+                android:textColor="#ffffff"
+                android:textSize="17dp" />
+
+
+            <View
+                android:layout_alignParentTop="true"
+                android:background="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"></View>
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/footer"
+        android:layout_alignParentTop="true">
+    </android.support.v7.widget.RecyclerView>
+
+
+    <RelativeLayout
+
+        android:visibility="visible"
+        android:clickable="true"
+        android:alpha="0.8"
+        android:background="#000000"
+        android:id="@+id/lyProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <ProgressBar
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

@@ -10,7 +10,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,9 +17,7 @@ import android.widget.TextView;
 
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.R;
-import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import com.razanPardazesh.supervisor.model.CustomerRequestEdit;
-import com.razanPardazesh.supervisor.model.wrapper.CustomerEditAnswer;
 import com.razanPardazesh.supervisor.model.wrapper.ServerAnswer;
 import com.razanPardazesh.supervisor.repo.CustomersEditedServerRepo;
 import com.razanPardazesh.supervisor.repo.iRepo.ICustomersEdited;
@@ -31,16 +28,17 @@ import java.util.Date;
 public class EditedCustomerActivity extends AppCompatActivity {
 
 
-    private static final String KEY_ID = "ID";
+    private static final String KEY_CUSTOMER_EDITED_EXTRA = "CUSTOMER_EDITED_EXTRA";
     private final int ACCEPT_CUSTOMER = 1;
     private final int REJECT_CUSTOMER = 2;
-    private long ID = -1;
+    private CustomerRequestEdit customerData = null;
 
     private RelativeLayout lyProgress;
     private ImageView imgBack;
     private TextView txtHead;
     private TextView txtName;
-    private TextView txtFamily;
+    private TextView txtShop;
+    private TextView txtCodeMelli;
     private TextView txtTel;
     private TextView txtMobile;
     private TextView txtAddress;
@@ -49,7 +47,6 @@ public class EditedCustomerActivity extends AppCompatActivity {
     private TextView txtAccept;
 
     private ICustomersEdited serverRepo = null;
-    private CustomerRequestEditAsynk customerAsynk;
     CustomerRequestEditChangeStatusAsynk changeCustomerStatusAsync;
     private double latitude = 0;
     private double longitude = 0;
@@ -63,14 +60,14 @@ public class EditedCustomerActivity extends AppCompatActivity {
         initRepo();
         parseIntent();
         initViews();
-        startAsync();
+        fillCustomerData();
 
     }
 
-    public static void start(FragmentActivity context, long id, int requestCode) {
+    public static void start(FragmentActivity context, CustomerRequestEdit customerRequestEdit, int requestCode) {
 
         Intent starter = new Intent(context, EditedCustomerActivity.class);
-        starter.putExtra(KEY_ID, id);
+        starter.putExtra(KEY_CUSTOMER_EDITED_EXTRA, customerRequestEdit);
         context.startActivityForResult(starter, requestCode);
     }
 
@@ -80,7 +77,8 @@ public class EditedCustomerActivity extends AppCompatActivity {
         imgBack = (ImageView) findViewById(R.id.imgBack);
         txtHead = (TextView) findViewById(R.id.txtHead);
         txtName = (TextView) findViewById(R.id.txtName);
-        txtFamily = (TextView) findViewById(R.id.txtFamily);
+        txtShop = (TextView) findViewById(R.id.txtShop);
+        txtCodeMelli = (TextView) findViewById(R.id.txtCodeMelli);
         txtTel = (TextView) findViewById(R.id.txtTel);
         txtMobile = (TextView) findViewById(R.id.txtMobile);
         txtAddress = (TextView) findViewById(R.id.txtAddress);
@@ -133,6 +131,7 @@ public class EditedCustomerActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void parseIntent() {
@@ -142,8 +141,8 @@ public class EditedCustomerActivity extends AppCompatActivity {
         if (data == null)
             return;
 
-        if (data.hasExtra(KEY_ID))
-            ID = data.getLongExtra(KEY_ID, -1);
+        if (data.hasExtra(KEY_CUSTOMER_EDITED_EXTRA))
+            customerData = data.getParcelableExtra(KEY_CUSTOMER_EDITED_EXTRA);
 
     }
 
@@ -153,67 +152,7 @@ public class EditedCustomerActivity extends AppCompatActivity {
             serverRepo = new CustomersEditedServerRepo();
     }
 
-
-    public class CustomerRequestEditAsynk extends AsyncTask<Void, String, String> {
-
-        private CustomerEditAnswer answer;
-        private String message;
-
-        @Override
-        protected void onPreExecute() {
-            lyProgress.setVisibility(View.VISIBLE);
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(Void... params) {
-            customerAsynk = null;
-            answer = serverRepo.getEditedCustomer(getApplicationContext(), ID);
-
-            if (answer.getMessage() != null || !TextUtils.isEmpty(answer.getMessage())) {
-                message = answer.getMessage();
-                return ("-1");
-            }
-
-            if (answer.getIsSuccess() == 1) {
-                return "1";
-            }
-
-            return "0";
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-
-            if (s.equals("-1")) {
-                showErorAlertDialog("خطا", message);
-            }
-
-            if (s.equals("0"))
-                showErorAlertDialog("خطا", "اطلاعاتی جهت نمایش وجود ندارد");
-
-            if (s.equals("1")) {
-                fillCustomerData(answer);
-            }
-        }
-    }
-
-
-    private void startAsync() {
-
-        if (customerAsynk != null)
-            return;
-
-        if (NetworkTools.checkNetworkConnection(EditedCustomerActivity.this) == false)
-            finish();
-
-        customerAsynk = new CustomerRequestEditAsynk();
-        customerAsynk.execute();
-
-    }
-
-    private void showErorAlertDialog(String titile, String message) {
+    private void showErorAlertDialog(String titile, String message, final boolean finishActivity) {
         if (message == null) return;
 
         AlertDialog alertDialog = new AlertDialog.Builder(EditedCustomerActivity.this).create();
@@ -223,56 +162,67 @@ public class EditedCustomerActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        finish();
+
+                        if (finishActivity)
+                            finish();
                     }
                 });
         alertDialog.show();
 
     }
 
-    private void fillCustomerData(CustomerEditAnswer data) {
+    private void fillCustomerData() {
 
-        if (data == null)
-            return;
-
-        if (data.getCustomerRequestEdit() == null)
+        if (customerData == null)
             return;
 
         if (txtName == null)
             initViews();
 
-        CustomerRequestEdit customer = data.getCustomerRequestEdit();
 
-        String name = customer.getCustomerName();
+        String name = customerData.getCustomerName();
         if (name != null || !TextUtils.isEmpty(name))
             txtName.setText(name);
 
-        String family = customer.getCustomerFamily();
-        if (family != null || !TextUtils.isEmpty(family))
-            txtFamily.setText(family);
+        String stroeName = customerData.getStoreName();
+        if (stroeName != null || !TextUtils.isEmpty(stroeName))
+            txtShop.setText(stroeName);
 
-        String tell = customer.getCustomerTel();
+        String tell = customerData.getCustomerTel();
         if (tell != null || !TextUtils.isEmpty(tell))
             txtTel.setText(tell);
 
-        String mobile = customer.getCustomerMobile();
+        String mobile = customerData.getCustomerMobile();
         if (mobile != null || !TextUtils.isEmpty(mobile))
             txtMobile.setText(mobile);
 
-        String address = customer.getCustomerAddress();
+        String address = customerData.getCustomerAddress();
         if (address != null || !TextUtils.isEmpty(address))
             txtAddress.setText(address);
 
-        latitude = customer.getCustomerLT();
-        longitude = customer.getCustomerLN();
+        long codeMelli = customerData.getCodeMelli();
+        if (codeMelli != 0) {
+            txtCodeMelli.setText("" + codeMelli);
+        }
+
+
+        latitude = customerData.getCustomerLT();
+        longitude = customerData.getCustomerLN();
+
+        if (latitude == 0 || longitude == 0) {
+            lyLocation.setVisibility(View.GONE);
+        }
 
         lyProgress.setVisibility(View.GONE);
 
     }
 
     private void checkUserLocationSetting() {
-        if (latitude == 0 || longitude == 0)
+        if (latitude == 0 || longitude == 0) {
+            showErorAlertDialog(null, "موقعیتی برای این مشتری روی نقشه ثبت نشده است", false);
             return;
+
+        }
 
         LocationOnMapActivity.start(EditedCustomerActivity.this, latitude, longitude);
     }
@@ -299,7 +249,7 @@ public class EditedCustomerActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             changeCustomerStatusAsync = null;
             String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-            answer = serverRepo.setEditedCustomerStatus(getApplicationContext(), ID, currentDateTimeString, statusCode);
+            answer = serverRepo.setEditedCustomerStatus(getApplicationContext(), customerData.getId(), currentDateTimeString, statusCode);
 
             if (answer.getMessage() != null || !TextUtils.isEmpty(answer.getMessage())) {
                 message = answer.getMessage();
@@ -318,18 +268,19 @@ public class EditedCustomerActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             if (s.equals("-1")) {
-                showErorAlertDialog("خطا", message);
+                showErorAlertDialog("خطا", message, true);
                 lyProgress.setVisibility(View.GONE);
-
             }
 
-            if (s.equals("0"))
-                showErorAlertDialog("خطا", "خطا در ارسال اطلاعات به سمت سرور");
-            lyProgress.setVisibility(View.GONE);
+            if (s.equals("0")) {
+                showErorAlertDialog("خطا", "خطا در ارسال اطلاعات به سمت سرور", true);
+                lyProgress.setVisibility(View.GONE);
+            }
+
 
             if (s.equals("1")) {
                 setResult(RESULT_OK);
-                showErorAlertDialog("موفقیت", "موفقیت در انجام عملیات");
+                showErorAlertDialog("موفقیت", "موفقیت در انجام عملیات", true);
                 lyProgress.setVisibility(View.GONE);
             }
         }

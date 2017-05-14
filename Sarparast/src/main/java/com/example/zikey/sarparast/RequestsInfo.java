@@ -38,8 +38,10 @@ public class RequestsInfo {
     private String _Tozihat;
     private String _NahveVosol;
 
+    private String mandeEtebar;
 
-    private  int _VaziatSefarersh;
+
+    private int _VaziatSefarersh;
 
     public String get_SefareshID() {
         return _SefareshID;
@@ -255,5 +257,13 @@ public class RequestsInfo {
 
     public void set_NahveVosol(String _NahveVosol) {
         this._NahveVosol = _NahveVosol;
+    }
+
+    public String getMandeEtebar() {
+        return mandeEtebar;
+    }
+
+    public void setMandeEtebar(String mandeEtebar) {
+        this.mandeEtebar = mandeEtebar;
     }
 }

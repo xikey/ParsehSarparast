@@ -72,13 +72,13 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabMyLocation"
-            android:elevation="10dp"
-            app:backgroundTint="#ef5350"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="@dimen/fab_margin"
+            android:elevation="10dp"
+            app:backgroundTint="#ef5350"
             android:src="@drawable/ic_my_location_black_24dp"
             android:scaleType="center" />
 

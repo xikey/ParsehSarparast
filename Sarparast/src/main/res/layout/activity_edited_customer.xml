@@ -26,13 +26,13 @@
 
         <TextView
             android:id="@+id/txtHead"
-            android:text="اطلاعات مشتری"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
             android:gravity="center"
             android:paddingLeft="10dp"
+            android:text="اطلاعات مشتری"
             android:textColor="#ffffff"
             android:textSize="16sp" />
     </android.support.v7.widget.Toolbar>
@@ -42,20 +42,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/mhztoolbar"
-        android:paddingBottom="60dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:paddingTop="@dimen/activity_vertical_margin">
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:scrollbarStyle="outsideOverlay">
 
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="60dp">
 
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -68,10 +69,10 @@
                     android:layout_weight="1"
                     android:clickable="false"
                     android:ellipsize="end"
-                    android:paddingRight="10dp"
-                    android:textSize="16sp"
                     android:gravity="center_vertical|right"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="60dp"
@@ -88,59 +89,114 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
 
                 <TextView
-                    android:id="@+id/txtFamily"
+                    android:id="@+id/txtCodeMelli"
                     android:layout_width="0dp"
-                    android:paddingRight="10dp"
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:clickable="false"
                     android:ellipsize="end"
-                    android:textSize="16sp"
                     android:gravity="center_vertical|right"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center"
-                    android:text="نام خانوادگی :" />
+                    android:text="کد ملی :" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="15dp"
                     android:alpha="0.4"
-                    app:srcCompat="@drawable/ic_person_black_24dp" />
+                    app:srcCompat="@drawable/ic_card_black_24dp" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
 
+                <TextView
+                    android:id="@+id/txtShop"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
-                    <TextView
-                        android:id="@+id/txtTel"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:clickable="false"
-                        android:ellipsize="end"
-                        android:paddingRight="10dp"
-                        android:gravity="center_vertical|right"
-                        android:maxLines="1" />
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:text="فروشگاه :" />
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="15dp"
+                    android:alpha="0.4"
+                    app:srcCompat="@drawable/ic_domain_black_24dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/txtTel"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="60dp"
@@ -156,25 +212,31 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="horizontal">
 
 
-
-                    <TextView
-                        android:id="@+id/txtMobile"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:clickable="false"
-                        android:ellipsize="end"
-                        android:textSize="16sp"
-                        android:paddingRight="10dp"
-                        android:gravity="center_vertical|right"
-                        android:maxLines="1" />
+                <TextView
+                    android:id="@+id/txtMobile"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="1"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="60dp"
@@ -191,30 +253,37 @@
 
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
 
 
-                    <TextView
-                        android:id="@+id/txtAddress"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="16sp"
-                        android:paddingRight="10dp"
-                        android:clickable="false"
-                        android:ellipsize="end"
-                        android:gravity="center_vertical|right"
-                        android:maxLines="3" />
+                <TextView
+                    android:id="@+id/txtAddress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical|right"
+                    android:maxLines="3"
+                    android:paddingBottom="20dp"
+                    android:paddingRight="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="60dp"
                     android:layout_height="50dp"
                     android:gravity="center"
                     android:text="آدرس :" />
-
 
 
                 <ImageView
@@ -224,6 +293,13 @@
                     app:srcCompat="@drawable/ic_location_city_black_24dp" />
 
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:layout_marginTop="5dp"
+                android:alpha="0.4"
+                android:background="#59000000" />
 
             <LinearLayout
                 android:id="@+id/lyLocation"
@@ -236,7 +312,7 @@
                     android:layout_height="50dp"
                     android:layout_weight="1"
                     android:gravity="center|right"
-                    android:text="نمایش موقیت مکانی روی نقشه"
+                    android:text="نمایش موقعیت مکانی روی نقشه"
                     android:textColor="#0277BD"
                     android:textStyle="bold" />
 
@@ -250,26 +326,36 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp" >
 
-                <TextView
-                    android:id="@+id/txtRejection"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:gravity="center"
-                    android:text="رد"
-                    android:textColor="#f44336"
-                    android:textSize="20sp" />
 
-                <TextView
-                    android:id="@+id/txtAccept"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="20dp"
-                    android:gravity="center"
-                    android:text="تایید"
-                    android:textColor="#8BC34A"
-                    android:textSize="20sp" />
+
+                    <TextView
+                        android:background="@drawable/bg_button_green"
+                        android:id="@+id/txtAccept"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="تایید"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+
+                    <TextView
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/txtRejection"
+                        android:layout_width="100dp"
+                        android:layout_height="40dp"
+                        android:gravity="center"
+                        android:text="رد"
+                        android:background="@drawable/bg_button_red"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
+
+
+
+
 
             </LinearLayout>
 
@@ -283,7 +369,8 @@
         android:layout_height="match_parent"
         android:layout_below="@id/mhztoolbar"
         android:alpha="0.6"
-        android:background="#CCffffff">
+        android:background="#CCffffff"
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"

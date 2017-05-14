@@ -1,8 +1,11 @@
 package com.example.zikey.sarparast;
 
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +29,9 @@ import java.util.HashMap;
 
 public class ActivitySarjamDetails extends AppCompatActivity {
 
+    private static final String KEY_CODE_BAZARYAB = "CodeBazaryab";
+    private static final String KEY_STATE = "State";
+
     private ImageView imgBack;
     private TextView txtHead;
     private String state;
@@ -47,6 +53,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
     private SarjamBarAdapter row_adapter;
 
     private EditText edtSearch;
+    private String codeBazaryab = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +92,8 @@ public class ActivitySarjamDetails extends AppCompatActivity {
         lyContent.setVisibility(View.GONE);
         lyProgress.setVisibility(View.VISIBLE);
 
+        parseIntent();
+
 
         if (state.equals("Vizitor")) {
             txtHead.setText("سرجمع بار (ویزیتور)");
@@ -94,7 +103,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
 
         if (state.equals("Kala")) {
-            txtHead.setText("سرجمع بار (کالا)");
+            txtHead.setText("سرجمع بار (کالا)" + " " + codeBazaryab);
 
             new SarjamKalaAsync().execute();
         }
@@ -123,10 +132,8 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
         Boolean isonline = NetworkTools.isOnline(ActivitySarjamDetails.this);
 
-
         @Override
         protected void onPostExecute(String state) {
-
 
             if (state.equals("Null")) {
 
@@ -155,8 +162,6 @@ public class ActivitySarjamDetails extends AppCompatActivity {
                 row_adapter.setState(-1);
                 row_adapter.setActivity(ActivitySarjamDetails.this);
                 row_adapter.setManager(manager);
-
-
                 lyContent.setVisibility(View.VISIBLE);
                 lyProgress.setVisibility(View.GONE);
 
@@ -183,6 +188,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("group", "Visitor");
+            datas.put("CodeBazaryab", codeBazaryab);
 
             if (isonline) {
                 try {
@@ -276,7 +282,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-
+            row_sarjam.setBackgroundColor(Color.parseColor("#E0F7FA"));
         }
 
         @Override
@@ -288,6 +294,7 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
             datas.put("TokenID", preferenceHelper.getString(PreferenceHelper.TOKEN_ID));
             datas.put("group", "Kala");
+            datas.put("CodeBazaryab", codeBazaryab);
 
             if (isonline) {
                 try {
@@ -327,5 +334,21 @@ public class ActivitySarjamDetails extends AppCompatActivity {
 
     }
 
+    private void parseIntent() {
+        Intent data = getIntent();
+        if (data == null)
+            return;
+        if (data.hasExtra(KEY_CODE_BAZARYAB)) {
+
+            codeBazaryab = data.getStringExtra(KEY_CODE_BAZARYAB);
+        }
+    }
+
+    public static void start(FragmentActivity context, String state, String codeBazaryab) {
+        Intent starter = new Intent(context, ActivitySarjamDetails.class);
+        starter.putExtra(KEY_STATE, state);
+        starter.putExtra(KEY_CODE_BAZARYAB, codeBazaryab);
+        context.startActivity(starter);
+    }
 
 }

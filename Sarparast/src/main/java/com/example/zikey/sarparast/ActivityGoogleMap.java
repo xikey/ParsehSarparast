@@ -378,7 +378,7 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             HashMap<String, Object> datas = new HashMap<String, Object>();
             HashMap<String, Object> datas2 = new HashMap<String, Object>();
 
-            if (points!=null&&points.size()>0){
+            if (points != null && points.size() > 0) {
                 points.clear();
             }
 
@@ -960,8 +960,6 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
                 marker.icon(pin);
                 marker.title(pointha.get(i).get_Code());
 
-                //   polylineOptions.add(latLng).width(1).color(Color.parseColor("#000000"));
-                //tsinfo  mMap.addPolyline(polylineOptions);
                 mMap.addMarker(marker);
 
             }
@@ -1229,6 +1227,8 @@ public class ActivityGoogleMap extends FragmentActivity implements OnMapReadyCal
             }
         });
     }
+
+
 }
 
 

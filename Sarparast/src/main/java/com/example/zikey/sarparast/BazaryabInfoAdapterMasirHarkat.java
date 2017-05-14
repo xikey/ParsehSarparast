@@ -50,14 +50,6 @@ public class BazaryabInfoAdapterMasirHarkat extends RecyclerView.Adapter<Bazarya
         productoViewHolder.txtTime.setText((""+item.get(i).get_Time().toString()).substring(0,8));
         productoViewHolder.ID = Integer.parseInt(item.get(i).get_ID());
 
-
-//        if ((Integer.parseInt(m.toString()))%2==0){
-//            productoViewHolder.lyRoot02.setBackgroundColor(Color.parseColor("#ffffff"));
-//        }
-//        if ((Integer.parseInt(m.toString()))%2>0){
-//            productoViewHolder.lyRoot02.setBackgroundColor(Color.parseColor("#E8EAF6"));
-//        }
-
     }
 
     @Override

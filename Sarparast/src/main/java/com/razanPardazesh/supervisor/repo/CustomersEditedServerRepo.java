@@ -9,8 +9,10 @@ import com.razanPardazesh.supervisor.model.wrapper.CustomersEditAnswer;
 import com.razanPardazesh.supervisor.model.wrapper.ServerAnswer;
 import com.razanPardazesh.supervisor.repo.iRepo.ICustomersEdited;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -23,6 +25,7 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
     private final String EDITED_CUSTOMER_WEBMETHOD = "getCustomerRequestEdited";
     private final String EDITEDLIST_WEBMETHOD = "getCustomerRequestEditedList";
     private final String SET_STATUS_WEBMETHOD = "SetCustomerRequestEdited_StatusCode";
+    private final String EDITED_LIST_COUNT_WEBMETHOD = "getCustomerRequestEditedCount";
     private final String Key_TOKEN = "TokenID";
     private final String Key_SEARCH = "key";
     private final String Key_FIRST_INDEX = "firstIndex";
@@ -50,8 +53,8 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
         datas.put(Key_COUNT, count);
 
         CustomersEditAnswer answer = new CustomersEditAnswer();
-        try {
 
+        try {
             String request = NetworkTools.CallSoapMethod(url, EDITEDLIST_WEBMETHOD, datas).getPropertyAsString(0);
             if (request == null) {
                 answer.setMessage("خطا در دریافت اطلاعات از سرور answer is empty ");
@@ -62,7 +65,7 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
             answer.fillByJson(jsonObject);
 
         } catch (Exception ex) {
-            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " +ex.getMessage().toString());
+            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " + ex.getMessage().toString());
             return answer;
 
         }
@@ -94,7 +97,7 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
             answer.fillByJson(jsonObject);
 
         } catch (Exception ex) {
-            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " +ex.getMessage().toString());
+            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " + ex.getMessage().toString());
             return answer;
 
         }
@@ -111,6 +114,10 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
         HashMap<String, Object> datas = new HashMap<>();
 
         ServerAnswer answer = new ServerAnswer() {
+            @Override
+            public ArrayList parseList(JSONArray array) {
+                return null;
+            }
         };
         datas.put(Key_TOKEN, token);
         datas.put(ID, requestID);
@@ -119,7 +126,7 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
 
         try {
 
-            String request = NetworkTools.CallSoapMethod(url, SET_STATUS_WEBMETHOD, datas).getPropertyAsString(0);
+            String request = NetworkTools.CallSoapMethod(url,SET_STATUS_WEBMETHOD, datas).getPropertyAsString(0);
 
             if (request == null) {
                 answer.setMessage("خطا در دریافت اطلاعات از سرور answer is empty ");
@@ -130,7 +137,36 @@ public class CustomersEditedServerRepo implements ICustomersEdited {
             answer.fillByJson(jsonObject);
 
         } catch (Exception ex) {
-            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " +ex.getMessage().toString());
+            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " + ex.getMessage().toString());
+            return answer;
+        }
+        return answer;
+    }
+
+    @Override
+    public CustomerEditAnswer getEditedListCount(Context context) {
+        preferenceHelper = new PreferenceHelper(context);
+        String token = preferenceHelper.getString(PreferenceHelper.TOKEN_ID);
+        String url = "http://" + preferenceHelper.getString(NetworkTools.URL);
+        HashMap<String, Object> datas = new HashMap<>();
+        datas.put(Key_TOKEN, token);
+
+        CustomerEditAnswer answer = new CustomerEditAnswer();
+
+        try {
+
+            String request = NetworkTools.CallSoapMethod(url,EDITED_LIST_COUNT_WEBMETHOD, datas).getPropertyAsString(0);
+
+            if (request == null) {
+                answer.setMessage("خطا در دریافت اطلاعات از سرور answer is empty ");
+                return answer;
+            }
+
+            JSONObject jsonObject = new JSONObject(request);
+            answer.fillByJson(jsonObject);
+
+        } catch (Exception ex) {
+            answer.setMessage(" خطا در دریافت اطلاعات از سرور  " + ex.getMessage().toString());
             return answer;
         }
         return answer;

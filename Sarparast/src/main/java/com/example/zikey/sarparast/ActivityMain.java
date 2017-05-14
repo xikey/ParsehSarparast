@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
@@ -19,10 +18,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -39,12 +36,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zikey.sarparast.Helpers.FontApplier;
-import com.example.zikey.sarparast.Helpers.Indicator;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.github.mikephil.charting.animation.Easing;
@@ -54,24 +48,23 @@ import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IFillFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.interfaces.dataprovider.LineDataProvider;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.razanPardazesh.supervisor.CoveragePercentageActivity;
 import com.razanPardazesh.supervisor.EditedCustomerListActivity;
+import com.razanPardazesh.supervisor.SatisfactionFromActivity;
+import com.razanPardazesh.supervisor.model.wrapper.CustomerEditAnswer;
 import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
+import com.razanPardazesh.supervisor.repo.CustomersEditedServerRepo;
 import com.razanPardazesh.supervisor.repo.ReportServerRepo;
+import com.razanPardazesh.supervisor.repo.iRepo.ICustomersEdited;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -91,14 +84,13 @@ public class ActivityMain extends AppCompatActivity
 
     private LinearLayout lyForoosh;
     private LinearLayout lyAnbar;
-    private LinearLayout lyHadaf;
+    private LinearLayout lyMoshtarian;
     private LinearLayout lyAcceptRequests;
     private LinearLayout lyMap;
     private LinearLayout lySarjam;
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
     RelativeLayout lyReload;
-
 
     private RecyclerView row_khales;
 
@@ -118,10 +110,10 @@ public class ActivityMain extends AppCompatActivity
     private GroupInfoAdapter groupInfoAdapter;
     private GroupTSInfoAdapter groupTSInfoAdapter;
 
-    private ArrayList<UserInfo> userInfos_khales = new ArrayList<UserInfo>();
-    private ArrayList<UserInfo> userInfos_Tasvie = new ArrayList<UserInfo>();
-    private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<UserInfo>();
-    private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<UserInfo>();
+    private ArrayList<UserInfo> userInfos_khales = new ArrayList<>();
+    private ArrayList<UserInfo> userInfos_Tasvie = new ArrayList<>();
+    private ArrayList<UserInfo> userInfos_SaleProducts = new ArrayList<>();
+    private ArrayList<UserInfo> userInfos_TasvieNashodeProducts = new ArrayList<>();
 
     private ArrayList<ChartInfo> chartInfoArrayList = new ArrayList<>();
     private GetPieChartInfos getPieChartInfos = null;
@@ -173,9 +165,17 @@ public class ActivityMain extends AppCompatActivity
     private RelativeLayout lyReloadCoverage;
     private LinearLayout lyCoverageProgress;
 
+    //CustomerEditedRequest
+    private CustomersRequestEditCountAsynk customersRequestEditCountAsynk;
+    private ICustomersEdited customersEditedServerRepo;
+    private TextView txtEditedCustomersCount;
+    private ImageView btnEditedCustomerList;
+    private ImageView btnRefreshEditedcustomerCount;
+    private RelativeLayout lyProgressEditedCustomerCunt;
+
 
     //bARAYE GHEYRE FAAL KARDANE THREADE ERORHANDELLING
-    private int isAFinalRelease = -1;
+    private int isAFinalRelease = 0;
 
     @Override
     protected void onResume() {
@@ -185,12 +185,11 @@ public class ActivityMain extends AppCompatActivity
 
     @Override
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         preferenceHelper = new PreferenceHelper(this);
-
-        isAFinalRelease = 0;
 
         if (isAFinalRelease == 1) {
             Thread t = new Thread(new adminThread());
@@ -206,26 +205,17 @@ public class ActivityMain extends AppCompatActivity
                     finish();
                     System.exit(0);
                     t.start();
-
                 }
             });
 
         }
-        requestPermission();
-        initVersionName();
-        runGetPiechartAsync();
-        runGetCubicChartInfos();
-        initCoveragePercentReport();
 
-        initKhalesForosh();
-
-        MyLocationServices.startActionGetLocation(getApplicationContext());
-
+        btnEditedCustomerList = (ImageView) findViewById(R.id.btnEditedCustomerList);
         inflater = (LayoutInflater) getSystemService(getApplicationContext().LAYOUT_INFLATER_SERVICE);
-
+        txtEditedCustomersCount = (TextView) findViewById(R.id.txtEditedCustomersCount);
         lyForoosh = (LinearLayout) findViewById(R.id.lyForoosh);
         lyAnbar = (LinearLayout) findViewById(R.id.lyAnbar);
-        lyHadaf = (LinearLayout) findViewById(R.id.lyHadaf);
+        lyMoshtarian = (LinearLayout) findViewById(R.id.lyHadaf);
         lyAcceptRequests = (LinearLayout) findViewById(R.id.lyAcceptRequests);
         lySarjam = (LinearLayout) findViewById(R.id.lySarjam);
         lyMap = (LinearLayout) findViewById(R.id.lyMap);
@@ -238,6 +228,18 @@ public class ActivityMain extends AppCompatActivity
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         lyReload = (RelativeLayout) findViewById(R.id.lyReload);
+
+        btnRefreshEditedcustomerCount = (ImageView) findViewById(R.id.btnRefreshEditedcustomerCount);
+        lyProgressEditedCustomerCunt = (RelativeLayout) findViewById(R.id.lyProgressEditedCustomerCunt);
+
+        requestPermission();
+        initVersionName();
+        runGetPiechartAsync();
+        runGetCubicChartInfos();
+        initCoveragePercentReport();
+        initKhalesForosh();
+        initCustomersRequestEditerdReport();
+        MyLocationServices.startActionGetLocation(getApplicationContext());
 
         lyReload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +258,7 @@ public class ActivityMain extends AppCompatActivity
             }
         });
 
-        lyHadaf.setOnClickListener(new View.OnClickListener() {
+        lyMoshtarian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ActivityMain.this, ActivityMoshtarian.class);
@@ -350,7 +352,6 @@ public class ActivityMain extends AppCompatActivity
 
         runReportAsync();
 
-
 //____________________________________EXECUTE ASYNC TASK____________________________________________
         new SaleAnalyzeAsynk().execute();
 
@@ -418,6 +419,9 @@ public class ActivityMain extends AppCompatActivity
         } else if (id == R.id.nav_customers_edit) {
             EditedCustomerListActivity.start(ActivityMain.this);
 
+        } else if (id == R.id.nav_satisfaction) {
+
+
         } else if (id == R.id.nav_exit) {
 
             new AlertDialog.Builder(this)
@@ -447,6 +451,7 @@ public class ActivityMain extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         new AlertDialog.Builder(this)
                 .setTitle("خروج")
                 .setMessage("مایل به بستن برنامه میباشید؟")
@@ -462,6 +467,7 @@ public class ActivityMain extends AppCompatActivity
 
 
     public class SaleAnalyzeAsynk extends AsyncTask<Void, UserInfo, Void> {
+
         ProgressDialog dialog;
 
         @Override
@@ -1352,6 +1358,91 @@ public class ActivityMain extends AppCompatActivity
     }
 
 
+    private void startEditedRequestCustomerCountAsync() {
+
+        if (customersRequestEditCountAsynk != null) return;
+
+        customersRequestEditCountAsynk = new CustomersRequestEditCountAsynk();
+        customersRequestEditCountAsynk.execute();
+    }
+
+
+    public class CustomersRequestEditCountAsynk extends AsyncTask<Void, String, String> {
+
+        private CustomerEditAnswer answer;
+        String message;
+
+        @Override
+        protected void onPreExecute() {
+            lyProgressEditedCustomerCunt.setVisibility(View.VISIBLE);
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+
+            customersRequestEditCountAsynk = null;
+
+            answer = customersEditedServerRepo.getEditedListCount(getApplicationContext());
+
+            if (answer.getMessage() != null || !TextUtils.isEmpty(answer.getMessage())) {
+                message = answer.getMessage();
+                return ("-1");
+            }
+
+            if (answer.getIsSuccess() == 1) {
+                return "1";
+            }
+
+            return "0";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s.equals("-1")) {
+                txtEditedCustomersCount.setText(message);
+            }
+
+            if (s.equals("1")) {
+
+                int count = (int) answer.getCustomerRequestEdit().getCount();
+
+                if (count != 0)
+                    txtEditedCustomersCount.setText(count + "");
+                lyProgressEditedCustomerCunt.setVisibility(View.GONE);
+            }
+            if (s.equals("0")) {
+
+            }
+        }
+
+    }
+
+    private void initCustomersRequestEditerdReport() {
+
+        if (customersEditedServerRepo == null)
+            customersEditedServerRepo = new CustomersEditedServerRepo();
+
+
+        startEditedRequestCustomerCountAsync();
+
+        btnEditedCustomerList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditedCustomerListActivity.start(ActivityMain.this);
+            }
+        });
+
+        btnRefreshEditedcustomerCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startEditedRequestCustomerCountAsync();
+            }
+        });
+    }
 }
 
 

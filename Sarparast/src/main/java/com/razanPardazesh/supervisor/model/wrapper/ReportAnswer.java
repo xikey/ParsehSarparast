@@ -3,7 +3,10 @@ package com.razanPardazesh.supervisor.model.wrapper;
 import com.razanPardazesh.supervisor.model.Report;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Zikey on 09/11/2016.
@@ -36,5 +39,10 @@ public class ReportAnswer extends ServerAnswer {
                 LogWrapper.loge("ReportAnswer_fillByJson_Exception: ", ex);
             }
         }
+    }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
     }
 }

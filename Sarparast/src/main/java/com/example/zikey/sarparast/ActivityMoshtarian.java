@@ -13,7 +13,6 @@ public class ActivityMoshtarian extends AppCompatActivity {
 
     private PreferenceHelper preferenceHelper;
     private ImageView imgBack;
-
     private LinearLayout ADD;
     private LinearLayout Mandeh;
     private LinearLayout  ltTaeed;

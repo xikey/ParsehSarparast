@@ -3,255 +3,288 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-
     android:background="#0D47A1">
 
     <android.support.v7.widget.Toolbar
 
         android:id="@+id/mhztoolbar"
-        android:background="#0277BD"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent">
+        android:background="#0277BD"
+        android:minHeight="?attr/actionBarSize">
+
         <ImageView
+            android:id="@+id/imgBack"
             android:layout_width="30dp"
-            android:src="@drawable/backsvg"
             android:layout_height="match_parent"
-            android:id="@+id/imgBack" />
+            android:src="@drawable/backsvg" />
+
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="30dp"
             android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="#ffffff"
             android:paddingLeft="10dp"
-            android:layout_marginLeft="10dp"
             android:text="معرفی مشتری جدید"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:textColor="#ffffff"
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
-
-    <RelativeLayout
+    <ScrollView
+        android:layout_below="@id/mhztoolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lyco"
-        android:layout_below="@+id/mhztoolbar"
-        android:layout_alignParentStart="true">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
+                        android:id="@+id/lyco"
+            android:paddingBottom="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            card_view:cardCornerRadius="1dp"
-            card_view:cardElevation="2dp"
+            android:layout_alignParentStart="true">
 
-            cardUseCompatPadding="true"
-            android:background="#fffbfb"
-            android:id="@+id/view"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="3dp">
-            <RelativeLayout
-                android:windowSoftInputMode="adjustResize"
+            <android.support.v7.widget.CardView
+
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/view"
+                cardUseCompatPadding="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#0D47A1"
-                android:paddingRight="5dp"
-                android:gravity="right">
+                android:layout_centerHorizontal="true"
+                android:layout_margin="3dp"
+                android:background="#fffbfb"
+                card_view:cardCornerRadius="1dp"
+                card_view:cardElevation="2dp">
 
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:text="نام :"
-                    android:id="@+id/textView8"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:textColor="#ffffff"
-                    android:layout_marginTop="10dp"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <EditText
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/edtName"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/textView8"
-                    android:background="@drawable/mhz_buttont_top"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:textColor="#000000"
-                    android:padding="10dp"
+                    android:layout_height="match_parent"
+                    android:background="#0D47A1"
                     android:gravity="right"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:text="نام خانوادگی : "
-                    android:id="@+id/textView44"
-                    android:layout_below="@+id/textView8"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:layout_marginTop="2dp"
-                    android:textColor="#ffffff"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/edtFamily"
-                    android:layout_below="@+id/textView8"
-                    android:layout_alignParentStart="true"
-                    android:layout_toStartOf="@+id/textView8"
-                    android:layout_marginTop="1dp"
-                    android:background="@drawable/mhz_button_middle"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#000000"
-                    android:padding="10dp"
-                    android:gravity="right"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:text="تلفن :"
-                    android:id="@+id/textView46"
-                    android:layout_below="@+id/textView44"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:layout_marginTop="2dp"
-                    android:textColor="#ffffff"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/edtTell"
-                    android:layout_below="@+id/edtFamily"
-                    android:layout_toStartOf="@+id/textView44"
-                    android:layout_marginTop="1dp"
-                    android:background="@drawable/mhz_button_middle"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#000000"
-                    android:padding="10dp"
-                    android:gravity="right"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="40dp"
-                    android:text="همراه :"
-                    android:id="@+id/textView47"
-                    android:layout_below="@+id/textView46"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:layout_marginTop="2dp"
-                    android:textColor="#ffffff"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:id="@+id/edtMobile"
-                    android:layout_below="@+id/edtTell"
-                    android:layout_toStartOf="@+id/textView46"
-                    android:layout_marginTop="1dp"
-                    android:background="@drawable/mhz_button_middle"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#000000"
-                    android:padding="10dp"
-                    android:gravity="right"
-                    android:autoText="false" />
-
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="50dp"
-                    android:text="آدرس :"
-                    android:id="@+id/textView48"
-                    android:layout_below="@+id/textView47"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="center|right"
-                    android:layout_marginTop="2dp"
-                    android:textColor="#ffffff"
-                    android:paddingRight="10dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:inputType="textMultiLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:id="@+id/edtAddress"
-                    android:background="@drawable/mhz_button_buttom"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="top|right"
-                    android:textColor="#000000"
-                    android:autoText="false"
-                    android:layout_below="@+id/edtMobile"
-                    android:layout_toStartOf="@+id/textView47"
-                    android:layout_marginTop="1dp" />
-
-                <Button
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:text="ارسال"
-                    android:id="@+id/btnSend"
-                    android:background="@drawable/mhz_button_all"
-                    android:textColor="#ffffff"
-                    android:textSize="17dp"
-                    android:textStyle="bold"
-                    android:layout_marginLeft="10dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="4dp" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:text="انتخاب ویزیتور"
-                    android:id="@+id/btnAdd"
-                    android:layout_marginTop="18dp"
-                    android:layout_below="@+id/edtAddress"
-                    android:layout_toStartOf="@+id/textView48"
-                    android:textColor="#0D47A1"
-                    android:background="@drawable/mhz_button_middle"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="..."
-                    android:id="@+id/txtVisitorName"
-                    android:layout_alignTop="@+id/btnAdd"
-                    android:layout_toStartOf="@+id/btnAdd"
-                    android:layout_alignBottom="@+id/btnAdd"
-                    android:textColor="#ffffff"
-                    android:gravity="center"
-                    android:layout_marginRight="20dp" />
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/imgGPS"
-                    android:src="@drawable/placeholder"
-                    android:layout_alignTop="@+id/txtVisitorName"
-                    android:layout_alignStart="@+id/edtAddress" />
+                    android:paddingRight="5dp"
+                    android:windowSoftInputMode="adjustResize">
 
 
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="نام :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toStartOf="@+id/textView8"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_buttont_top"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView77"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView8"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="کد ملی :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtCodeMelli"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/edtName"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_toStartOf="@+id/textView44"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_button_middle"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:textColor="#000000" />
 
 
+                    <EditText
+                        android:id="@+id/edtShopName"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textView77"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_toStartOf="@+id/textView8"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_button_middle"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:textColor="#000000" />
 
-        </android.support.v7.widget.CardView>
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/textView46"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView44"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="تلفن :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtTell"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/edtShopName"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_toStartOf="@+id/textView44"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_button_middle"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView47"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView46"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="همراه :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/edtTell"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_toStartOf="@+id/textView46"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_button_middle"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/textView48"
+                        android:layout_width="70dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_below="@+id/textView47"
+                        android:layout_marginTop="2dp"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="آدرس :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/edtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_below="@+id/edtMobile"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_toStartOf="@+id/textView47"
+                        android:autoText="false"
+                        android:background="@drawable/mhz_button_buttom"
+                        android:gravity="top|right"
+                        android:inputType="textMultiLine"
+                        android:textColor="#000000" />
+
+                    <Button
+                        android:id="@+id/btnSend"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btnAdd"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="40dp"
+                        android:background="@drawable/mhz_button_all"
+                        android:text="ارسال"
+                        android:textColor="#ffffff"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/edtAddress"
+                        android:layout_marginTop="18dp"
+                        android:layout_toStartOf="@+id/textView48"
+                        android:background="@drawable/mhz_button_middle"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="انتخاب ویزیتور"
+                        android:textColor="#0D47A1" />
+
+                    <TextView
+                        android:id="@+id/txtVisitorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/btnAdd"
+                        android:layout_alignTop="@+id/btnAdd"
+                        android:layout_marginRight="20dp"
+                        android:layout_toStartOf="@+id/btnAdd"
+                        android:gravity="center"
+                        android:text="..."
+                        android:textColor="#ffffff" />
+
+                    <ImageView
+                        android:id="@+id/imgGPS"
+                        android:layout_width="50dp"
+                        android:layout_height="40dp"
+                        android:layout_alignStart="@+id/edtAddress"
+                        android:layout_alignTop="@+id/txtVisitorName"
+                        android:src="@drawable/placeholder" />
+
+                    <TextView
+                        android:id="@+id/textView44"
+                        android:layout_width="70dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignTop="@+id/edtShopName"
+                        android:gravity="center|right"
+                        android:paddingRight="10dp"
+                        android:text="فروشگاه :"
+                        android:textColor="#ffffff"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

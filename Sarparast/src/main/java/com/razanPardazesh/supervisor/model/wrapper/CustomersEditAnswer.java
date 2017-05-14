@@ -46,4 +46,9 @@ public class CustomersEditAnswer extends ServerAnswer {
 
         }
     }
+
+    @Override
+    public ArrayList parseList(JSONArray array) {
+        return null;
+    }
 }

@@ -5,8 +5,6 @@
     <!-- Base application theme. -->
 
 
-
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
 
         <!-- Customize your theme here. -->
@@ -19,8 +17,6 @@
         <item name="colorAccent">#00838F</item>
 
     </style>
-
-
 
 
     <style name="AppTheme.NoActionBar">
@@ -49,7 +45,6 @@
     </style>
 
 
-
     <style name="AppTheme.MHZLogin" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#0277BD</item>
@@ -74,7 +69,6 @@
     </style>
 
 
-
     <style name="AppTheme.MHZEdittext" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>
@@ -85,6 +79,25 @@
         <item name="windowActionBar">true</item>
         <item name="android:title">jhjk</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.MHZ.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.MHZ.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.MHZ.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="mhzSmallRating" parent="android:Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/abc_ratingbar_small_material</item>
+        <item name="android:indeterminateDrawable">@drawable/abc_ratingbar_small_material</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:maxHeight">40dp</item>
+        <item name="android:isIndicator">true</item>
+        <item name="android:thumb">@null</item>
     </style>
 
 

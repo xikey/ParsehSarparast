@@ -3,9 +3,8 @@ package com.example.zikey.sarparast;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 

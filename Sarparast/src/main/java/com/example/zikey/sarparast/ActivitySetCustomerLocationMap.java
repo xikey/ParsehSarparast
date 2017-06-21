@@ -166,6 +166,12 @@ public class ActivitySetCustomerLocationMap extends FragmentActivity implements 
                                     setCustomerLocation();
                                 }
                             })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
                             .setIcon(R.drawable.eror_dialog)
                             .show();
 
@@ -318,7 +324,7 @@ public class ActivitySetCustomerLocationMap extends FragmentActivity implements 
 
         private String temp = "";
         private ProgressDialog dialog;
-        private String deviceInfo = DeviceInfos.getDeviceModel() + " " + DeviceInfos.getDeviceModel();
+        private String deviceInfo = DeviceInfos.getDeviceModel() + " " + DeviceInfos.getAndroidVersion();
 
         @Override
         protected void onPostExecute(String state) {

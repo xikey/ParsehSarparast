@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zikey.sarparast"
-    android:versionCode="960224"
-    android:versionName="96.02.24">
+    android:versionCode="960331"
+    android:versionName="96.03.31">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

@@ -1,5 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
+
+
+
+repositories {
+    jcenter()
+    maven { url "https://jitpack.io" }
+
+}
 
 android {
 
@@ -9,8 +16,8 @@ android {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 960224
-        versionName "96.02.24"
+        versionCode 960331
+        versionName "96.03.31"
         // Enabling multidex support.
         multiDexEnabled true
     }

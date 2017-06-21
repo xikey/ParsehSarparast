@@ -2,28 +2,26 @@ package com.razanPardazesh.supervisor.model;
 
 import java.util.Date;
 
-import io.realm.RealmObject;
 
 /**
  * Created by Zikey on 13/11/2016.
  */
+@Deprecated
+public class LocationData {
 
-public class LocationData extends RealmObject {
 
-
-
-    private long id=0;
-    private double latitude=0.0;
-    private double longitude=0.0;
-    private double accuracy=0.0;
+    private long id = 0;
+    private double latitude = 0.0;
+    private double longitude = 0.0;
+    private double accuracy = 0.0;
     private Date date;
-    private int gpsStatus=0;
-    private String provider="";
-    private double speed=0.0;
-    private int isMock=0;
-    private String deviceID="";
-    private long batteryCharge=0l;
-    private int isSended=0;
+    private int gpsStatus = 0;
+    private String provider = "";
+    private double speed = 0.0;
+    private int isMock = 0;
+    private String deviceID = "";
+    private long batteryCharge = 0l;
+    private int isSended = 0;
 
     public int isSended() {
         return isSended;

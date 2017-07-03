@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.productoViewHolder> implements Filterable {
     private ArrayList<RequestsInfo> item;
     private ArrayList<RequestsInfo> itemDump;
-    public int vaziat;
+
     public int id;
     private String customerCode;
 
@@ -55,7 +55,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.produc
     }
 
     @Override
-    public void onBindViewHolder(productoViewHolder productoViewHolder, final int i) {
+    public void onBindViewHolder(productoViewHolder productoViewHolder, int i) {
 
         productoViewHolder.txtShomareSefaresh.setText("" + item.get(i).get_SefareshID());
         productoViewHolder.txtDate.setText("" + item.get(i).get_OrderDate());
@@ -68,14 +68,15 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.produc
         productoViewHolder.txtJaryanR.setText("" + item.get(i).get_SumVBank());
         productoViewHolder.txtBargashtT.setText("" + item.get(i).get_CntHoghooghi());
         productoViewHolder.txtBargashtR.setText("" + item.get(i).get_SumHoghooghi());
-        vaziat = item.get(i).get_VaziatSefarersh();
+        productoViewHolder.vaziat = item.get(i).get_VaziatSefarersh();
         productoViewHolder.tell = item.get(i).get_Tel();
         productoViewHolder.mobile = item.get(i).get_Mobile();
         productoViewHolder.nahveVosool = item.get(i).get_NahveVosol();
         productoViewHolder.tozihat = item.get(i).get_Tozihat();
         productoViewHolder.txtMandeEtebar.setText(item.get(i).getMandeEtebar());
 
-        switch (vaziat) {
+        switch ( productoViewHolder.vaziat) {
+
             case 0:
                 productoViewHolder.lyButtom.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 break;
@@ -182,6 +183,8 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.produc
         String mobile;
         String nahveVosool;
         String tozihat;
+
+        int vaziat;
 
         public productoViewHolder(final View itemView) {
             super(itemView);

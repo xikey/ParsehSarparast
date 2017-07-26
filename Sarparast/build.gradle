@@ -36,6 +36,16 @@ android {
     }
 
     productFlavors {
+
+        mainBuild {
+            applicationId "com.example.zikey.sarparast"
+            versionCode 960331
+            versionName "96.03.31"
+            versionCode 1
+            versionName "1.0"
+            buildConfigField("String", "PORT", '":755"')
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -44,11 +54,16 @@ android {
 }
 
 dependencies {
-
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/ksoap2-android-assembly-3.3.0-jar-with-dependencies.jar')
     compile project(':CustomGauge')
+    compile files('libs/retrofit-2.1.0.jar')
+    compile files('libs/gson-2.8.0.jar')
+    compile files('libs/converter-gson-2.1.0.jar')
+    compile files('libs/glide-3.7.0.jar')
+    compile files('libs/rxjava-1.2.5.jar')
     compile project(':persianmaterialdatetimepicker')
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:cardview-v7:24.2.1'
@@ -56,5 +71,5 @@ dependencies {
     compile 'com.google.android.gms:play-services:9.2.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'
-
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha7'
 }

@@ -9,4 +9,6 @@
     <color name="coloraboutUs_foot">#616161</color>
     <color name="coloraboutUs_foot_selected">#757575</color>
 
+    <color name="colorWhite">#ffffff</color>
+
 </resources>

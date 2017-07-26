@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.annotations.SerializedName;
 import com.razanPardazesh.supervisor.model.interfaces.IJson;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
@@ -21,9 +22,13 @@ public abstract class ServerAnswer implements IJson {
     private final String KEY_LAST_INDEX = "lsti";
     private final String KEY_MESSAGE = "msg";
 
+    @SerializedName("issu")
     private int isSuccess = 0;
+    @SerializedName("hasm")
     private int hasMore = 0;
+    @SerializedName("lsti")
     private long lastIndex = 0;
+    @SerializedName("msg")
     private String message = null;
 
 

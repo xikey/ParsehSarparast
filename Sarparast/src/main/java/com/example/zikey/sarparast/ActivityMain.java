@@ -58,8 +58,8 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.razanPardazesh.supervisor.CoveragePercentageActivity;
+import com.razanPardazesh.supervisor.RegionActivity;
 import com.razanPardazesh.supervisor.EditedCustomerListActivity;
-import com.razanPardazesh.supervisor.SatisfactionFromActivity;
 import com.razanPardazesh.supervisor.model.wrapper.CustomerEditAnswer;
 import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
 import com.razanPardazesh.supervisor.repo.CustomersEditedServerRepo;
@@ -419,8 +419,9 @@ public class ActivityMain extends AppCompatActivity
         } else if (id == R.id.nav_customers_edit) {
             EditedCustomerListActivity.start(ActivityMain.this);
 
-        } else if (id == R.id.nav_satisfaction) {
+        } else if (id == R.id.nav_daily_path) {
 
+            RegionActivity.start(ActivityMain.this);
 
         } else if (id == R.id.nav_exit) {
 

@@ -101,4 +101,15 @@
     </style>
 
 
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+
+        <item name="queryBackground">@color/colorPrimaryDark</item>-->
+        <item name="android:editTextColor">@color/colorWhite</item>
+        <item name="editTextColor">@color/colorWhite</item>
+        <item name="submitBackground">@color/colorWhite</item>
+
+
+    </style>
+
+
 </resources>

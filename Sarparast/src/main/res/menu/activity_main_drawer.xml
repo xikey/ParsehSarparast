@@ -31,9 +31,9 @@
                 android:title="مدیریت ویزیتور ها" />
 
             <item
-                android:id="@+id/nav_satisfaction"
-                android:icon="@drawable/ic_assignment_black_24dp"
-                android:title="فرم بازدید مشتریان" />
+                android:id="@+id/nav_daily_path"
+                android:icon="@drawable/ic_path_black_48dp"
+                android:title="روز مسیر" />
             <item
                 android:id="@+id/nav_customers_edit"
                 android:icon="@drawable/ic_mode_edit_black_24dp"

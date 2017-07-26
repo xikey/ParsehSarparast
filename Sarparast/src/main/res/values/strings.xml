@@ -55,12 +55,12 @@
     <string name="coverage_proceed_info">در این بخش می توان میزان پوشش دهی امروز مشتریان توسط مشاوران فروش را مشاهده کرد. صفر بودن تعداد مشتریان بدین معناست که شما برای مشاوران فروش خود مشتریانی را به عنوان تارگت مشخص ننموده اید.</string>
     <string name="title_activity_adam_visit_moshtarian_map">Map</string>
 
-     <string name="managment_needGPS_describtion1"> تمامی فعالیت های ویزیتورها نیازمند روشن بودن gps می باشد.
+    <string name="managment_needGPS_describtion1"> تمامی فعالیت های ویزیتورها نیازمند روشن بودن gps می باشد.
  \nنکته: در صورتی که این تنظیم فعال باشد ویزیتور دیگر نمیتواند فعالیت هایی مانند به روز رسانی، ورود به برنامه، ارسال سفارشات، دریافت موجودی کالا، مشاهده اطلاعاات مشتریان و ویرایش سفارشات ارسالی امروز را بدون روشن نمودن سنسورgps خود انجام دهد
  \nنکته: روشن بودن سنسور gps  تضمین ارسال موقعیت کاربر به سرور نیست.
 </string>
 
-     <string name="managment_order_outOfPath">با اعمال این تنظیم ویزیتور فعلی میتواند به صورت آنلاین کلیه مشتریان اختصاص داده شده به وی را ملاحضه نمایند
+    <string name="managment_order_outOfPath">با اعمال این تنظیم ویزیتور فعلی میتواند به صورت آنلاین کلیه مشتریان اختصاص داده شده به وی را ملاحضه نمایند
 \nنکته: این تنظیم نیاز به بروز رسانی تبلت ویزیتورها ندارد
 </string>
 
@@ -73,6 +73,18 @@
     <string name="title_activity_location_on_map">Map</string>
     <string name="title_activity_around_me_map">Map</string>
     <string name="title_activity_satisfaction_from">SatisfactionFromActivity</string>
+    <string name="title_activity_daily_path">DailyPathActivity</string>
+
+    <!--//DialogBuilde-->
+    <string name="attention">توجه</string>
+    <string name="yes">بلی</string>
+    <string name="no">نه</string>
+    <string name="ok">تایید</string>
+    <string name="wait">صبر کنید</string>
+    <string name="connecting_to_server">در حال دریافت اطلاعات</string>
+    <string name="connecting_to_server_error">امکان برقراری ارتباط با سرور نیست</string>
+    <string name="must_fill_error">مقدار فیلد %1$s نمی تواند خالی باشد</string>
+    <string name="is_wrong_error">مقدار فیلد %1$s معتبر نمی باشد</string>
 
 
 </resources>

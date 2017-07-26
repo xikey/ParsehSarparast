@@ -5,13 +5,14 @@
       <GradleProjectSettings>
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="C:\Program Files\Android\Android Studio New\gradle\gradle-2.14.1" />
+        <option name="gradleHome" value="C:/Program Files/Android/Android Studio New/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/CustomGauge" />
             <option value="$PROJECT_DIR$/Sarparast" />
             <option value="$PROJECT_DIR$/persianmaterialdatetimepicker" />
+            <option value="$PROJECT_DIR$/razanlibs-debug" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -98,7 +98,9 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
 
         txtHeader.setText("لیست مشتریان ـ امروز");
 
-        imgCalendar.setOnClickListener(new View.OnClickListener() {
+        imgCalendar.setOnClickListener(
+
+                new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPersianCalender(persianCalendar, datePickerDialog);

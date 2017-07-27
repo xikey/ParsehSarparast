@@ -403,7 +403,7 @@ public class RegionActivity extends AppCompatActivity {
                 txtName = (TextView) v.findViewById(R.id.txtName);
                 txtRegionName = (TextView) v.findViewById(R.id.txtRegionName);
                 lyRoot = (LinearLayout) v.findViewById(R.id.lyRoot);
-                lyRegion = (LinearLayout) findViewById(R.id.lyRegion);
+                lyRegion = (LinearLayout) v.findViewById(R.id.lyRegion);
 
                 FontApplier.applyMainFont(getApplicationContext(), lyRoot);
                 FontChanger.applyTitleFont(txtName);
@@ -414,6 +414,7 @@ public class RegionActivity extends AppCompatActivity {
                         if (region==null)
                             return;
 
+                        CustomerActivity.start(RegionActivity.this,CustomerActivity.KEY_REGION_CUSTOMERS);
 
                     }
                 });

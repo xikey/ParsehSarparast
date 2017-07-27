@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="white">#ffffffff</color>
-	<color name="black">#ff000000</color>
+	<color name="black">#000000</color>
 	<color name="button_edittext_border">#ccc</color>
 	<color name="button_edittext_disabled">#ffe0e0e0</color>
 	

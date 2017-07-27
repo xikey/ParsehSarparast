@@ -85,6 +85,7 @@
     <string name="connecting_to_server_error">امکان برقراری ارتباط با سرور نیست</string>
     <string name="must_fill_error">مقدار فیلد %1$s نمی تواند خالی باشد</string>
     <string name="is_wrong_error">مقدار فیلد %1$s معتبر نمی باشد</string>
+    <string name="title_activity_customer">CustomerActivity</string>
 
 
 </resources>

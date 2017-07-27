@@ -90,7 +90,6 @@ public class RegionServerRepo implements IRegion {
                     return;
                 }
 
-
                 answer.setRegions(regions);
                 answer.setIsSuccess(1);
 

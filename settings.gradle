@@ -1,1 +1,1 @@
-include ':Sarparast', ':CustomGauge', ':persianmaterialdatetimepicker', ':razanlibs-debug'
+include ':Sarparast', ':CustomGauge', ':persianmaterialdatetimepicker', ':razanlibs-debug', ':rxandroid-1.2.1'

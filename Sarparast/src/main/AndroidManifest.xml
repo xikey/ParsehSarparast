@@ -235,18 +235,26 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name="com.razanPardazesh.supervisor.LocationOnMapActivity"
-            android:label="@string/title_activity_location_on_map" />
+            android:label="@string/title_activity_location_on_map"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.razanPardazesh.supervisor.AroundMeMapActivity"
-            android:label="@string/title_activity_around_me_map" />
+            android:label="@string/title_activity_around_me_map"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.razanPardazesh.supervisor.SatisfactionFromActivity"
             android:label="@string/title_activity_satisfaction_from"
-            android:theme="@style/AppTheme.MHZ.NoActionBar" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MHZ" />
         <activity android:name="com.razanPardazesh.supervisor.CustomerUnvisitedReasonsActivity" />
         <activity
             android:name="com.razanPardazesh.supervisor.RegionActivity"
             android:label="@string/title_activity_daily_path"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.MHZ" />
+        <activity
+            android:name="com.razanPardazesh.supervisor.CustomerActivity"
+            android:label="@string/title_activity_customer"
             android:theme="@style/AppTheme.MHZ.NoActionBar"></activity>
     </application>
 

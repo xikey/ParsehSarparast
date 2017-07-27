@@ -4,18 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E0E0E0"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.razanPardazesh.supervisor.RegionActivity"
     tools:showIn="@layout/activity_region">
 
 
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvItems"
         android:layout_width="match_parent"
-        android:background="#fefefe"
+        android:background="#e0e0e0"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false"
         android:layout_height="match_parent">
-
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/txtError"
+        android:textSize="17sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:text="اطلاعاتی جهت نمایش وجود ندارد"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:padding="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/lyProgress"

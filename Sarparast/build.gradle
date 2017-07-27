@@ -63,11 +63,11 @@ dependencies {
     compile files('libs/glide-3.7.0.jar')
     compile files('libs/rxjava-1.2.5.jar')
     compile project(':persianmaterialdatetimepicker')
+    compile project(':rxandroid-1.2.1')
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:design:24.2.1'
     compile 'com.android.support:cardview-v7:24.2.1'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.google.android.gms:play-services:9.2.1'
     compile 'com.android.support:multidex:1.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.0'

@@ -32,6 +32,7 @@ import com.razanPardazesh.supervisor.repo.tools.IRepoCallBack;
 import com.razanPardazesh.supervisor.tools.DialogBuilder;
 import com.razanPardazesh.supervisor.tools.FontChanger;
 import com.razanPardazesh.supervisor.tools.RxSearch;
+import com.razanPardazesh.supervisor.tools.SupervisorDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -50,8 +51,8 @@ public class RegionActivity extends AppCompatActivity {
     ImageView imgBack;
     ImageView imgDatePicker;
     RecyclerView rvItems;
-    RelativeLayout lyProgress;
     LinearLayoutManager linearLayoutManager;
+    RelativeLayout lyProgress;
     TextView txtError;
     private SearchView searchView;
 
@@ -124,8 +125,8 @@ public class RegionActivity extends AppCompatActivity {
 
         imgBack = (ImageView) findViewById(R.id.imgBack);
         rvItems = (RecyclerView) findViewById(R.id.rvItems);
-        lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
         imgDatePicker = (ImageView) findViewById(R.id.imgDatePicker);
+        lyProgress = (RelativeLayout) findViewById(R.id.lyProgress);
         txtError = (TextView) findViewById(R.id.txtError);
         searchView = (SearchView) findViewById(R.id.searchView);
 
@@ -411,10 +412,24 @@ public class RegionActivity extends AppCompatActivity {
                 lyRegion.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (region==null)
+                        if (region == null)
                             return;
 
-                        CustomerActivity.start(RegionActivity.this,CustomerActivity.KEY_REGION_CUSTOMERS);
+                        CharSequence items[] = new CharSequence[4];
+                        items[0] = "سطح یک";
+                        items[1] = "سطح دو";
+                        items[2] = "سطح سه";
+                        items[3] = "سطح چهار";
+
+                        new SupervisorDialogBuilder().showPickerDialog(RegionActivity.this, null, items, new SupervisorDialogBuilder.OnPickerDialogListener() {
+                            @Override
+                            public void onPick(int position) {
+
+                                CustomerActivity.start_forRegionCustomers(RegionActivity.this, region.getId(),position+1,region.getVisitors().get(0).getId());
+                            }
+                        });
+
+
 
                     }
                 });

@@ -2,6 +2,8 @@ package com.razanPardazesh.supervisor.model.user;
 
 import android.content.Context;
 
+import com.google.gson.annotations.SerializedName;
+import com.razanPardazesh.supervisor.model.accounting.AccountData;
 import com.razanPardazesh.supervisor.tools.LogWrapper;
 
 import org.json.JSONArray;
@@ -19,8 +21,24 @@ public class Customer extends IUser  {
     private static final String KEY_CODE_MARKAZ = "c";
     private static final String KEY_NAME = "n";
 
+    @SerializedName("c")
     private long codeMarkaz;
+    @SerializedName("n")
     private String name;
+    @SerializedName("aC")
+    private AccountData accountData;
+    @SerializedName("ln")
+    private String ln = null;
+    @SerializedName("lt")
+    private String lt = null;
+    @SerializedName("te")
+    private String tel = null;
+    @SerializedName("mo")
+    private String mobile = null;
+    @SerializedName("ad")
+    private String address = null;
+    @SerializedName("v")
+    private Visitor visitor;
 
     public long getCodeMarkaz() {
         return codeMarkaz;
@@ -40,6 +58,62 @@ public class Customer extends IUser  {
 
     public Customer() {
         setType(3);
+    }
+
+    public AccountData getAccountData() {
+        return accountData;
+    }
+
+    public void setAccountData(AccountData accountData) {
+        this.accountData = accountData;
+    }
+
+    public Visitor getVisitor() {
+        return visitor;
+    }
+
+    public void setVisitor(Visitor visitor) {
+        this.visitor = visitor;
+    }
+
+    public String getLn() {
+        return ln;
+    }
+
+    public void setLn(String ln) {
+        this.ln = ln;
+    }
+
+    public String getLt() {
+        return lt;
+    }
+
+    public void setLt(String lt) {
+        this.lt = lt;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

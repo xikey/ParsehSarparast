@@ -29,12 +29,12 @@ public class MandehMoshtariInfo {
     private String _Tell;
     private String _Mobile;
 
+    private String _Address;
+
+
     public String get_Address() {
         return _Address;
     }
-
-    private String _Address;
-
 
     public String get_Code() {
         return _Code;

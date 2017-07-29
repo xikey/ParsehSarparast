@@ -172,7 +172,11 @@ public class MandehMoshtariAdapter extends RecyclerView.Adapter<MandehMoshtariAd
     }
 
     public class productoViewHolder extends RecyclerView.ViewHolder {
-        TextView txtCode, txtName, txtMande, txtVaset, txtAddress;
+        TextView txtCode;
+        TextView txtName;
+        TextView txtMande;
+        TextView txtVaset;
+        TextView txtAddress;
 
         ImageView btnShowDetails;
         ImageView imgInfo;

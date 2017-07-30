@@ -15,6 +15,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -90,6 +91,7 @@ public class ActivityMain extends AppCompatActivity
     private LinearLayout lySarjam;
     private LinearLayout lyHead;
     private LinearLayout lyNotVisited;
+    private CardView lyDailyPath;
     RelativeLayout lyReload;
 
     private RecyclerView row_khales;
@@ -228,6 +230,7 @@ public class ActivityMain extends AppCompatActivity
         txtEntezar = (TextView) findViewById(R.id.txtEntezar);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         lyReload = (RelativeLayout) findViewById(R.id.lyReload);
+        lyDailyPath = (CardView) findViewById(R.id.lyDailyPath);
 
         btnRefreshEditedcustomerCount = (ImageView) findViewById(R.id.btnRefreshEditedcustomerCount);
         lyProgressEditedCustomerCunt = (RelativeLayout) findViewById(R.id.lyProgressEditedCustomerCunt);
@@ -312,6 +315,12 @@ public class ActivityMain extends AppCompatActivity
                 intent.putExtra("Amaliat", "");
                 startActivity(intent);
 
+            }
+        });
+        lyDailyPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegionActivity.start(ActivityMain.this);
             }
         });
 

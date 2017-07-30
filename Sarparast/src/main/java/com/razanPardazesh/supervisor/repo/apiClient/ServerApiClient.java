@@ -2,16 +2,11 @@ package com.razanPardazesh.supervisor.repo.apiClient;
 
 import android.content.Context;
 
-
 import com.example.zikey.sarparast.BuildConfig;
 import com.example.zikey.sarparast.Helpers.NetworkTools;
 import com.example.zikey.sarparast.Helpers.PreferenceHelper;
-import com.example.zikey.sarparast.LoginActivity;
 
 import java.io.IOException;
-
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;

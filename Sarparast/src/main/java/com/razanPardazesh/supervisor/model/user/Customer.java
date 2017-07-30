@@ -25,7 +25,7 @@ public class Customer extends IUser  {
     private long codeMarkaz;
     @SerializedName("n")
     private String name;
-    @SerializedName("aC")
+    @SerializedName("ac")
     private AccountData accountData;
     @SerializedName("ln")
     private String ln = null;

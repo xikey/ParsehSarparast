@@ -8,80 +8,95 @@ import com.google.gson.annotations.SerializedName;
 
 public class AccountData implements IAccounting {
 
+
+    /**
+     * تعداد فروش
+     */
     @SerializedName("sc")
-    /**
-     * تعداد فروش
-     */
     private long salesCount = 0;
-    @SerializedName("sa")
+
     /**
      * تعداد فروش
      */
+    @SerializedName("sa")
     private String salesAmount = null;
-    @SerializedName("rc")
+
     /**
      *تعداد برگشتی
      */
+    @SerializedName("rc")
     private long returnedCount = 0;
-    @SerializedName("ra")
+
     /**
      *ریال برگشتی
      */
+    @SerializedName("ra")
     private String returnedAmount = null;
-    @SerializedName("ncc")
+
     /**
      *تعدا ناخالص
      */
+    @SerializedName("ncc")
     private long notClearCount = 0;
-    @SerializedName("nca")
+
     /**
      *ریال نا خالص
      */
+    @SerializedName("nca")
     private String notClearAmount = null;
-    @SerializedName("ipc")
+
     /**
      *تعداد در جریان
      */
+    @SerializedName("ipc")
     private long inProgressCount = 0;
-    @SerializedName("ipa")
+
     /**
      *ریال در جریان
      */
+    @SerializedName("ipa")
     private String inProgressAmount = null;
-    @SerializedName("lc")
+
     /**
      *تعداد حقوقی شده
      */
+    @SerializedName("lc")
     private long legalizedCount = 0;
-    @SerializedName("la")
+
     /**
      *ریال حقوقی شده
      */
+    @SerializedName("la")
     private String legalizedAmount = null;
-    @SerializedName("icc")
+
     /**
      *تعداد وصول
      */
+    @SerializedName("icc")
     private long inCommingCount = 0;
-    @SerializedName("ica")
+
     /**
      *ریال وصول
      */
+    @SerializedName("ica")
     private String inCommingAmount = null;
-    @SerializedName("pc")
+
     /**
      *تعدا پاس شده
      */
+    @SerializedName("pc")
     private long passedCount = 0;
-    @SerializedName("pa")
+
     /**
      *ریال پاس شده
      */
+    @SerializedName("pa")
     private String passedAmount = null;
-    @SerializedName("b")
+
     /**
      * مانده حساب
      */
+    @SerializedName("b")
     private String balance = null;
 
 

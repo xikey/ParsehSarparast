@@ -344,12 +344,12 @@ public class RegionActivity extends AppCompatActivity {
             Visitor thisVisitor = items.get(position).getVisitors().get(0);
 
             String visitorName = thisVisitor.getName();
-            String visitorId = String.valueOf(thisVisitor.getId());
+            String visitorCode = String.valueOf(thisVisitor.getCode());
             if (!TextUtils.isEmpty(visitorName)) {
 
-                holder.txtName.setText(visitorId + " - " + visitorName);
+                holder.txtName.setText(visitorCode + " - " + visitorName);
             } else {
-                holder.txtName.setText(visitorId);
+                holder.txtName.setText(visitorCode);
             }
 
 
@@ -364,10 +364,10 @@ public class RegionActivity extends AppCompatActivity {
             } else if (position < getItemCount()) {
 
                 try {
-                    long thisId = thisVisitor.getId();
-                    long previousId = items.get(position - 1).getVisitors().get(0).getId();
+                    long thisCode = thisVisitor.getCode();
+                    long previousCode = items.get(position - 1).getVisitors().get(0).getCode();
 
-                    if (thisId == previousId) {
+                    if (thisCode == previousCode) {
                         holder.lyHeader.setVisibility(View.GONE);
                     } else {
                         holder.lyHeader.setVisibility(View.VISIBLE);
@@ -425,7 +425,7 @@ public class RegionActivity extends AppCompatActivity {
                             @Override
                             public void onPick(int position) {
 
-                                CustomerActivity.start_forRegionCustomers(RegionActivity.this, region.getId(),position+1,region.getVisitors().get(0).getId());
+                                CustomerActivity.start_forRegionCustomers(RegionActivity.this, region.getId(),position+1,region.getVisitors().get(0).getCode());
                             }
                         });
 

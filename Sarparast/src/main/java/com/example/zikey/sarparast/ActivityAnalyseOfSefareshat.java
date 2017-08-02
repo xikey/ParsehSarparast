@@ -230,7 +230,7 @@ public class ActivityAnalyseOfSefareshat extends AppCompatActivity {
 
                     Log.e("iiiiiii", "connot read Soap");
                     e.printStackTrace();
-
+                    return "Eror";
                 }
                 return "Online";
             }

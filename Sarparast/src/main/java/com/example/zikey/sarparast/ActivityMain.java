@@ -66,6 +66,7 @@ import com.razanPardazesh.supervisor.model.wrapper.ReportAnswer;
 import com.razanPardazesh.supervisor.repo.CustomersEditedServerRepo;
 import com.razanPardazesh.supervisor.repo.ReportServerRepo;
 import com.razanPardazesh.supervisor.repo.iRepo.ICustomersEdited;
+import com.razanPardazesh.supervisor.view.MyMarkerView;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -142,6 +143,7 @@ public class ActivityMain extends AppCompatActivity
     private RelativeLayout lyContentPieChart;
     private boolean isPieChartInited = false;
     private boolean fakePie = false;
+
 
 
     //LineChart
@@ -1016,18 +1018,17 @@ public class ActivityMain extends AppCompatActivity
 
 
         cubeChart = (LineChart) findViewById(R.id.cubeChart);
-        cubeChart.setViewPortOffsets(0, 0, 0, 0);
 //        cubeChart.setBackgroundColor(Color.rgb(104, 241, 175));
-        cubeChart.setBackgroundColor(Color.parseColor("#ffffff"));
+//        cubeChart.setBackgroundColor(Color.parseColor("#1976D2"));
 
         // no description text
         cubeChart.getDescription().setEnabled(false);
 
         // enable touch gestures
         cubeChart.setTouchEnabled(true);
-        cubeChart.setNoDataTextColor(Color.parseColor("#000000"));
-        cubeChart.setGridBackgroundColor(Color.parseColor("#000000"));
-        cubeChart.setBorderColor(Color.parseColor("#000000"));
+        cubeChart.setNoDataTextColor(Color.parseColor("#ffffff"));
+        cubeChart.setGridBackgroundColor(Color.parseColor("#ffffff"));
+        cubeChart.setBorderColor(Color.parseColor("#ffffff"));
 
         // enable scaling and dragging
         cubeChart.setDragEnabled(true);
@@ -1041,12 +1042,17 @@ public class ActivityMain extends AppCompatActivity
 
         cubeChart.setDragEnabled(true);
 
+        MyMarkerView mv = new MyMarkerView(this, R.layout.custom_marker_view);
+        mv.setChartView(cubeChart); // For bounds control
+        cubeChart.setMarker(mv); //
+
         XAxis x = cubeChart.getXAxis();
         x.setEnabled(true);
-        x.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+//        x.setPosition(XAxis.XAxisPosition.O);
+        x.setPosition(XAxis.XAxisPosition.BOTTOM);
         x.setTextSize(10f);
-        x.setTextColor(Color.BLACK);
-        x.setGridColor(Color.parseColor("#CFD8DC"));
+        x.setTextColor(Color.WHITE);
+        x.setGridColor(Color.parseColor("#880277BD"));
         x.setDrawAxisLine(true);
         x.setDrawGridLines(true);
         x.setDrawLabels(true);
@@ -1085,10 +1091,7 @@ public class ActivityMain extends AppCompatActivity
                 return "";
             }
 
-            @Override
-            public int getDecimalDigits() {
-                return 0;
-            }
+
         });
 
         YAxis y = cubeChart.getAxisLeft();
@@ -1097,12 +1100,12 @@ public class ActivityMain extends AppCompatActivity
 
         y.setLabelCount(6, false);
         y.setEnabled(true);
-        y.setGridColor(Color.parseColor("#CFD8DC"));
-        y.setTextColor(Color.BLACK);
-        y.setPosition(YAxis.YAxisLabelPosition.INSIDE_CHART);
+        y.setGridColor(Color.parseColor("#880277BD"));
+        y.setTextColor(Color.WHITE);
+//        y.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         y.setDrawGridLines(true);
         y.setTextSize(12);
-        y.setAxisLineColor(Color.WHITE);
+//        y.setAxisLineColor(Color.parseColor("#880277BD"));
 
         cubeChart.getAxisRight().setEnabled(false);
         // add data
@@ -1117,6 +1120,7 @@ public class ActivityMain extends AppCompatActivity
         l.setDrawInside(false);
         l.setTextSize(14);
         l.setXEntrySpace(25f);
+        l.setTextColor(Color.WHITE);
         l.setYEntrySpace(10f);
         l.setYOffset(1f);
         l.setXOffset(40f);
@@ -1125,6 +1129,7 @@ public class ActivityMain extends AppCompatActivity
         cubeChart.getLegend().setEnabled(true);
 
         cubeChart.animateXY(2000, 2000);
+
 
         // dont forget to refresh the drawing
         cubeChart.invalidate();
@@ -1149,8 +1154,8 @@ public class ActivityMain extends AppCompatActivity
         LineDataSet lineKhalesRsDataSet = new LineDataSet(lineKhalesRsValues, " خالص فروش ");
 
 //        setDataSetSeting(lineSalesDataSet,Color.parseColor("#00E5FF"));
-        setDataSetSeting(lineReturnsDataSet, Color.parseColor("#FF3D00"), false);
-        setDataSetSeting(lineKhalesRsDataSet, Color.parseColor("#FFFF00"), true);
+        setDataSetSeting(lineReturnsDataSet, Color.parseColor("#FF3D00"), true,Color.parseColor("#ff8b66"));
+        setDataSetSeting(lineKhalesRsDataSet, Color.parseColor("#FFFFFF"), true,Color.parseColor("#f4f4a0"));
 
 
 //        LineData data = new LineData(lineSalesDataSet);
@@ -1162,7 +1167,7 @@ public class ActivityMain extends AppCompatActivity
         cubeChart.invalidate();
     }
 
-    private void setDataSetSeting(LineDataSet dataSet, int color, Boolean fillable) {
+    private void setDataSetSeting(LineDataSet dataSet, int color, Boolean fillable,int holeColor) {
 
 
         dataSet.setMode(LineDataSet.Mode.LINEAR);
@@ -1170,18 +1175,21 @@ public class ActivityMain extends AppCompatActivity
         dataSet.setDrawFilled(fillable);
         dataSet.setDrawValues(false);
         dataSet.setCubicIntensity(0f);
-        dataSet.setCircleRadius(4f);
+        dataSet.setCircleRadius(3.5f);
+//        dataSet.setHighLightColor(Color.rgb(244, 117, 117));
         dataSet.setHighLightColor(Color.rgb(244, 117, 117));
         dataSet.setCircleColor(color);
         dataSet.disableDashedLine();
-        dataSet.setCircleHoleRadius(3f);
+       dataSet.setCircleHoleRadius(2.5f);
         dataSet.setColor(color);
-        dataSet.setLineWidth(1f);
-        dataSet.setDrawCircleHole(true);
+        dataSet.setCircleColorHole(color);
+        dataSet.setLineWidth(2f);
+      dataSet.setDrawCircleHole(true);
         dataSet.setFillColor(color);
-        dataSet.setFillAlpha(95);
+        dataSet.setFillAlpha(80);
 //        dataSet.setDrawHorizontalHighlightIndicator(false);
         dataSet.setDrawHorizontalHighlightIndicator(true);
+
     }
 
     private void runGetCubicChartInfos() {

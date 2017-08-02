@@ -33,6 +33,7 @@ import com.example.zikey.sarparast.Helpers.PreferenceHelper;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendarConstants;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendarUtils;
+import com.razanPardazesh.supervisor.tools.FontChanger;
 
 import org.ksoap2.serialization.SoapObject;
 
@@ -73,6 +74,7 @@ public class ActivityLogin extends AppCompatActivity {
         login = (Button) findViewById(R.id.btnLogin);
         lyHead = (LinearLayout) findViewById(R.id.lyrt);
 
+        FontChanger.applyTitleFont(login);
         initVersionName();
         preferenceHelper = new PreferenceHelper(this);
 

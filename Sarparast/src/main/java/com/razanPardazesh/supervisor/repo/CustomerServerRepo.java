@@ -88,6 +88,7 @@ public class CustomerServerRepo implements ICustomer {
 
                 answer.setCustomers(customers);
                 answer.setIsSuccess(1);
+                answer.setLastIndex(response.body().getLastIndex());
                 answer.setHasMore(response.body().getHasMore());
 
                callBack.onAnswer(answer);

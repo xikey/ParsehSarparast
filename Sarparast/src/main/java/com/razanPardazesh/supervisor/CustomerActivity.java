@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,7 +40,6 @@ import com.razanPardazesh.supervisor.tools.LogWrapper;
 import com.razanPardazesh.supervisor.tools.NumberSeperator;
 import com.razanPardazesh.supervisor.tools.RxSearch;
 
-import android.os.Handler;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +48,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 import static com.example.zikey.sarparast.R.id.code;
-import static com.example.zikey.sarparast.R.id.ifRoom;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -64,8 +63,8 @@ public class CustomerActivity extends AppCompatActivity {
     private long visitorCode;
     private int regionLevel;
     private long lastIndex;
-    private int count = 5;
-    private boolean hasmore;
+    private int count = 50;
+    private boolean hasMore;
 
     private int lastVisibleItem, totalItemCount;
     private int visibleThreshold = 2;
@@ -79,11 +78,13 @@ public class CustomerActivity extends AppCompatActivity {
     private TextView txtError;
     private LinearLayoutManager layoutManager;
 
-
     //adapter
     private CustomerAdapter adapter;
     //Repo
     private ICustomer customerRepo;
+
+    //   use for loadMore
+    private ArrayList<Customer> customers = null;
 
 
     @Override
@@ -159,22 +160,22 @@ public class CustomerActivity extends AppCompatActivity {
                 if (adapter == null)
                     return;
 
-                final ArrayList<Customer> items = adapter.getCustomers();
-                if (layoutManager != null && items != null) {
+
+                if (layoutManager != null && customers != null) {
 
                     totalItemCount = layoutManager.getItemCount();
                     lastVisibleItem = layoutManager.findLastVisibleItemPosition();
 
                     if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                        if (items.size() <= count && hasmore) {
-                            items.add(null);
+                        if (customers.size() <= count && hasMore) {
+                            customers.add(null);
                             adapter.setIsLoading(true);
-                            adapter.notifyItemInserted(items.size() - 1);
+                            adapter.notifyItemInserted(customers.size() - 1);
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    items.remove(items.size() - 1);
-                                    adapter.notifyItemRemoved(items.size());
+                                    customers.remove(customers.size() - 1);
+                                    adapter.notifyItemRemoved(customers.size());
 
                                     isLoading = true;
                                     getData();
@@ -200,6 +201,8 @@ public class CustomerActivity extends AppCompatActivity {
 
         this.keySearch = keySearch;
 
+        lastIndex=0;
+        lyProgress.setVisibility(View.VISIBLE);
         getData();
 
     }
@@ -263,7 +266,7 @@ public class CustomerActivity extends AppCompatActivity {
             @Override
             public void onAnswer(ServerAnswer answer) {
 
-                hasmore = false;
+                hasMore = false;
 
                 if (answer == null) {
                     txtError.setVisibility(View.VISIBLE);
@@ -288,7 +291,9 @@ public class CustomerActivity extends AppCompatActivity {
                     lyProgress.setVisibility(View.GONE);
                     return;
                 }
-                ArrayList<Customer> customers = ((CustomersAnswer) answer).getCustomers();
+
+                customers = ((CustomersAnswer) answer).getCustomers();
+
 
                 if (customers == null || customers.size() == 0) {
                     txtError.setVisibility(View.VISIBLE);
@@ -297,8 +302,11 @@ public class CustomerActivity extends AppCompatActivity {
                 }
 
                 adapter.addItems(customers);
+                lastIndex = answer.getLastIndex();
                 if (answer.getHasMore() == 1)
-                    hasmore = true;
+                    hasMore = true;
+                isLoading = false;
+                adapter.setIsLoading(false);
                 txtError.setVisibility(View.GONE);
                 lyProgress.setVisibility(View.GONE);
 
@@ -413,7 +421,7 @@ public class CustomerActivity extends AppCompatActivity {
             if (items.get(position) == null)
                 return;
 
-            if (holder instanceof CustomerHolder){
+            if (holder instanceof CustomerHolder) {
                 CustomerHolder cHolder = (CustomerHolder) holder;
 
                 Customer customer = items.get(position);
@@ -452,9 +460,7 @@ public class CustomerActivity extends AppCompatActivity {
                     cHolder.txtVaset.setText(nameVaset + " - " + visitorCode);
                 }
 
-            }
-
-            else if (holder instanceof LoadingViewHolder) {
+            } else if (holder instanceof LoadingViewHolder) {
 
                 LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
 

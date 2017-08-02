@@ -73,6 +73,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
     public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
 
         String date = changeDate(year, monthOfYear, dayOfMonth);
+        points = null;
         runAsunc(date);
 
         txtHeader.setText("" + " لیست مشتریان ـ " + date);
@@ -101,11 +102,11 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         imgCalendar.setOnClickListener(
 
                 new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPersianCalender(persianCalendar, datePickerDialog);
-            }
-        });
+                    @Override
+                    public void onClick(View v) {
+                        showPersianCalender(persianCalendar, datePickerDialog);
+                    }
+                });
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,8 +137,9 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
     private void runAsunc(String date) {
 
         if (getCustomerAsync == null) {
-            points.clear();
 
+            notPointed = 0;
+            points = null;
             getCustomerAsync = new GetCustomerAsync(date);
             getCustomerAsync.execute();
 
@@ -184,7 +186,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         if (array == null || array.size() == 0)
             return 0;
         double average = 0;
-        int i = array.size()-notPointed;
+        int i = array.size() - notPointed;
         for (int j = 0; j < i; j++) {
             average += array.get(j).get_Distance();
         }
@@ -219,6 +221,9 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
 
             if (isonline) {
                 try {
+
+                    if (points == null)
+                        points = new ArrayList<>();
                     SoapObject request2 = (SoapObject) NetworkTools.CallSoapMethod("http://" + preferenceHelper.getString(NetworkTools.URL), "S_Navigation_ListOfVisitorMasirSabtPoints", datas).getProperty(0);
 
                     if (request2.getPropertyCount() <= 0) return "null";
@@ -255,9 +260,10 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
 
                                     point.set_Distance(Double.valueOf(Math.round(results[0])));
                                 }
-                                if (NetworkTools.getSoapPropertyAsNullableString(sp, 8).equals("0")||NetworkTools.getSoapPropertyAsNullableString(sp, 0).equals("0")){
+                                if (NetworkTools.getSoapPropertyAsNullableString(sp, 8).equals("0") || NetworkTools.getSoapPropertyAsNullableString(sp, 0).equals("0")) {
                                     notPointed++;
                                 }
+
                                 points.add(point);
                             }
                         }
@@ -276,7 +282,7 @@ public class ActivityCustomersDistance extends AppCompatActivity implements Date
         protected void onPostExecute(String s) {
             getCustomerAsync = null;
 
-            if (points.size()==0||points==null){
+            if (points.size() == 0 || points == null) {
                 edtSearch.setEnabled(false);
                 lyContent.setVisibility(View.GONE);
                 lyProgress.setVisibility(View.GONE);

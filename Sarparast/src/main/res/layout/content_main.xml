@@ -47,7 +47,7 @@
 
                         layout="@layout/bar_chart_mainreport"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="300dp" />
 
 
                     <!--<com.example.zikey.sarparast.Helpers.Indicator-->
@@ -187,7 +187,7 @@
                         <!--<ImageView android:background="#727594" android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/imageView" android:layout_weight=".5" android:layout_margin="5dp" android:scaleType="centerCrop" android:src="@drawable/img_map2" android:baselineAlignBottom="false" android:baseline="1dp" android:adjustViewBounds="true"/>-->
 
                         <LinearLayout
-                            android:id="@+id/lyMap"
+
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
@@ -209,6 +209,7 @@
                                 card_view:cardElevation="5dp">
 
                                 <LinearLayout
+                                    android:id="@+id/lyMap"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical">
@@ -925,7 +926,7 @@
                     <!--<ImageView android:background="#727594" android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/imageView" android:layout_weight=".5" android:layout_margin="5dp" android:scaleType="centerCrop" android:src="@drawable/img_map2" android:baselineAlignBottom="false" android:baseline="1dp" android:adjustViewBounds="true"/>-->
 
                     <LinearLayout
-                        android:id="@+id/lySarjam"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
@@ -947,6 +948,7 @@
                             card_view:cardElevation="5dp">
 
                             <LinearLayout
+                                android:id="@+id/lySarjam"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">

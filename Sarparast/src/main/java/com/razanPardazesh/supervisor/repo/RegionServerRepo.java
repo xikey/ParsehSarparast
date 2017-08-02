@@ -74,7 +74,7 @@ public class RegionServerRepo implements IRegion {
                     answer.setMessage("اطلاعاتی جهت نمایش وجود ندارد");
                     callBack.onAnswer(answer);
                     return;
-                } else if (response.body().getIsSuccess()!=1) {
+                } else if (response.body().getIsSuccess() != 1) {
                     answer.setIsSuccess(0);
                     answer.setMessage("اطلاعاتی جهت نمایش وجود ندارد");
                     callBack.onAnswer(answer);
@@ -92,6 +92,7 @@ public class RegionServerRepo implements IRegion {
 
                 answer.setRegions(regions);
                 answer.setIsSuccess(1);
+                answer.setLastIndex(response.body().getLastIndex());
 
                 callBack.onAnswer(answer);
 

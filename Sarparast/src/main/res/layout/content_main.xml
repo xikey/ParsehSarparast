@@ -849,7 +849,7 @@
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentStart="true"
                                         android:gravity="center"
-                                        android:text="   تایید درخواست ها امروز"
+                                        android:text="تایید درخواست ها"
                                         android:textAppearance="?android:attr/textAppearanceSmall"
                                         android:textColor="#ffffff"
                                         android:textSize="16sp" />

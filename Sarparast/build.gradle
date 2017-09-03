@@ -16,8 +16,8 @@ android {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 960331
-        versionName "96.03.31"
+        versionCode 960518
+        versionName "96.05.18"
         // Enabling multidex support.
         multiDexEnabled true
     }
@@ -39,10 +39,8 @@ android {
 
         mainBuild {
             applicationId "com.example.zikey.sarparast"
-            versionCode 960331
-            versionName "96.03.31"
-            versionCode 1
-            versionName "1.0"
+            versionCode 960518
+            versionName "96.05.18"
             buildConfigField("String", "PORT", '":755"')
         }
 

@@ -16,8 +16,8 @@ android {
         applicationId "com.example.zikey.sarparast"
         minSdkVersion 16
         targetSdkVersion 24
-        versionCode 960518
-        versionName "96.05.18"
+        versionCode 960612
+        versionName "96.06.12"
         // Enabling multidex support.
         multiDexEnabled true
     }
